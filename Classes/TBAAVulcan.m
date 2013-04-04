@@ -1,0 +1,63 @@
+//
+//  TBAAVulcan.m
+//  Thunderbolt
+//
+//  Created by jskim on 10. 5. 14..
+//  Copyright 2010 Tinybean. All rights reserved.
+//
+
+#import "TBAAVulcan.h"
+#import "TBUnit.h"
+#import "TBWarheadManager.h"
+
+
+@implementation TBAAVulcan
+
+
+- (id)initWithBody:(TBSprite *)aBody team:(TBTeam)aTeam
+{
+    self = [super initWithBody:aBody team:aTeam];
+    
+    if (self)
+    {
+        mReloadCount = 0;
+        mReloadTime  = kAAVulcanReloadTime;
+        mMaxRange    = kAAVulcanMaxRange;
+        mAmmoCount   = 100;
+    }
+    
+    return self;
+}
+
+
+- (BOOL)fireAt:(TBUnit *)aTarget
+{
+    BOOL    sResult = NO;
+    CGPoint sTargetPosition;
+    CGPoint sVulcanPosition;
+    CGFloat sDistance;
+    TBTeam  sTeam = ([aTarget isAlly]) ? kTBTeamEnemy : kTBTeamAlly;
+    
+    if ([self isReloaded])
+    {
+        sTargetPosition = [aTarget position];
+        sVulcanPosition = [mBody position];
+        sDistance       = TBDistanceBetweenToPoints(sVulcanPosition, sTargetPosition);
+        
+        if (sDistance <= mMaxRange)
+        {
+            CGFloat sAngle  = TBAngleBetweenToPoints(sVulcanPosition, sTargetPosition);
+            CGPoint sVector = TBVector(sAngle, 6.0);
+            
+            [TBWarheadManager bulletWithTeam:sTeam position:sVulcanPosition vector:sVector destructivePower:kVulcanBulletPower];
+            mAmmoCount--;
+            [self reload];            
+            sResult = YES;
+        }
+    }
+    
+    return sResult;
+}
+
+
+@end
