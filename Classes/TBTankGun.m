@@ -1,10 +1,11 @@
-//
-//  TBTankGun.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 16..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBTankGun.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 16..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBTankGun.h"
 #import "TBUnit.h"
@@ -40,8 +41,8 @@
 
     if ([self isReloaded])
     {
-        sTargetPosition = [aTarget position];
-        sTankPosition   = [mBody position];
+        sTargetPosition = [aTarget point];
+        sTankPosition   = [mBody point];
 
         CGFloat sAngle  = TBAngleBetweenToPoints(sTankPosition, sTargetPosition);
         CGPoint sVector = TBVector(sAngle, 8.0);

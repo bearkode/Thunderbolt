@@ -81,29 +81,29 @@
 {
     TBBase *sBase;
     sBase = [[TBBase alloc] initWithTeam:kTBTeamAlly];
-    [sBase setPosition:CGPointMake(kMinMapXPos + 100, MAP_GROUND + 30)];
+    [sBase setPoint:CGPointMake(kMinMapXPos + 100, MAP_GROUND + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     
     sBase = [[TBBase alloc] initWithTeam:kTBTeamEnemy];
-    [sBase setPosition:CGPointMake(kMaxMapXPos - 100, MAP_GROUND + 30)];
+    [sBase setPoint:CGPointMake(kMaxMapXPos - 100, MAP_GROUND + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     
     TBLandingPad *sLandingPad;
     sLandingPad = [[TBLandingPad alloc] initWithTeam:kTBTeamAlly];
-    [sLandingPad setPosition:CGPointMake(kMinMapXPos + 200, MAP_GROUND + 6)];
+    [sLandingPad setPoint:CGPointMake(kMinMapXPos + 200, MAP_GROUND + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     
     sLandingPad = [[TBLandingPad alloc] initWithTeam:kTBTeamEnemy];
-    [sLandingPad setPosition:CGPointMake(kMaxMapXPos - 200, MAP_GROUND + 6)];
+    [sLandingPad setPoint:CGPointMake(kMaxMapXPos - 200, MAP_GROUND + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     
     TBAAGunSite *sAAGunSite;
     sAAGunSite = [[TBAAGunSite alloc] initWithTeam:kTBTeamAlly];
-    [sAAGunSite setPosition:CGPointMake(kMinMapXPos + 800, MAP_GROUND + 15)];
+    [sAAGunSite setPoint:CGPointMake(kMinMapXPos + 800, MAP_GROUND + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
     
     sAAGunSite = [[TBAAGunSite alloc] initWithTeam:kTBTeamEnemy];
-    [sAAGunSite setPosition:CGPointMake(kMaxMapXPos - 800, MAP_GROUND + 15)];
+    [sAAGunSite setPoint:CGPointMake(kMaxMapXPos - 800, MAP_GROUND + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
 }
 
@@ -328,7 +328,7 @@
     {
         [sHelicopter setAltitudeLever:[aAcceleration z]];
         [sHelicopter setSpeedLever:[aAcceleration y]];
-        sPos = [sHelicopter position];
+        sPos = [sHelicopter point];
         
         if ([sHelicopter isLeftAhead])
         {

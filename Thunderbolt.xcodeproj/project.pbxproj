@@ -44,7 +44,6 @@
 		A73DE652110DE710008C1A67 /* TBTextureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A73DE651110DE710008C1A67 /* TBTextureManager.m */; };
 		A73DE656110DE739008C1A67 /* TBTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A73DE655110DE739008C1A67 /* TBTextureInfo.m */; };
 		A73DE6FE110DF0FC008C1A67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73DE6FD110DF0FC008C1A67 /* CoreGraphics.framework */; };
-		A73DE721110DF20E008C1A67 /* TBGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73DE720110DF20E008C1A67 /* TBGameController.m */; };
 		A73DE74B110DF3BF008C1A67 /* TBSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = A73DE74A110DF3BF008C1A67 /* TBSprite.m */; };
 		A73DE978110E4B4A008C1A67 /* heli00.png in Resources */ = {isa = PBXBuildFile; fileRef = A73DE96F110E4B4A008C1A67 /* heli00.png */; };
 		A73DE979110E4B4A008C1A67 /* heli01.png in Resources */ = {isa = PBXBuildFile; fileRef = A73DE970110E4B4A008C1A67 /* heli01.png */; };
@@ -798,7 +797,6 @@
 				28FD14FE0DC6FC130079059D /* TBGLView.m in Sources */,
 				A73DE652110DE710008C1A67 /* TBTextureManager.m in Sources */,
 				A73DE656110DE739008C1A67 /* TBTextureInfo.m in Sources */,
-				A73DE721110DF20E008C1A67 /* TBGameController.m in Sources */,
 				A73DE74B110DF3BF008C1A67 /* TBSprite.m in Sources */,
 				A73DE9FD110E4E96008C1A67 /* TBHelicopter.m in Sources */,
 				A733A77B1111E26700FA6062 /* TBTank.m in Sources */,

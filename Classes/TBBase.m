@@ -1,10 +1,11 @@
-//
-//  TBBase.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 3. 5..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBBase.m
+ *  Thunderbolt
+ *
+ *  Created by jskim on 10. 3. 5..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBBase.h"
 #import "TBTextureNames.h"
@@ -25,19 +26,16 @@
 
 - (id)initWithTeam:(TBTeam)aTeam
 {
-    TBTextureInfo *sInfo;
-    
     self = [super initWithTeam:aTeam];
+
     if (self)
     {
         [self setDurability:kBaseDurability];
         
-        sInfo = [TBTextureManager textureInfoForKey:kTexBase00];
         
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
-        
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBase00];
+        [self setTexture:sTexture];
+
         mTextureIndex    = 0;
         mTextureKeys     = [[NSArray alloc] initWithObjects:kTexBase00, kTexBase00, kTexBase00,
                                                             kTexBase01, kTexBase01, kTexBase01,
@@ -72,8 +70,9 @@
     
     if (![self isDestroyed])
     {
-        TBTextureInfo *sInfo = [TBTextureManager textureInfoForKey:[mTextureKeys objectAtIndex:mTextureIndex]];
-        [self setTextureID:[sInfo textureID]];
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:[mTextureKeys objectAtIndex:mTextureIndex]];
+        [self setTexture:sTexture];
+        
         mTextureIndex++;
         if (mTextureIndex == 22)
         {

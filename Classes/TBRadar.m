@@ -20,17 +20,11 @@
 
 - (id)init
 {
-    TBTextureInfo *sInfo = nil;
+    self = [super initWithImageName:kTexRadarBackground];
     
-    self = [super init];
     if (self)
     {
-        sInfo = [TBTextureManager textureInfoForKey:kTexRadarBackground];
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
-        
-        NSLog(@"textureSize = %@", NSStringFromCGSize([sInfo textureSize]));
+
     }
     
     return self;
@@ -39,8 +33,8 @@
 
 - (void)drawAt:(CGFloat)aXPos
 {
-    [self setPosition:CGPointMake(aXPos + 240.0, 300.0)];
-    [super draw];
+    [self setPoint:CGPointMake(aXPos + 240.0, 300.0)];
+//    [super draw];
     
     TBRadarObject *sUnitObject = [TBRadarObject unitRadarObject];
     CGPoint        sPosition;
@@ -50,17 +44,17 @@
     sUnits = [[TBUnitManager sharedManager] allyUnits];
     for (sUnit in sUnits)
     {
-        sPosition = [sUnit position];
-        [sUnitObject setPosition:CGPointMake(aXPos + 480 * sPosition.x / kMaxMapXPos, 280.0 + 40 * sPosition.y / 320)];
-        [sUnitObject draw];
+        sPosition = [sUnit point];
+        [sUnitObject setPoint:CGPointMake(aXPos + 480 * sPosition.x / kMaxMapXPos, 280.0 + 40 * sPosition.y / 320)];
+//        [sUnitObject draw];
     }
     
     sUnits = [[TBUnitManager sharedManager] enemyUnits];
     for (sUnit in sUnits)
     {
-        sPosition = [sUnit position];
-        [sUnitObject setPosition:CGPointMake(aXPos + 480 * sPosition.x / kMaxMapXPos, 280.0 + 40 * sPosition.y / 320)];
-        [sUnitObject draw];
+        sPosition = [sUnit point];
+        [sUnitObject setPoint:CGPointMake(aXPos + 480 * sPosition.x / kMaxMapXPos, 280.0 + 40 * sPosition.y / 320)];
+//        [sUnitObject draw];
     }
 }
 

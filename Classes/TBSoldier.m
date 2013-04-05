@@ -25,7 +25,7 @@
     {
         [self setType:kTBUnitSoldier];
         [self setDurability:kSoldierDurability];
-        [self setPosition:CGPointMake(kMaxMapXPos + 50, 53)];
+        [self setPoint:CGPointMake(kMaxMapXPos + 50, 53)];
         
         mTick         = 1;
         mTextureArray = [[NSMutableArray alloc] init];
@@ -76,23 +76,25 @@
 
     if (!sFire)
     {
-        mPosition.x += ([self isAlly]) ? 1.0 : -1.0;
+        CGPoint sPoint = [self point];
+        sPoint.x += ([self isAlly]) ? 1.0 : -1.0;
+        [self setPoint:sPoint];
     }
 }
 
 
 - (void)draw
 {
-    TBTextureInfo *sInfo = nil;
-    
     mTick = (mTick == 24) ? 0 : mTick + 1;
     
-    sInfo = [[TBTextureManager sharedManager] textureInfoForKey:[mTextureArray objectAtIndex:(NSUInteger)(mTick / 5) + 1]];
+    PBTexture *sTexture = [mTextureArray objectAtIndex:(NSUInteger)(mTick / 5) + 1];
 
-    [self setTextureID:[sInfo textureID]];
-    [self setTextureSize:[sInfo textureSize]];
-    [self setContentSize:[sInfo contentSize]];
-    [super draw];
+    [self setTexture:sTexture];
+//    [self setTextureID:[sInfo textureID]];
+//    [self setTextureSize:[sInfo textureSize]];
+//    [self setContentSize:[sInfo contentSize]];
+//    
+//    [super draw];
 }
 
 

@@ -121,8 +121,8 @@
     CGRect sResult   = CGRectZero;
     CGRect sContRect = CGRectFromString([mContentRectArray objectAtIndex:mTextureIndex]);
     
-    sResult.origin.x    = mPosition.x - ((mContentSize.width  - 30) / 2);
-    sResult.origin.y    = mPosition.y - ((mContentSize.height - 30) / 2);
+    sResult.origin.x    = [self point].x - (([[self mesh] size].width  - 30) / 2);
+    sResult.origin.y    = [self point].y - (([[self mesh] size].height - 30) / 2);
     
     sResult.origin.x   += sContRect.origin.x;
     sResult.origin.y   -= sContRect.size.height;
@@ -167,6 +167,7 @@
 - (void)setSpeedLever:(CGFloat)aSpeedLever
 {
     CGFloat sDegree = aSpeedLever * 50;
+    CGPoint sPoint  = [self point];
     
     if (aSpeedLever > 0.1 || aSpeedLever < -0.1)
     {
@@ -190,10 +191,13 @@
         mSpeed += 0.04;
     }
     
-    if (!mIsLanded && (mPosition.y - mContentSize.height) > MAP_GROUND) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
+    if (!mIsLanded && ([self point].y - [[self mesh] size].height) > MAP_GROUND) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
     {
-        mPosition.x += mSpeed;
-        [self setAngle:sDegree];
+        sPoint.x += mSpeed;
+        
+        PBVertex3 sAngle;
+        sAngle.z = sDegree;
+        [[self transform] setAngle:sAngle];
         
         if (mSpeed > 0)
         {
@@ -213,40 +217,45 @@
     else
     {
         mSpeed = 0;
-        [self setAngle:0];
+        [[self transform] setAngle:PBVertex3Make(0, 0, 0)];
     }
     
-    if (mPosition.x < kMinMapXPos)
+    if (sPoint.x < kMinMapXPos)
     {
-        mPosition.x = kMinMapXPos;
+        sPoint.x = kMinMapXPos;
     }
-    else if (mPosition.x > kMaxMapXPos)
+    else if (sPoint.x > kMaxMapXPos)
     {
-        mPosition.x = kMaxMapXPos;
+        sPoint.x = kMaxMapXPos;
     }
+    
+    [self setPoint:sPoint];
 }
 
 
 - (void)setAltitudeLever:(CGFloat)aAltitudeLever
 {
     CGFloat sAltitudeLever = (aAltitudeLever + 0.68) * kAltitudeSensitivity;
+    CGPoint sPoint         = [self point];
 
-    mPosition.y -= sAltitudeLever;
+    sPoint.y -= sAltitudeLever;
 
-    if ((mPosition.y - mContentSize.height / 2) < MAP_GROUND)
+    if ((sPoint.y - [[self mesh] size].height / 2) < MAP_GROUND)
     {
         mIsLanded   = YES;
-        mPosition.y = MAP_GROUND + mContentSize.height / 2;
+        sPoint.y = MAP_GROUND + [[self mesh] size].height / 2;
     }
-    else if (mPosition.y > 300)
+    else if (sPoint.y > 300)
     {
-        mPosition.y = 300;
+        sPoint.y = 300;
         mIsLanded = NO;        
     }
     else
     {
         mIsLanded = NO;
     }
+    
+    [self setPoint:sPoint];
 }
 
 
@@ -317,7 +326,9 @@
     
     if (mBombCount > 0)
     {
-        sBomb = [TBWarheadManager bombWithTeam:kTBTeamAlly position:CGPointMake(mPosition.x, mPosition.y - 10) speed:mSpeed];
+        CGPoint sPoint = [self point];
+        
+        sBomb = [TBWarheadManager bombWithTeam:kTBTeamAlly position:CGPointMake(sPoint.x, sPoint.y - 10) speed:mSpeed];
         mBombCount--;
         
         [mDelegate helicopter:self weaponFired:1];
@@ -337,8 +348,10 @@
     {
         if (mBulletCount > 0)
         {
-            sAngle = TBDegreesToRadians([self angle]);
-            sPos1  = [self position];
+            PBVertex3 sAngle3 = [[self transform] angle];
+            
+            sAngle = TBDegreesToRadians(sAngle3.z);
+            sPos1  = [self point];
             sPos2  = sPos1;
 
             if ([self isLeftAhead])
@@ -393,8 +406,8 @@
 
 - (void)draw
 {
-    NSString      *sTextureKey = nil;
-    TBTextureInfo *sInfo       = nil;
+//    NSString      *sTextureKey = nil;
+//    TBTextureInfo *sInfo       = nil;
 
     if (++mTick == 100)
     {
@@ -428,13 +441,15 @@
         }
     }
     
-    sTextureKey = [mTextureArray objectAtIndex:mTextureIndex];    
-    sInfo       = [[TBTextureManager sharedManager] textureInfoForKey:sTextureKey];
+    PBTexture *sTexture = [mTextureArray objectAtIndex:mTextureIndex];
+//    sInfo       = [[TBTextureManager sharedManager] textureInfoForKey:sTextureKey];
     
-    [self setTextureID:[sInfo textureID]];
-    [self setTextureSize:[sInfo textureSize]];
-    [self setContentSize:[sInfo contentSize]];
-    [super draw];
+    [self setTexture:sTexture];
+    
+//    [self setTextureID:[sInfo textureID]];
+//    [self setTextureSize:[sInfo textureSize]];
+//    [self setContentSize:[sInfo contentSize]];
+//    [super draw];
 }
 
 

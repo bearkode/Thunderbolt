@@ -1,10 +1,11 @@
-//
-//  TBTankShell.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 16..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBTankShell.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 16..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBTankShell.h"
 #import "TBGameConst.h"
@@ -24,16 +25,10 @@
 
 - (id)init
 {
-    TBTextureInfo *sInfo;
+    self = [super initWithImageName:kTexBullet];
     
-    self = [super init];
     if (self)
     {
-        sInfo = [TBTextureManager textureInfoForKey:kTexBullet];
-        
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
         [self setDestructivePower:kTankShellPower];
         
         mLife   = 100;
@@ -62,10 +57,14 @@
 {
     if (mLife > 0)
     {
-        mPosition.x += mVector.x;
-        mPosition.y += mVector.y;
+        CGPoint sPoint = [self point];
         
-        if (mPosition.y < MAP_GROUND)
+        sPoint.x += mVector.x;
+        sPoint.y += mVector.y;
+
+        [self setPoint:sPoint];
+        
+        if (sPoint.y < MAP_GROUND)
         {
             mLife = 0;
         }

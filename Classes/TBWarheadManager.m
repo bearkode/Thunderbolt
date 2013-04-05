@@ -1,10 +1,11 @@
-//
-//  TBWarheadManager.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 9..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBWarheadManager.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 9..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBWarheadManager.h"
 #import "TBUnit.h"
@@ -16,6 +17,7 @@
 #import "TBBullet.h"
 #import "TBBomb.h"
 #import "TBTankShell.h"
+
 
 static TBWarheadManager *gWarheadManager = nil;
 
@@ -147,11 +149,11 @@ static TBWarheadManager *gWarheadManager = nil;
         {
             [sWarhead setAvailable:NO];
             [sUnit addDamage:[sWarhead destructivePower]];
-            [TBExplosionManager bombExplosionAtPosition:[sWarhead position]];
+            [TBExplosionManager bombExplosionAtPosition:[sWarhead point]];
         }
         else
         {
-            [sWarhead draw];
+//            [sWarhead draw];
         }
         
         if ([sWarhead isAvailable])
@@ -161,11 +163,11 @@ static TBWarheadManager *gWarheadManager = nil;
             {
                 [sWarhead setAvailable:NO];
                 [sStructure addDamage:[sWarhead destructivePower]];
-                [TBExplosionManager bombExplosionAtPosition:[sWarhead position]];
+                [TBExplosionManager bombExplosionAtPosition:[sWarhead point]];
             }
             else
             {
-                [sWarhead draw];        
+//                [sWarhead draw];        
             }
         }
     }
@@ -189,7 +191,7 @@ static TBWarheadManager *gWarheadManager = nil;
         }
         else if ([sWarhead isMemberOfClass:[TBBomb class]] && [sWarhead intersectWithGround])
         {
-            CGPoint sPosition = [sWarhead position];
+            CGPoint sPosition = [sWarhead point];
             
             [sWarhead setAvailable:NO];  
             [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, MAP_GROUND + 18)];
@@ -228,7 +230,7 @@ static TBWarheadManager *gWarheadManager = nil;
     }
     
     [sBullet setTeam:aTeam];
-    [sBullet setPosition:aPos];
+    [sBullet setPoint:aPos];
     [sBullet setVector:aVector];
     
     [[TBWarheadManager sharedManager] addObject:sBullet];
@@ -242,7 +244,7 @@ static TBWarheadManager *gWarheadManager = nil;
     TBBomb *sBomb = [[[TBBomb alloc] init] autorelease];
     
     [sBomb setTeam:aTeam];
-    [sBomb setPosition:aPos];
+    [sBomb setPoint:aPos];
     [sBomb setSpeed:aSpeed];
     
     [[TBWarheadManager sharedManager] addObject:sBomb];
@@ -256,7 +258,7 @@ static TBWarheadManager *gWarheadManager = nil;
     TBTankShell *sTankShell = [[[TBTankShell alloc] init] autorelease];
     
     [sTankShell setTeam:aTeam];
-    [sTankShell setPosition:aPos];
+    [sTankShell setPoint:aPos];
     [sTankShell setVector:aVector];
     
     [[TBWarheadManager sharedManager] addObject:sTankShell];

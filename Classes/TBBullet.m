@@ -1,10 +1,11 @@
-//
-//  TBBullet.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 1. 30..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBBullet.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 1. 30..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBBullet.h"
 #import "TBGameConst.h"
@@ -24,16 +25,10 @@
 
 - (id)initWithDestructivePower:(NSUInteger)aDestructivePower
 {
-    TBTextureInfo *sInfo;
+    self = [super initWithImageName:kTexBullet];
     
-    self = [super init];
     if (self)
     {
-        sInfo = [TBTextureManager textureInfoForKey:kTexBullet];
-        
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
         [self setDestructivePower:aDestructivePower];
         
         mLife   = 100;
@@ -60,12 +55,15 @@
 
 - (void)action
 {
+    CGPoint sPoint = [self point];
+    
     if (mLife > 0)
     {
-        mPosition.x += mVector.x;
-        mPosition.y += mVector.y;
+        sPoint.x += mVector.x;
+        sPoint.y += mVector.y;
+        [self setPoint:sPoint];
         
-        if (mPosition.y < MAP_GROUND)
+        if (sPoint.y < MAP_GROUND)
         {
             mLife = 0;
         }

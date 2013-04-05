@@ -1,10 +1,11 @@
-//
-//  TBBomb.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 2. 3..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBBomb.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 2. 3..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBBomb.h"
 #import "TBTextureNames.h"
@@ -22,17 +23,10 @@
 
 - (id)init
 {
-    TBTextureInfo *sInfo;
-    
-    self = [super init];
+    self = [super initWithImageName:kTexBomb];
     
     if (self)
     {
-        sInfo = [TBTextureManager textureInfoForKey:kTexBomb];
-        
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
         [self setDestructivePower:kBombPower];
     
         mVector = CGPointZero;
@@ -65,8 +59,12 @@
     
     mVector.y += 0.4;
     
-    mPosition.x += mVector.x;
-    mPosition.y -= mVector.y;
+    CGPoint sPoint = [self point];
+    
+    sPoint.x += mVector.x;
+    sPoint.y -= mVector.y;
+    
+    [self setPoint:sPoint];
 }
 
 

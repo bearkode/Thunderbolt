@@ -1,10 +1,11 @@
-//
-//  TBMissile.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 8..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBMissile.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 8..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBMissile.h"
 #import "TBTextureManager.h"
@@ -31,9 +32,8 @@
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam
 {
-    TBTextureInfo *sInfo;
-    
     self = [super initWithUnitID:aUnitID team:aTeam];
+    
     if (self)
     {
         [self setType:kTBUnitMissile];
@@ -43,11 +43,8 @@
         mDestructivePower = kMissilePower;
         mSpeed            = 0.0;
         
-        sInfo = [TBTextureManager textureInfoForKey:kTexMissile];
-        
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:CGSizeMake(20, 20)];
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexMissile];
+        [self setTexture:sTexture];
     }
     
     return self;
@@ -66,6 +63,9 @@
     
     [super action];
 
+    CGPoint   sPoint  = [self point];
+    PBVertex3 sAngle3 = [[self transform] angle];
+    
     if (mSpeed < MISSILE_SPEED)
     {
         mSpeed += 0.2;
@@ -74,39 +74,42 @@
     sTarget = [[TBUnitManager sharedManager] unitForUnitID:mTargetID];
     if (sTarget)
     {
-        CGFloat sAngle = TBRadiansToDegrees(TBAngleBetweenToPoints([self position], [sTarget position]));
-        CGFloat sDelta = sAngle - mAngle;
+        CGFloat sAngle = TBRadiansToDegrees(TBAngleBetweenToPoints([self point], [sTarget point]));
+        CGFloat sDelta = sAngle - sAngle3.z;
         
         if (sDelta > 0)
         {
-            mAngle = (sDelta < MISSILE_SENSITIVE) ? sAngle : mAngle + MISSILE_SENSITIVE;
+            sAngle3.z = (sDelta < MISSILE_SENSITIVE) ? sAngle : sAngle3.z + MISSILE_SENSITIVE;
         }
         else
         {
-            mAngle = (sDelta > -MISSILE_SENSITIVE) ? sAngle : mAngle - MISSILE_SENSITIVE;
+            sAngle3.z = (sDelta > -MISSILE_SENSITIVE) ? sAngle : sAngle3.z - MISSILE_SENSITIVE;
         }
     }
 
-    CGFloat sX = cos(TBDegreesToRadians(mAngle)) * mSpeed;
-    CGFloat sY = sin(TBDegreesToRadians(mAngle)) * mSpeed;
+    CGFloat sX = cos(TBDegreesToRadians(sAngle3.z)) * mSpeed;
+    CGFloat sY = sin(TBDegreesToRadians(sAngle3.z)) * mSpeed;
     
     if (mFuel > 0)
     {
-        mPosition.x += sX;
-        mPosition.y += sY;
+        sPoint.x += sX;
+        sPoint.y += sY;
     }
     else
     {
-        mPosition.x += sX;
-        mPosition.y -= 7.0;
+        sPoint.x += sX;
+        sPoint.y -= 7.0;
         mSpeed = (mSpeed <= 0) ? 0.0 : mSpeed - 0.1;
     }
+
+    [[self transform] setAngle:sAngle3];
+    [self setPoint:sPoint];
 }
 
 
 - (void)draw
 {
-    [super draw];
+//    [super draw];
 }
 
 

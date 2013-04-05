@@ -1,10 +1,11 @@
-//
-//  TBRadarObject.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 21..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBRadarObject.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 21..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBRadarObject.h"
 #import "TBTextureManager.h"
@@ -30,16 +31,11 @@ static TBRadarObject *gUnitRadarObject;
 
 - (id)init
 {
-    TBTextureInfo *sInfo;
+    self = [super initWithImageName:kTexRadarObject];
     
-    self = [super init];
     if (self)
     {
-        sInfo = [TBTextureManager textureInfoForKey:kTexRadarObject];
-        
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
+
     }
     
     return self;

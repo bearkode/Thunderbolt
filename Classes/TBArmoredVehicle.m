@@ -17,28 +17,32 @@
 
 
 @implementation TBArmoredVehicle
+{
+    PBTexture *mTextureNormal;
+    PBTexture *mTextureHit;
+}
 
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam
 {
-    TBTextureManager *sTextureMan = [TBTextureManager sharedManager];
-    TBTextureInfo    *sInfo;
-    
     self = [super initWithUnitID:aUnitID team:aTeam];
+    
     if (self)
     {
         [self setType:kTBUnitArmoredVehicle];
         [self setDurability:kArmoredVehicleDurability];
         mHitDiscount = 0;
         
-        sInfo          = [sTextureMan textureInfoForKey:kTexSAM];
-        mTextureNormal = [sInfo textureID];
-        sInfo          = [sTextureMan textureInfoForKey:kTexSAMShoot];
-        mTextureHit    = [sInfo textureID];
+        [mTextureNormal autorelease];
+        mTextureNormal = [[PBTextureManager textureWithImageName:kTexSAM] retain];
         
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
-        [self setPosition:CGPointMake(kMaxMapXPos + 50, MAP_GROUND + (mContentSize.height / 2))];
+        [mTextureHit autorelease];
+        mTextureHit = [[PBTextureManager textureWithImageName:kTexSAMShoot] retain];
+
+        [self setTexture:mTextureNormal];
+//        [self setTextureSize:[sInfo textureSize]];
+//        [self setContentSize:[sInfo contentSize]];
+        [self setPoint:CGPointMake(kMaxMapXPos + 50, MAP_GROUND + ([[self mesh] size].height / 2))];
         
         mAAVulcan        = [[TBAAVulcan alloc] initWithBody:self team:aTeam];
         mMissileLauncher = [[TBMissileLauncher alloc] initWithBody:self team:aTeam];
@@ -84,7 +88,9 @@
     
     if (!sFire)
     {
-        mPosition.x += ([self isAlly]) ? 1.0 : -1.0;
+        CGPoint sPoint = [self point];
+        sPoint.x += ([self isAlly]) ? 1.0 : -1.0;
+        [self setPoint:sPoint];
     }
 }
 
@@ -101,15 +107,15 @@
 {
     if (mHitDiscount == 0)
     {
-        [self setTextureID:mTextureNormal];
+        [self setTexture:mTextureNormal];
     }
     else
     {
         mHitDiscount--;
-        [self setTextureID:mTextureHit];
+        [self setTexture:mTextureHit];
     }
     
-    [super draw];
+//    [super draw];
 }
 
 

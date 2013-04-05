@@ -1,10 +1,11 @@
-//
-//  TBAAVulcan.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 14..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBAAVulcan.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 14..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBAAVulcan.h"
 #import "TBUnit.h"
@@ -40,8 +41,8 @@
     
     if ([self isReloaded])
     {
-        sTargetPosition = [aTarget position];
-        sVulcanPosition = [mBody position];
+        sTargetPosition = [aTarget point];
+        sVulcanPosition = [mBody point];
         sDistance       = TBDistanceBetweenToPoints(sVulcanPosition, sTargetPosition);
         
         if (sDistance <= mMaxRange)

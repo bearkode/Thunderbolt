@@ -1,10 +1,11 @@
-//
-//  TBSAMLauncher.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 16..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBSAMLauncher.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 16..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBMissileLauncher.h"
 #import "TBUnit.h"
@@ -40,8 +41,8 @@
     
     if ([self isReloaded])
     {
-        sTargetPosition = [aUnit position];
-        sBodyPosition   = [mBody position];
+        sTargetPosition = [aUnit point];
+        sBodyPosition   = [mBody point];
         sBodyPosition.y = sBodyPosition.y + 20;
         sDistance       = TBDistanceBetweenToPoints(sBodyPosition, sTargetPosition);
 

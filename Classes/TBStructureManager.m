@@ -1,10 +1,11 @@
-//
-//  TBStructureManager.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 7. 5..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBStructureManager.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 7. 5..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBStructureManager.h"
 #import "TBGameConst.h"
@@ -114,7 +115,7 @@ static TBStructureManager *gStructureManager = nil;
     for (sStructure in mAllyStructures)
     {
         [sStructure action];
-        [sStructure draw];
+//        [sStructure draw];
 /*        if (sLog)
         {
             NSLog(@"A %@ %d", [sStructure class], [sStructure damage]);
@@ -124,7 +125,7 @@ static TBStructureManager *gStructureManager = nil;
     for (sStructure in mEnemyStructures)
     {
         [sStructure action];
-        [sStructure draw];
+//        [sStructure draw];
 /*        if (sLog)
         {
             NSLog(@"E %@ %d", [sStructure class], [sStructure damage]);

@@ -1,10 +1,11 @@
-//
-//  TBExplosion.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 2. 7..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBExplosion.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 2. 7..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBExplosion.h"
 #import "TBTextureManager.h"
@@ -42,17 +43,17 @@
 
 - (void)action
 {
-    TBTextureInfo *sInfo;
     NSValue       *sPosition;
     
     if (![self isFinished])
     {
-        sInfo     = [mTextureInfoArray objectAtIndex:mAniIndex];
+        PBTexture *sTexture = [mTextureInfoArray objectAtIndex:mAniIndex];
         sPosition = [mPositionArray objectAtIndex:mAniIndex];
 
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setPosition:[sPosition CGPointValue]];
+        [self setTexture:sTexture];
+//        [self setTextureID:[sInfo textureID]];
+//        [self setTextureSize:[sInfo textureSize]];
+        [self setPoint:[sPosition CGPointValue]];
         
         mAniIndex++;
     }

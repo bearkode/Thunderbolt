@@ -1,10 +1,11 @@
-//
-//  TBRifle.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 7. 22..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBRifle.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 7. 22..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBRifle.h"
 #import "TBUnit.h"
@@ -40,8 +41,8 @@
 
     if ([self isReloaded])
     {
-        sTargetPosition = [aUnit position];
-        sBodyPosition   = [mBody position];
+        sTargetPosition = [aUnit point];
+        sBodyPosition   = [mBody point];
         sBodyPosition.y = sBodyPosition.y + 15;
         sDistance       = TBDistanceBetweenToPoints(sBodyPosition, sTargetPosition);
         

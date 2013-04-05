@@ -1,10 +1,11 @@
-//
-//  TBLandingPad.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 3. 6..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBLandingPad.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 3. 6..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBLandingPad.h"
 #import "TBTextureNames.h"
@@ -18,17 +19,14 @@
 
 - (id)initWithTeam:(TBTeam)aTeam
 {
-    TBTextureInfo *sInfo;
-    
     self = [super initWithTeam:aTeam];
+    
     if (self)
     {
         [self setDurability:kLandingPadDurability];
         
-        sInfo = [TBTextureManager textureInfoForKey:kTexLandingPad00];
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexLandingPad00];
+        [self setTexture:sTexture];
         
         mFillUpCount = 0;
     }

@@ -26,10 +26,20 @@
 @implementation TBTank (Privates)
 
 
+
+
+@end
+
+
+@implementation TBTank
+{
+    PBTexture *mTextureNormal;
+    PBTexture *mTextureHit;
+}
+
+
 - (void)setTexture
 {
-    TBTextureManager *sTextureMan = [TBTextureManager sharedManager];
-    TBTextureInfo    *sInfo;
     NSString         *sTexTank;
     NSString         *sTexTankShoot;
     
@@ -44,20 +54,14 @@
         sTexTankShoot = kTexEnemyTankShoot;
     }
     
-    sInfo          = [sTextureMan textureInfoForKey:sTexTank];
-    mTextureNormal = [sInfo textureID];
-    sInfo          = [sTextureMan textureInfoForKey:sTexTankShoot];
-    mTextureHit    = [sInfo textureID];
-
-    [self setTextureSize:[sInfo textureSize]];
-    [self setContentSize:[sInfo contentSize]];
+    [mTextureNormal autorelease];
+    mTextureNormal = [[PBTextureManager textureWithImageName:sTexTank] retain];
+    
+    [mTextureHit autorelease];
+    mTextureHit = [[PBTextureManager textureWithImageName:sTexTankShoot] retain];
+    
+    [self setTexture:mTextureNormal];
 }
-
-
-@end
-
-
-@implementation TBTank
 
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam
@@ -72,14 +76,14 @@
         mHitDiscount = 0;
 
         [self setTexture];
-
+        
         if (mTeam == kTBTeamEnemy)
         {
-            [self setPosition:CGPointMake(kMaxMapXPos + 50, MAP_GROUND + (mContentSize.height / 2))];
+            [self setPoint:CGPointMake(kMaxMapXPos + 50, MAP_GROUND + ([[self mesh] size].height / 2))];
         }
         else
         {
-            [self setPosition:CGPointMake(-50, MAP_GROUND + (mContentSize.height / 2))];        
+            [self setPoint:CGPointMake(-50, MAP_GROUND + ([[self mesh] size].height / 2))];
         }
         
         mTankGun = [[TBTankGun alloc] initWithBody:self team:aTeam];
@@ -91,6 +95,9 @@
 
 - (void)dealloc
 {
+    [mTextureNormal release];
+    [mTextureHit release];
+    
     [mTankGun release];
     
     [super dealloc];
@@ -123,7 +130,9 @@
     
     if (!sFire)
     {
-        mPosition.x += ([self isAlly]) ? kTankSpeed : -kTankSpeed;
+        CGPoint sPoint = [self point];
+        sPoint.x += ([self isAlly]) ? kTankSpeed : -kTankSpeed;
+        [self setPoint:sPoint];
     }
 }
 
@@ -140,15 +149,15 @@
 {
     if (mHitDiscount == 0)
     {
-        [self setTextureID:mTextureNormal];
+        [self setTexture:mTextureNormal];
     }
     else
     {
         mHitDiscount--;
-        [self setTextureID:mTextureHit];
+        [self setTexture:mTextureHit];
     }
     
-    [super draw];
+//    [super draw];
 }
 
 

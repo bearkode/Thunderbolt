@@ -1,12 +1,14 @@
-//
-//  TBAAGun.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 7. 4..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBAAGun.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 7. 4..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBAAGunSite.h"
+#import <PBKit.h>
 #import "TBGameConst.h"
 #import "TBTextureNames.h"
 #import "TBTextureInfo.h"
@@ -19,28 +21,29 @@
 
 
 @implementation TBAAGunSite
+{
+    TBAAVulcan *mAAVulcan;
+    
+    NSArray    *mTextureArray;
+}
 
 
 - (id)initWithTeam:(TBTeam)aTeam
 {
-    TBTextureInfo *sInfo;
-    
     self = [super initWithTeam:aTeam];
+    
     if (self)
     {
         [self setDurability:kAAGunSiteDurability];
         
         mAAVulcan     = [[TBAAVulcan alloc] initWithBody:self team:aTeam];        
-        mTextureArray = [[NSArray alloc] initWithObjects:[TBTextureManager textureInfoForKey:kTexAAGun00],
-                                                         [TBTextureManager textureInfoForKey:kTexAAGun01],
-                                                         [TBTextureManager textureInfoForKey:kTexAAGun02],
-                                                         [TBTextureManager textureInfoForKey:kTexAAGun03],
-                                                         [TBTextureManager textureInfoForKey:kTexAAGun04], nil];
+        mTextureArray = [[NSArray alloc] initWithObjects:[PBTextureManager textureWithImageName:kTexAAGun01],
+                                                         [PBTextureManager textureWithImageName:kTexAAGun01],
+                                                         [PBTextureManager textureWithImageName:kTexAAGun02],
+                                                         [PBTextureManager textureWithImageName:kTexAAGun03],
+                                                         [PBTextureManager textureWithImageName:kTexAAGun04], nil];
                          
-        sInfo = [mTextureArray objectAtIndex:0];
-        [self setTextureID:[sInfo textureID]];
-        [self setTextureSize:[sInfo textureSize]];
-        [self setContentSize:[sInfo contentSize]];
+        [self setTexture:[mTextureArray objectAtIndex:0]];
     }
     
     return self;
@@ -65,12 +68,14 @@
         {
             mIsDestroyed = YES;
 
-            TBTextureInfo *sInfo = [TBTextureManager textureInfoForKey:kTexAAGunDestroyed];
-            [self setTextureID:[sInfo textureID]];
-            [self setTextureSize:[sInfo textureSize]];
-            [self setContentSize:[sInfo contentSize]];
+            PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexAAGunDestroyed];
+            [self setTexture:sTexture];
+//            TBTextureInfo *sInfo = [TBTextureManager textureInfoForKey:kTexAAGunDestroyed];
+//            [self setTextureID:[sInfo textureID]];
+//            [self setTextureSize:[sInfo textureSize]];
+//            [self setContentSize:[sInfo contentSize]];
             
-            [TBExplosionManager tankExplosionAtPoistion:[self position]];
+            [TBExplosionManager tankExplosionAtPoistion:[self point]];
         }
     }
 }
@@ -85,12 +90,12 @@
         [mAAVulcan action];
         
         TBHelicopter  *sHelicopter     = [[TBUnitManager sharedManager] opponentHeicopter:mTeam];
-        CGPoint        sSitePosition   = [self position];
-        CGPoint        sTargetPosition = [sHelicopter position];
+        CGPoint        sSitePosition   = [self point];
+        CGPoint        sTargetPosition = [sHelicopter point];
         CGFloat        sAngle;
         CGFloat        sDistance;
-        TBTextureInfo *sInfo;
-        
+//        TBTextureInfo *sInfo;
+        PBTexture     *sTexture;
         
         sDistance = TBDistanceBetweenToPoints(sSitePosition, sTargetPosition);
         
@@ -99,28 +104,29 @@
             sAngle = TBRadiansToDegrees(TBAngleBetweenToPoints(sSitePosition, sTargetPosition));
             if (sAngle < 36)
             {
-                sInfo = [mTextureArray objectAtIndex:4];
+                sTexture = [mTextureArray objectAtIndex:4];
             }
             else if (sAngle >= 36 && sAngle < 72)
             {
-                sInfo = [mTextureArray objectAtIndex:3];
+                sTexture = [mTextureArray objectAtIndex:3];
             }
             else if (sAngle >= 72 && sAngle < 108)
             {
-                sInfo = [mTextureArray objectAtIndex:2];
+                sTexture = [mTextureArray objectAtIndex:2];
             }
             else if (sAngle >= 108 && sAngle < 144)
             {
-                sInfo = [mTextureArray objectAtIndex:1];
+                sTexture = [mTextureArray objectAtIndex:1];
             }
             else if (sAngle >= 144)
             {
-                sInfo = [mTextureArray objectAtIndex:0];
+                sTexture = [mTextureArray objectAtIndex:0];
             }
             
-            [self setTextureID:[sInfo textureID]];
-            [self setTextureSize:[sInfo textureSize]];
-            [self setContentSize:[sInfo contentSize]];
+            [self setTexture:sTexture];
+//            [self setTextureID:[sInfo textureID]];
+//            [self setTextureSize:[sInfo textureSize]];
+//            [self setContentSize:[sInfo contentSize]];
             
             [mAAVulcan fireAt:sHelicopter];
         }

@@ -182,13 +182,13 @@ static TBUnitManager *gUnitManager = nil;
     {
         if ([sUnit isKindOfUnit:kTBUnitMissile] && [sUnit intersectWithGround])
         {
-            sPosition = [sUnit position];
+            sPosition = [sUnit point];
             [sUnit addDamage:100];
             [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, MAP_GROUND + 18)];
         }
         
         [sUnit action];
-        [sUnit draw];
+//        [sUnit draw];
     }
     
     sUnits = [mEnemyUnitDict allValues];
@@ -210,13 +210,13 @@ static TBUnitManager *gUnitManager = nil;
         
         if ([sUnit isKindOfUnit:kTBUnitMissile] && [sUnit intersectWithGround])
         {
-            sPosition = [sUnit position];
+            sPosition = [sUnit point];
             [sUnit addDamage:100];
             [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, MAP_GROUND + 18)];
         }
         
         [sUnit action];
-        [sUnit draw];
+//        [sUnit draw];
     }
 }
 
@@ -272,7 +272,7 @@ static TBUnitManager *gUnitManager = nil;
     {
         if ([sUnit isAvailable])
         {
-            if ([sUnit position].x > (kMaxMapXPos + 50))
+            if ([sUnit point].x > (kMaxMapXPos + 50))
             {
                 /*   Arrived Limit   */
                 [sDisabledUnits addObject:sUnit];
@@ -292,7 +292,7 @@ static TBUnitManager *gUnitManager = nil;
     {
         if ([sUnit isAvailable])
         {
-            if ([sUnit position].x < -50)
+            if ([sUnit point].x < -50)
             {
                 /*   Arrived Limit   */
                 [sDisabledUnits addObject:sUnit];
@@ -362,7 +362,7 @@ static TBUnitManager *gUnitManager = nil;
     TBHelicopter *sHelicopter = [[[TBHelicopter alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
     [sHelicopter setDelegate:aDelegate];    
-    [sHelicopter setPosition:CGPointMake(kMinMapXPos + 200, MAP_GROUND + ([sHelicopter contentSize].height /2))];
+    [sHelicopter setPoint:CGPointMake(kMinMapXPos + 200, MAP_GROUND + ([[sHelicopter mesh] size].height /2))];
     [[TBUnitManager sharedManager] addUnit:sHelicopter];
     
     return sHelicopter;
@@ -407,9 +407,12 @@ static TBUnitManager *gUnitManager = nil;
     NSNumber  *sUnitID  = [gUnitManager nextUnitID];
     TBMissile *sMissile = [[[TBMissile alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
-    [sMissile setPosition:aPosition];
+    [sMissile setPoint:aPosition];
     [sMissile setTargetID:[aTarget unitID]];
-    [sMissile setAngle:TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget position]))];
+    
+    PBVertex3 sAngle;
+    sAngle.z = TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget point]));
+    [[sMissile transform] setAngle:sAngle];
     
     [gUnitManager addUnit:sMissile];
     

@@ -1,10 +1,11 @@
-//
-//  TBExplosionManager.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 9..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBExplosionManager.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 9..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBExplosionManager.h"
 #import "TBExplosion.h"
@@ -100,7 +101,6 @@ static TBExplosionManager *gExplosionManager = nil;
     for (sExplosion in mExplosionArray)
     {
         [sExplosion action];
-        [sExplosion draw];
     }
 }
 
@@ -144,15 +144,16 @@ static TBExplosionManager *gExplosionManager = nil;
 {
     if ([aUnit isKindOfUnit:kTBUnitTank])
     {
-        [TBExplosionManager tankExplosionAtPoistion:[aUnit position]];
+        [TBExplosionManager tankExplosionAtPoistion:[aUnit point]];
     }
     else if ([aUnit isKindOfUnit:kTBUnitMissile])
     {
-        [TBExplosionManager missileExplosionAtPosition:[aUnit position] angle:[aUnit angle]];
+        PBVertex3 sAngle = [[aUnit transform] angle];
+        [TBExplosionManager missileExplosionAtPosition:[aUnit point] angle:sAngle.z];
     }
     else if ([aUnit isKindOfUnit:kTBUnitHelicopter])
     {
-        [TBExplosionManager helicopterExplosionAtPosition:[aUnit position] isLeftAhead:[(TBHelicopter *)aUnit isLeftAhead]];
+        [TBExplosionManager helicopterExplosionAtPosition:[aUnit point] isLeftAhead:[(TBHelicopter *)aUnit isLeftAhead]];
     }
     else if ([aUnit isKindOfUnit:kTBUnitSoldier])
     {
@@ -160,7 +161,7 @@ static TBExplosionManager *gExplosionManager = nil;
     }
     else
     {
-        [TBExplosionManager tankExplosionAtPoistion:[aUnit position]];            
+        [TBExplosionManager tankExplosionAtPoistion:[aUnit point]];
     }
 }
 
@@ -239,7 +240,9 @@ static TBExplosionManager *gExplosionManager = nil;
     TBExplosion   *sExplosion = [[[TBExplosion alloc] init] autorelease];
     TBTextureInfo *sInfo      = nil;
     
-    [sExplosion setAngle:aAngle];
+    PBVertex3 sAngle;
+    sAngle.z = aAngle;
+    [[sExplosion transform] setAngle:sAngle];
     
     sInfo = [TBTextureManager textureInfoForKey:kTexMissileExp00];
     [sExplosion addTextureInfo:sInfo atPosition:aPosition];
