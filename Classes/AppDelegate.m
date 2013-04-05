@@ -20,9 +20,8 @@
     UIWindow *mWindow;
 }
 
+
 @synthesize window         = mWindow;
-//@synthesize GLView         = mGLView;
-//@synthesize gameController = mGameController;
 
 
 #pragma mark -
@@ -39,6 +38,10 @@
 
 - (BOOL)application:(UIApplication *)aApplication didFinishLaunchingWithOptions:(NSDictionary *)aLaunchOptions
 {
+#if (0)
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+#endif
+
     UIWindow *sWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 
     [self setWindow:sWindow];
@@ -49,17 +52,6 @@
 
     [sWindow setRootViewController:sNaviController];
 
-    
-#if (0)
-    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-
-    [mGLView setTransform:CGAffineTransformMakeRotation(TBDegreesToRadians(90))];
-    [mGLView setFrame:CGRectMake(0, 0, 320, 480)];
-    [mGLView startAnimation];
-    
-    [mGameController setGLView:mGLView];
-#endif
-    
     return YES;
 }
 

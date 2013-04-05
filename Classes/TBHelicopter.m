@@ -26,27 +26,6 @@
 #define kVulcanDelay    4
 
 
-@interface TBHelicopter (Privates)
-@end
-
-
-@implementation TBHelicopter (Privates)
-
-
-- (void)loadImages
-{
-    NSInteger i;
-    
-    for (i = 0; i < 9; i++)
-    {
-        [mTextureArray addObject:[NSString stringWithFormat:@"heli%02d.png", i]];
-    }
-}
-
-
-@end
-
-
 @implementation TBHelicopter
 
 
@@ -64,6 +43,7 @@
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam
 {
     self = [super initWithUnitID:aUnitID team:aTeam];
+
     if (self)
     {
         [self setType:kTBUnitHelicopter];
@@ -76,7 +56,14 @@
         mTextureIndex    = (aTeam == kTBTeamAlly) ? 8 : 0;
         
         mTextureArray    = [[NSMutableArray alloc] init];
-        [self loadImages];
+        for (NSInteger i = 0; i < 9; i++)
+        {
+            [mTextureArray addObject:[NSString stringWithFormat:@"heli%02d.png", i]];
+        }
+        
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:[mTextureArray objectAtIndex:mTextureIndex]];
+        [sTexture loadIfNeeded];
+        [self setTexture:sTexture];
         
         mContentRectArray = [[NSMutableArray alloc] init];
         [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(12, 4, 72, 28))];    // 0
@@ -166,7 +153,7 @@
 
 - (void)setSpeedLever:(CGFloat)aSpeedLever
 {
-    CGFloat sDegree = aSpeedLever * 50;
+    CGFloat sDegree = aSpeedLever * -50;
     CGPoint sPoint  = [self point];
     
     if (aSpeedLever > 0.1 || aSpeedLever < -0.1)
@@ -194,10 +181,8 @@
     if (!mIsLanded && ([self point].y - [[self mesh] size].height) > MAP_GROUND) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
     {
         sPoint.x += mSpeed;
-        
-        PBVertex3 sAngle;
-        sAngle.z = sDegree;
-        [[self transform] setAngle:sAngle];
+
+        [[self transform] setAngle:PBVertex3Make(0, 0, sDegree)];
         
         if (mSpeed > 0)
         {
@@ -402,14 +387,7 @@
             [self fireVulcan];
         }
     }
-}
-
-
-- (void)draw
-{
-//    NSString      *sTextureKey = nil;
-//    TBTextureInfo *sInfo       = nil;
-
+    
     if (++mTick == 100)
     {
         mTick = 0;
@@ -442,15 +420,11 @@
         }
     }
     
-    PBTexture *sTexture = [mTextureArray objectAtIndex:mTextureIndex];
-//    sInfo       = [[TBTextureManager sharedManager] textureInfoForKey:sTextureKey];
+    NSString  *sTextureName = [mTextureArray objectAtIndex:mTextureIndex];
+    PBTexture *sTexture     = [PBTextureManager textureWithImageName:sTextureName];
     
+    [sTexture loadIfNeeded];
     [self setTexture:sTexture];
-    
-//    [self setTextureID:[sInfo textureID]];
-//    [self setTextureSize:[sInfo textureSize]];
-//    [self setContentSize:[sInfo contentSize]];
-//    [super draw];
 }
 
 

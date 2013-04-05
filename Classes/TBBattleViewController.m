@@ -33,20 +33,6 @@
 @implementation TBBattleViewController (Privates)
 
 
-- (void)makeNewAllyHelicopter
-{
-    if ([[TBMoneyManager sharedManager] sum] >= kTBPriceHelicopter)
-    {
-        [TBUnitManager helicopterWithTeam:kTBTeamAlly delegate:self];
-        [TBMoneyManager useMoney:kTBPriceHelicopter];
-    }
-    else
-    {
-        [self performSelector:@selector(makeNewAllyHelicopter) withObject:nil afterDelay:3.0];
-    }
-}
-
-
 - (void)removeDisabledSprite
 {
     [[TBUnitManager sharedManager] removeDisabledUnits];
@@ -94,7 +80,7 @@
 - (void)setupUIs
 {
     CGRect   sBounds    = [[self view] bounds];
-    UIColor *sBackColor = [UIColor cyanColor];
+    UIColor *sBackColor = [UIColor clearColor];
 
     mAmmoLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 40, 140, 30)] autorelease];
     [mAmmoLabel setBackgroundColor:sBackColor];
@@ -177,7 +163,7 @@
     
     CGFloat y = [sGroundTexture size].height / 2;
 
-    for (NSInteger x = 0; x <= kMaxMapXPos; x += [sGroundTexture size].width)
+    for (NSInteger x = -300; x <= kMaxMapXPos + 300; x += [sGroundTexture size].width)
     {
         PBLayer *sLayer = [[[PBLayer alloc] init] autorelease];
         [[sLayer mesh] setUsingMeshQueue:YES];
@@ -230,6 +216,22 @@
 }
 
 
+- (void)makeNewAllyHelicopter
+{
+    if ([[TBMoneyManager sharedManager] sum] >= kTBPriceHelicopter)
+    {
+        [TBMoneyManager useMoney:kTBPriceHelicopter];
+        
+        TBHelicopter *sHelicopter = [TBUnitManager helicopterWithTeam:kTBTeamAlly delegate:self];
+        [mUnitLayer addSublayer:sHelicopter];
+    }
+    else
+    {
+        [self performSelector:@selector(makeNewAllyHelicopter) withObject:nil afterDelay:3.0];
+    }
+}
+
+
 #pragma mark -
 
 
@@ -240,8 +242,6 @@
     if (self)
     {
         mRadar = [[TBRadar alloc] init];
-        
-        [self makeNewAllyHelicopter];
         
         mBackPoint = 240;
         mTimeTick  = 0;
@@ -281,6 +281,8 @@
     [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.5 green:0.5 blue:1.0 alpha:1.0]];
     [self setupUIs];
     [self setupLayers];
+
+    [self makeNewAllyHelicopter];
 }
 
 
@@ -302,6 +304,19 @@
     
     CGRect sBounds = [[self canvas] bounds];
     [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.width / 2, sBounds.size.height / 2)];
+}
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)aInterfaceOrientation
+{
+    if (aInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 
@@ -364,7 +379,7 @@
 //    
 //    [self removeDisabledSprite];
 //    
-//    [[TBUnitManager sharedManager] doActions];
+    [[TBUnitManager sharedManager] doActions];
 //    [[TBWarheadManager sharedManager] doActions];
 //    [[TBExplosionManager sharedManager] doActions];
     
@@ -378,36 +393,30 @@
 
 - (void)accelerometer:(UIAccelerometer *)aAccelerometer didAccelerate:(UIAcceleration *)aAcceleration
 {
-    NSLog(@"accelerometer:didAccelerate:");
-    CGPoint       sPos;
-//    AppDelegate  *sAppDelegate;
-//    TBGLView     *sGLView;
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
     if (sHelicopter)
     {
         [sHelicopter setAltitudeLever:[aAcceleration z]];
         [sHelicopter setSpeedLever:[aAcceleration y]];
-        sPos = [sHelicopter point];
         
+        /*  Update Camera Position  */
+        CGPoint   sHeliPos   = [sHelicopter point];
+        PBCamera *sCamera    = [[self canvas] camera];
+        CGPoint   sCameraPos = [sCamera position];
+
         if ([sHelicopter isLeftAhead])
         {
-            if (mBackPoint < 330)
-            {
-                mBackPoint += 8;
-            }
+            mBackPoint -= (mBackPoint > -80) ? 8 : 0;
         }
         else
         {
-            if (mBackPoint > 150)
-            {
-                mBackPoint -= 8;
-            }
+            mBackPoint += (mBackPoint < 80) ? 8 : 0;
         }
         
-//        sAppDelegate = [[UIApplication sharedApplication] delegate];
-//        sGLView      = [sAppDelegate GLView];
-//        [sGLView setXPos:(sPos.x - mBackPoint)];
+        sCameraPos.x = sHeliPos.x + mBackPoint;
+        [sCamera setPosition:sCameraPos];
+        /*  Update Camera Position  */
     }
 }
 

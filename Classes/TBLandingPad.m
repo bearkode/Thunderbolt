@@ -15,6 +15,12 @@
 
 
 @implementation TBLandingPad
+{
+    NSUInteger mFillUpCount;
+}
+
+
+#pragma mark -
 
 
 - (id)initWithTeam:(TBTeam)aTeam
@@ -26,6 +32,8 @@
         [self setDurability:kLandingPadDurability];
         
         PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexLandingPad00];
+
+        [sTexture loadIfNeeded];
         [self setTexture:sTexture];
         
         mFillUpCount = 0;
