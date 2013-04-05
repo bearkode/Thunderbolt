@@ -137,7 +137,7 @@
 {
     [super setDelegate:aDelegate];
     
-    [mDelegate helicopterWeaponDidReload:self];
+    [[self delegate] helicopterWeaponDidReload:self];
 }
 
 
@@ -147,11 +147,11 @@
     {
         [super addDamage:aDamage];
         
-        [mDelegate helicopterDamageChanged:self];
+        [[self delegate] helicopterDamageChanged:self];
 
         if (mDamage >= mDurability)
         {
-            [mDelegate helicopterDidDestroy:self];
+            [[self delegate] helicopterDidDestroy:self];
         }
     }
 }
@@ -278,7 +278,7 @@
         {
             mDamage = 0;
         }
-        [mDelegate helicopterDamageChanged:self];
+        [[self delegate] helicopterDamageChanged:self];
         [TBMoneyManager useMoney:kTBPriceRepair];
     }
 }
@@ -293,7 +293,7 @@
         {
             mBulletCount = MAX_BULLETS;
         }
-        [mDelegate helicopterWeaponDidReload:self];
+        [[self delegate] helicopterWeaponDidReload:self];
         [TBMoneyManager useMoney:kTBPriceBullet];        
     }
 }
@@ -308,7 +308,8 @@
         {
             mBombCount = MAX_BOMBS;
         }
-        [mDelegate helicopterWeaponDidReload:self];
+        
+        [[self delegate] helicopterWeaponDidReload:self];
         [TBMoneyManager useMoney:kTBPriceBomb];
     }
 }
@@ -331,7 +332,7 @@
         sBomb = [TBWarheadManager bombWithTeam:kTBTeamAlly position:CGPointMake(sPoint.x, sPoint.y - 10) speed:mSpeed];
         mBombCount--;
         
-        [mDelegate helicopter:self weaponFired:1];
+        [[self delegate] helicopter:self weaponFired:1];
     }
 }
 
@@ -373,7 +374,7 @@
             [sBullet setLife:50];
             mBulletCount--;
             
-            [mDelegate helicopter:self weaponFired:0];
+            [[self delegate] helicopter:self weaponFired:0];
         }
 
         if (mBulletCount == 0)

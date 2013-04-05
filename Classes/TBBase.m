@@ -19,6 +19,13 @@
 
 
 @implementation TBBase
+{
+    NSUInteger         mTextureIndex;
+    NSArray           *mTextureKeys;
+    
+    TBAAVulcan        *mAAVulcan;
+    TBMissileLauncher *mMissileLauncher;
+}
 
 
 #pragma mark -
@@ -34,6 +41,7 @@
         
         
         PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBase00];
+        [sTexture loadIfNeeded];
         [self setTexture:sTexture];
 
         mTextureIndex    = 0;
@@ -70,7 +78,10 @@
     
     if (![self isDestroyed])
     {
-        PBTexture *sTexture = [PBTextureManager textureWithImageName:[mTextureKeys objectAtIndex:mTextureIndex]];
+        NSString  *sTextureName = [mTextureKeys objectAtIndex:mTextureIndex];
+        PBTexture *sTexture     = [PBTextureManager textureWithImageName:sTextureName];
+        
+        [sTexture loadIfNeeded];
         [self setTexture:sTexture];
         
         mTextureIndex++;
@@ -79,21 +90,20 @@
             mTextureIndex = 0;
         }
         
-        TBUnit *sTarget;
-        
-        sTarget = (mTeam == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
+        TBUnit *sTarget = (mTeam == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
         
         [mAAVulcan action];
         [mMissileLauncher action];
         
-        /*    if (sTarget)
-         {
-         if ([mAAVulcan fireAt:sTarget])
-         {
-         [mAAVulcan supplyAmmo:1];
-         }
-         }*/
-        
+#if (0)
+        if (sTarget)
+        {
+            if ([mAAVulcan fireAt:sTarget])
+            {
+                [mAAVulcan supplyAmmo:1];
+            }
+        }
+#else
         if (sTarget)
         {
             if ([mMissileLauncher fireAt:sTarget])
@@ -102,6 +112,7 @@
             }
         }
     }
+#endif
 }
 
 

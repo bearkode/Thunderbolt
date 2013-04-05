@@ -107,30 +107,8 @@ static TBStructureManager *gStructureManager = nil;
 
 - (void)doActions
 {
-//    static NSUInteger sCounter = 0;
-
-    TBStructure *sStructure;
-//    BOOL         sLog = ((sCounter++ % 10) == 0) ? YES : NO;
-    
-    for (sStructure in mAllyStructures)
-    {
-        [sStructure action];
-//        [sStructure draw];
-/*        if (sLog)
-        {
-            NSLog(@"A %@ %d", [sStructure class], [sStructure damage]);
-        }*/
-    }
-
-    for (sStructure in mEnemyStructures)
-    {
-        [sStructure action];
-//        [sStructure draw];
-/*        if (sLog)
-        {
-            NSLog(@"E %@ %d", [sStructure class], [sStructure damage]);
-        }*/
-    }
+    [mAllyStructures makeObjectsPerformSelector:@selector(action)];
+    [mEnemyStructures makeObjectsPerformSelector:@selector(action)];
 }
 
 

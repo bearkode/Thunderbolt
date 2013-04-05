@@ -1,10 +1,11 @@
-//
-//  TBStructure.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 3. 5..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBStructure.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 3. 5..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBStructure.h"
 
@@ -24,6 +25,7 @@
 - (id)initWithTeam:(TBTeam)aTeam
 {
     self = [super init];
+    
     if (self)
     {
         mTeam        = aTeam;
