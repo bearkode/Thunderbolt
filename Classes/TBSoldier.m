@@ -1,10 +1,11 @@
-//
-//  TBSoldier.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 7. 22..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBSoldier.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 7. 22..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBSoldier.h"
 #import "TBTextureInfo.h"
@@ -24,7 +25,7 @@
     {
         [self setType:kTBUnitSoldier];
         [self setDurability:kSoldierDurability];
-        [self setPosition:CGPointMake(MAX_MAP_XPOS + 50, 53)];
+        [self setPosition:CGPointMake(kMaxMapXPos + 50, 53)];
         
         mTick         = 1;
         mTextureArray = [[NSMutableArray alloc] init];

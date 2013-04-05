@@ -1,10 +1,11 @@
-//
-//  TBTank.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 1. 29..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBTank.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 1. 29..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBTank.h"
 #import "TBGameConst.h"
@@ -74,7 +75,7 @@
 
         if (mTeam == kTBTeamEnemy)
         {
-            [self setPosition:CGPointMake(MAX_MAP_XPOS + 50, MAP_GROUND + (mContentSize.height / 2))];
+            [self setPosition:CGPointMake(kMaxMapXPos + 50, MAP_GROUND + (mContentSize.height / 2))];
         }
         else
         {

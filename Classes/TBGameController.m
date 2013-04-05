@@ -1,10 +1,11 @@
-//
-//  TBGameController.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 1. 26..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBGameController.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 1. 26..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBGameController.h"
 #import "TBGameConst.h"
@@ -84,29 +85,29 @@
 {
     TBBase *sBase;
     sBase = [[TBBase alloc] initWithTeam:kTBTeamAlly];
-    [sBase setPosition:CGPointMake(MIN_MAP_XPOS + 100, MAP_GROUND + 30)];
+    [sBase setPosition:CGPointMake(kMinMapXPos + 100, MAP_GROUND + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     
     sBase = [[TBBase alloc] initWithTeam:kTBTeamEnemy];
-    [sBase setPosition:CGPointMake(MAX_MAP_XPOS - 100, MAP_GROUND + 30)];
+    [sBase setPosition:CGPointMake(kMaxMapXPos - 100, MAP_GROUND + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     
     TBLandingPad *sLandingPad;
     sLandingPad = [[TBLandingPad alloc] initWithTeam:kTBTeamAlly];
-    [sLandingPad setPosition:CGPointMake(MIN_MAP_XPOS + 200, MAP_GROUND + 6)];
+    [sLandingPad setPosition:CGPointMake(kMinMapXPos + 200, MAP_GROUND + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     
     sLandingPad = [[TBLandingPad alloc] initWithTeam:kTBTeamEnemy];
-    [sLandingPad setPosition:CGPointMake(MAX_MAP_XPOS - 200, MAP_GROUND + 6)];
+    [sLandingPad setPosition:CGPointMake(kMaxMapXPos - 200, MAP_GROUND + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     
     TBAAGunSite *sAAGunSite;
     sAAGunSite = [[TBAAGunSite alloc] initWithTeam:kTBTeamAlly];
-    [sAAGunSite setPosition:CGPointMake(MIN_MAP_XPOS + 800, MAP_GROUND + 15)];
+    [sAAGunSite setPosition:CGPointMake(kMinMapXPos + 800, MAP_GROUND + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
     
     sAAGunSite = [[TBAAGunSite alloc] initWithTeam:kTBTeamEnemy];
-    [sAAGunSite setPosition:CGPointMake(MAX_MAP_XPOS - 800, MAP_GROUND + 15)];
+    [sAAGunSite setPosition:CGPointMake(kMaxMapXPos - 800, MAP_GROUND + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
 }
 
@@ -129,17 +130,17 @@
         mStar0 = [[TBSprite alloc] init];
         [mStar0 setTextureID:[sInfo textureID]];
         [mStar0 setTextureSize:[sInfo textureSize]];
-        [mStar0 setPosition:CGPointMake(MIN_MAP_XPOS, MAP_GROUND + ([sInfo contentSize].height / 2))];
+        [mStar0 setPosition:CGPointMake(kMinMapXPos, MAP_GROUND + ([sInfo contentSize].height / 2))];
 
         mStar1 = [[TBSprite alloc] init];
         [mStar1 setTextureID:[sInfo textureID]];
         [mStar1 setTextureSize:[sInfo textureSize]];
-        [mStar1 setPosition:CGPointMake(MAX_MAP_XPOS / 2, MAP_GROUND + ([sInfo contentSize].height / 2))];
+        [mStar1 setPosition:CGPointMake(kMaxMapXPos / 2, MAP_GROUND + ([sInfo contentSize].height / 2))];
 
         mStar2 = [[TBSprite alloc] init];
         [mStar2 setTextureID:[sInfo textureID]];
         [mStar2 setTextureSize:[sInfo textureSize]];
-        [mStar2 setPosition:CGPointMake(MAX_MAP_XPOS, MAP_GROUND + ([sInfo contentSize].height / 2))];
+        [mStar2 setPosition:CGPointMake(kMaxMapXPos, MAP_GROUND + ([sInfo contentSize].height / 2))];
         
         mRadar = [[TBRadar alloc] init];
         

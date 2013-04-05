@@ -1,10 +1,11 @@
-//
-//  TBRadar.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 20..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBRadar.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 20..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBRadar.h"
 #import "TBTextureManager.h"
@@ -50,7 +51,7 @@
     for (sUnit in sUnits)
     {
         sPosition = [sUnit position];
-        [sUnitObject setPosition:CGPointMake(aXPos + 480 * sPosition.x / MAX_MAP_XPOS, 280.0 + 40 * sPosition.y / 320)];
+        [sUnitObject setPosition:CGPointMake(aXPos + 480 * sPosition.x / kMaxMapXPos, 280.0 + 40 * sPosition.y / 320)];
         [sUnitObject draw];
     }
     
@@ -58,7 +59,7 @@
     for (sUnit in sUnits)
     {
         sPosition = [sUnit position];
-        [sUnitObject setPosition:CGPointMake(aXPos + 480 * sPosition.x / MAX_MAP_XPOS, 280.0 + 40 * sPosition.y / 320)];
+        [sUnitObject setPosition:CGPointMake(aXPos + 480 * sPosition.x / kMaxMapXPos, 280.0 + 40 * sPosition.y / 320)];
         [sUnitObject draw];
     }
 }

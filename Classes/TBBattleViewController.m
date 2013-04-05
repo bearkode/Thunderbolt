@@ -66,9 +66,9 @@
     UIButton *mTankButton;
     UIButton *mAmmoButton;
 
-    TBSprite *mStar0;
-    TBSprite *mStar1;
-    TBSprite *mStar2;
+    PBSprite *mStar0;
+    PBSprite *mStar1;
+    PBSprite *mStar2;
     
     TBRadar  *mRadar;
     
@@ -81,29 +81,29 @@
 {
     TBBase *sBase;
     sBase = [[TBBase alloc] initWithTeam:kTBTeamAlly];
-    [sBase setPosition:CGPointMake(MIN_MAP_XPOS + 100, MAP_GROUND + 30)];
+    [sBase setPosition:CGPointMake(kMinMapXPos + 100, MAP_GROUND + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     
     sBase = [[TBBase alloc] initWithTeam:kTBTeamEnemy];
-    [sBase setPosition:CGPointMake(MAX_MAP_XPOS - 100, MAP_GROUND + 30)];
+    [sBase setPosition:CGPointMake(kMaxMapXPos - 100, MAP_GROUND + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     
     TBLandingPad *sLandingPad;
     sLandingPad = [[TBLandingPad alloc] initWithTeam:kTBTeamAlly];
-    [sLandingPad setPosition:CGPointMake(MIN_MAP_XPOS + 200, MAP_GROUND + 6)];
+    [sLandingPad setPosition:CGPointMake(kMinMapXPos + 200, MAP_GROUND + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     
     sLandingPad = [[TBLandingPad alloc] initWithTeam:kTBTeamEnemy];
-    [sLandingPad setPosition:CGPointMake(MAX_MAP_XPOS - 200, MAP_GROUND + 6)];
+    [sLandingPad setPosition:CGPointMake(kMaxMapXPos - 200, MAP_GROUND + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     
     TBAAGunSite *sAAGunSite;
     sAAGunSite = [[TBAAGunSite alloc] initWithTeam:kTBTeamAlly];
-    [sAAGunSite setPosition:CGPointMake(MIN_MAP_XPOS + 800, MAP_GROUND + 15)];
+    [sAAGunSite setPosition:CGPointMake(kMinMapXPos + 800, MAP_GROUND + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
     
     sAAGunSite = [[TBAAGunSite alloc] initWithTeam:kTBTeamEnemy];
-    [sAAGunSite setPosition:CGPointMake(MAX_MAP_XPOS - 800, MAP_GROUND + 15)];
+    [sAAGunSite setPosition:CGPointMake(kMaxMapXPos - 800, MAP_GROUND + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
 }
 
@@ -126,20 +126,14 @@
         
         sInfo = [sTextureMan textureInfoForKey:kTexGreen];
         
-        mStar0 = [[TBSprite alloc] init];
-        [mStar0 setTextureID:[sInfo textureID]];
-        [mStar0 setTextureSize:[sInfo textureSize]];
-        [mStar0 setPosition:CGPointMake(MIN_MAP_XPOS, MAP_GROUND + ([sInfo contentSize].height / 2))];
+        mStar0 = [[PBSprite alloc] initWithImageName:kTexGreen];
+        [mStar0 setPoint:CGPointMake(kMinMapXPos, MAP_GROUND + ([[mStar0 mesh] size].height / 2))];
         
-        mStar1 = [[TBSprite alloc] init];
-        [mStar1 setTextureID:[sInfo textureID]];
-        [mStar1 setTextureSize:[sInfo textureSize]];
-        [mStar1 setPosition:CGPointMake(MAX_MAP_XPOS / 2, MAP_GROUND + ([sInfo contentSize].height / 2))];
+        mStar1 = [[PBSprite alloc] initWithImageName:kTexGreen];
+        [mStar1 setPoint:CGPointMake(kMaxMapXPos / 2, MAP_GROUND + ([[mStar0 mesh] size].height / 2))];
         
-        mStar2 = [[TBSprite alloc] init];
-        [mStar2 setTextureID:[sInfo textureID]];
-        [mStar2 setTextureSize:[sInfo textureSize]];
-        [mStar2 setPosition:CGPointMake(MAX_MAP_XPOS, MAP_GROUND + ([sInfo contentSize].height / 2))];
+        mStar2 = [[PBSprite alloc] initWithImageName:kTexGreen];
+        [mStar2 setPoint:CGPointMake(kMaxMapXPos, MAP_GROUND + ([[mStar0 mesh] size].height / 2))];
         
         mRadar = [[TBRadar alloc] init];
         
@@ -212,21 +206,38 @@
     [mTankButton setFrame:CGRectMake(10, sBounds.size.height - 35, 60, 30)];
     [mTankButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
     [mTankButton setTitle:@"Tank" forState:UIControlStateNormal];
-    [[self view] addSubview:mTankButton];
     [mTankButton addTarget:self action:@selector(tankButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:mTankButton];
     
     mAmmoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [mAmmoButton setFrame:CGRectMake(410, sBounds.size.height - 35, 60, 30)];
     [mAmmoButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
     [mAmmoButton setTitle:@"Ammo" forState:UIControlStateNormal];
-    [[self view] addSubview:mAmmoButton];
     [mAmmoButton addTarget:self action:@selector(ammoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:mAmmoButton];
+    
+    [[[self canvas] rootLayer] addSublayer:mStar0];
+    [[[self canvas] rootLayer] addSublayer:mStar1];
+    [[[self canvas] rootLayer] addSublayer:mStar2];
+    
+    PBSprite *sSprite = [[[PBSprite alloc] initWithImageName:kTexGreen] autorelease];
+    [sSprite setPoint:CGPointMake(0, 0)];
+    [[[self canvas] rootLayer] addSublayer:sSprite];
 }
 
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+
+- (void)viewDidAppear:(BOOL)aAnimated
+{
+    [super viewDidAppear:aAnimated];
+    
+    CGRect sBounds = [[self canvas] bounds];
+    [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.width / 2, sBounds.size.height / 2)];
 }
 
 
@@ -264,40 +275,40 @@
 
 - (void)pbCanvasWillUpdate:(PBCanvas *)aView
 {
-    [[TBStructureManager sharedManager] doActions];
+//    [[TBStructureManager sharedManager] doActions];
+//    
+//    [mStar0 draw];
+//    [mStar1 draw];
+//    [mStar2 draw];
+//
+//    if (++mTimeTick == 30 * 10)
+//    {
+//        mTimeTick = 0;
+//        NSInteger sUnitType = rand() % 4;
+//        
+//        if (sUnitType == 0)
+//        {
+//            [TBUnitManager armoredVehicleWithTeam:kTBTeamEnemy];
+//        }
+//        else if (sUnitType == 1)
+//        {
+//            [TBUnitManager tankWithTeam:kTBTeamEnemy];
+//        }
+//        else
+//        {
+//            [TBUnitManager soldierWithTeam:kTBTeamEnemy];
+//        }
+//        
+//        [[TBMoneyManager sharedManager] saveMoney:10];
+//    }
+//    
+//    [self removeDisabledSprite];
+//    
+//    [[TBUnitManager sharedManager] doActions];
+//    [[TBWarheadManager sharedManager] doActions];
+//    [[TBExplosionManager sharedManager] doActions];
     
-    [mStar0 draw];
-    [mStar1 draw];
-    [mStar2 draw];
-    
-    if (++mTimeTick == 30 * 10)
-    {
-        mTimeTick = 0;
-        NSInteger sUnitType = rand() % 4;
-        
-        if (sUnitType == 0)
-        {
-            [TBUnitManager armoredVehicleWithTeam:kTBTeamEnemy];
-        }
-        else if (sUnitType == 1)
-        {
-            [TBUnitManager tankWithTeam:kTBTeamEnemy];
-        }
-        else
-        {
-            [TBUnitManager soldierWithTeam:kTBTeamEnemy];
-        }
-        
-        [[TBMoneyManager sharedManager] saveMoney:10];
-    }
-    
-    [self removeDisabledSprite];
-    
-    [[TBUnitManager sharedManager] doActions];
-    [[TBWarheadManager sharedManager] doActions];
-    [[TBExplosionManager sharedManager] doActions];
-    
-    /*  RADAR  */
+
 //    [mRadar drawAt:[mGLView xPos]];
 }
 
@@ -307,6 +318,7 @@
 
 - (void)accelerometer:(UIAccelerometer *)aAccelerometer didAccelerate:(UIAcceleration *)aAcceleration
 {
+    NSLog(@"accelerometer:didAccelerate:");
     CGPoint       sPos;
 //    AppDelegate  *sAppDelegate;
 //    TBGLView     *sGLView;

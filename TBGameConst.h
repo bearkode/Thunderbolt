@@ -7,8 +7,8 @@ typedef enum
 } TBTeam;
 
 
-#define MIN_MAP_XPOS                0
-#define MAX_MAP_XPOS                4000
+#define kMinMapXPos                 0
+#define kMaxMapXPos                 4000
 #define MAP_GROUND                  40
 
 

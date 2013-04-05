@@ -1,10 +1,11 @@
-//
-//  TBSAM.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 16..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBArmoredVehicle.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 16..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBArmoredVehicle.h"
 #import "TBTextureManager.h"
@@ -37,7 +38,7 @@
         
         [self setTextureSize:[sInfo textureSize]];
         [self setContentSize:[sInfo contentSize]];
-        [self setPosition:CGPointMake(MAX_MAP_XPOS + 50, MAP_GROUND + (mContentSize.height / 2))];
+        [self setPosition:CGPointMake(kMaxMapXPos + 50, MAP_GROUND + (mContentSize.height / 2))];
         
         mAAVulcan        = [[TBAAVulcan alloc] initWithBody:self team:aTeam];
         mMissileLauncher = [[TBMissileLauncher alloc] initWithBody:self team:aTeam];

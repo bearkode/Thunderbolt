@@ -1,10 +1,11 @@
-//
-//  TBUnitManager.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 3. 7..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBUnitManager.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 3. 7..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBUnitManager.h"
 #import "TBUnit.h"
@@ -271,7 +272,7 @@ static TBUnitManager *gUnitManager = nil;
     {
         if ([sUnit isAvailable])
         {
-            if ([sUnit position].x > (MAX_MAP_XPOS + 50))
+            if ([sUnit position].x > (kMaxMapXPos + 50))
             {
                 /*   Arrived Limit   */
                 [sDisabledUnits addObject:sUnit];
@@ -361,7 +362,7 @@ static TBUnitManager *gUnitManager = nil;
     TBHelicopter *sHelicopter = [[[TBHelicopter alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
     [sHelicopter setDelegate:aDelegate];    
-    [sHelicopter setPosition:CGPointMake(MIN_MAP_XPOS + 200, MAP_GROUND + ([sHelicopter contentSize].height /2))];    
+    [sHelicopter setPosition:CGPointMake(kMinMapXPos + 200, MAP_GROUND + ([sHelicopter contentSize].height /2))];
     [[TBUnitManager sharedManager] addUnit:sHelicopter];
     
     return sHelicopter;

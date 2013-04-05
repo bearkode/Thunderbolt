@@ -1,10 +1,11 @@
-//
-//  TBHelicopter.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 1. 24..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBHelicopter.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 1. 24..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBHelicopter.h"
 #import "TBTextureManager.h"
@@ -215,13 +216,13 @@
         [self setAngle:0];
     }
     
-    if (mPosition.x < MIN_MAP_XPOS)
+    if (mPosition.x < kMinMapXPos)
     {
-        mPosition.x = MIN_MAP_XPOS;
+        mPosition.x = kMinMapXPos;
     }
-    else if (mPosition.x > MAX_MAP_XPOS)
+    else if (mPosition.x > kMaxMapXPos)
     {
-        mPosition.x = MAX_MAP_XPOS;
+        mPosition.x = kMaxMapXPos;
     }
 }
 
