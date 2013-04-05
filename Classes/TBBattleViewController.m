@@ -1,49 +1,36 @@
-//
-//  TBGameController.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 1. 26..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBBattleViewController.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 13. 4. 4..
+ *  Copyright (c) 2013 Tinybean. All rights reserved.
+ *
+ */
 
-#import "TBGameController.h"
-#import "TBGameConst.h"
-#import "TBMacro.h"
-#import "AppDelegate.h"
-#import "TBGLView.h"
+#import "TBBattleViewController.h"
+#import <PBKit.h>
 
 #import "TBTextureNames.h"
-#import "TBTextureManager.h"
-#import "TBBGMManager.h"
-#import "TBALPlayback.h"
 
 #import "TBMoneyManager.h"
-#import "TBScoreManager.h"
-
 #import "TBUnitManager.h"
 #import "TBWarheadManager.h"
 #import "TBExplosionManager.h"
-
-#import "TBHelicopter.h"
-#import "TBTank.h"
-#import "TBBullet.h"
-#import "TBBomb.h"
-#import "TBMissile.h"
-#import "TBExplosion.h"
-
 #import "TBStructureManager.h"
+#import "TBTextureManager.h"
+#import "TBScoreManager.h"
+#import "TBBGMManager.h"
+
 #import "TBBase.h"
 #import "TBLandingPad.h"
 #import "TBAAGunSite.h"
 
+#import "TBHelicopter.h"
+
 #import "TBRadar.h"
 
 
-@interface TBGameController (Privates)
-@end
-
-
-@implementation TBGameController (Privates)
+@implementation TBBattleViewController (Privates)
 
 
 - (void)makeNewAllyHelicopter
@@ -71,13 +58,23 @@
 @end
 
 
-@implementation TBGameController
+@implementation TBBattleViewController
+{
+    UILabel  *mAmmoLabel;
+    UILabel  *mScoreLabel;
+    UILabel  *mMoneyLabel;
+    UIButton *mTankButton;
+    UIButton *mAmmoButton;
 
-
-@synthesize GLView = mGLView;
-
-
-#pragma mark -
+    TBSprite *mStar0;
+    TBSprite *mStar1;
+    TBSprite *mStar2;
+    
+    TBRadar  *mRadar;
+    
+    CGFloat   mBackPoint;
+    NSInteger mTimeTick;
+}
 
 
 - (void)setupStructures
@@ -111,31 +108,34 @@
 }
 
 
-- (id)init
+#pragma mark -
+
+- (id)initWithNibName:(NSString *)aNibNameOrNil bundle:(NSBundle *)aNibBundleOrNil
 {
     TBTextureManager *sTextureMan;
     TBTextureInfo    *sInfo;
+
+    self = [super initWithNibName:aNibNameOrNil bundle:aNibBundleOrNil];
     
-    self = [super init];
     if (self)
     {
         sTextureMan = [TBTextureManager sharedManager];
         [sTextureMan loadTextures];
-
+        
         [self setupStructures];
         
         sInfo = [sTextureMan textureInfoForKey:kTexGreen];
-         
+        
         mStar0 = [[TBSprite alloc] init];
         [mStar0 setTextureID:[sInfo textureID]];
         [mStar0 setTextureSize:[sInfo textureSize]];
         [mStar0 setPosition:CGPointMake(MIN_MAP_XPOS, MAP_GROUND + ([sInfo contentSize].height / 2))];
-
+        
         mStar1 = [[TBSprite alloc] init];
         [mStar1 setTextureID:[sInfo textureID]];
         [mStar1 setTextureSize:[sInfo textureSize]];
         [mStar1 setPosition:CGPointMake(MAX_MAP_XPOS / 2, MAP_GROUND + ([sInfo contentSize].height / 2))];
-
+        
         mStar2 = [[TBSprite alloc] init];
         [mStar2 setTextureID:[sInfo textureID]];
         [mStar2 setTextureSize:[sInfo textureSize]];
@@ -171,19 +171,62 @@
     
     [[TBMoneyManager sharedManager] setDelegate:nil];
     [[TBScoreManager sharedManager] setDelegate:nil];
-
+    
     [super dealloc];
 }
 
 
-- (void)setGLView:(TBGLView *)aGLView
+- (void)viewDidLoad
 {
-    mGLView = aGLView;
+    [super viewDidLoad];
+    
+    [[self view] setBackgroundColor:[UIColor greenColor]];
+    
+    [[self navigationController] setNavigationBarHidden:YES];
+    [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.5 green:0.5 blue:1.0 alpha:1.0]];
 
-    [mGLView setDelegate:self];
-  
-    [[mGLView tankButton] addTarget:self action:@selector(tankButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [[mGLView ammoButton] addTarget:self action:@selector(ammoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    CGRect   sBounds    = [[self view] bounds];
+    UIColor *sBackColor = [UIColor cyanColor];
+    
+    mAmmoLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 40, 140, 30)] autorelease];
+    [mAmmoLabel setBackgroundColor:sBackColor];
+    [mAmmoLabel setTextColor:[UIColor whiteColor]];
+    [mAmmoLabel setFont:[UIFont systemFontOfSize:14]];
+    [[self view] addSubview:mAmmoLabel];
+    
+    mScoreLabel = [[[UILabel alloc] initWithFrame:CGRectMake(190, 40, 100, 30)] autorelease];
+    [mScoreLabel setBackgroundColor:sBackColor];
+    [mScoreLabel setTextColor:[UIColor whiteColor]];
+    [mScoreLabel setFont:[UIFont systemFontOfSize:14]];
+    [mScoreLabel setTextAlignment:UITextAlignmentCenter];
+    [[self view] addSubview:mScoreLabel];
+    
+    mMoneyLabel = [[[UILabel alloc] initWithFrame:CGRectMake(340, 40, 120, 30)] autorelease];
+    [mMoneyLabel setBackgroundColor:sBackColor];
+    [mMoneyLabel setTextColor:[UIColor whiteColor]];
+    [mMoneyLabel setFont:[UIFont systemFontOfSize:14]];
+    [mMoneyLabel setTextAlignment:UITextAlignmentRight];
+    [[self view] addSubview:mMoneyLabel];
+
+    mTankButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [mTankButton setFrame:CGRectMake(10, sBounds.size.height - 35, 60, 30)];
+    [mTankButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
+    [mTankButton setTitle:@"Tank" forState:UIControlStateNormal];
+    [[self view] addSubview:mTankButton];
+    [mTankButton addTarget:self action:@selector(tankButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    mAmmoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [mAmmoButton setFrame:CGRectMake(410, sBounds.size.height - 35, 60, 30)];
+    [mAmmoButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
+    [mAmmoButton setTitle:@"Ammo" forState:UIControlStateNormal];
+    [[self view] addSubview:mAmmoButton];
+    [mAmmoButton addTarget:self action:@selector(ammoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 
@@ -217,10 +260,9 @@
 
 
 #pragma mark -
-#pragma mark Delegates
 
 
-- (void)glViewRenderObjects:(TBGLView *)aGLView
+- (void)pbCanvasWillUpdate:(PBCanvas *)aView
 {
     [[TBStructureManager sharedManager] doActions];
     
@@ -248,7 +290,7 @@
         
         [[TBMoneyManager sharedManager] saveMoney:10];
     }
-
+    
     [self removeDisabledSprite];
     
     [[TBUnitManager sharedManager] doActions];
@@ -256,61 +298,7 @@
     [[TBExplosionManager sharedManager] doActions];
     
     /*  RADAR  */
-    [mRadar drawAt:[mGLView xPos]];
-}
-
-
-- (void)glView:(TBGLView *)aGLView touchBegan:(CGPoint)aPoint
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    
-    if ([sHelicopter selectedWeapon] == kWeaponVulcan &&
-        [sHelicopter bulletCount] > 0 &&
-        ![sHelicopter isLanded])
-    {
-        [[TBALPlayback sharedPlayback] startSound:kTBSoundVulcan];
-        [sHelicopter setFireVulcan:YES];
-    }
-}
-
-
-- (void)glView:(TBGLView *)aGLView touchCancelled:(CGPoint)aPoint
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    
-    [[TBALPlayback sharedPlayback] stopSound:kTBSoundVulcan];    
-    [sHelicopter setFireVulcan:NO];
-}
-
-
-- (void)glView:(TBGLView *)aGLView touchMoved:(CGPoint)aPoint
-{
-
-}
-
-
-- (void)glView:(TBGLView *)aGLView touchEnded:(CGPoint)aPoint
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    
-    [[TBALPlayback sharedPlayback] stopSound:kTBSoundVulcan];
-    [sHelicopter setFireVulcan:NO];
-}
-
-
-- (void)glView:(TBGLView *)aGLView touchSwipe:(NSInteger)aDirection
-{
-}
-
-
-- (void)glView:(TBGLView *)aGLView touchTapCount:(NSInteger)aTabCount
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    
-    if ([sHelicopter selectedWeapon] == kWeaponBomb && ![sHelicopter isLanded])
-    {
-        [sHelicopter dropBomb];
-    }
+//    [mRadar drawAt:[mGLView xPos]];
 }
 
 
@@ -320,21 +308,21 @@
 - (void)accelerometer:(UIAccelerometer *)aAccelerometer didAccelerate:(UIAcceleration *)aAcceleration
 {
     CGPoint       sPos;
-    AppDelegate  *sAppDelegate;
-    TBGLView     *sGLView;
+//    AppDelegate  *sAppDelegate;
+//    TBGLView     *sGLView;
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-
+    
     if (sHelicopter)
     {
         [sHelicopter setAltitudeLever:[aAcceleration z]];
-        [sHelicopter setSpeedLever:[aAcceleration y]];    
+        [sHelicopter setSpeedLever:[aAcceleration y]];
         sPos = [sHelicopter position];
-    
+        
         if ([sHelicopter isLeftAhead])
         {
             if (mBackPoint < 330)
             {
-                mBackPoint += 8;        
+                mBackPoint += 8;
             }
         }
         else
@@ -344,10 +332,10 @@
                 mBackPoint -= 8;
             }
         }
-
-        sAppDelegate = [[UIApplication sharedApplication] delegate];
+        
+//        sAppDelegate = [[UIApplication sharedApplication] delegate];
 //        sGLView      = [sAppDelegate GLView];
-        [sGLView setXPos:(sPos.x - mBackPoint)];
+//        [sGLView setXPos:(sPos.x - mBackPoint)];
     }
 }
 
@@ -364,7 +352,7 @@
     if (sHelicopter)
     {
         sAmmoText = [NSString stringWithFormat:@"V:%d B:%d D:%3.2f", [sHelicopter bulletCount], [sHelicopter bombCount], [sHelicopter damageRate]];
-        [[mGLView ammoLabel] setText:sAmmoText];
+        [mAmmoLabel setText:sAmmoText];
     }
 }
 
@@ -411,13 +399,13 @@
 
 - (void)updateMoneyLabel:(NSUInteger)aSum
 {
-    [[mGLView moneyLabel] setText:[NSString stringWithFormat:@"$ %d", aSum]];
+    [mMoneyLabel setText:[NSString stringWithFormat:@"$ %d", aSum]];
 }
 
 
 - (void)updateScoreLabel:(NSUInteger)aScore
 {
-    [[mGLView scoreLabel] setText:[NSString stringWithFormat:@"%d", aScore]];
+    [mScoreLabel setText:[NSString stringWithFormat:@"%d", aScore]];
 }
 
 

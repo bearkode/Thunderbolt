@@ -2,7 +2,7 @@
  *  GLSprite.h
  *  
  *
- *  Created by jskim on 09. 11. 10.
+ *  Created by bearkode on 09. 11. 10.
  *  Copyright 2009 tinybean. All rights reserved.
  *
  */

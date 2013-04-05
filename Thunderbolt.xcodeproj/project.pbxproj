@@ -15,12 +15,13 @@
 		28FD14FE0DC6FC130079059D /* TBGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* TBGLView.m */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E868568170D7E0900D64EF7 /* TBBattleViewController.m */; };
+		2E86856A170D7EAE00D64EF7 /* libPBKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E868563170D7AC300D64EF7 /* libPBKit.a */; };
 		A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFA6D1194D9ED00DA0139 /* TBMissile.m */; };
 		A71FFA9D1194E6D800DA0139 /* missile.png in Resources */ = {isa = PBXBuildFile; fileRef = A71FFA9C1194E6D700DA0139 /* missile.png */; };
 		A71FFB7811961DCE00DA0139 /* TBWarheadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFB7711961DCE00DA0139 /* TBWarheadManager.m */; };
 		A71FFC5211965E4300DA0139 /* TBExplosionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFC5111965E4300DA0139 /* TBExplosionManager.m */; };
 		A720E4F8111E2A6D00CA7792 /* Valkyries.3gp in Resources */ = {isa = PBXBuildFile; fileRef = A720E4F7111E2A6D00CA7792 /* Valkyries.3gp */; };
-		A720E51E111E5E8A00CA7792 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E51D111E5E8A00CA7792 /* Default.png */; };
 		A720E523111E5FDF00CA7792 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E522111E5FDF00CA7792 /* icon.png */; };
 		A720E543111EA5D700CA7792 /* enemy_tank_exp00.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E540111EA5D700CA7792 /* enemy_tank_exp00.png */; };
 		A720E544111EA5D700CA7792 /* enemy_tank_exp01.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E541111EA5D700CA7792 /* enemy_tank_exp01.png */; };
@@ -126,6 +127,23 @@
 		A7D9182011A67027006ABF25 /* TBRadarObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9181F11A67027006ABF25 /* TBRadarObject.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2E868562170D7AC300D64EF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0C7D657116AD214C00235E6B;
+			remoteInfo = PBKit;
+		};
+		2E868564170D7ACF00D64EF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C7D657016AD214C00235E6B;
+			remoteInfo = PBKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -138,6 +156,9 @@
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PBKit.xcodeproj; path = PrisonBreak/PBKit/PBKit.xcodeproj; sourceTree = "<group>"; };
+		2E868567170D7E0900D64EF7 /* TBBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleViewController.h; sourceTree = "<group>"; };
+		2E868568170D7E0900D64EF7 /* TBBattleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleViewController.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Thunderbolt_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thunderbolt_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Thunderbolt-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Thunderbolt-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A71FFA6C1194D9ED00DA0139 /* TBMissile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMissile.h; sourceTree = "<group>"; };
@@ -294,6 +315,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E86856A170D7EAE00D64EF7 /* libPBKit.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
@@ -323,6 +345,8 @@
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
 				A73DE71F110DF20E008C1A67 /* TBGameController.h */,
 				A73DE720110DF20E008C1A67 /* TBGameController.m */,
+				2E868567170D7E0900D64EF7 /* TBBattleViewController.h */,
+				2E868568170D7E0900D64EF7 /* TBBattleViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -338,6 +362,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -383,6 +408,14 @@
 				A73DE6FD110DF0FC008C1A67 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2E86855F170D7AC300D64EF7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2E868563170D7AC300D64EF7 /* libPBKit.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A725CB59119CA76D00276F35 /* Weapon */ = {
@@ -626,6 +659,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2E868565170D7ACF00D64EF7 /* PBXTargetDependency */,
 			);
 			name = Thunderbolt;
 			productName = Thunderbolt;
@@ -652,12 +686,28 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2E86855F170D7AC300D64EF7 /* Products */;
+					ProjectRef = 2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* Thunderbolt */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2E868563170D7AC300D64EF7 /* libPBKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPBKit.a;
+			remoteRef = 2E868562170D7AC300D64EF7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -681,7 +731,6 @@
 				A7BC32E51119BF6A0052D1BA /* bomb.png in Resources */,
 				A7C78F69111E212C004A2F37 /* heli.caf in Resources */,
 				A720E4F8111E2A6D00CA7792 /* Valkyries.3gp in Resources */,
-				A720E51E111E5E8A00CA7792 /* Default.png in Resources */,
 				A720E523111E5FDF00CA7792 /* icon.png in Resources */,
 				A720E543111EA5D700CA7792 /* enemy_tank_exp00.png in Resources */,
 				A720E544111EA5D700CA7792 /* enemy_tank_exp01.png in Resources */,
@@ -782,10 +831,19 @@
 				A7A7782811E217D7001CE8D1 /* TBStructureManager.m in Sources */,
 				A7901E9E11F88440000BA30C /* TBSoldier.m in Sources */,
 				A78DF06F11F890A0002AFCC9 /* TBRifle.m in Sources */,
+				2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2E868565170D7ACF00D64EF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PBKit;
+			targetProxy = 2E868564170D7ACF00D64EF7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
@@ -798,7 +856,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Thunderbolt_Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrisonBreak/PBKit/PBKit";
 				INFOPLIST_FILE = "Thunderbolt-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Thunderbolt;
 			};
 			name = Debug;
@@ -811,7 +872,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Thunderbolt_Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrisonBreak/PBKit/PBKit";
 				INFOPLIST_FILE = "Thunderbolt-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Thunderbolt;
 			};
 			name = Release;
@@ -826,7 +889,8 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -842,7 +906,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
