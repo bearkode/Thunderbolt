@@ -26,6 +26,7 @@
 #import "TBAAGunSite.h"
 
 #import "TBHelicopter.h"
+#import "TBTank.h"
 
 #import "TBRadar.h"
 
@@ -124,32 +125,32 @@
     TBLandingPad *sLandingPad;
     TBAAGunSite  *sAAGunSite;
     
-    sBase = [[TBBase alloc] initWithTeam:kTBTeamAlly];
+    sBase = [[[TBBase alloc] initWithTeam:kTBTeamAlly] autorelease];
     [sBase setPoint:CGPointMake(kMinMapXPos + 100, MAP_GROUND + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     [mStructureLayer addSublayer:sBase];
 
-    sBase = [[TBBase alloc] initWithTeam:kTBTeamEnemy];
+    sBase = [[[TBBase alloc] initWithTeam:kTBTeamEnemy] autorelease];
     [sBase setPoint:CGPointMake(kMaxMapXPos - 100, MAP_GROUND + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     [mStructureLayer addSublayer:sBase];
 
-    sLandingPad = [[TBLandingPad alloc] initWithTeam:kTBTeamAlly];
+    sLandingPad = [[[TBLandingPad alloc] initWithTeam:kTBTeamAlly] autorelease];
     [sLandingPad setPoint:CGPointMake(kMinMapXPos + 200, MAP_GROUND + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     [mStructureLayer addSublayer:sLandingPad];
     
-    sLandingPad = [[TBLandingPad alloc] initWithTeam:kTBTeamEnemy];
+    sLandingPad = [[[TBLandingPad alloc] initWithTeam:kTBTeamEnemy] autorelease];
     [sLandingPad setPoint:CGPointMake(kMaxMapXPos - 200, MAP_GROUND + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     [mStructureLayer addSublayer:sLandingPad];
     
-    sAAGunSite = [[TBAAGunSite alloc] initWithTeam:kTBTeamAlly];
+    sAAGunSite = [[[TBAAGunSite alloc] initWithTeam:kTBTeamAlly] autorelease];
     [sAAGunSite setPoint:CGPointMake(kMinMapXPos + 800, MAP_GROUND + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
     [mStructureLayer addSublayer:sAAGunSite];
     
-    sAAGunSite = [[TBAAGunSite alloc] initWithTeam:kTBTeamEnemy];
+    sAAGunSite = [[[TBAAGunSite alloc] initWithTeam:kTBTeamEnemy] autorelease];
     [sAAGunSite setPoint:CGPointMake(kMaxMapXPos - 800, MAP_GROUND + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
     [mStructureLayer addSublayer:sAAGunSite];
@@ -163,7 +164,7 @@
     
     CGFloat y = [sGroundTexture size].height / 2;
 
-    for (NSInteger x = -300; x <= kMaxMapXPos + 300; x += [sGroundTexture size].width)
+    for (NSInteger x = -400; x <= kMaxMapXPos + 400; x += [sGroundTexture size].width)
     {
         PBLayer *sLayer = [[[PBLayer alloc] init] autorelease];
         [[sLayer mesh] setUsingMeshQueue:YES];
@@ -328,8 +329,10 @@
 {
     if ([[TBMoneyManager sharedManager] sum] >= kTBPriceTank)
     {
-        [TBUnitManager tankWithTeam:kTBTeamAlly];
         [TBMoneyManager useMoney:kTBPriceTank];
+        
+        TBTank *sTank = [TBUnitManager tankWithTeam:kTBTeamAlly];
+        [mUnitLayer addSublayer:sTank];
     }
 }
 
@@ -356,34 +359,33 @@
 {
     [[TBStructureManager sharedManager] doActions];
 
-//    if (++mTimeTick == 30 * 10)
-//    {
-//        mTimeTick = 0;
-//        NSInteger sUnitType = rand() % 4;
-//        
-//        if (sUnitType == 0)
-//        {
-//            [TBUnitManager armoredVehicleWithTeam:kTBTeamEnemy];
-//        }
-//        else if (sUnitType == 1)
-//        {
-//            [TBUnitManager tankWithTeam:kTBTeamEnemy];
-//        }
-//        else
-//        {
-//            [TBUnitManager soldierWithTeam:kTBTeamEnemy];
-//        }
-//        
-//        [[TBMoneyManager sharedManager] saveMoney:10];
-//    }
-//    
-//    [self removeDisabledSprite];
-//    
-    [[TBUnitManager sharedManager] doActions];
-//    [[TBWarheadManager sharedManager] doActions];
-//    [[TBExplosionManager sharedManager] doActions];
+    if (++mTimeTick == 30 * 10)
+    {
+        mTimeTick = 0;
+        NSInteger sUnitType = rand() % 4;
+        
+        if (sUnitType == 0)
+        {
+            [TBUnitManager armoredVehicleWithTeam:kTBTeamEnemy];
+        }
+        else if (sUnitType == 1)
+        {
+            [TBUnitManager tankWithTeam:kTBTeamEnemy];
+        }
+        else
+        {
+            [TBUnitManager soldierWithTeam:kTBTeamEnemy];
+        }
+        
+        [[TBMoneyManager sharedManager] saveMoney:10];
+    }
     
+    [self removeDisabledSprite];
 
+    [[TBUnitManager sharedManager] doActions];
+    [[TBWarheadManager sharedManager] doActions];
+    [[TBExplosionManager sharedManager] doActions];
+    
 //    [mRadar drawAt:[mGLView xPos]];
 }
 

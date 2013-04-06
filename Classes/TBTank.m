@@ -19,18 +19,6 @@
 #define kTankSpeed 1
 
 
-@interface TBTank (Privates)
-@end
-
-
-@implementation TBTank (Privates)
-
-
-
-
-@end
-
-
 @implementation TBTank
 {
     PBTexture *mTextureNormal;
@@ -56,9 +44,11 @@
     
     [mTextureNormal autorelease];
     mTextureNormal = [[PBTextureManager textureWithImageName:sTexTank] retain];
+    [mTextureNormal loadIfNeeded];
     
     [mTextureHit autorelease];
     mTextureHit = [[PBTextureManager textureWithImageName:sTexTankShoot] retain];
+    [mTextureHit loadIfNeeded];
     
     [self setTexture:mTextureNormal];
 }
@@ -134,19 +124,7 @@
         sPoint.x += ([self isAlly]) ? kTankSpeed : -kTankSpeed;
         [self setPoint:sPoint];
     }
-}
-
-
-- (void)addDamage:(NSInteger)aDamage
-{
-    [super addDamage:aDamage];
     
-    mHitDiscount = 5;
-}
-
-
-- (void)draw
-{
     if (mHitDiscount == 0)
     {
         [self setTexture:mTextureNormal];
@@ -156,8 +134,14 @@
         mHitDiscount--;
         [self setTexture:mTextureHit];
     }
+}
+
+
+- (void)addDamage:(NSInteger)aDamage
+{
+    [super addDamage:aDamage];
     
-//    [super draw];
+    mHitDiscount = 5;
 }
 
 

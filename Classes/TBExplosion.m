@@ -15,6 +15,12 @@
 
 
 @implementation TBExplosion
+{
+    NSInteger       mAniIndex;
+    NSMutableArray *mTextureInfoArray;
+    NSMutableArray *mTextureArray;
+    NSMutableArray *mPositionArray;
+}
 
 
 - (id)init
@@ -25,6 +31,7 @@
     {
         mAniIndex         = 0;
         mTextureInfoArray = [[NSMutableArray alloc] init];
+        mTextureArray     = [[NSMutableArray alloc] init];
         mPositionArray    = [[NSMutableArray alloc] init];
     }
     
@@ -35,7 +42,8 @@
 - (void)dealloc
 {
     [mTextureInfoArray release];
-    [mPositionArray    release];
+    [mTextureArray release];
+    [mPositionArray release];
     
     [super dealloc];
 }
@@ -43,16 +51,12 @@
 
 - (void)action
 {
-    NSValue       *sPosition;
-    
     if (![self isFinished])
     {
-        PBTexture *sTexture = [mTextureInfoArray objectAtIndex:mAniIndex];
-        sPosition = [mPositionArray objectAtIndex:mAniIndex];
+        PBTexture *sTexture = [mTextureArray objectAtIndex:mAniIndex];
+        NSValue   *sPosition = [mPositionArray objectAtIndex:mAniIndex];
 
         [self setTexture:sTexture];
-//        [self setTextureID:[sInfo textureID]];
-//        [self setTextureSize:[sInfo textureSize]];
         [self setPoint:[sPosition CGPointValue]];
         
         mAniIndex++;
@@ -63,10 +67,13 @@
 #pragma mark -
 
 
-- (void)addTextureInfo:(TBTextureInfo *)aInfo atPosition:(CGPoint)aPosition
+- (void)addTexture:(PBTexture *)aTexture atPosition:(CGPoint)aPosition
 {
-    [mTextureInfoArray addObject:aInfo];
-    [mPositionArray    addObject:[NSValue valueWithCGPoint:aPosition]];
+    if (aTexture)
+    {
+        [mTextureArray addObject:aTexture];
+        [mPositionArray addObject:[NSValue valueWithCGPoint:aPosition]];
+    }
 }
 
 
@@ -79,51 +86,6 @@
     
     return NO;
 }
-
-
-#pragma mark -
-
-
-/*+ (TBExplosion *)tankExplosionAtPoistion:(CGPoint)aPosition
-{
-    TBExplosion   *sExplosion = [[TBExplosion alloc] init];
-    TBTextureInfo *sInfo      = nil;
-    
-    sInfo = [TBTextureManager textureInfoForKey:kTexTankExp00];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexTankExp01];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexTankExp02];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-
-    [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
-
-    return [sExplosion autorelease];
-}
-
-
-+ (TBExplosion *)bombExplosionAtPosition:(CGPoint)aPosition
-{
-    TBExplosion   *sExplosion = [[TBExplosion alloc] init];
-    TBTextureInfo *sInfo      = nil;
-    
-    sInfo = [TBTextureManager textureInfoForKey:kTexBombExp00];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexBombExp01];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexBombExp02];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    
-    [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
-    
-    return [sExplosion autorelease];
-}*/
 
 
 @end

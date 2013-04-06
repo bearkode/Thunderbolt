@@ -410,8 +410,7 @@ static TBUnitManager *gUnitManager = nil;
     [sMissile setPoint:aPosition];
     [sMissile setTargetID:[aTarget unitID]];
     
-    PBVertex3 sAngle;
-    sAngle.z = TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget point]));
+    PBVertex3 sAngle = PBVertex3Make(0, 0, TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget point])));
     [[sMissile transform] setAngle:sAngle];
     
     [gUnitManager addUnit:sMissile];

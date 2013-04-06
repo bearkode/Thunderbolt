@@ -8,6 +8,7 @@
  */
 
 #import "TBExplosionManager.h"
+#import <PBKit.h>
 #import "TBExplosion.h"
 #import "TBTextureManager.h"
 #import "TBTextureNames.h"
@@ -169,18 +170,23 @@ static TBExplosionManager *gExplosionManager = nil;
 //  TODO : explosion for each team
 + (TBExplosion *)tankExplosionAtPoistion:(CGPoint)aPosition
 {
-    TBExplosion   *sExplosion = [[[TBExplosion alloc] init] autorelease];
-    TBTextureInfo *sInfo      = nil;
+    TBExplosion *sExplosion   = [[[TBExplosion alloc] init] autorelease];
+    PBTexture   *sTexture     = nil;
     
-    sInfo = [TBTextureManager textureInfoForKey:kTexEnemyTankExp00];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexEnemyTankExp01];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexEnemyTankExp02];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
+    sTexture = [PBTextureManager textureWithImageName:kTexEnemyTankExp00];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    sTexture = [PBTextureManager textureWithImageName:kTexEnemyTankExp01];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    sTexture = [PBTextureManager textureWithImageName:kTexEnemyTankExp02];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
     
     [[TBExplosionManager sharedManager] addObject:sExplosion];
     [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
@@ -191,21 +197,22 @@ static TBExplosionManager *gExplosionManager = nil;
 
 + (TBExplosion *)bombExplosionAtPosition:(CGPoint)aPosition
 {
-    TBExplosion   *sExplosion = [[[TBExplosion alloc] init] autorelease];
-    TBTextureInfo *sInfo      = nil;
+    TBExplosion *sExplosion = [[[TBExplosion alloc] init] autorelease];
+    PBTexture   *sTexture   = nil;
     
-    sInfo = [TBTextureManager textureInfoForKey:kTexBombExp00];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexBombExp01];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexBombExp02];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
+    sTexture = [PBTextureManager textureWithImageName:kTexBombExp00];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    sTexture = [PBTextureManager textureWithImageName:kTexBombExp01];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    sTexture = [PBTextureManager textureWithImageName:kTexBombExp02];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
 
     [[TBExplosionManager sharedManager] addObject:sExplosion];    
-    
     [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
 
     return sExplosion;
@@ -214,21 +221,25 @@ static TBExplosionManager *gExplosionManager = nil;
 
 + (TBExplosion *)helicopterExplosionAtPosition:(CGPoint)aPosition isLeftAhead:(BOOL)aIsLeftAhead
 {
-    TBExplosion   *sExplosion = [[[TBExplosion alloc] init] autorelease];
-    TBTextureInfo *sInfo      = nil;
+    TBExplosion *sExplosion = [[[TBExplosion alloc] init] autorelease];
+    PBTexture   *sTexture = nil;
     
-    sInfo = [TBTextureManager textureInfoForKey:(aIsLeftAhead) ? kTexHeliLExp00 : kTexHeliRExp00];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:(aIsLeftAhead) ? kTexHeliLExp01 : kTexHeliRExp01];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:(aIsLeftAhead) ? kTexHeliLExp02 : kTexHeliRExp02];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
+    sTexture = [PBTextureManager textureWithImageName:(aIsLeftAhead) ? kTexHeliLExp00 : kTexHeliRExp00];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    sTexture = [PBTextureManager textureWithImageName:(aIsLeftAhead) ? kTexHeliLExp01 : kTexHeliRExp01];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    sTexture = [PBTextureManager textureWithImageName:(aIsLeftAhead) ? kTexHeliLExp02 : kTexHeliRExp02];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
     
     [[TBExplosionManager sharedManager] addObject:sExplosion];    
-    
     [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
     
     return sExplosion;
@@ -237,25 +248,28 @@ static TBExplosionManager *gExplosionManager = nil;
 
 + (TBExplosion *)missileExplosionAtPosition:(CGPoint)aPosition angle:(CGFloat)aAngle
 {
-    TBExplosion   *sExplosion = [[[TBExplosion alloc] init] autorelease];
-    TBTextureInfo *sInfo      = nil;
+    TBExplosion *sExplosion = [[[TBExplosion alloc] init] autorelease];
+    PBTexture   *sTexture   = nil;
+    PBVertex3    sAngle = PBVertex3Make(0, 0, aAngle);
     
-    PBVertex3 sAngle;
-    sAngle.z = aAngle;
     [[sExplosion transform] setAngle:sAngle];
     
-    sInfo = [TBTextureManager textureInfoForKey:kTexMissileExp00];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexMissileExp01];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
-    sInfo = [TBTextureManager textureInfoForKey:kTexMissileExp02];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];
-    [sExplosion addTextureInfo:sInfo atPosition:aPosition];    
+    sTexture = [PBTextureManager textureWithImageName:kTexMissileExp00];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    sTexture = [PBTextureManager textureWithImageName:kTexMissileExp01];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    sTexture = [PBTextureManager textureWithImageName:kTexMissileExp02];
+    [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
     
     [[TBExplosionManager sharedManager] addObject:sExplosion];    
-    
     [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
     
     return sExplosion;

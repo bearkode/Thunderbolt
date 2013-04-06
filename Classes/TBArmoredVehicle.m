@@ -35,13 +35,13 @@
         
         [mTextureNormal autorelease];
         mTextureNormal = [[PBTextureManager textureWithImageName:kTexSAM] retain];
+        [mTextureNormal loadIfNeeded];
         
         [mTextureHit autorelease];
         mTextureHit = [[PBTextureManager textureWithImageName:kTexSAMShoot] retain];
+        [mTextureHit loadIfNeeded];
 
         [self setTexture:mTextureNormal];
-//        [self setTextureSize:[sInfo textureSize]];
-//        [self setContentSize:[sInfo contentSize]];
         [self setPoint:CGPointMake(kMaxMapXPos + 50, MAP_GROUND + ([[self mesh] size].height / 2))];
         
         mAAVulcan        = [[TBAAVulcan alloc] initWithBody:self team:aTeam];
@@ -92,19 +92,7 @@
         sPoint.x += ([self isAlly]) ? 1.0 : -1.0;
         [self setPoint:sPoint];
     }
-}
-
-
-- (void)addDamage:(NSInteger)aDamage
-{
-    [super addDamage:aDamage];
     
-    mHitDiscount = 5;
-}
-
-
-- (void)draw
-{
     if (mHitDiscount == 0)
     {
         [self setTexture:mTextureNormal];
@@ -114,8 +102,14 @@
         mHitDiscount--;
         [self setTexture:mTextureHit];
     }
+}
+
+
+- (void)addDamage:(NSInteger)aDamage
+{
+    [super addDamage:aDamage];
     
-//    [super draw];
+    mHitDiscount = 5;
 }
 
 

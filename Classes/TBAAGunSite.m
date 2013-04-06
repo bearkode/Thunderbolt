@@ -69,12 +69,9 @@
             mIsDestroyed = YES;
 
             PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexAAGunDestroyed];
-            [self setTexture:sTexture];
-//            TBTextureInfo *sInfo = [TBTextureManager textureInfoForKey:kTexAAGunDestroyed];
-//            [self setTextureID:[sInfo textureID]];
-//            [self setTextureSize:[sInfo textureSize]];
-//            [self setContentSize:[sInfo contentSize]];
             
+            [sTexture loadIfNeeded];
+            [self setTexture:sTexture];
             [TBExplosionManager tankExplosionAtPoistion:[self point]];
         }
     }
@@ -89,13 +86,12 @@
     {
         [mAAVulcan action];
         
-        TBHelicopter  *sHelicopter     = [[TBUnitManager sharedManager] opponentHeicopter:mTeam];
-        CGPoint        sSitePosition   = [self point];
-        CGPoint        sTargetPosition = [sHelicopter point];
-        CGFloat        sAngle;
-        CGFloat        sDistance;
-//        TBTextureInfo *sInfo;
-        PBTexture     *sTexture;
+        TBHelicopter *sHelicopter     = [[TBUnitManager sharedManager] opponentHeicopter:mTeam];
+        CGPoint       sSitePosition   = [self point];
+        CGPoint       sTargetPosition = [sHelicopter point];
+        CGFloat       sAngle;
+        CGFloat       sDistance;
+        PBTexture    *sTexture = nil;
         
         sDistance = TBDistanceBetweenToPoints(sSitePosition, sTargetPosition);
         
@@ -123,10 +119,10 @@
                 sTexture = [mTextureArray objectAtIndex:0];
             }
             
-            [self setTexture:sTexture];
-//            [self setTextureID:[sInfo textureID]];
-//            [self setTextureSize:[sInfo textureSize]];
-//            [self setContentSize:[sInfo contentSize]];
+            if (sTexture)
+            {
+                [self setTexture:sTexture];
+            }
             
             [mAAVulcan fireAt:sHelicopter];
         }
