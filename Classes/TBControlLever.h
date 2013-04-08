@@ -10,11 +10,13 @@
 #import <Foundation/Foundation.h>
 
 
-@interface TBControlStickValue : NSObject
+@interface TBControlLever : NSObject
 
 
-@property (nonatomic, assign) CGFloat altitude;
-@property (nonatomic, assign) CGFloat speed;
+- (id)initWithHelicopter:(id)aHelicopter;
+
+
+- (void)setAltitude:(CGFloat)aAltitude speed:(CGFloat)aSpeed;
 
 
 @end

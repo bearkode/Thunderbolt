@@ -12,4 +12,5 @@
 
 @interface TBBattleViewController : PBViewController <UIAccelerometerDelegate>
 
+
 @end

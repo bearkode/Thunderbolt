@@ -11,7 +11,7 @@
 #import <PBKit.h>
 
 #import "TBEventView.h"
-#import "TBControlStickValue.h"
+#import "TBControlLever.h"
 
 #import "TBTextureNames.h"
 
@@ -74,8 +74,6 @@
     PBSprite    *mStar2;
     
     TBRadar     *mRadar;
-    
-    TBControlStickValue *mStick;
     
     CGFloat      mBackPoint;
     NSInteger    mTimeTick;
@@ -251,7 +249,6 @@
     {
         mRadar = [[TBRadar alloc] init];
         
-        mStick     = [[TBControlStickValue alloc] init];
         mBackPoint = 0;
         mTimeTick  = 0;
         
@@ -269,8 +266,6 @@
 
 - (void)dealloc
 {
-    [mStick release];
-    
     [mStar0 release];
     [mStar1 release];
     [mStar2 release];
@@ -410,53 +405,42 @@
 #pragma mark -
 
 
-- (void)updateHelicopter
+- (void)updateCameraPositoin
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    CGPoint       sHeliPos    = [sHelicopter point];
+    PBCamera     *sCamera     = [[self canvas] camera];
+    CGPoint       sCameraPos  = [sCamera position];
     
-    if (sHelicopter)
+    if ([sHelicopter isLeftAhead])
     {
-        [sHelicopter setAltitudeLever:[mStick altitude]];
-        [sHelicopter setSpeedLever:[mStick speed]];
-        
-        /*  Update Camera Position  */
-        CGPoint   sHeliPos   = [sHelicopter point];
-        PBCamera *sCamera    = [[self canvas] camera];
-        CGPoint   sCameraPos = [sCamera position];
-        
-        if ([sHelicopter isLeftAhead])
-        {
-            mBackPoint -= (mBackPoint > -80) ? 8 : 0;
-        }
-        else
-        {
-            mBackPoint += (mBackPoint < 80) ? 8 : 0;
-        }
-        
-        sCameraPos.x = sHeliPos.x + mBackPoint;
-        [sCamera setPosition:sCameraPos];
-        /*  Update Camera Position  */
+        mBackPoint -= (mBackPoint > -80) ? 8 : 0;
     }
+    else
+    {
+        mBackPoint += (mBackPoint < 80) ? 8 : 0;
+    }
+    
+    sCameraPos.x = sHeliPos.x + mBackPoint;
+    [sCamera setPosition:sCameraPos];
 }
 
 
 - (void)accelerometer:(UIAccelerometer *)aAccelerometer didAccelerate:(UIAcceleration *)aAcceleration
 {
-    NSLog(@"y = %f", [aAcceleration y]);
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
-    [mStick setAltitude:[aAcceleration z]];
-    [mStick setSpeed:[aAcceleration y]];
-    
-    [self updateHelicopter];
+    [[sHelicopter controlLever] setAltitude:[aAcceleration z] speed:[aAcceleration y]];
+    [self updateCameraPositoin];
 }
 
 
 - (void)eventView:(TBEventView *)aEventView controlAltitude:(CGFloat)aAltitude speed:(CGFloat)aSpeed
 {
-    [mStick setAltitude:aAltitude];
-    [mStick setSpeed:aSpeed];
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
-    [self updateHelicopter];
+    [[sHelicopter controlLever] setAltitude:aAltitude speed:aSpeed];
+    [self updateCameraPositoin];    
 }
 
 

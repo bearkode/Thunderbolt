@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TBUnit.h"
+#import "TBControlLever.h"
 
 
 typedef enum
@@ -20,6 +21,8 @@ typedef enum
 
 @interface TBHelicopter : TBUnit
 {
+    TBControlLever *mControlLever;
+    
     NSInteger       mTick;
     
     BOOL            mIsLeftAhead;
@@ -40,12 +43,13 @@ typedef enum
     BOOL            mIsMissileLaunch;
 }
 
-@property (nonatomic, assign) TBWeaponType selectedWeapon;
-@property (nonatomic, assign) NSInteger    bulletCount;
-@property (nonatomic, assign) NSInteger    bombCount;
-@property (nonatomic, assign) NSInteger    missileCount;
-@property (nonatomic, assign) BOOL         isBombDrop;
-@property (nonatomic, assign) BOOL         isMissileLaunch;
+@property (nonatomic, readonly) TBControlLever *controlLever;
+@property (nonatomic, assign)   TBWeaponType    selectedWeapon;
+@property (nonatomic, assign)   NSInteger       bulletCount;
+@property (nonatomic, assign)   NSInteger       bombCount;
+@property (nonatomic, assign)   NSInteger       missileCount;
+@property (nonatomic, assign)   BOOL            isBombDrop;
+@property (nonatomic, assign)   BOOL            isMissileLaunch;
 
 - (void)setSpeedLever:(CGFloat)aSpeedLever;
 - (void)setAltitudeLever:(CGFloat)aAltitudeLever;

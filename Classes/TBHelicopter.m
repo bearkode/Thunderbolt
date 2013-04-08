@@ -29,6 +29,7 @@
 @implementation TBHelicopter
 
 
+@synthesize controlLever    = mControlLever;
 @synthesize selectedWeapon  = mSelectedWeapon;
 @synthesize bulletCount     = mBulletCount;
 @synthesize bombCount       = mBombCount;
@@ -48,6 +49,8 @@
     {
         [self setType:kTBUnitHelicopter];
         [self setDurability:kHelicopterDurability];
+        
+        mControlLever    = [[TBControlLever alloc] initWithHelicopter:self];
         
         mTick            = 0;
         
@@ -94,6 +97,8 @@
 
 - (void)dealloc
 {
+    [mControlLever release];
+    
     [mTextureArray     release];
     [mContentRectArray release];
 
