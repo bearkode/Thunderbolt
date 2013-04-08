@@ -21,6 +21,11 @@
 
 
 @implementation TBMissile
+{
+    NSNumber *mTargetID;
+    NSInteger mDestructivePower;
+    CGFloat   mSpeed;
+}
 
 
 @synthesize targetID         = mTargetID;
@@ -44,6 +49,7 @@
         mSpeed            = 0.0;
         
         PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexMissile];
+        [sTexture loadIfNeeded];
         [self setTexture:sTexture];
     }
     
@@ -104,12 +110,6 @@
 
     [[self transform] setAngle:sAngle3];
     [self setPoint:sPoint];
-}
-
-
-- (void)draw
-{
-//    [super draw];
 }
 
 

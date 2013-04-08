@@ -42,8 +42,10 @@
                                                          [PBTextureManager textureWithImageName:kTexAAGun02],
                                                          [PBTextureManager textureWithImageName:kTexAAGun03],
                                                          [PBTextureManager textureWithImageName:kTexAAGun04], nil];
-                         
-        [self setTexture:[mTextureArray objectAtIndex:0]];
+
+        PBTexture *sTexture = [mTextureArray objectAtIndex:0];
+        [sTexture loadIfNeeded];
+        [self setTexture:sTexture];
     }
     
     return self;
@@ -69,9 +71,10 @@
             mIsDestroyed = YES;
 
             PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexAAGunDestroyed];
-            
+
             [sTexture loadIfNeeded];
             [self setTexture:sTexture];
+            
             [TBExplosionManager tankExplosionAtPoistion:[self point]];
         }
     }
@@ -121,6 +124,7 @@
             
             if (sTexture)
             {
+                [sTexture loadIfNeeded];
                 [self setTexture:sTexture];
             }
             

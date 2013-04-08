@@ -1,12 +1,14 @@
-//
-//  TBUnitManager.h
-//  Thunderbolt
-//
-//  Created by jskim on 10. 3. 7..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBUnitManager.h
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 3. 7..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import <Foundation/Foundation.h>
+#import <PBKit.h>
 #import "TBGameConst.h"
 
 
@@ -21,6 +23,8 @@
 
 @interface TBUnitManager : NSObject
 {
+    PBLayer             *mUnitLayer;
+    
     NSInteger            mNextUnitID;
     
     TBUnit              *mAllyHelicopter;
@@ -31,6 +35,8 @@
 }
 
 + (TBUnitManager *)sharedManager;
+
+- (void)setUnitLayer:(PBLayer *)aUnitLayer;
 
 - (NSNumber *)nextUnitID;
 - (void)addUnit:(TBUnit *)aUnit;

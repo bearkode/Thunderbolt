@@ -17,7 +17,6 @@
 @implementation TBExplosion
 {
     NSInteger       mAniIndex;
-    NSMutableArray *mTextureInfoArray;
     NSMutableArray *mTextureArray;
     NSMutableArray *mPositionArray;
 }
@@ -30,7 +29,6 @@
     if (self)
     {
         mAniIndex         = 0;
-        mTextureInfoArray = [[NSMutableArray alloc] init];
         mTextureArray     = [[NSMutableArray alloc] init];
         mPositionArray    = [[NSMutableArray alloc] init];
     }
@@ -41,7 +39,6 @@
 
 - (void)dealloc
 {
-    [mTextureInfoArray release];
     [mTextureArray release];
     [mPositionArray release];
     
@@ -53,9 +50,9 @@
 {
     if (![self isFinished])
     {
-        PBTexture *sTexture = [mTextureArray objectAtIndex:mAniIndex];
+        PBTexture *sTexture  = [mTextureArray objectAtIndex:mAniIndex];
         NSValue   *sPosition = [mPositionArray objectAtIndex:mAniIndex];
-
+        
         [self setTexture:sTexture];
         [self setPoint:[sPosition CGPointValue]];
         
@@ -79,7 +76,7 @@
 
 - (BOOL)isFinished
 {
-    if (mAniIndex == [mTextureInfoArray count])
+    if (mAniIndex == [mTextureArray count])
     {
         return YES;
     }

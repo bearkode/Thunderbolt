@@ -1,12 +1,14 @@
-//
-//  TBWarheadManager.h
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 9..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBWarheadManager.h
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 9..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import <Foundation/Foundation.h>
+#import <PBKit.h>
 #import "TBGameConst.h"
 
 
@@ -18,11 +20,7 @@
 
 
 @interface TBWarheadManager : NSObject
-{
-    NSMutableArray *mWarheadArray;
-    
-    NSMutableArray *mReusableBulletArray;
-}
+
 
 + (TBWarheadManager *)sharedManager;
 
@@ -30,10 +28,12 @@
 + (TBBomb *)bombWithTeam:(TBTeam)aTeam position:(CGPoint)aPos speed:(CGFloat)aSpeed;
 + (TBTankShell *)tankShellWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector;
 
+- (void)setWarheadLayer:(PBLayer *)aLayer;
 - (void)addObject:(TBWarhead *)aWarhead;
 - (NSArray *)allWarheads;
 
 - (void)doActions;
 - (void)removeDisabledSprite;
+
 
 @end

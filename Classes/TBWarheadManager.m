@@ -22,11 +22,16 @@
 static TBWarheadManager *gWarheadManager = nil;
 
 
-@interface TBWarheadManager (Privates)
-@end
+@implementation TBWarheadManager
+{
+    PBLayer        *mWarheadLayer;
+    
+    NSMutableArray *mWarheadArray;
+    NSMutableArray *mReusableBulletArray;
+}
 
 
-@implementation TBWarheadManager (Privates)
+#pragma mark -
 
 
 - (TBBullet *)dequeueReusableBullet
@@ -48,12 +53,6 @@ static TBWarheadManager *gWarheadManager = nil;
 {
     [mReusableBulletArray addObject:aBullet];
 }
-
-
-@end
-
-
-@implementation TBWarheadManager
 
 
 #pragma mark -
@@ -122,8 +121,16 @@ static TBWarheadManager *gWarheadManager = nil;
 #pragma mark -
 
 
+- (void)setWarheadLayer:(PBLayer *)aLayer
+{
+    [mWarheadLayer autorelease];
+    mWarheadLayer = [aLayer retain];
+}
+
+
 - (void)addObject:(TBWarhead *)aWarhead
 {
+    [mWarheadLayer addSublayer:aWarhead];
     [mWarheadArray addObject:aWarhead];
 }
 
@@ -151,10 +158,6 @@ static TBWarheadManager *gWarheadManager = nil;
             [sUnit addDamage:[sWarhead destructivePower]];
             [TBExplosionManager bombExplosionAtPosition:[sWarhead point]];
         }
-        else
-        {
-//            [sWarhead draw];
-        }
         
         if ([sWarhead isAvailable])
         {
@@ -164,10 +167,6 @@ static TBWarheadManager *gWarheadManager = nil;
                 [sWarhead setAvailable:NO];
                 [sStructure addDamage:[sWarhead destructivePower]];
                 [TBExplosionManager bombExplosionAtPosition:[sWarhead point]];
-            }
-            else
-            {
-//                [sWarhead draw];        
             }
         }
     }
@@ -198,7 +197,8 @@ static TBWarheadManager *gWarheadManager = nil;
             [sRemovedSprites addObject:sWarhead];
         }
     }
-     
+    
+    [mWarheadLayer removeSublayers:sRemovedSprites];
     [mWarheadArray removeObjectsInArray:sRemovedSprites];
 }
 

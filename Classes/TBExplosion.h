@@ -11,12 +11,11 @@
 #import "TBSprite.h"
 
 
-@class TBTextureInfo;
-
-
 @interface TBExplosion : TBSprite
+
 
 - (void)addTexture:(PBTexture *)aTexture atPosition:(CGPoint)aPosition;
 - (BOOL)isFinished;
+
 
 @end

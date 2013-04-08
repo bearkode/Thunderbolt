@@ -109,6 +109,13 @@ static TBUnitManager *gUnitManager = nil;
 #pragma mark -
 
 
+- (void)setUnitLayer:(PBLayer *)aUnitLayer
+{
+    [mUnitLayer autorelease];
+    mUnitLayer = [aUnitLayer retain];
+}
+
+
 - (NSNumber *)nextUnitID
 {
     NSNumber *sResult = [NSNumber numberWithInteger:mNextUnitID];
@@ -121,6 +128,8 @@ static TBUnitManager *gUnitManager = nil;
 
 - (void)addUnit:(TBUnit *)aUnit
 {
+    [mUnitLayer addSublayer:aUnit];
+    
     if ([aUnit isAlly])
     {
         if ([aUnit isKindOfUnit:kTBUnitHelicopter])
@@ -188,7 +197,6 @@ static TBUnitManager *gUnitManager = nil;
         }
         
         [sUnit action];
-//        [sUnit draw];
     }
     
     sUnits = [mEnemyUnitDict allValues];
@@ -216,7 +224,6 @@ static TBUnitManager *gUnitManager = nil;
         }
         
         [sUnit action];
-//        [sUnit draw];
     }
 }
 
@@ -326,8 +333,10 @@ static TBUnitManager *gUnitManager = nil;
             {
                 mEnemyHelicopter = nil;
             }
-            [mEnemyUnitDict removeObjectForKey:[sUnit unitID]];            
+            [mEnemyUnitDict removeObjectForKey:[sUnit unitID]];
         }
+        
+        [mUnitLayer removeSublayers:sDisabledUnits];
     }
     
     return sDisabledUnits;
@@ -413,7 +422,7 @@ static TBUnitManager *gUnitManager = nil;
     PBVertex3 sAngle = PBVertex3Make(0, 0, TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget point])));
     [[sMissile transform] setAngle:sAngle];
     
-    [gUnitManager addUnit:sMissile];
+    [[TBUnitManager sharedManager] addUnit:sMissile];
     
     return sMissile;
 }

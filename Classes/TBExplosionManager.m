@@ -22,6 +22,10 @@ static TBExplosionManager *gExplosionManager = nil;
 
 
 @implementation TBExplosionManager
+{
+    PBLayer        *mExplosionLayer;
+    NSMutableArray *mExplosionArray;
+}
 
 
 #pragma mark -
@@ -91,7 +95,15 @@ static TBExplosionManager *gExplosionManager = nil;
 
 - (void)addObject:(TBExplosion *)aExplosion
 {
+    [mExplosionLayer addSublayer:aExplosion];
     [mExplosionArray addObject:aExplosion];
+}
+
+
+- (void)setExplosionLayer:(PBLayer *)aExplosionLayer
+{
+    [mExplosionLayer autorelease];
+    mExplosionLayer = [aExplosionLayer retain];
 }
 
 
@@ -118,7 +130,8 @@ static TBExplosionManager *gExplosionManager = nil;
             [sRemovedSprites addObject:sExplosion];
         }
     }
-    
+
+    [mExplosionLayer removeSublayers:sRemovedSprites];
     [mExplosionArray removeObjectsInArray:sRemovedSprites];
     [sRemovedSprites removeAllObjects];
 }

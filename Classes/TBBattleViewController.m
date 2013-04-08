@@ -217,6 +217,11 @@
                                                                       mEffectLayer,
                                                                       mRadarLayer, nil]];
     
+    
+    [[TBWarheadManager sharedManager] setWarheadLayer:mWarheadLayer];
+    [[TBExplosionManager sharedManager] setExplosionLayer:mExplosionLayer];
+    [[TBUnitManager sharedManager] setUnitLayer:mUnitLayer];
+    
     [self setupBackgroundLayer];
     [self setupStructureLayer];
 }
@@ -227,9 +232,7 @@
     if ([[TBMoneyManager sharedManager] sum] >= kTBPriceHelicopter)
     {
         [TBMoneyManager useMoney:kTBPriceHelicopter];
-        
-        TBHelicopter *sHelicopter = [TBUnitManager helicopterWithTeam:kTBTeamAlly delegate:self];
-        [mUnitLayer addSublayer:sHelicopter];
+        [TBUnitManager helicopterWithTeam:kTBTeamAlly delegate:self];
     }
     else
     {
@@ -272,6 +275,10 @@
     
     [mRadar release];
     
+    [[TBWarheadManager sharedManager] setWarheadLayer:nil];
+    [[TBExplosionManager sharedManager] setExplosionLayer:nil];
+    [[TBUnitManager sharedManager] setUnitLayer:nil];
+    
     [[TBMoneyManager sharedManager] setDelegate:nil];
     [[TBScoreManager sharedManager] setDelegate:nil];
     
@@ -302,6 +309,10 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+
+    [[TBWarheadManager sharedManager] setWarheadLayer:nil];
+    [[TBExplosionManager sharedManager] setExplosionLayer:nil];
+    [[TBUnitManager sharedManager] setUnitLayer:nil];
     
     mEventView  = nil;
     
@@ -344,9 +355,7 @@
     if ([[TBMoneyManager sharedManager] sum] >= kTBPriceTank)
     {
         [TBMoneyManager useMoney:kTBPriceTank];
-        
-        TBTank *sTank = [TBUnitManager tankWithTeam:kTBTeamAlly];
-        [mUnitLayer addSublayer:sTank];
+        [TBUnitManager tankWithTeam:kTBTeamAlly];
     }
 }
 
