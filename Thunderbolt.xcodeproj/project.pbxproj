@@ -14,6 +14,8 @@
 		28FD14FE0DC6FC130079059D /* TBGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* TBGLView.m */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		2E46379A17127FEA00EA1888 /* TBEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379917127FEA00EA1888 /* TBEventView.m */; };
+		2E46379D171286E800EA1888 /* TBControlStickValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379C171286E800EA1888 /* TBControlStickValue.m */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
 		2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E868568170D7E0900D64EF7 /* TBBattleViewController.m */; };
 		2E86856A170D7EAE00D64EF7 /* libPBKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E868563170D7AC300D64EF7 /* libPBKit.a */; };
@@ -154,6 +156,10 @@
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2E46379817127FEA00EA1888 /* TBEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBEventView.h; sourceTree = "<group>"; };
+		2E46379917127FEA00EA1888 /* TBEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBEventView.m; sourceTree = "<group>"; };
+		2E46379B171286E800EA1888 /* TBControlStickValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBControlStickValue.h; sourceTree = "<group>"; };
+		2E46379C171286E800EA1888 /* TBControlStickValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBControlStickValue.m; sourceTree = "<group>"; };
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PBKit.xcodeproj; path = PrisonBreak/PBKit/PBKit.xcodeproj; sourceTree = "<group>"; };
 		2E868567170D7E0900D64EF7 /* TBBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleViewController.h; sourceTree = "<group>"; };
@@ -410,6 +416,10 @@
 		2E662D4D170E98210081DEC9 /* BattleViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2E46379B171286E800EA1888 /* TBControlStickValue.h */,
+				2E46379C171286E800EA1888 /* TBControlStickValue.m */,
+				2E46379817127FEA00EA1888 /* TBEventView.h */,
+				2E46379917127FEA00EA1888 /* TBEventView.m */,
 				2E868567170D7E0900D64EF7 /* TBBattleViewController.h */,
 				2E868568170D7E0900D64EF7 /* TBBattleViewController.m */,
 			);
@@ -838,6 +848,8 @@
 				A7901E9E11F88440000BA30C /* TBSoldier.m in Sources */,
 				A78DF06F11F890A0002AFCC9 /* TBRifle.m in Sources */,
 				2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */,
+				2E46379A17127FEA00EA1888 /* TBEventView.m in Sources */,
+				2E46379D171286E800EA1888 /* TBControlStickValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

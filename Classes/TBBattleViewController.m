@@ -10,6 +10,9 @@
 #import "TBBattleViewController.h"
 #import <PBKit.h>
 
+#import "TBEventView.h"
+#import "TBControlStickValue.h"
+
 #import "TBTextureNames.h"
 
 #import "TBMoneyManager.h"
@@ -48,30 +51,34 @@
 @implementation TBBattleViewController
 {
     /*  User Interface : not retained  */
-    UILabel  *mAmmoLabel;
-    UILabel  *mScoreLabel;
-    UILabel  *mMoneyLabel;
-    UIButton *mTankButton;
-    UIButton *mAmmoButton;
+    TBEventView *mEventView;
+    
+    UILabel     *mAmmoLabel;
+    UILabel     *mScoreLabel;
+    UILabel     *mMoneyLabel;
+    UIButton    *mTankButton;
+    UIButton    *mAmmoButton;
     
     /*  Layers : not retained  */
-    PBLayer  *mRadarLayer;
-    PBLayer  *mEffectLayer;
-    PBLayer  *mWarheadLayer;
-    PBLayer  *mExplosionLayer;
-    PBLayer  *mUnitLayer;
-    PBLayer  *mStructureLayer;
-    PBLayer  *mBackgroundLayer;
+    PBLayer     *mRadarLayer;
+    PBLayer     *mEffectLayer;
+    PBLayer     *mWarheadLayer;
+    PBLayer     *mExplosionLayer;
+    PBLayer     *mUnitLayer;
+    PBLayer     *mStructureLayer;
+    PBLayer     *mBackgroundLayer;
     
     /*  Models  */
-    PBSprite *mStar0;
-    PBSprite *mStar1;
-    PBSprite *mStar2;
+    PBSprite    *mStar0;
+    PBSprite    *mStar1;
+    PBSprite    *mStar2;
     
-    TBRadar  *mRadar;
+    TBRadar     *mRadar;
     
-    CGFloat   mBackPoint;
-    NSInteger mTimeTick;
+    TBControlStickValue *mStick;
+    
+    CGFloat      mBackPoint;
+    NSInteger    mTimeTick;
 }
 
 
@@ -244,7 +251,8 @@
     {
         mRadar = [[TBRadar alloc] init];
         
-        mBackPoint = 240;
+        mStick     = [[TBControlStickValue alloc] init];
+        mBackPoint = 0;
         mTimeTick  = 0;
         
         [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / 30.0];
@@ -261,6 +269,8 @@
 
 - (void)dealloc
 {
+    [mStick release];
+    
     [mStar0 release];
     [mStar1 release];
     [mStar2 release];
@@ -279,6 +289,13 @@
     [super viewDidLoad];
     [[self navigationController] setNavigationBarHidden:YES];
     
+    CGRect sBounds = [[self view] bounds];
+
+    mEventView = [[[TBEventView alloc] initWithFrame:sBounds] autorelease];
+    [mEventView setDelegate:self];
+    [mEventView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+    [[self view] addSubview:mEventView];
+    
     [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.5 green:0.5 blue:1.0 alpha:1.0]];
     [self setupUIs];
     [self setupLayers];
@@ -290,6 +307,8 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+    mEventView  = nil;
     
     mAmmoLabel  = nil;
     mScoreLabel = nil;
@@ -385,28 +404,26 @@
     [[TBUnitManager sharedManager] doActions];
     [[TBWarheadManager sharedManager] doActions];
     [[TBExplosionManager sharedManager] doActions];
-    
-//    [mRadar drawAt:[mGLView xPos]];
 }
 
 
 #pragma mark -
 
 
-- (void)accelerometer:(UIAccelerometer *)aAccelerometer didAccelerate:(UIAcceleration *)aAcceleration
+- (void)updateHelicopter
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
     if (sHelicopter)
     {
-        [sHelicopter setAltitudeLever:[aAcceleration z]];
-        [sHelicopter setSpeedLever:[aAcceleration y]];
+        [sHelicopter setAltitudeLever:[mStick altitude]];
+        [sHelicopter setSpeedLever:[mStick speed]];
         
         /*  Update Camera Position  */
         CGPoint   sHeliPos   = [sHelicopter point];
         PBCamera *sCamera    = [[self canvas] camera];
         CGPoint   sCameraPos = [sCamera position];
-
+        
         if ([sHelicopter isLeftAhead])
         {
             mBackPoint -= (mBackPoint > -80) ? 8 : 0;
@@ -420,6 +437,26 @@
         [sCamera setPosition:sCameraPos];
         /*  Update Camera Position  */
     }
+}
+
+
+- (void)accelerometer:(UIAccelerometer *)aAccelerometer didAccelerate:(UIAcceleration *)aAcceleration
+{
+    NSLog(@"y = %f", [aAcceleration y]);
+    
+    [mStick setAltitude:[aAcceleration z]];
+    [mStick setSpeed:[aAcceleration y]];
+    
+    [self updateHelicopter];
+}
+
+
+- (void)eventView:(TBEventView *)aEventView controlAltitude:(CGFloat)aAltitude speed:(CGFloat)aSpeed
+{
+    [mStick setAltitude:aAltitude];
+    [mStick setSpeed:aSpeed];
+    
+    [self updateHelicopter];
 }
 
 
