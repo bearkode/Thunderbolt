@@ -16,7 +16,6 @@
 
 #import "TBWarheadManager.h"
 #import "TBMoneyManager.h"
-#import "TBALPlayback.h"
 
 
 #define MAX_BULLETS     100
@@ -27,6 +26,31 @@
 
 
 @implementation TBHelicopter
+{
+    TBControlLever *mControlLever;
+    
+    NSInteger       mTick;
+    
+    BOOL            mIsLeftAhead;
+    BOOL            mIsLanded;
+    CGFloat         mSpeed;
+    NSInteger       mTextureIndex;
+    
+    NSMutableArray *mTextureArray;
+    NSMutableArray *mContentRectArray;
+    
+    TBWeaponType    mSelectedWeapon;
+    NSInteger       mVulcanDelay;
+    NSInteger       mBulletCount;
+    NSInteger       mBombCount;
+    NSInteger       mMissileCount;
+    BOOL            mIsVulcanFire;
+    BOOL            mIsBombDrop;
+    BOOL            mIsMissileLaunch;
+    
+    PBSoundSource  *mSoundSource;
+    PBSoundSource  *mVulcanSoundSource;
+}
 
 
 @synthesize controlLever    = mControlLever;
@@ -88,8 +112,20 @@
         
         mIsLanded        = YES;
         
-        [[TBALPlayback sharedPlayback] startSound:kTBSoundHeli];
-   }
+        
+        PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
+        
+        mSoundSource = [sSoundManager retainSoundSource];
+        [mSoundSource setSound:[sSoundManager soundForKey:kTBSoundHeli]];
+        [mSoundSource setDistance:1];
+        [mSoundSource setLooping:YES];
+        [mSoundSource play];
+        
+        mVulcanSoundSource = [sSoundManager retainSoundSource];
+        [mVulcanSoundSource setSound:[sSoundManager soundForKey:kTBSoundVulcan]];
+        [mVulcanSoundSource setDistance:1];
+        [mVulcanSoundSource setLooping:YES];
+    }
     
     return self;
 }
@@ -102,7 +138,8 @@
     [mTextureArray     release];
     [mContentRectArray release];
 
-    [[TBALPlayback sharedPlayback] stopSound:kTBSoundHeli];
+    [[PBSoundManager sharedManager] releaseSoundSource:mSoundSource];
+    [[PBSoundManager sharedManager] releaseSoundSource:mVulcanSoundSource];
     
     [super dealloc];
 }
@@ -252,9 +289,15 @@
 - (void)setFireVulcan:(BOOL)aFlag
 {
     mIsVulcanFire = aFlag;
+
     if (mIsVulcanFire)
     {
         mVulcanDelay = 0;
+        [mVulcanSoundSource play];
+    }
+    else
+    {
+        [mVulcanSoundSource stop];
     }
 }
 
@@ -313,13 +356,11 @@
 
 - (void)dropBomb
 {
-    TBBomb *sBomb = nil;
-    
     if (mBombCount > 0)
     {
         CGPoint sPoint = [self point];
         
-        sBomb = [TBWarheadManager bombWithTeam:kTBTeamAlly position:CGPointMake(sPoint.x, sPoint.y - 10) speed:mSpeed];
+        [TBWarheadManager bombWithTeam:kTBTeamAlly position:CGPointMake(sPoint.x, sPoint.y - 10) speed:mSpeed];
         mBombCount--;
         
         [[self delegate] helicopter:self weaponFired:1];
@@ -369,8 +410,7 @@
 
         if (mBulletCount == 0)
         {
-            [[TBALPlayback sharedPlayback] stopSound:kTBSoundVulcan];
-            mIsVulcanFire = NO;
+            [self setFireVulcan:NO];
         }
         else
         {

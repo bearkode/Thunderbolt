@@ -61,12 +61,10 @@
 		A73DE980110E4B4A008C1A67 /* heli08.png in Resources */ = {isa = PBXBuildFile; fileRef = A73DE977110E4B4A008C1A67 /* heli08.png */; };
 		A73DE9FD110E4E96008C1A67 /* TBHelicopter.m in Sources */ = {isa = PBXBuildFile; fileRef = A73DE9FC110E4E96008C1A67 /* TBHelicopter.m */; };
 		A73DEB6C110F2986008C1A67 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = A73DEB6B110F2986008C1A67 /* green.png */; };
-		A74EC4E8111D525800A5FA1B /* TBBGMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A74EC4E7111D525800A5FA1B /* TBBGMManager.m */; };
 		A75A5C09119FF7AE002B9360 /* TBTankGun.m in Sources */ = {isa = PBXBuildFile; fileRef = A75A5C08119FF7AE002B9360 /* TBTankGun.m */; };
 		A75A5C6C11A02180002B9360 /* TBTankShell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75A5C6B11A02180002B9360 /* TBTankShell.m */; };
 		A7736B08111B144A00B9174C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7736B07111B144A00B9174C /* AVFoundation.framework */; };
 		A7858C06112AD72D00F27970 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7858C05112AD72D00F27970 /* MediaPlayer.framework */; };
-		A785DCA6112AC48500487CCB /* TBALSound.m in Sources */ = {isa = PBXBuildFile; fileRef = A785DCA5112AC48500487CCB /* TBALSound.m */; };
 		A785DD35112ACD6500487CCB /* bomb_explosion.caf in Resources */ = {isa = PBXBuildFile; fileRef = A785DD34112ACD6500487CCB /* bomb_explosion.caf */; };
 		A785DD37112ACDCE00487CCB /* tank_explosion.caf in Resources */ = {isa = PBXBuildFile; fileRef = A785DD36112ACDCE00487CCB /* tank_explosion.caf */; };
 		A78A1C4111E88C5200DA9574 /* heli_l_exp00.png in Resources */ = {isa = PBXBuildFile; fileRef = A78A1C3B11E88C5200DA9574 /* heli_l_exp00.png */; };
@@ -103,7 +101,6 @@
 		A7AD01FA1122EE7300359C54 /* vulcan.caf in Resources */ = {isa = PBXBuildFile; fileRef = A7AD01F91122EE7300359C54 /* vulcan.caf */; };
 		A7AD029511235F9700359C54 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AD029411235F9700359C54 /* OpenAL.framework */; };
 		A7AD02A111235FF500359C54 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AD02A011235FF500359C54 /* AudioToolbox.framework */; };
-		A7AD02AB112360AB00359C54 /* TBALPlayback.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AD02AA112360AB00359C54 /* TBALPlayback.m */; };
 		A7AF9C85114005DB00726807 /* TBStructure.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF9C84114005DB00726807 /* TBStructure.m */; };
 		A7AF9CA01140088400726807 /* TBBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF9C9F1140088400726807 /* TBBase.m */; };
 		A7AF9CBA11400B4000726807 /* base_00.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AF9CB911400B4000726807 /* base_00.png */; };
@@ -833,10 +830,7 @@
 				A7C62A8B1115766100F31E63 /* TBUnit.m in Sources */,
 				A7BC32B01119B9100052D1BA /* TBBomb.m in Sources */,
 				A7BC332C1119C3E10052D1BA /* TBWarhead.m in Sources */,
-				A74EC4E8111D525800A5FA1B /* TBBGMManager.m in Sources */,
 				A720E54A111EA68900CA7792 /* TBExplosion.m in Sources */,
-				A7AD02AB112360AB00359C54 /* TBALPlayback.m in Sources */,
-				A785DCA6112AC48500487CCB /* TBALSound.m in Sources */,
 				A7AF9C85114005DB00726807 /* TBStructure.m in Sources */,
 				A7AF9CA01140088400726807 /* TBBase.m in Sources */,
 				A7AF9CF211428C0400726807 /* TBLandingPad.m in Sources */,

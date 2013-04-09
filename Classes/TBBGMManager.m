@@ -6,7 +6,6 @@
 //  Copyright 2010 tinybean. All rights reserved.
 //
 
-#import "TBBGMManager.h"
 #import "TBGameConst.h"
 
 

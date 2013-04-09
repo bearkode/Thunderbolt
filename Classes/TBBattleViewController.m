@@ -22,7 +22,6 @@
 #import "TBStructureManager.h"
 #import "TBTextureManager.h"
 #import "TBScoreManager.h"
-#import "TBBGMManager.h"
 
 #import "TBBase.h"
 #import "TBLandingPad.h"
@@ -74,6 +73,9 @@
     PBSprite    *mStar0;
     PBSprite    *mStar1;
     PBSprite    *mStar2;
+    
+    /*  BGM  */
+    PBSoundSource *mBGMSoundSource;
 
     CGFloat      mBackPoint;
     NSInteger    mTimeTick;
@@ -266,7 +268,11 @@
         
         [[TBMoneyManager sharedManager] setDelegate:self];
         [[TBScoreManager sharedManager] setDelegate:self];
-        [TBBGMManager startBGMWithVolume:0.5];
+        
+        [PBSoundListener setOrientation:0];
+        mBGMSoundSource = [[PBSoundManager sharedManager] retainSoundSource];
+        [mBGMSoundSource setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundValkyries]];
+        [mBGMSoundSource play];
     }
     
     return self;
@@ -285,6 +291,8 @@
     
     [[TBMoneyManager sharedManager] setDelegate:nil];
     [[TBScoreManager sharedManager] setDelegate:nil];
+    
+    [[PBSoundManager sharedManager] releaseSoundSource:mBGMSoundSource];
     
     [super dealloc];
 }

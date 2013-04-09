@@ -12,7 +12,6 @@
 #import "TBExplosion.h"
 #import "TBTextureManager.h"
 #import "TBTextureNames.h"
-#import "TBALPlayback.h"
 #import "TBGameConst.h"
 #import "TBUnit.h"
 #import "TBHelicopter.h"
@@ -202,7 +201,8 @@ static TBExplosionManager *gExplosionManager = nil;
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
     [[TBExplosionManager sharedManager] addObject:sExplosion];
-    [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
+#warning fix it
+//    [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
 
     return sExplosion;
 }
@@ -225,8 +225,9 @@ static TBExplosionManager *gExplosionManager = nil;
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
 
-    [[TBExplosionManager sharedManager] addObject:sExplosion];    
-    [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
+    [[TBExplosionManager sharedManager] addObject:sExplosion];
+#warning fix it
+//    [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
 
     return sExplosion;
 }
@@ -252,8 +253,9 @@ static TBExplosionManager *gExplosionManager = nil;
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
-    [[TBExplosionManager sharedManager] addObject:sExplosion];    
-    [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
+    [[TBExplosionManager sharedManager] addObject:sExplosion];
+#warning fix it
+//    [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
     
     return sExplosion;
 }
@@ -282,8 +284,9 @@ static TBExplosionManager *gExplosionManager = nil;
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
-    [[TBExplosionManager sharedManager] addObject:sExplosion];    
-    [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
+    [[TBExplosionManager sharedManager] addObject:sExplosion];
+#warning fix it
+//    [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
     
     return sExplosion;
 }

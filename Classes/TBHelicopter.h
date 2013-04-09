@@ -1,10 +1,11 @@
-//
-//  TBHelicopter.h
-//  Thunderbolt
-//
-//  Created by jskim on 10. 1. 24..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBHelicopter.h
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 1. 24..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import <UIKit/UIKit.h>
 #import "TBUnit.h"
@@ -20,28 +21,7 @@ typedef enum
 
 
 @interface TBHelicopter : TBUnit
-{
-    TBControlLever *mControlLever;
-    
-    NSInteger       mTick;
-    
-    BOOL            mIsLeftAhead;
-    BOOL            mIsLanded;
-    CGFloat         mSpeed;
-    NSInteger       mTextureIndex;
-    
-    NSMutableArray *mTextureArray;
-    NSMutableArray *mContentRectArray;
-    
-    TBWeaponType    mSelectedWeapon;
-    NSInteger       mVulcanDelay;
-    NSInteger       mBulletCount;
-    NSInteger       mBombCount;
-    NSInteger       mMissileCount;
-    BOOL            mIsVulcanFire;
-    BOOL            mIsBombDrop;
-    BOOL            mIsMissileLaunch;
-}
+
 
 @property (nonatomic, readonly) TBControlLever *controlLever;
 @property (nonatomic, assign)   TBWeaponType    selectedWeapon;
@@ -50,6 +30,7 @@ typedef enum
 @property (nonatomic, assign)   NSInteger       missileCount;
 @property (nonatomic, assign)   BOOL            isBombDrop;
 @property (nonatomic, assign)   BOOL            isMissileLaunch;
+
 
 - (void)setSpeedLever:(CGFloat)aSpeedLever;
 - (void)setAltitudeLever:(CGFloat)aAltitudeLever;
@@ -65,15 +46,18 @@ typedef enum
 - (BOOL)isLeftAhead;
 - (BOOL)isLanded;
 
+
 @end
 
 
 @interface NSObject (TBHelicopterProtocol)
 
+
 - (void)helicopterDamageChanged:(TBHelicopter *)aHelicopter;
 - (void)helicopterWeaponDidReload:(TBHelicopter *)aHelicopter;
 - (void)helicopter:(TBHelicopter *)aHelicopter weaponFired:(NSInteger)aWeaponIndex;
 - (void)helicopterDidDestroy:(TBHelicopter *)aHelicopter;
+
 
 @end
 

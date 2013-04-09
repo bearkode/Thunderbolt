@@ -32,12 +32,11 @@
 
 - (BOOL)fireAt:(TBUnit *)aUnit
 {
-    BOOL      sResult = NO;
-    CGPoint   sTargetPosition;
-    CGPoint   sBodyPosition;
-    CGFloat   sDistance;
-    TBTeam    sTeam = ([aUnit isAlly]) ? kTBTeamEnemy : kTBTeamAlly;
-    TBBullet *sBullet;
+    BOOL    sResult = NO;
+    CGPoint sTargetPosition;
+    CGPoint sBodyPosition;
+    CGFloat sDistance;
+    TBTeam  sTeam = ([aUnit isAlly]) ? kTBTeamEnemy : kTBTeamAlly;
 
     if ([self isReloaded])
     {
@@ -51,7 +50,7 @@
             CGFloat sAngle  = TBAngleBetweenToPoints(sBodyPosition, sTargetPosition);
             CGPoint sVector = TBVector(sAngle, 6.0);
             
-            sBullet = [TBWarheadManager bulletWithTeam:sTeam position:sBodyPosition vector:sVector destructivePower:kRifleBulletPower];
+            [TBWarheadManager bulletWithTeam:sTeam position:sBodyPosition vector:sVector destructivePower:kRifleBulletPower];
             mAmmoCount--;
             [self reload];
             sResult = YES;

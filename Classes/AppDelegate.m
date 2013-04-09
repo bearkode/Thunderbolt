@@ -8,9 +8,8 @@
  */
 
 #import "AppDelegate.h"
-#import "TBGLView.h"
-#import "TBGameController.h"
-#import "TBALPlayback.h"
+#import <PBKit.h>
+#import "TBGameConst.h"
 #import "TBMacro.h"
 #import "TBBattleViewController.h"
 
@@ -21,7 +20,7 @@
 }
 
 
-@synthesize window         = mWindow;
+@synthesize window = mWindow;
 
 
 #pragma mark -
@@ -41,12 +40,20 @@
 #if (0)
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 #endif
-
+    
+    /*  Setup Window  */
     UIWindow *sWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 
     [self setWindow:sWindow];
     [sWindow makeKeyAndVisible];
     
+    /*  Setup SoundManager  */
+    PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
+    [sSoundManager loadSoundNamed:kTBSoundValkyries forKey:kTBSoundValkyries];
+    [sSoundManager loadSoundNamed:kTBSoundHeli forKey:kTBSoundHeli];
+    [sSoundManager loadSoundNamed:kTBSoundVulcan forKey:kTBSoundVulcan];
+    
+    /*  Setup ViewController  */
     TBBattleViewController *sViewController = [[[TBBattleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
     UINavigationController *sNaviController = [[[UINavigationController alloc] initWithRootViewController:sViewController] autorelease];
 
