@@ -1,10 +1,11 @@
-//
-//  TBUnit.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 1. 31..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBUnit.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 1. 31..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBUnit.h"
 
@@ -26,6 +27,7 @@
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam
 {
     self = [super init];
+    
     if (self)
     {
         [self setUnitID:aUnitID];

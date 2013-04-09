@@ -12,33 +12,28 @@
 #import "TBTextureNames.h"
 
 
-static TBRadarObject *gUnitRadarObject;
-
-
 @implementation TBRadarObject
-
-
-+ (TBRadarObject *)unitRadarObject
-{
-    if (!gUnitRadarObject)
-    {
-        gUnitRadarObject = [[TBRadarObject alloc] init];
-    }
-    
-    return gUnitRadarObject;
-}
 
 
 - (id)init
 {
-    self = [super initWithImageName:kTexRadarObject];
+    self = [super init];
     
     if (self)
     {
-
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRadarObject];
+        
+        [sTexture loadIfNeeded];
+        [self setTexture:sTexture];
     }
     
     return self;
+}
+
+
+- (void)dealloc
+{
+    [super dealloc];
 }
 
 

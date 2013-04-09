@@ -59,6 +59,8 @@
     UIButton    *mTankButton;
     UIButton    *mAmmoButton;
     
+    TBRadar     *mRadar;
+    
     /*  Layers : not retained  */
     PBLayer     *mRadarLayer;
     PBLayer     *mEffectLayer;
@@ -72,9 +74,7 @@
     PBSprite    *mStar0;
     PBSprite    *mStar1;
     PBSprite    *mStar2;
-    
-    TBRadar     *mRadar;
-    
+
     CGFloat      mBackPoint;
     NSInteger    mTimeTick;
 }
@@ -199,6 +199,13 @@
 }
 
 
+- (void)setupRadarLayer
+{
+    mRadar = [[[TBRadar alloc] init] autorelease];
+    [mRadarLayer addSublayer:mRadar];
+}
+
+
 - (void)setupLayers
 {
     mRadarLayer      = [[[PBLayer alloc] init] autorelease];
@@ -224,6 +231,7 @@
     
     [self setupBackgroundLayer];
     [self setupStructureLayer];
+    [self setupRadarLayer];
 }
 
 
@@ -250,8 +258,6 @@
     
     if (self)
     {
-        mRadar = [[TBRadar alloc] init];
-        
         mBackPoint = 0;
         mTimeTick  = 0;
         
@@ -272,8 +278,6 @@
     [mStar0 release];
     [mStar1 release];
     [mStar2 release];
-    
-    [mRadar release];
     
     [[TBWarheadManager sharedManager] setWarheadLayer:nil];
     [[TBExplosionManager sharedManager] setExplosionLayer:nil];
@@ -314,13 +318,24 @@
     [[TBExplosionManager sharedManager] setExplosionLayer:nil];
     [[TBUnitManager sharedManager] setUnitLayer:nil];
     
-    mEventView  = nil;
+    mEventView       = nil;
     
-    mAmmoLabel  = nil;
-    mScoreLabel = nil;
-    mMoneyLabel = nil;
-    mTankButton = nil;
-    mAmmoButton = nil;
+    mAmmoLabel       = nil;
+    mScoreLabel      = nil;
+    mMoneyLabel      = nil;
+    mTankButton      = nil;
+    mAmmoButton      = nil;
+    
+    mRadar           = nil;
+    
+    mRadarLayer      = nil;
+    mEffectLayer     = nil;
+    mWarheadLayer    = nil;
+    mExplosionLayer  = nil;
+    mUnitLayer       = nil;
+    mStructureLayer  = nil;
+    mBackgroundLayer = nil;
+    
 }
 
 
@@ -408,6 +423,8 @@
     [[TBUnitManager sharedManager] doActions];
     [[TBWarheadManager sharedManager] doActions];
     [[TBExplosionManager sharedManager] doActions];
+    
+    [mRadar updateWithCanvas:[self canvas]];    
 }
 
 

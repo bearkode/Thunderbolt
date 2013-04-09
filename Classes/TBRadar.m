@@ -16,45 +16,68 @@
 
 
 @implementation TBRadar
+{
+    CGRect mCanvasBounds;
+}
 
 
 - (id)init
 {
-    self = [super initWithImageName:kTexRadarBackground];
+    self = [super init];
     
     if (self)
     {
-
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRadarBackground];
+        
+        [sTexture loadIfNeeded];
+        [self setTexture:sTexture];
     }
     
     return self;
 }
 
 
-- (void)drawAt:(CGFloat)aXPos
+- (void)addRadarObjectWithUnit:(TBUnit *)aUnit
 {
-    [self setPoint:CGPointMake(aXPos + 240.0, 300.0)];
-//    [super draw];
-    
-    TBRadarObject *sUnitObject = [TBRadarObject unitRadarObject];
     CGPoint        sPosition;
-    NSArray       *sUnits;
-    TBUnit        *sUnit;
+    CGSize         sRadarSize = [[self mesh] size];
+    TBRadarObject *sRadarObject = [[[TBRadarObject alloc] init] autorelease];
 
+    [self addSublayer:sRadarObject];
+    
+    sPosition = [aUnit point];
+    
+    CGPoint sPoint = CGPointMake(sPosition.x / kMaxMapXPos * sRadarSize.width, sPosition.y / mCanvasBounds.size.height * sRadarSize.height);
+    sPoint.x -= (sRadarSize.width / 2);
+    sPoint.y -= (sRadarSize.height / 2);
+    
+    [sRadarObject setPoint:sPoint];
+}
+
+
+#warning Tuning needed
+
+
+- (void)updateWithCanvas:(PBCanvas *)aCanvas
+{
+    CGPoint  sCameraPos = [[aCanvas camera] position];
+    NSArray *sUnits;
+    
+    [self setPoint:CGPointMake(sCameraPos.x, 300.0)];
+    [self removeSublayers:[self sublayers]];
+
+    mCanvasBounds = [aCanvas bounds];
+    
     sUnits = [[TBUnitManager sharedManager] allyUnits];
-    for (sUnit in sUnits)
+    for (TBUnit *sUnit in sUnits)
     {
-        sPosition = [sUnit point];
-        [sUnitObject setPoint:CGPointMake(aXPos + 480 * sPosition.x / kMaxMapXPos, 280.0 + 40 * sPosition.y / 320)];
-//        [sUnitObject draw];
+        [self addRadarObjectWithUnit:sUnit];
     }
     
     sUnits = [[TBUnitManager sharedManager] enemyUnits];
-    for (sUnit in sUnits)
+    for (TBUnit *sUnit in sUnits)
     {
-        sPosition = [sUnit point];
-        [sUnitObject setPoint:CGPointMake(aXPos + 480 * sPosition.x / kMaxMapXPos, 280.0 + 40 * sPosition.y / 320)];
-//        [sUnitObject draw];
+        [self addRadarObjectWithUnit:sUnit];
     }
 }
 
