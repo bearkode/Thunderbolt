@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import <PBKit.h>
+#import <PBObjCUtil.h>
 #import "TBGameConst.h"
 
 
@@ -22,17 +23,7 @@
 
 
 @interface TBUnitManager : NSObject
-{
-    PBLayer             *mUnitLayer;
-    
-    NSInteger            mNextUnitID;
-    
-    TBUnit              *mAllyHelicopter;
-    TBUnit              *mEnemyHelicopter;
 
-    NSMutableDictionary *mAllyUnitDict;
-    NSMutableDictionary *mEnemyUnitDict;
-}
 
 + (TBUnitManager *)sharedManager;
 
@@ -61,5 +52,6 @@
 + (TBArmoredVehicle *)armoredVehicleWithTeam:(TBTeam)aTeam;
 + (TBSoldier *)soldierWithTeam:(TBTeam)aTeam;
 + (TBMissile *)missileWithTeam:(TBTeam)aTeam position:(CGPoint)aPosition target:(TBUnit *)aTarget;
+
 
 @end

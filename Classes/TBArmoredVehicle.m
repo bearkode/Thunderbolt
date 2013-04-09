@@ -8,7 +8,6 @@
  */
 
 #import "TBArmoredVehicle.h"
-#import "TBTextureManager.h"
 #import "TBTextureNames.h"
 #import "TBUnitManager.h"
 

@@ -14,7 +14,6 @@
 #import "TBGLView.h"
 
 #import "TBTextureNames.h"
-#import "TBTextureManager.h"
 
 #import "TBMoneyManager.h"
 #import "TBScoreManager.h"
@@ -112,9 +111,6 @@
 
 - (id)init
 {
-    TBTextureManager *sTextureMan;
-    TBTextureInfo    *sInfo;
-    
     self = [super init];
     if (self)
     {

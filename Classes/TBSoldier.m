@@ -8,8 +8,6 @@
  */
 
 #import "TBSoldier.h"
-#import "TBTextureInfo.h"
-#import "TBTextureManager.h"
 #import "TBRifle.h"
 #import "TBUnitManager.h"
 

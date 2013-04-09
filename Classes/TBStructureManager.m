@@ -13,70 +13,14 @@
 #import "TBWarhead.h"
 
 
-static TBStructureManager *gStructureManager = nil;
-
-
 @implementation TBStructureManager
-
-
-+ (TBStructureManager *)sharedManager
 {
-    @synchronized(self)
-    {
-        if (!gStructureManager)
-        {
-            gStructureManager = [[self alloc] init];
-        }
-    }
-    
-    return gStructureManager;
+    NSMutableArray *mAllyStructures;
+    NSMutableArray *mEnemyStructures;
 }
 
 
-+ (id)allocWithZone:(NSZone *)aZone
-{
-    @synchronized(self)
-    {
-        if (!gStructureManager)
-        {
-            gStructureManager = [super allocWithZone:aZone];
-            return gStructureManager;
-        }
-    }
-    
-    return nil;
-}
-
-
-- (id)copyWithZone:(NSZone *)aZone
-{
-    return self;
-}
-
-
-- (id)retain
-{
-    return self;
-}
-
-
-- (unsigned)retainCount
-{
-    return UINT_MAX;
-}
-
-- (oneway void)release
-{
-}
-
-
-- (id)autorelease
-{
-    return self;
-}
-
-
-#pragma mark -
+SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
 
 
 - (id)init

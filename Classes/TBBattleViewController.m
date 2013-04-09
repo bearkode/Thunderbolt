@@ -20,7 +20,6 @@
 #import "TBWarheadManager.h"
 #import "TBExplosionManager.h"
 #import "TBStructureManager.h"
-#import "TBTextureManager.h"
 #import "TBScoreManager.h"
 
 #import "TBBase.h"

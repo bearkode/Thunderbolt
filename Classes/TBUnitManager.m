@@ -29,66 +29,20 @@ static TBUnitManager *gUnitManager = nil;
 
 
 @implementation TBUnitManager
-
-
-+ (TBUnitManager *)sharedManager
 {
-    @synchronized(self)
-    {
-        if (!gUnitManager)
-        {
-            gUnitManager = [[self alloc] init];
-        }
-    }
+    PBLayer             *mUnitLayer;
     
-    return gUnitManager;
-}
-
-
-+ (id)allocWithZone:(NSZone *)aZone
-{
-    @synchronized(self)
-    {
-        if (!gUnitManager)
-        {
-            gUnitManager = [super allocWithZone:aZone];
-            return gUnitManager;
-        }
-    }
+    NSInteger            mNextUnitID;
     
-    return nil;
+    TBUnit              *mAllyHelicopter;
+    TBUnit              *mEnemyHelicopter;
+    
+    NSMutableDictionary *mAllyUnitDict;
+    NSMutableDictionary *mEnemyUnitDict;
 }
 
 
-- (id)copyWithZone:(NSZone *)aZone
-{
-    return self;
-}
-
-
-- (id)retain
-{
-    return self;
-}
-
-
-- (unsigned)retainCount
-{
-    return UINT_MAX;
-}
-
-- (oneway void)release
-{
-}
-
-
-- (id)autorelease
-{
-    return self;
-}
-
-
-#pragma mark -
+SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 
 - (id)init

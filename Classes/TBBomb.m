@@ -9,7 +9,6 @@
 
 #import "TBBomb.h"
 #import "TBTextureNames.h"
-#import "TBTextureManager.h"
 
 
 @implementation TBBomb

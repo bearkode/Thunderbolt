@@ -8,7 +8,6 @@
  */
 
 #import "TBHelicopter.h"
-#import "TBTextureManager.h"
 #import "TBGameConst.h"
 #import "TBMacro.h"
 #import "TBBullet.h"

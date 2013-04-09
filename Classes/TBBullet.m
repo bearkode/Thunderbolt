@@ -9,7 +9,6 @@
 
 #import "TBBullet.h"
 #import "TBGameConst.h"
-#import "TBTextureManager.h"
 #import "TBTextureNames.h"
 
 

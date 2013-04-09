@@ -8,7 +8,6 @@
  */
 
 #import "TBRadarObject.h"
-#import "TBTextureManager.h"
 #import "TBTextureNames.h"
 
 

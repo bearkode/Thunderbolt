@@ -9,7 +9,6 @@
 
 #import "TBTank.h"
 #import "TBGameConst.h"
-#import "TBTextureManager.h"
 #import "TBTextureNames.h"
 #import "TBTankGun.h"
 #import "TBUnitManager.h"

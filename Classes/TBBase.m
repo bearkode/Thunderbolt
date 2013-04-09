@@ -2,14 +2,13 @@
  *  TBBase.m
  *  Thunderbolt
  *
- *  Created by jskim on 10. 3. 5..
+ *  Created by bearkode on 10. 3. 5..
  *  Copyright 2010 tinybean. All rights reserved.
  *
  */
 
 #import "TBBase.h"
 #import "TBTextureNames.h"
-#import "TBTextureManager.h"
 #import "TBUnitManager.h"
 #import "TBWarheadManager.h"
 #import "TBHelicopter.h"

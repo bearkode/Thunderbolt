@@ -11,8 +11,6 @@
 #import <PBKit.h>
 #import "TBGameConst.h"
 #import "TBTextureNames.h"
-#import "TBTextureInfo.h"
-#import "TBTextureManager.h"
 #import "TBUnitManager.h"
 #import "TBAAVulcan.h"
 #import "TBHelicopter.h"
