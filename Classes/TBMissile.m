@@ -15,7 +15,7 @@
 
 
 #define MISSILE_FUEL        250.0
-#define MISSILE_SPEED       11.7
+#define MISSILE_SPEED       5.8//11.7
 #define MISSILE_SENSITIVE   2.8
 
 

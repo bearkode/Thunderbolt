@@ -54,7 +54,7 @@
         sTankPosition   = [mBody point];
 
         CGFloat sAngle  = TBAngleBetweenToPoints(sTankPosition, sTargetPosition);
-        CGPoint sVector = TBVector(sAngle, 8.0);
+        CGPoint sVector = TBVector(sAngle, 4.0);
             
         [TBWarheadManager tankShellWithTeam:sTeam position:sTankPosition vector:sVector];
         mAmmoCount--;

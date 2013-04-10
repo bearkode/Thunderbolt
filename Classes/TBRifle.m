@@ -57,7 +57,7 @@
         if (sDistance <= mMaxRange)
         {
             CGFloat sAngle  = TBAngleBetweenToPoints(sBodyPosition, sTargetPosition);
-            CGPoint sVector = TBVector(sAngle, 6.0);
+            CGPoint sVector = TBVector(sAngle, 3.0);
             
             [TBWarheadManager bulletWithTeam:sTeam position:sBodyPosition vector:sVector destructivePower:kRifleBulletPower];
             mAmmoCount--;

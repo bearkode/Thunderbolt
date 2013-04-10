@@ -140,7 +140,7 @@
         [self addSubview:mMoneyLabel];
         
         //  Bottom Consol
-        UIView *sGroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 320 - MAP_GROUND, 480, MAP_GROUND)];
+        UIView *sGroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 320 - kMapGround, 480, kMapGround)];
         [sGroundView setBackgroundColor:[UIColor grayColor]];
         [self addSubview:sGroundView];
         [sGroundView release];

@@ -9,7 +9,7 @@ typedef enum
 
 #define kMinMapXPos                 0
 #define kMaxMapXPos                 4000
-#define MAP_GROUND                  40
+#define kMapGround                  40
 
 
 #define kTBSoundValkyries           @"Valkyries.3gp"

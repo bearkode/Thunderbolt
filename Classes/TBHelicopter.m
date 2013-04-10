@@ -219,7 +219,7 @@
         mSpeed += 0.04;
     }
     
-    if (!mIsLanded && ([self point].y - [[self mesh] size].height) > MAP_GROUND) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
+    if (!mIsLanded && ([self point].y - [[self mesh] size].height) > kMapGround) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
     {
         sPoint.x += mSpeed;
 
@@ -266,10 +266,10 @@
 
     sPoint.y -= sAltitudeLever;
 
-    if ((sPoint.y - [[self mesh] size].height / 2) < MAP_GROUND)
+    if ((sPoint.y - [[self mesh] size].height / 2) < kMapGround)
     {
         mIsLanded   = YES;
-        sPoint.y = MAP_GROUND + [[self mesh] size].height / 2;
+        sPoint.y = kMapGround + [[self mesh] size].height / 2;
     }
     else if (sPoint.y > 300)
     {

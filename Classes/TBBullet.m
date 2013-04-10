@@ -69,7 +69,7 @@
         sPoint.y += mVector.y;
         [self setPoint:sPoint];
         
-        if (sPoint.y < MAP_GROUND)
+        if (sPoint.y < kMapGround)
         {
             mLife = 0;
         }

@@ -108,7 +108,7 @@ inline CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed)
     CGPoint sPoint = [self point];
     CGSize  sSize  = [[self mesh] size];
     
-    if ((sPoint.y - sSize.height) < MAP_GROUND)
+    if ((sPoint.y - sSize.height) < kMapGround)
     {
         return YES;
     }

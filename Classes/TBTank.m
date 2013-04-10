@@ -15,7 +15,7 @@
 #import "TBHelicopter.h"
 
 
-#define kTankSpeed 1
+#define kTankSpeed 0.5
 
 
 @implementation TBTank
@@ -74,11 +74,11 @@
         
         if (mTeam == kTBTeamEnemy)
         {
-            [self setPoint:CGPointMake(kMaxMapXPos + 50, MAP_GROUND + ([[self mesh] size].height / 2))];
+            [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + ([[self mesh] size].height / 2))];
         }
         else
         {
-            [self setPoint:CGPointMake(-50, MAP_GROUND + ([[self mesh] size].height / 2))];
+            [self setPoint:CGPointMake(-50, kMapGround + ([[self mesh] size].height / 2))];
         }
         
         mTankGun = [[TBTankGun alloc] initWithBody:self team:aTeam];

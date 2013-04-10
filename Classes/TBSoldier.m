@@ -87,13 +87,14 @@
     if (!sFire)
     {
         CGPoint sPoint = [self point];
-        sPoint.x += ([self isAlly]) ? 1.0 : -1.0;
+        sPoint.x += ([self isAlly]) ? 0.5 : -0.5;
         [self setPoint:sPoint];
     }
     
     mTick = (mTick == 24) ? 0 : mTick + 1;
     NSString  *sTextureName = [mTextureArray objectAtIndex:(NSUInteger)(mTick / 5) + 1];
     PBTexture *sTexture     = [PBTextureManager textureWithImageName:sTextureName];
+    [sTexture loadIfNeeded];
     [self setTexture:sTexture];
 }
 

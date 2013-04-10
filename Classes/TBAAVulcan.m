@@ -48,7 +48,7 @@
         if (sDistance <= mMaxRange)
         {
             CGFloat sAngle  = TBAngleBetweenToPoints(sVulcanPosition, sTargetPosition);
-            CGPoint sVector = TBVector(sAngle, 6.0);
+            CGPoint sVector = TBVector(sAngle, 3.0);
             
             [TBWarheadManager bulletWithTeam:sTeam position:sVulcanPosition vector:sVector destructivePower:kVulcanBulletPower];
             mAmmoCount--;

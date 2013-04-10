@@ -44,14 +44,14 @@
         [self setTexture:sTexture];
 
         mTextureIndex    = 0;
-        mTextureKeys     = [[NSArray alloc] initWithObjects:kTexBase00, kTexBase00, kTexBase00,
-                                                            kTexBase01, kTexBase01, kTexBase01,
-                                                            kTexBase02, kTexBase02, kTexBase02,
-                                                            kTexBase03, kTexBase03, kTexBase03,
-                                                            kTexBase04, kTexBase04, kTexBase04,
-                                                            kTexBase05, kTexBase05, kTexBase05,
-                                                            kTexBase06, kTexBase06, kTexBase06,
-                                                            kTexBase07, kTexBase07, kTexBase07, nil];
+        mTextureKeys     = [[NSArray alloc] initWithObjects:kTexBase00, kTexBase00, kTexBase00, kTexBase00, kTexBase00,
+                                                            kTexBase01, kTexBase01, kTexBase01, kTexBase01, kTexBase01,
+                                                            kTexBase02, kTexBase02, kTexBase02, kTexBase02, kTexBase02,
+                                                            kTexBase03, kTexBase03, kTexBase03, kTexBase03, kTexBase03,
+                                                            kTexBase04, kTexBase04, kTexBase04, kTexBase04, kTexBase04,
+                                                            kTexBase05, kTexBase05, kTexBase05, kTexBase05, kTexBase05,
+                                                            kTexBase06, kTexBase06, kTexBase06, kTexBase06, kTexBase06,
+                                                            kTexBase07, kTexBase07, kTexBase07, kTexBase07, kTexBase07, nil];
         
         mAAVulcan        = [[TBAAVulcan alloc] initWithBody:self team:aTeam];
         mMissileLauncher = [[TBMissileLauncher alloc] initWithBody:self team:aTeam];

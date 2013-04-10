@@ -148,7 +148,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
         {
             sPosition = [sUnit point];
             [sUnit addDamage:100];
-            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, MAP_GROUND + 18)];
+            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
         }
         
         [sUnit action];
@@ -175,7 +175,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
         {
             sPosition = [sUnit point];
             [sUnit addDamage:100];
-            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, MAP_GROUND + 18)];
+            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
         }
         
         [sUnit action];
@@ -326,7 +326,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     TBHelicopter *sHelicopter = [[[TBHelicopter alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
     [sHelicopter setDelegate:aDelegate];    
-    [sHelicopter setPoint:CGPointMake(kMinMapXPos + 200, MAP_GROUND + ([[sHelicopter mesh] size].height /2))];
+    [sHelicopter setPoint:CGPointMake(kMinMapXPos + 200, kMapGround + ([[sHelicopter mesh] size].height /2))];
     [[TBUnitManager sharedManager] addUnit:sHelicopter];
     
     return sHelicopter;

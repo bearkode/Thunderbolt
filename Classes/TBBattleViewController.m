@@ -9,11 +9,10 @@
 
 #import "TBBattleViewController.h"
 #import <PBKit.h>
+#import "TBTextureNames.h"
 
 #import "TBEventView.h"
 #import "TBControlLever.h"
-
-#import "TBTextureNames.h"
 
 #import "TBMoneyManager.h"
 #import "TBUnitManager.h"
@@ -25,7 +24,6 @@
 #import "TBBase.h"
 #import "TBLandingPad.h"
 #import "TBAAGunSite.h"
-
 #import "TBHelicopter.h"
 #import "TBTank.h"
 
@@ -49,35 +47,35 @@
 @implementation TBBattleViewController
 {
     /*  User Interface : not retained  */
-    TBEventView *mEventView;
+    TBEventView   *mEventView;
     
-    UILabel     *mAmmoLabel;
-    UILabel     *mScoreLabel;
-    UILabel     *mMoneyLabel;
-    UIButton    *mTankButton;
-    UIButton    *mAmmoButton;
+    UILabel       *mAmmoLabel;
+    UILabel       *mScoreLabel;
+    UILabel       *mMoneyLabel;
+    UIButton      *mTankButton;
+    UIButton      *mAmmoButton;
     
-    TBRadar     *mRadar;
+    TBRadar       *mRadar;
     
     /*  Layers : not retained  */
-    PBLayer     *mRadarLayer;
-    PBLayer     *mEffectLayer;
-    PBLayer     *mWarheadLayer;
-    PBLayer     *mExplosionLayer;
-    PBLayer     *mUnitLayer;
-    PBLayer     *mStructureLayer;
-    PBLayer     *mBackgroundLayer;
+    PBLayer       *mRadarLayer;
+    PBLayer       *mEffectLayer;
+    PBLayer       *mWarheadLayer;
+    PBLayer       *mExplosionLayer;
+    PBLayer       *mUnitLayer;
+    PBLayer       *mStructureLayer;
+    PBLayer       *mBackgroundLayer;
     
     /*  Models  */
-    PBSprite    *mStar0;
-    PBSprite    *mStar1;
-    PBSprite    *mStar2;
+    PBSprite      *mStar0;
+    PBSprite      *mStar1;
+    PBSprite      *mStar2;
     
     /*  BGM  */
     PBSoundSource *mBGMSoundSource;
 
-    CGFloat      mBackPoint;
-    NSInteger    mTimeTick;
+    CGFloat        mBackPoint;
+    NSInteger      mTimeTick;
 }
 
 
@@ -132,32 +130,32 @@
     TBAAGunSite  *sAAGunSite;
     
     sBase = [[[TBBase alloc] initWithTeam:kTBTeamAlly] autorelease];
-    [sBase setPoint:CGPointMake(kMinMapXPos + 100, MAP_GROUND + 30)];
+    [sBase setPoint:CGPointMake(kMinMapXPos + 100, kMapGround + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     [mStructureLayer addSublayer:sBase];
 
     sBase = [[[TBBase alloc] initWithTeam:kTBTeamEnemy] autorelease];
-    [sBase setPoint:CGPointMake(kMaxMapXPos - 100, MAP_GROUND + 30)];
+    [sBase setPoint:CGPointMake(kMaxMapXPos - 100, kMapGround + 30)];
     [[TBStructureManager sharedManager] addStructure:sBase];
     [mStructureLayer addSublayer:sBase];
 
     sLandingPad = [[[TBLandingPad alloc] initWithTeam:kTBTeamAlly] autorelease];
-    [sLandingPad setPoint:CGPointMake(kMinMapXPos + 200, MAP_GROUND + 6)];
+    [sLandingPad setPoint:CGPointMake(kMinMapXPos + 200, kMapGround + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     [mStructureLayer addSublayer:sLandingPad];
     
     sLandingPad = [[[TBLandingPad alloc] initWithTeam:kTBTeamEnemy] autorelease];
-    [sLandingPad setPoint:CGPointMake(kMaxMapXPos - 200, MAP_GROUND + 6)];
+    [sLandingPad setPoint:CGPointMake(kMaxMapXPos - 200, kMapGround + 6)];
     [[TBStructureManager sharedManager] addStructure:sLandingPad];
     [mStructureLayer addSublayer:sLandingPad];
     
     sAAGunSite = [[[TBAAGunSite alloc] initWithTeam:kTBTeamAlly] autorelease];
-    [sAAGunSite setPoint:CGPointMake(kMinMapXPos + 800, MAP_GROUND + 15)];
+    [sAAGunSite setPoint:CGPointMake(kMinMapXPos + 800, kMapGround + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
     [mStructureLayer addSublayer:sAAGunSite];
     
     sAAGunSite = [[[TBAAGunSite alloc] initWithTeam:kTBTeamEnemy] autorelease];
-    [sAAGunSite setPoint:CGPointMake(kMaxMapXPos - 800, MAP_GROUND + 15)];
+    [sAAGunSite setPoint:CGPointMake(kMaxMapXPos - 800, kMapGround + 15)];
     [[TBStructureManager sharedManager] addStructure:sAAGunSite];
     [mStructureLayer addSublayer:sAAGunSite];
 }
@@ -181,17 +179,17 @@
     
     [mStar0 autorelease];
     mStar0 = [[PBSprite alloc] initWithImageName:kTexGreen];
-    [mStar0 setPoint:CGPointMake(kMinMapXPos, MAP_GROUND + ([[mStar0 mesh] size].height / 2))];
+    [mStar0 setPoint:CGPointMake(kMinMapXPos, kMapGround + ([[mStar0 mesh] size].height / 2))];
     [mBackgroundLayer addSublayer:mStar0];
 
     [mStar1 autorelease];
     mStar1 = [[PBSprite alloc] initWithImageName:kTexGreen];
-    [mStar1 setPoint:CGPointMake(kMaxMapXPos / 2, MAP_GROUND + ([[mStar0 mesh] size].height / 2))];
+    [mStar1 setPoint:CGPointMake(kMaxMapXPos / 2, kMapGround + ([[mStar0 mesh] size].height / 2))];
     [mBackgroundLayer addSublayer:mStar1];
 
     [mStar2 autorelease];
     mStar2 = [[PBSprite alloc] initWithImageName:kTexGreen];
-    [mStar2 setPoint:CGPointMake(kMaxMapXPos, MAP_GROUND + ([[mStar0 mesh] size].height / 2))];
+    [mStar2 setPoint:CGPointMake(kMaxMapXPos, kMapGround + ([[mStar0 mesh] size].height / 2))];
     [mBackgroundLayer addSublayer:mStar2];
     
     PBSprite *sSprite = [[[PBSprite alloc] initWithImageName:kTexGreen] autorelease];
@@ -355,7 +353,10 @@
 {
     [super viewDidAppear:aAnimated];
     
-    CGRect sBounds = [[self canvas] bounds];
+    PBCanvas *sCanvas = [self canvas];
+    CGRect    sBounds = [sCanvas bounds];
+    
+    [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateHigh];
     [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.width / 2, sBounds.size.height / 2)];
 }
 

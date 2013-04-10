@@ -144,7 +144,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
             CGPoint sPosition = [sWarhead point];
             
             [sWarhead setAvailable:NO];  
-            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, MAP_GROUND + 18)];
+            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
             [sRemovedSprites addObject:sWarhead];
         }
     }
