@@ -25,9 +25,6 @@
 #import "TBScoreManager.h"
 
 
-static TBUnitManager *gUnitManager = nil;
-
-
 @implementation TBUnitManager
 {
     PBLayer             *mUnitLayer;
@@ -82,6 +79,11 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 - (void)addUnit:(TBUnit *)aUnit
 {
     [mUnitLayer addSublayer:aUnit];
+    
+    if (![aUnit unitID])
+    {
+        NSLog(@"aUnit = %@", aUnit);
+    }
     
     if ([aUnit isAlly])
     {
@@ -366,7 +368,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 + (TBMissile *)missileWithTeam:(TBTeam)aTeam position:(CGPoint)aPosition target:(TBUnit *)aTarget
 {
-    NSNumber  *sUnitID  = [gUnitManager nextUnitID];
+    NSNumber  *sUnitID  = [[TBUnitManager sharedManager] nextUnitID];
     TBMissile *sMissile = [[[TBMissile alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
     [sMissile setPoint:aPosition];

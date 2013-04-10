@@ -90,7 +90,7 @@
         }
         
         TBUnit *sTarget = (mTeam == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
-        
+
         [mAAVulcan action];
         [mMissileLauncher action];
         

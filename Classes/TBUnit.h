@@ -1,10 +1,11 @@
-//
-//  TBUnit.h
-//  Thunderbolt
-//
-//  Created by jskim on 10. 1. 31..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBUnit.h
+ *  Thunderbolt
+ *
+ *  Created by jskim on 10. 1. 31..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import <Foundation/Foundation.h>
 #import "TBGameConst.h"
@@ -32,12 +33,14 @@ typedef enum
     NSInteger  mFuel;
 }
 
+
 @property (nonatomic, assign)   TBUnitType type;
 @property (nonatomic, retain)   NSNumber  *unitID;
 @property (nonatomic, readonly) TBTeam team;
 @property (nonatomic, assign)   NSInteger  durability;
 @property (nonatomic, assign)   NSInteger  damage;
 @property (nonatomic, assign)   NSInteger  fuel;
+
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam;
 

@@ -38,7 +38,7 @@
     CGPoint sTargetPosition;
     CGPoint sBodyPosition;
     CGFloat sDistance;
-    
+
     if ([self isReloaded])
     {
         sTargetPosition = [aUnit point];
@@ -54,7 +54,7 @@
             sResult = YES;
         }
     }
-    
+
     return sResult;
 }
 

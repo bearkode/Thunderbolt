@@ -13,9 +13,15 @@
 @implementation TBEventView
 {
     id       mDelegate;
+    BOOL     mControlMode;
+    
+    /*  Control Mode */
     NSTimer *mTimer;
     CGFloat  mY;
     CGFloat  mZ;
+    
+    /*  Button Mode  */
+    CGPoint  mBeginPoint;
 }
 
 
@@ -31,7 +37,7 @@
     
     if (self)
     {
-
+        mControlMode = NO;
     }
     
     return self;
@@ -59,37 +65,105 @@
 - (void)touchesBegan:(NSSet *)aTouches withEvent:(UIEvent *)aEvent
 {
     UITouch *sTouch = [aTouches anyObject];
-    [self updatePoint:[sTouch locationInView:self]];
+    
+    if (mControlMode)
+    {
+        [self updatePoint:[sTouch locationInView:self]];
 
-    [mTimer invalidate];
-    mTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0 / 30.0) target:self selector:@selector(timerExpired:) userInfo:nil repeats:YES];
+        [mTimer invalidate];
+        mTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0 / 30.0) target:self selector:@selector(timerExpired:) userInfo:nil repeats:YES];
+    }
+    else
+    {
+        mBeginPoint = [sTouch locationInView:self];
+        
+        if ([mDelegate respondsToSelector:@selector(eventView:touchBegan:)])
+        {
+            [mDelegate eventView:self touchBegan:mBeginPoint];
+        }
+    }
 }
 
 
 - (void)touchesMoved:(NSSet *)aTouches withEvent:(UIEvent *)aEvent
 {
     UITouch *sTouch = [aTouches anyObject];
-    [self updatePoint:[sTouch locationInView:self]];
+    CGPoint  sPoint = [sTouch locationInView:self];
+    
+    if (mControlMode)
+    {
+        [self updatePoint:sPoint];
+    }
+    else
+    {
+        if ([mDelegate respondsToSelector:@selector(eventView:touchMoved:)])
+        {
+            [mDelegate eventView:self touchMoved:sPoint];
+        }
+    }
 }
 
 
 - (void)touchesEnded:(NSSet *)aTouches withEvent:(UIEvent *)aEvent
 {
-    [mTimer invalidate];
-    mTimer = nil;
+    if (mControlMode)
+    {
+        [mTimer invalidate];
+        mTimer = nil;
+    }
+    else
+    {
+        UITouch  *sTouch = [[aTouches allObjects] objectAtIndex:0];
+        CGPoint   sPoint = [sTouch locationInView:self];
+        NSInteger sCount = [sTouch tapCount];
+        
+        if ([mDelegate respondsToSelector:@selector(eventView:touchEnded:)])
+        {
+            [mDelegate eventView:self touchEnded:sPoint];
+        }
+        
+        if ([mDelegate respondsToSelector:@selector(eventView:touchTapCount:)])
+        {
+            [mDelegate eventView:self touchTapCount:sCount];
+        }
+    }
 }
 
 
 - (void)touchesCancelled:(NSSet *)aTouches withEvent:(UIEvent *)aEvent
 {
-    [mTimer invalidate];
-    mTimer = nil;
+    if (mControlMode)
+    {
+        [mTimer invalidate];
+        mTimer = nil;
+    }
+    else
+    {
+        UITouch *sTouch = [[aTouches allObjects] objectAtIndex:0];
+        CGPoint  sPoint = [sTouch locationInView:self];
+        
+        mBeginPoint = CGPointMake(-1, -1);
+        
+        if ([mDelegate respondsToSelector:@selector(eventView:touchCancelled:)])
+        {
+            [mDelegate eventView:self touchCancelled:sPoint];
+        }
+    }
 }
 
 
 - (void)timerExpired:(NSTimer *)aTimer
 {
     [mDelegate eventView:self controlAltitude:mZ speed:mY];
+}
+
+
+#pragma mark -
+
+
+- (void)setControlMode:(BOOL)aFlag
+{
+    mControlMode = aFlag;
 }
 
 

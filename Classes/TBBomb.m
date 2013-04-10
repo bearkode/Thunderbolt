@@ -22,10 +22,14 @@
 
 - (id)init
 {
-    self = [super initWithImageName:kTexBomb];
+    self = [super init];
     
     if (self)
     {
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBomb];
+        [sTexture loadIfNeeded];
+
+        [self setTexture:sTexture];
         [self setDestructivePower:kBombPower];
     
         mVector = CGPointZero;

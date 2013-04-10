@@ -308,6 +308,11 @@
     [mEventView setDelegate:self];
     [mEventView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [[self view] addSubview:mEventView];
+
+#if TARGET_IPHONE_SIMULATOR
+    [mEventView setControlMode:YES];
+#endif
+
     
     [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.5 green:0.5 blue:1.0 alpha:1.0]];
     [self setupUIs];
@@ -468,12 +473,56 @@
 }
 
 
+#pragma mark -
+#pragma mark EventView Delegate
+
+
 - (void)eventView:(TBEventView *)aEventView controlAltitude:(CGFloat)aAltitude speed:(CGFloat)aSpeed
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
     [[sHelicopter controlLever] setAltitude:aAltitude speed:aSpeed];
     [self updateCameraPositoin];    
+}
+
+
+- (void)eventView:(TBEventView *)aEventView touchBegan:(CGPoint)aPoint
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    
+    if ([sHelicopter selectedWeapon] == kWeaponVulcan &&
+        [sHelicopter bulletCount] > 0 &&
+        ![sHelicopter isLanded])
+    {
+        [sHelicopter setFireVulcan:YES];
+    }
+}
+
+
+- (void)eventView:(TBEventView *)aEventView touchCancelled:(CGPoint)aPoint
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    
+    [sHelicopter setFireVulcan:NO];
+}
+
+
+- (void)eventView:(TBEventView *)aEventView touchEnded:(CGPoint)aPoint
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    
+    [sHelicopter setFireVulcan:NO];
+}
+
+
+- (void)eventView:(TBEventView *)aEventView touchTapCount:(NSInteger)aTabCount
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    
+    if ([sHelicopter selectedWeapon] == kWeaponBomb && ![sHelicopter isLanded])
+    {
+        [sHelicopter dropBomb];
+    }
 }
 
 

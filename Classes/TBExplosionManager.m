@@ -213,14 +213,17 @@ static TBExplosionManager *gExplosionManager = nil;
     PBTexture   *sTexture   = nil;
     
     sTexture = [PBTextureManager textureWithImageName:kTexBombExp00];
+    [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
     sTexture = [PBTextureManager textureWithImageName:kTexBombExp01];
+    [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
     sTexture = [PBTextureManager textureWithImageName:kTexBombExp02];
+    [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
 
