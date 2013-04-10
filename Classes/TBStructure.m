@@ -11,6 +11,12 @@
 
 
 @implementation TBStructure
+{
+    TBTeam     mTeam;
+    NSInteger  mDurability;
+    NSInteger  mDamage;
+    BOOL       mIsDestroyed;
+}
 
 
 @synthesize team        = mTeam;
@@ -51,7 +57,8 @@
 {
     if (!mIsDestroyed)
     {
-        mDamage += aDamage;    
+        mDamage += aDamage;
+        
         if (mDurability <= mDamage)
         {
             mIsDestroyed = YES;

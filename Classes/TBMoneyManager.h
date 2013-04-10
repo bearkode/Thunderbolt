@@ -1,10 +1,11 @@
-//
-//  TBMoneyManager.h
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 18..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBMoneyManager.h
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 18..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -25,10 +26,6 @@
 
 
 @interface TBMoneyManager : NSObject
-{
-    id         mDelegate;
-    NSUInteger mSum;
-}
 
 
 @property (nonatomic, assign) id delegate;

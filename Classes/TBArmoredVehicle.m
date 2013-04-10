@@ -17,8 +17,13 @@
 
 @implementation TBArmoredVehicle
 {
-    PBTexture *mTextureNormal;
-    PBTexture *mTextureHit;
+    PBTexture         *mTextureNormal;
+    PBTexture         *mTextureHit;
+    
+    NSInteger          mHitDiscount;
+        
+    TBAAVulcan        *mAAVulcan;
+    TBMissileLauncher *mMissileLauncher;
 }
 
 

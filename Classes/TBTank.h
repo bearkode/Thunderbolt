@@ -15,10 +15,6 @@
 
 
 @interface TBTank : TBUnit
-{
-    NSInteger   mHitDiscount;
-    
-    TBTankGun  *mTankGun;
-}
+
 
 @end

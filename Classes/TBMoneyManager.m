@@ -1,86 +1,28 @@
-//
-//  TBMoneyManager.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 18..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBMoneyManager.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 18..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBMoneyManager.h"
+#import <PBObjCUtil.h>
 #import "TBUnit.h"
 
 
-static TBMoneyManager *gMoneyManager = nil;
-
-
 @implementation TBMoneyManager
+{
+    id         mDelegate;
+    NSUInteger mSum;
+}
 
 
 @synthesize delegate = mDelegate;
 
 
-#pragma mark -
-#pragma mark for Singleton
-
-
-+ (id)allocWithZone:(NSZone *)aZone
-{
-    @synchronized(self)
-    {
-        if (!gMoneyManager)
-        {
-            gMoneyManager = [super allocWithZone:aZone];
-            return gMoneyManager;
-        }
-    }
-    
-    return nil;
-}
-
-
-- (id)copyWithZone:(NSZone *)aZone
-{
-    return self;
-}
-
-
-- (id)retain
-{
-    return self;
-}
-
-
-- (unsigned)retainCount
-{
-    return UINT_MAX;
-}
-
-- (oneway void)release
-{
-}
-
-
-- (id)autorelease
-{
-    return self;
-}
-
-
-#pragma mark -
-
-
-+ (TBMoneyManager *)sharedManager
-{
-    @synchronized(self)
-    {
-        if (!gMoneyManager)
-        {
-            gMoneyManager = [[self alloc] init];
-        }
-    }
-    
-    return gMoneyManager;
-}
+SYNTHESIZE_SINGLETON_CLASS(TBMoneyManager, sharedManager);
 
 
 + (void)useMoney:(NSUInteger)aValue

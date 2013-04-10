@@ -89,7 +89,7 @@
             mTextureIndex = 0;
         }
         
-        TBUnit *sTarget = (mTeam == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
+        TBUnit *sTarget = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
 
         [mAAVulcan action];
         [mMissileLauncher action];

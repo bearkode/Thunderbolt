@@ -61,20 +61,16 @@
 
 - (void)addDamage:(NSUInteger)aDamage
 {
-    if (!mIsDestroyed)
+    [super addDamage:aDamage];
+    
+    if ([self isDestroyed])
     {
-        mDamage += aDamage;    
-        if (mDurability <= mDamage)
-        {
-            mIsDestroyed = YES;
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexAAGunDestroyed];
 
-            PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexAAGunDestroyed];
+        [sTexture loadIfNeeded];
+        [self setTexture:sTexture];
 
-            [sTexture loadIfNeeded];
-            [self setTexture:sTexture];
-            
-            [TBExplosionManager tankExplosionAtPoistion:[self point]];
-        }
+        [TBExplosionManager tankExplosionAtPoistion:[self point]];
     }
 }
 
@@ -87,7 +83,7 @@
     {
         [mAAVulcan action];
         
-        TBHelicopter *sHelicopter     = [[TBUnitManager sharedManager] opponentHeicopter:mTeam];
+        TBHelicopter *sHelicopter     = [[TBUnitManager sharedManager] opponentHeicopter:[self team]];
         CGPoint       sSitePosition   = [self point];
         CGPoint       sTargetPosition = [sHelicopter point];
         CGFloat       sAngle;

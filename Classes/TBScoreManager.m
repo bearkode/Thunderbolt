@@ -1,90 +1,29 @@
-//
-//  TBScoreManager.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 19..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBScoreManager.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 19..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import "TBScoreManager.h"
+#import <PBObjCUtil.h>
 #import "TBUnit.h"
 
 
-static TBScoreManager *gScoreManager = nil;
-
-
 @implementation TBScoreManager
+{
+    id         mDelegate;
+    NSUInteger mScore;
+}
 
 
 @synthesize delegate = mDelegate;
 @synthesize score    = mScore;
 
 
-#pragma mark -
-#pragma mark for Singleton
-
-
-+ (id)allocWithZone:(NSZone *)aZone
-{
-    @synchronized(self)
-    {
-        if (!gScoreManager)
-        {
-            gScoreManager = [super allocWithZone:aZone];
-            return gScoreManager;
-        }
-    }
-    
-    return nil;
-}
-
-
-- (id)copyWithZone:(NSZone *)aZone
-{
-    return self;
-}
-
-
-- (id)retain
-{
-    return self;
-}
-
-
-- (unsigned)retainCount
-{
-    return UINT_MAX;
-}
-
-- (oneway void)release
-{
-}
-
-
-- (id)autorelease
-{
-    return self;
-}
-
-
-#pragma mark -
-
-
-+ (TBScoreManager *)sharedManager
-{
-    @synchronized(self)
-    {
-        if (!gScoreManager)
-        {
-            gScoreManager = [[self alloc] init];
-        }
-    }
-    
-    return gScoreManager;
-}
-
-
-#pragma mark -
+SYNTHESIZE_SINGLETON_CLASS(TBScoreManager, sharedManager)
 
 
 - (id)init

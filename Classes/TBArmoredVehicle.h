@@ -11,16 +11,7 @@
 #import "TBUnit.h"
 
 
-@class TBAAVulcan;
-@class TBMissileLauncher;
-
-
 @interface TBArmoredVehicle : TBUnit
-{
-    NSInteger          mHitDiscount;
-    
-    TBAAVulcan        *mAAVulcan;
-    TBMissileLauncher *mMissileLauncher;
-}
+
 
 @end

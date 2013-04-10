@@ -48,7 +48,7 @@
     
     if (![self isDestroyed])
     {
-        TBHelicopter *sHelicopter = (mTeam == kTBTeamAlly) ? [[TBUnitManager sharedManager] allyHelicopter] : [[TBUnitManager sharedManager] enemyHelicopter];
+        TBHelicopter *sHelicopter = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] allyHelicopter] : [[TBUnitManager sharedManager] enemyHelicopter];
         
         if (mFillUpCount == 0)
         {

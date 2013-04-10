@@ -1,10 +1,11 @@
-//
-//  TBScoreManager.h
-//  Thunderbolt
-//
-//  Created by jskim on 10. 5. 19..
-//  Copyright 2010 Tinybean. All rights reserved.
-//
+/*
+ *  TBScoreManager.h
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 5. 19..
+ *  Copyright 2010 Tinybean. All rights reserved.
+ *
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -17,10 +18,7 @@
 
 
 @interface TBScoreManager : NSObject
-{
-    id         mDelegate;
-    NSUInteger mScore;
-}
+
 
 @property (nonatomic, assign)   id         delegate;
 @property (nonatomic, readonly) NSUInteger score;

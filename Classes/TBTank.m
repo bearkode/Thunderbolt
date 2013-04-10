@@ -22,6 +22,9 @@
 {
     PBTexture *mTextureNormal;
     PBTexture *mTextureHit;
+    
+    NSInteger  mHitDiscount;
+    TBTankGun *mTankGun;
 }
 
 
@@ -51,6 +54,9 @@
     
     [self setTexture:mTextureNormal];
 }
+
+
+#pragma mark -
 
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam

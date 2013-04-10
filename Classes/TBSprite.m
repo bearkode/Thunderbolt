@@ -13,7 +13,7 @@
 #import "TBGameConst.h"
 
 
-CGFloat TBAngleBetweenToPoints(CGPoint aPt1, CGPoint aPt2)
+inline CGFloat TBAngleBetweenToPoints(CGPoint aPt1, CGPoint aPt2)
 {
     float sResult = 0.0;
     float sDX, sDY;
@@ -31,7 +31,7 @@ CGFloat TBAngleBetweenToPoints(CGPoint aPt1, CGPoint aPt2)
 }
 
 
-CGFloat TBDistanceBetweenToPoints(CGPoint aPt1, CGPoint aPt2)
+inline CGFloat TBDistanceBetweenToPoints(CGPoint aPt1, CGPoint aPt2)
 {
     CGFloat sDeltaX;
     CGFloat sDeltaY;
@@ -45,7 +45,7 @@ CGFloat TBDistanceBetweenToPoints(CGPoint aPt1, CGPoint aPt2)
 }
 
 
-CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed)
+inline CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed)
 {
     CGFloat sX = cos(aAngle) * aSpeed;
     CGFloat sY = sin(aAngle) * aSpeed;

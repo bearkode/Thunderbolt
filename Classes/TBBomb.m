@@ -12,6 +12,9 @@
 
 
 @implementation TBBomb
+{
+    CGPoint mVector;
+}
 
 
 @synthesize vector = mVector;

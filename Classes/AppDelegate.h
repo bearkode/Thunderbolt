@@ -15,15 +15,7 @@
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-//{
-//    UIWindow         *mWindow;
-//    TBGLView         *mGLView;
-//    TBGameController *mGameController;
-//}
-//
-@property (nonatomic, retain) UIWindow *window;
-//@property (nonatomic, retain) IBOutlet TBGLView         *GLView;
-//@property (nonatomic, assign) IBOutlet TBGameController *gameController;
-//
+
+
 @end
 

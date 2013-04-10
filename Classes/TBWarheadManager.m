@@ -8,6 +8,7 @@
  */
 
 #import "TBWarheadManager.h"
+#import <PBObjCUtil.h>
 #import "TBUnit.h"
 #import "TBUnitManager.h"
 #import "TBExplosionManager.h"
@@ -19,9 +20,6 @@
 #import "TBTankShell.h"
 
 
-static TBWarheadManager *gWarheadManager = nil;
-
-
 @implementation TBWarheadManager
 {
     PBLayer        *mWarheadLayer;
@@ -31,7 +29,7 @@ static TBWarheadManager *gWarheadManager = nil;
 }
 
 
-#pragma mark -
+SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 
 
 - (TBBullet *)dequeueReusableBullet
@@ -52,53 +50,6 @@ static TBWarheadManager *gWarheadManager = nil;
 - (void)storeReusableBullet:(TBBullet *)aBullet
 {
     [mReusableBulletArray addObject:aBullet];
-}
-
-
-#pragma mark -
-#pragma mark for Singleton
-
-
-+ (id)allocWithZone:(NSZone *)aZone
-{
-    @synchronized(self)
-    {
-        if (!gWarheadManager)
-        {
-            gWarheadManager = [super allocWithZone:aZone];
-            return gWarheadManager;
-        }
-    }
-    
-    return nil;
-}
-
-
-- (id)copyWithZone:(NSZone *)aZone
-{
-    return self;
-}
-
-
-- (id)retain
-{
-    return self;
-}
-
-
-- (unsigned)retainCount
-{
-    return UINT_MAX;
-}
-
-- (oneway void)release
-{
-}
-
-
-- (id)autorelease
-{
-    return self;
 }
 
 
@@ -204,20 +155,6 @@ static TBWarheadManager *gWarheadManager = nil;
 
 
 #pragma mark -
-
-
-+ (TBWarheadManager *)sharedManager
-{
-    @synchronized(self)
-    {
-        if (!gWarheadManager)
-        {
-            gWarheadManager = [[self alloc] init];
-        }
-    }
-    
-    return gWarheadManager;
-}
 
 
 + (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector destructivePower:(NSUInteger)aDestructivePower

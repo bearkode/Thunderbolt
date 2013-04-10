@@ -2,7 +2,7 @@
  *  TBUnit.h
  *  Thunderbolt
  *
- *  Created by jskim on 10. 1. 31..
+ *  Created by bearkode on 10. 1. 31..
  *  Copyright 2010 tinybean. All rights reserved.
  *
  */
@@ -27,7 +27,7 @@ typedef enum
 {
     TBUnitType mType;
     NSNumber  *mUnitID;
-    TBTeam mTeam;
+    TBTeam     mTeam;
     NSInteger  mDurability;
     NSInteger  mDamage;
     NSInteger  mFuel;
@@ -36,7 +36,7 @@ typedef enum
 
 @property (nonatomic, assign)   TBUnitType type;
 @property (nonatomic, retain)   NSNumber  *unitID;
-@property (nonatomic, readonly) TBTeam team;
+@property (nonatomic, readonly) TBTeam     team;
 @property (nonatomic, assign)   NSInteger  durability;
 @property (nonatomic, assign)   NSInteger  damage;
 @property (nonatomic, assign)   NSInteger  fuel;
@@ -49,5 +49,6 @@ typedef enum
 - (void)addDamage:(NSInteger)aDamage;
 - (BOOL)isAvailable;
 - (CGFloat)damageRate;
+
 
 @end

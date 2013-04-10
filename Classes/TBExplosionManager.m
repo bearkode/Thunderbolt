@@ -9,14 +9,12 @@
 
 #import "TBExplosionManager.h"
 #import <PBKit.h>
+#import <PBObjCUtil.h>
 #import "TBExplosion.h"
 #import "TBTextureNames.h"
 #import "TBGameConst.h"
 #import "TBUnit.h"
 #import "TBHelicopter.h"
-
-
-static TBExplosionManager *gExplosionManager = nil;
 
 
 @implementation TBExplosionManager
@@ -26,54 +24,7 @@ static TBExplosionManager *gExplosionManager = nil;
 }
 
 
-#pragma mark -
-#pragma mark for Singleton
-
-
-+ (id)allocWithZone:(NSZone *)aZone
-{
-    @synchronized(self)
-    {
-        if (!gExplosionManager)
-        {
-            gExplosionManager = [super allocWithZone:aZone];
-            return gExplosionManager;
-        }
-    }
-    
-    return nil;
-}
-
-
-- (id)copyWithZone:(NSZone *)aZone
-{
-    return self;
-}
-
-
-- (id)retain
-{
-    return self;
-}
-
-
-- (unsigned)retainCount
-{
-    return UINT_MAX;
-}
-
-- (oneway void)release
-{
-}
-
-
-- (id)autorelease
-{
-    return self;
-}
-
-
-#pragma mark -
+SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 
 
 - (id)init
@@ -136,20 +87,6 @@ static TBExplosionManager *gExplosionManager = nil;
 
 
 #pragma mark -
-
-
-+ (TBExplosionManager *)sharedManager
-{
-    @synchronized(self)
-    {
-        if (!gExplosionManager)
-        {
-            gExplosionManager = [[self alloc] init];
-        }
-    }
-    
-    return gExplosionManager;
-}
 
 
 + (void)explosionWithUnit:(TBUnit *)aUnit

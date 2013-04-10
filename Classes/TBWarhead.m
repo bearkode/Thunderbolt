@@ -1,10 +1,11 @@
-//
-//  TBWarhead.m
-//  Thunderbolt
-//
-//  Created by jskim on 10. 2. 3..
-//  Copyright 2010 tinybean. All rights reserved.
-//
+/*
+ *  TBWarhead.m
+ *  Thunderbolt
+ *
+ *  Created by bearkode on 10. 2. 3..
+ *  Copyright 2010 tinybean. All rights reserved.
+ *
+ */
 
 #import "TBWarhead.h"
 

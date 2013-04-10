@@ -13,6 +13,15 @@
 
 
 @implementation TBSoldier
+{
+    NSUInteger      mTick;
+    NSMutableArray *mTextureArray;
+    
+    TBRifle        *mRifle;
+}
+
+
+#pragma mark -
 
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam
@@ -51,6 +60,9 @@
 }
 
 
+#pragma mark -
+
+
 - (void)action
 {
     CGFloat sAngle;
@@ -78,21 +90,11 @@
         sPoint.x += ([self isAlly]) ? 1.0 : -1.0;
         [self setPoint:sPoint];
     }
-}
-
-
-- (void)draw
-{
-    mTick = (mTick == 24) ? 0 : mTick + 1;
     
-    PBTexture *sTexture = [mTextureArray objectAtIndex:(NSUInteger)(mTick / 5) + 1];
-
+    mTick = (mTick == 24) ? 0 : mTick + 1;
+    NSString  *sTextureName = [mTextureArray objectAtIndex:(NSUInteger)(mTick / 5) + 1];
+    PBTexture *sTexture     = [PBTextureManager textureWithImageName:sTextureName];
     [self setTexture:sTexture];
-//    [self setTextureID:[sInfo textureID]];
-//    [self setTextureSize:[sInfo textureSize]];
-//    [self setContentSize:[sInfo contentSize]];
-//    
-//    [super draw];
 }
 
 

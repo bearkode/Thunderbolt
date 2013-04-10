@@ -30,6 +30,15 @@
 }
 
 
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+
+#pragma mark -
+
+
 - (BOOL)fireAt:(TBUnit *)aUnit
 {
     BOOL    sResult = NO;

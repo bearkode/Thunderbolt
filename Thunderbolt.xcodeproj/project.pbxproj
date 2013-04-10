@@ -221,16 +221,12 @@
 		A73DE9FB110E4E96008C1A67 /* TBHelicopter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBHelicopter.h; sourceTree = "<group>"; };
 		A73DE9FC110E4E96008C1A67 /* TBHelicopter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHelicopter.m; sourceTree = "<group>"; };
 		A73DEB6B110F2986008C1A67 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
-		A74EC4E6111D525800A5FA1B /* TBBGMManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBGMManager.h; sourceTree = "<group>"; };
-		A74EC4E7111D525800A5FA1B /* TBBGMManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBGMManager.m; sourceTree = "<group>"; };
 		A75A5C07119FF7AE002B9360 /* TBTankGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTankGun.h; sourceTree = "<group>"; };
 		A75A5C08119FF7AE002B9360 /* TBTankGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTankGun.m; sourceTree = "<group>"; };
 		A75A5C6A11A02180002B9360 /* TBTankShell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTankShell.h; sourceTree = "<group>"; };
 		A75A5C6B11A02180002B9360 /* TBTankShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTankShell.m; sourceTree = "<group>"; };
 		A7736B07111B144A00B9174C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A7858C05112AD72D00F27970 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		A785DCA4112AC48500487CCB /* TBALSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBALSound.h; sourceTree = "<group>"; };
-		A785DCA5112AC48500487CCB /* TBALSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBALSound.m; sourceTree = "<group>"; };
 		A785DD34112ACD6500487CCB /* bomb_explosion.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bomb_explosion.caf; sourceTree = "<group>"; };
 		A785DD36112ACDCE00487CCB /* tank_explosion.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tank_explosion.caf; sourceTree = "<group>"; };
 		A78A1C3B11E88C5200DA9574 /* heli_l_exp00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heli_l_exp00.png; sourceTree = "<group>"; };
@@ -271,8 +267,6 @@
 		A7AD01F91122EE7300359C54 /* vulcan.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = vulcan.caf; sourceTree = "<group>"; };
 		A7AD029411235F9700359C54 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		A7AD02A011235FF500359C54 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		A7AD02A9112360AB00359C54 /* TBALPlayback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBALPlayback.h; sourceTree = "<group>"; };
-		A7AD02AA112360AB00359C54 /* TBALPlayback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBALPlayback.m; sourceTree = "<group>"; };
 		A7AF9C83114005DB00726807 /* TBStructure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStructure.h; sourceTree = "<group>"; };
 		A7AF9C84114005DB00726807 /* TBStructure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStructure.m; sourceTree = "<group>"; };
 		A7AF9C9E1140088400726807 /* TBBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBase.h; sourceTree = "<group>"; };
@@ -337,14 +331,13 @@
 			children = (
 				A72BD30E11A2DAE80091AEC4 /* Logic */,
 				A725CB59119CA76D00276F35 /* Weapon */,
-				A74EC4E5111D523600A5FA1B /* Sound */,
 				A7BC32AD1119B8F10052D1BA /* Objects */,
 				A73DE72D110DF286008C1A67 /* TextureManagement */,
 				2E662D4D170E98210081DEC9 /* BattleViewController */,
-				28FD14FC0DC6FC130079059D /* TBGLView.h */,
-				28FD14FD0DC6FC130079059D /* TBGLView.m */,
 				1D3623240D0F684500981E51 /* AppDelegate.h */,
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
+				28FD14FC0DC6FC130079059D /* TBGLView.h */,
+				28FD14FD0DC6FC130079059D /* TBGLView.m */,
 				A73DE71F110DF20E008C1A67 /* TBGameController.h */,
 				A73DE720110DF20E008C1A67 /* TBGameController.m */,
 			);
@@ -547,19 +540,6 @@
 				A73DE981110E4B77008C1A67 /* TBTextureNames.h */,
 			);
 			name = TextureManagement;
-			sourceTree = "<group>";
-		};
-		A74EC4E5111D523600A5FA1B /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-				A74EC4E6111D525800A5FA1B /* TBBGMManager.h */,
-				A74EC4E7111D525800A5FA1B /* TBBGMManager.m */,
-				A785DCA4112AC48500487CCB /* TBALSound.h */,
-				A785DCA5112AC48500487CCB /* TBALSound.m */,
-				A7AD02A9112360AB00359C54 /* TBALPlayback.h */,
-				A7AD02AA112360AB00359C54 /* TBALPlayback.m */,
-			);
-			name = Sound;
 			sourceTree = "<group>";
 		};
 		A7736AF8111B141200B9174C /* Sound */ = {

@@ -13,6 +13,10 @@
 
 
 @implementation TBBullet
+{
+    NSInteger mLife;
+    CGPoint   mVector;
+}
 
 
 @synthesize life   = mLife;
@@ -42,6 +46,9 @@
 {
     [super dealloc];
 }
+
+
+#pragma mark -
 
 
 - (void)reset

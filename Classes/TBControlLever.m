@@ -42,6 +42,9 @@
 }
 
 
+#pragma mark -
+
+
 - (void)setAltitude:(CGFloat)aAltitude speed:(CGFloat)aSpeed
 {
     mAltitude = aAltitude;
