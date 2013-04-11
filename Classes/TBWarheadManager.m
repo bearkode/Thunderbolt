@@ -98,6 +98,8 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
     TBUnit      *sUnit;
     TBStructure *sStructure;
     
+    [self removeDisabledSprite];
+    
     for (sWarhead in mWarheadArray)
     {
         [sWarhead action];

@@ -138,8 +138,10 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 - (void)doActions
 {
     TBUnit  *sUnit;
-    CGPoint  sPosition;
     NSArray *sUnits;
+    CGPoint  sPosition;
+
+    [self removeDisabledUnits];
     
     sUnits = [mAllyUnitDict allValues];
     for (sUnit in sUnits)

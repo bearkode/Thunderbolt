@@ -23,7 +23,6 @@
         [[self mesh] setUsingMeshQueue:YES];
         
         PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRadarObject];
-        
         [sTexture loadIfNeeded];
         [self setTexture:sTexture];
     }

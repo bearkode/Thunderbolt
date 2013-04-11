@@ -60,6 +60,8 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 {
     TBExplosion *sExplosion;
     
+    [self removeFinishedExplosion];
+    
     for (sExplosion in mExplosionArray)
     {
         [sExplosion action];

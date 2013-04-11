@@ -90,14 +90,6 @@
 }
 
 
-- (void)removeDisabledSprite
-{
-    [[TBUnitManager sharedManager] removeDisabledUnits];
-    [[TBWarheadManager sharedManager] removeDisabledSprite];
-    [[TBExplosionManager sharedManager] removeFinishedExplosion];
-}
-
-
 #pragma mark -
 
 
@@ -425,11 +417,8 @@
 #pragma mark -
 
 
-- (void)pbCanvasWillUpdate:(PBCanvas *)aView
+- (void)deployEnemyUnit
 {
-//    PBBeginTimeCheck();
-    [[TBStructureManager sharedManager] doActions];
-
     if (++mTimeTick == 60 * 10)
     {
         mTimeTick = 0;
@@ -450,15 +439,21 @@
         
         [[TBMoneyManager sharedManager] saveMoney:10];
     }
-    
-    [self removeDisabledSprite];
+}
 
-    [[TBUnitManager sharedManager] doActions];
-    [[TBWarheadManager sharedManager] doActions];
+
+- (void)pbCanvasWillUpdate:(PBCanvas *)aView
+{
+    PBBeginTimeCheck();
+    [self deployEnemyUnit];
+    
+    [[TBStructureManager sharedManager] doActions];
+    [[TBUnitManager      sharedManager] doActions];
+    [[TBWarheadManager   sharedManager] doActions];
     [[TBExplosionManager sharedManager] doActions];
 
     [mRadar updateWithCanvas:[self canvas]];
-//    PBEndTimeCheck();
+    PBEndTimeCheck();
 }
 
 
