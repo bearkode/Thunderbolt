@@ -444,16 +444,16 @@
 
 - (void)pbCanvasWillUpdate:(PBCanvas *)aView
 {
-    PBBeginTimeCheck();
     [self deployEnemyUnit];
     
     [[TBStructureManager sharedManager] doActions];
+//    PBBeginTimeCheck();
     [[TBUnitManager      sharedManager] doActions];
+//    PBEndTimeCheck();
     [[TBWarheadManager   sharedManager] doActions];
     [[TBExplosionManager sharedManager] doActions];
 
     [mRadar updateWithCanvas:[self canvas]];
-    PBEndTimeCheck();
 }
 
 

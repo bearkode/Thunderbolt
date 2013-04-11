@@ -34,7 +34,7 @@
     {
         [self setDestructivePower:kTankShellPower];
         
-        mLife   = 100;
+        mLife   = 200;
         mVector = CGPointZero;
     }
     
@@ -54,7 +54,7 @@
 - (void)reset
 {
     [self setAvailable:YES];
-    mLife   = 100;
+    mLife   = 200;
     mVector = CGPointZero;
 }
 

@@ -111,7 +111,6 @@
         
         mIsLanded        = YES;
         
-        
         PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
         
         mSoundSource = [sSoundManager retainSoundSource];
