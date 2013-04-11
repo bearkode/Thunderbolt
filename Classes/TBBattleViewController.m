@@ -30,20 +30,6 @@
 #import "TBRadar.h"
 
 
-@implementation TBBattleViewController (Privates)
-
-
-- (void)removeDisabledSprite
-{
-    [[TBUnitManager sharedManager] removeDisabledUnits];
-    [[TBWarheadManager sharedManager] removeDisabledSprite];
-    [[TBExplosionManager sharedManager] removeFinishedExplosion];
-}
-
-
-@end
-
-
 @implementation TBBattleViewController
 {
     /*  User Interface : not retained  */
@@ -76,6 +62,39 @@
 
     CGFloat        mBackPoint;
     NSInteger      mTimeTick;
+}
+
+
+#pragma mark -
+#pragma mark Privates
+
+
+- (void)updateCameraPositoin
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    CGPoint       sHeliPos    = [sHelicopter point];
+    PBCamera     *sCamera     = [[self canvas] camera];
+    CGPoint       sCameraPos  = [sCamera position];
+    
+    if ([sHelicopter isLeftAhead])
+    {
+        mBackPoint -= (mBackPoint > -80) ? 8 : 0;
+    }
+    else
+    {
+        mBackPoint += (mBackPoint < 80) ? 8 : 0;
+    }
+    
+    sCameraPos.x = sHeliPos.x + mBackPoint;
+    [sCamera setPosition:sCameraPos];
+}
+
+
+- (void)removeDisabledSprite
+{
+    [[TBUnitManager sharedManager] removeDisabledUnits];
+    [[TBWarheadManager sharedManager] removeDisabledSprite];
+    [[TBExplosionManager sharedManager] removeFinishedExplosion];
 }
 
 
@@ -408,9 +427,10 @@
 
 - (void)pbCanvasWillUpdate:(PBCanvas *)aView
 {
+//    PBBeginTimeCheck();
     [[TBStructureManager sharedManager] doActions];
 
-    if (++mTimeTick == 30 * 10)
+    if (++mTimeTick == 60 * 10)
     {
         mTimeTick = 0;
         NSInteger sUnitType = rand() % 4;
@@ -436,33 +456,13 @@
     [[TBUnitManager sharedManager] doActions];
     [[TBWarheadManager sharedManager] doActions];
     [[TBExplosionManager sharedManager] doActions];
-    
-    [mRadar updateWithCanvas:[self canvas]];    
+
+    [mRadar updateWithCanvas:[self canvas]];
+//    PBEndTimeCheck();
 }
 
 
 #pragma mark -
-
-
-- (void)updateCameraPositoin
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    CGPoint       sHeliPos    = [sHelicopter point];
-    PBCamera     *sCamera     = [[self canvas] camera];
-    CGPoint       sCameraPos  = [sCamera position];
-    
-    if ([sHelicopter isLeftAhead])
-    {
-        mBackPoint -= (mBackPoint > -80) ? 8 : 0;
-    }
-    else
-    {
-        mBackPoint += (mBackPoint < 80) ? 8 : 0;
-    }
-    
-    sCameraPos.x = sHeliPos.x + mBackPoint;
-    [sCamera setPosition:sCameraPos];
-}
 
 
 - (void)accelerometer:(UIAccelerometer *)aAccelerometer didAccelerate:(UIAcceleration *)aAcceleration

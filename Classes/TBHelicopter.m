@@ -200,24 +200,12 @@
     if (aSpeedLever > 0.1 || aSpeedLever < -0.1)
     {
         mSpeed -= aSpeedLever * 2;
-        if (mSpeed > 10)
-        {
-            mSpeed = 10;
-        }
-        else if (mSpeed < -10)
-        {
-            mSpeed = -10;
-        }
+        mSpeed  = (mSpeed >  10.0) ?  10.0 : mSpeed;
+        mSpeed  = (mSpeed < -10.0) ? -10.0 : mSpeed;
     }
-    
-    if (mSpeed > 0)
-    {
-        mSpeed -= 0.04;
-    }
-    if (mSpeed < 0)
-    {
-        mSpeed += 0.04;
-    }
+
+    mSpeed -= (mSpeed > 0.0) ? 0.04 : 0.0;
+    mSpeed += (mSpeed < 0.0) ? 0.04 : 0.0;
     
     if (!mIsLanded && ([self point].y - [[self mesh] size].height) > kMapGround) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
     {
@@ -246,14 +234,8 @@
         [[self transform] setAngle:PBVertex3Make(0, 0, 0)];
     }
     
-    if (sPoint.x < kMinMapXPos)
-    {
-        sPoint.x = kMinMapXPos;
-    }
-    else if (sPoint.x > kMaxMapXPos)
-    {
-        sPoint.x = kMaxMapXPos;
-    }
+    sPoint.x = (sPoint.x < kMinMapXPos) ? kMinMapXPos : sPoint.x;
+    sPoint.x = (sPoint.x > kMaxMapXPos) ? kMaxMapXPos : sPoint.x;
     
     [self setPoint:sPoint];
 }
@@ -263,24 +245,25 @@
 {
     CGFloat sAltitudeLever = (aAltitudeLever + 0.68) * kAltitudeSensitivity;
     CGPoint sPoint         = [self point];
+    CGSize  sMeshSize      = [[self mesh] size];
 
     sPoint.y -= sAltitudeLever;
 
-    if ((sPoint.y - [[self mesh] size].height / 2) < kMapGround)
+    if ((sPoint.y - (sMeshSize.height / 2)) < kMapGround)
     {
         mIsLanded   = YES;
-        sPoint.y = kMapGround + [[self mesh] size].height / 2;
+        sPoint.y = kMapGround + sMeshSize.height / 2;
     }
     else if (sPoint.y > 300)
     {
         sPoint.y = 300;
-        mIsLanded = NO;        
+        mIsLanded = NO;
     }
     else
     {
         mIsLanded = NO;
     }
-    
+
     [self setPoint:sPoint];
 }
 

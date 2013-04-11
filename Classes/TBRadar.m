@@ -16,7 +16,8 @@
 
 @implementation TBRadar
 {
-    CGRect mCanvasBounds;
+    NSInteger       mUseIndex;
+    NSMutableArray *mObjects;
 }
 
 
@@ -30,53 +31,84 @@
         
         [sTexture loadIfNeeded];
         [self setTexture:sTexture];
+        
+        mObjects = [[NSMutableArray alloc] initWithCapacity:100];
     }
     
     return self;
 }
 
 
-- (void)addRadarObjectWithUnit:(TBUnit *)aUnit
+- (void)dealloc
 {
-    CGPoint        sPosition;
-    CGSize         sRadarSize = [[self mesh] size];
-    TBRadarObject *sRadarObject = [[[TBRadarObject alloc] init] autorelease];
-
-    [self addSublayer:sRadarObject];
+    [mObjects release];
     
-    sPosition = [aUnit point];
-    
-    CGPoint sPoint = CGPointMake(sPosition.x / kMaxMapXPos * sRadarSize.width, sPosition.y / mCanvasBounds.size.height * sRadarSize.height);
-    sPoint.x -= (sRadarSize.width / 2);
-    sPoint.y -= (sRadarSize.height / 2);
-    
-    [sRadarObject setPoint:sPoint];
+    [super dealloc];
 }
 
 
-#warning Tuning needed
+#pragma mark -
+
+
+- (TBRadarObject *)radarObject
+{
+    TBRadarObject *sResult = nil;
+    
+    if ([mObjects count] > mUseIndex)
+    {
+        sResult = [mObjects objectAtIndex:mUseIndex];
+    }
+    else
+    {
+        sResult = [[TBRadarObject alloc] init];
+        [mObjects addObject:sResult];
+        [self addSublayer:sResult];
+        [sResult release];
+    }
+    
+    mUseIndex++;
+    
+    return sResult;
+}
 
 
 - (void)updateWithCanvas:(PBCanvas *)aCanvas
 {
-    CGPoint  sCameraPos = [[aCanvas camera] position];
-    NSArray *sUnits;
-    
-    [self setPoint:CGPointMake(sCameraPos.x, 300.0)];
-    [self removeSublayers:[self sublayers]];
+    CGSize sRadarSize    = [[self mesh] size];
+    CGRect sCanvasBounds = [aCanvas bounds];
 
-    mCanvasBounds = [aCanvas bounds];
+    mUseIndex = 0;
+    [self setPoint:CGPointMake([[aCanvas camera] position].x, 300.0)];
     
-    sUnits = [[TBUnitManager sharedManager] allyUnits];
-    for (TBUnit *sUnit in sUnits)
+    for (TBRadarObject *sObject in mObjects)
     {
-        [self addRadarObjectWithUnit:sUnit];
+        [sObject setHidden:YES];
+    }
+
+    for (TBUnit *sUnit in [[TBUnitManager sharedManager] allyUnits])
+    {
+        CGPoint        sPoint       = [sUnit point];
+        TBRadarObject *sRadarObject = [self radarObject];
+        
+        sPoint    = CGPointMake(sPoint.x / kMaxMapXPos * sRadarSize.width, sPoint.y / sCanvasBounds.size.height * sRadarSize.height);
+        sPoint.x -= (sRadarSize.width / 2);
+        sPoint.y -= (sRadarSize.height / 2);
+        
+        [sRadarObject setHidden:NO];
+        [sRadarObject setPoint:sPoint];
     }
     
-    sUnits = [[TBUnitManager sharedManager] enemyUnits];
-    for (TBUnit *sUnit in sUnits)
+    for (TBUnit *sUnit in [[TBUnitManager sharedManager] enemyUnits])
     {
-        [self addRadarObjectWithUnit:sUnit];
+        CGPoint        sPoint       = [sUnit point];
+        TBRadarObject *sRadarObject = [self radarObject];
+        
+        sPoint    = CGPointMake(sPoint.x / kMaxMapXPos * sRadarSize.width, sPoint.y / sCanvasBounds.size.height * sRadarSize.height);
+        sPoint.x -= (sRadarSize.width / 2);
+        sPoint.y -= (sRadarSize.height / 2);
+        
+        [sRadarObject setHidden:NO];
+        [sRadarObject setPoint:sPoint];
     }
 }
 
