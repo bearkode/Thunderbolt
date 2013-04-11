@@ -21,7 +21,7 @@
 #define MAX_BOMBS       5
 #define MAX_MISSILE     2
 
-#define kVulcanDelay    4
+#define kVulcanDelay    8
 
 
 @implementation TBHelicopter
@@ -400,9 +400,9 @@
             sBulletPos.x = sPos1.x + (sPos2.x - sPos1.x) * cos(sAngle) - (sPos2.y - sPos1.y) * sin(sAngle);
             sBulletPos.y = sPos1.y + (sPos2.x - sPos1.x) * sin(sAngle) + (sPos2.y - sPos1.y) * cos(sAngle);
 
-            CGPoint sVector = CGPointMake((sBulletPos.x - sPos1.x) / 1.5, (sBulletPos.y - sPos2.y) / 1.5);
+            CGPoint sVector = CGPointMake((sBulletPos.x - sPos1.x) / 3.5, (sBulletPos.y - sPos2.y) / 3.5);
             sBullet = [TBWarheadManager bulletWithTeam:kTBTeamAlly position:sBulletPos vector:sVector destructivePower:kVulcanBulletPower];
-            [sBullet setLife:50];
+            [sBullet setLife:100];
             mBulletCount--;
             
             [[self delegate] helicopter:self weaponFired:0];

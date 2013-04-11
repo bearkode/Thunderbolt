@@ -12,6 +12,7 @@
 #import "TBGameConst.h"
 #import "TBMacro.h"
 #import "TBBattleViewController.h"
+#import "ProfilingOverlay.h"
 
 
 @implementation AppDelegate
@@ -21,6 +22,16 @@
 
 
 @synthesize window = mWindow;
+
+
+#pragma mark -
+
+
+- (void)showPrifilingOverlay
+{
+    [ProfilingOverlay setHidden:NO];
+    [[ProfilingOverlay sharedManager] startCPUMemoryUsages];
+}
 
 
 #pragma mark -
@@ -59,6 +70,8 @@
 
     [sWindow setRootViewController:sNaviController];
 
+    [self performSelector:@selector(showPrifilingOverlay) withObject:nil afterDelay:0.5];
+    
     return YES;
 }
 
