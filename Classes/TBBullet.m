@@ -32,9 +32,10 @@
     
     if (self)
     {
+        [[self mesh] setUsingMeshQueue:YES];
         [self setDestructivePower:aDestructivePower];
         
-        mLife   = 100;
+        mLife   = 200;
         mVector = CGPointZero;
     }
     
@@ -54,17 +55,16 @@
 - (void)reset
 {
     [self setAvailable:YES];
-    mLife   = 100;
+    mLife   = 200;
     mVector = CGPointZero;
 }
 
 
 - (void)action
 {
-    CGPoint sPoint = [self point];
-    
     if (mLife > 0)
     {
+        CGPoint sPoint = [self point];
         sPoint.x += mVector.x;
         sPoint.y += mVector.y;
         [self setPoint:sPoint];

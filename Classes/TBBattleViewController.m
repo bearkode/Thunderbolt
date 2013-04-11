@@ -61,6 +61,7 @@
     PBSoundSource *mBGMSoundSource;
 
     CGFloat        mBackPoint;
+    CGFloat        mCameraXPos;
     NSInteger      mTimeTick;
 }
 
@@ -73,8 +74,6 @@
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     CGPoint       sHeliPos    = [sHelicopter point];
-    PBCamera     *sCamera     = [[self canvas] camera];
-    CGPoint       sCameraPos  = [sCamera position];
     
     if ([sHelicopter isLeftAhead])
     {
@@ -85,8 +84,7 @@
         mBackPoint += (mBackPoint < 80) ? 8 : 0;
     }
     
-    sCameraPos.x = sHeliPos.x + mBackPoint;
-    [sCamera setPosition:sCameraPos];
+    mCameraXPos = sHeliPos.x + mBackPoint;
 }
 
 
@@ -280,6 +278,7 @@
         [PBSoundListener setOrientation:0];
         mBGMSoundSource = [[PBSoundManager sharedManager] retainSoundSource];
         [mBGMSoundSource setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundValkyries]];
+        [mBGMSoundSource setLooping:YES];
         [mBGMSoundSource play];
     }
     
@@ -444,6 +443,10 @@
 
 - (void)pbCanvasWillUpdate:(PBCanvas *)aView
 {
+    PBCamera *sCamera    = [[self canvas] camera];
+    CGPoint   sCameraPos = [sCamera position];
+    [sCamera setPosition:CGPointMake(mCameraXPos, sCameraPos.y)];
+
     [self deployEnemyUnit];
     
     [[TBStructureManager sharedManager] doActions];

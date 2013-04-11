@@ -28,14 +28,16 @@
 
 - (id)init
 {
-    self = [super initWithImageName:kTexBullet];
+    self = [super init];
     
     if (self)
     {
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBullet];
+        [sTexture loadIfNeeded];
+        [self setTexture:sTexture];
+
+        [self reset];
         [self setDestructivePower:kTankShellPower];
-        
-        mLife   = 200;
-        mVector = CGPointZero;
     }
     
     return self;

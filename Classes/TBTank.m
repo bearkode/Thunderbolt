@@ -104,22 +104,26 @@
 
 - (void)action
 {
-    CGFloat sAngle;
+    [super action];
+    
     TBUnit *sUnit;
     BOOL    sFire = NO;
-    
-    [super action];
+
     [mTankGun action];
 
-    sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kTankGunMaxRange];
-    if (sUnit)
+    // TODO : 현재 로직으로는 적 탱크 앞에 헬기가 공중에 떠 있으면 다음으로 가까운 앞의 탱크를 공격하지 않는다.
+    if ([mTankGun isReloaded])
     {
-        sAngle = [self angleWith:sUnit];
-        if ((sAngle >= -100.0 && sAngle <= -85.0) ||
-            (sAngle <= 100.0 && sAngle >= 85.0))
+        sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kTankGunMaxRange];
+        if (sUnit)
         {
-            [mTankGun fireAt:sUnit];
-            sFire = YES;
+            CGFloat sAngle = [self angleWith:sUnit];
+            if ((sAngle >= -100.0 && sAngle <= -85.0) ||
+                (sAngle <= 100.0 && sAngle >= 85.0))
+            {
+                [mTankGun fireAt:sUnit];
+                sFire = YES;
+            }
         }
     }
     
@@ -130,14 +134,9 @@
         [self setPoint:sPoint];
     }
     
-    if (mHitDiscount == 0)
+    if (mHitDiscount-- == 0)
     {
         [self setTexture:mTextureNormal];
-    }
-    else
-    {
-        mHitDiscount--;
-        [self setTexture:mTextureHit];
     }
 }
 
@@ -146,7 +145,8 @@
 {
     [super addDamage:aDamage];
     
-    mHitDiscount = 5;
+    [self setTexture:mTextureHit];
+    mHitDiscount = 10;
 }
 
 
