@@ -48,10 +48,10 @@
     
     if (![self isDestroyed])
     {
-        TBHelicopter *sHelicopter = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] allyHelicopter] : [[TBUnitManager sharedManager] enemyHelicopter];
-        
         if (mFillUpCount == 0)
         {
+            TBHelicopter *sHelicopter = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] allyHelicopter] : [[TBUnitManager sharedManager] enemyHelicopter];
+            
             if ([self intersectWith:sHelicopter])
             {
                 [sHelicopter repairDamage:kLandingPadRepairDamage];

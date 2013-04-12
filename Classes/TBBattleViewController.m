@@ -30,6 +30,14 @@
 #import "TBRadar.h"
 
 
+#if (1)
+#define kUnitDeployDuration (60 * 10)
+#else
+#warning UNIT FAST DEPLOY
+#define kUnitDeployDuration (10)
+#endif
+
+
 @implementation TBBattleViewController
 {
     /*  User Interface : not retained  */
@@ -366,7 +374,7 @@
     PBCanvas *sCanvas = [self canvas];
     CGRect    sBounds = [sCanvas bounds];
     
-    [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateHigh];
+    [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateMid];
     [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.width / 2, sBounds.size.height / 2)];
 }
 
@@ -418,45 +426,51 @@
 
 - (void)deployEnemyUnit
 {
-    if (++mTimeTick == 60 * 10)
+    if ([[[TBUnitManager sharedManager] enemyUnits] count] < 50)
     {
-        mTimeTick = 0;
-        NSInteger sUnitType = rand() % 4;
-        
-        if (sUnitType == 0)
+        if (++mTimeTick == kUnitDeployDuration)
         {
-            [TBUnitManager armoredVehicleWithTeam:kTBTeamEnemy];
+            mTimeTick = 0;
+            NSInteger sUnitType = rand() % 4;
+            
+            if (sUnitType == 0)
+            {
+                [TBUnitManager armoredVehicleWithTeam:kTBTeamEnemy];
+            }
+            else if (sUnitType == 1)
+            {
+                [TBUnitManager tankWithTeam:kTBTeamEnemy];
+            }
+            else
+            {
+                [TBUnitManager soldierWithTeam:kTBTeamEnemy];
+            }
+            
+            [[TBMoneyManager sharedManager] saveMoney:10];
         }
-        else if (sUnitType == 1)
-        {
-            [TBUnitManager tankWithTeam:kTBTeamEnemy];
-        }
-        else
-        {
-            [TBUnitManager soldierWithTeam:kTBTeamEnemy];
-        }
-        
-        [[TBMoneyManager sharedManager] saveMoney:10];
+    }
+    else
+    {
+        NSLog(@"UNIT MAX");
     }
 }
 
 
 - (void)pbCanvasWillUpdate:(PBCanvas *)aView
 {
-    PBCamera *sCamera    = [[self canvas] camera];
-    CGPoint   sCameraPos = [sCamera position];
-    [sCamera setPosition:CGPointMake(mCameraXPos, sCameraPos.y)];
+//    PBBeginTimeCheck();
+    CGPoint sCameraPos = [[[self canvas] camera] position];
+    [[[self canvas] camera] setPosition:CGPointMake(mCameraXPos, sCameraPos.y)];
 
     [self deployEnemyUnit];
-    
+
     [[TBStructureManager sharedManager] doActions];
-//    PBBeginTimeCheck();
     [[TBUnitManager      sharedManager] doActions];
-//    PBEndTimeCheck();
     [[TBWarheadManager   sharedManager] doActions];
     [[TBExplosionManager sharedManager] doActions];
 
     [mRadar updateWithCanvas:[self canvas]];
+//    PBEndTimeCheck();
 }
 
 

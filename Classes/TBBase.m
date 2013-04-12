@@ -80,11 +80,13 @@
         NSString  *sTextureName = [mTextureKeys objectAtIndex:mTextureIndex];
         PBTexture *sTexture     = [PBTextureManager textureWithImageName:sTextureName];
         
-        [sTexture loadIfNeeded];
-        [self setTexture:sTexture];
+        if ([self texture] != sTexture)
+        {
+            [sTexture loadIfNeeded];
+            [self setTexture:sTexture];
+        }
         
-        mTextureIndex++;
-        if (mTextureIndex == 22)
+        if (++mTextureIndex >= [mTextureKeys count])
         {
             mTextureIndex = 0;
         }

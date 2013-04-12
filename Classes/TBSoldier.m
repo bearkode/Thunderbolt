@@ -65,11 +65,12 @@
 
 - (void)action
 {
+    [super action];
+    
     CGFloat sAngle;
     TBUnit *sUnit;
     BOOL    sFire = NO;
     
-    [super action];
     [mRifle action];
     
     sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kRifleMaxRange];

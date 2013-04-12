@@ -116,7 +116,7 @@
                 sTexture = [mTextureArray objectAtIndex:0];
             }
             
-            if (sTexture)
+            if (sTexture && sTexture != [self texture])
             {
                 [sTexture loadIfNeeded];
                 [self setTexture:sTexture];

@@ -105,16 +105,15 @@
 - (void)action
 {
     [super action];
-    
-    TBUnit *sUnit;
-    BOOL    sFire = NO;
+
+    BOOL sFire = NO;
 
     [mTankGun action];
 
     // TODO : 현재 로직으로는 적 탱크 앞에 헬기가 공중에 떠 있으면 다음으로 가까운 앞의 탱크를 공격하지 않는다.
     if ([mTankGun isReloaded])
     {
-        sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kTankGunMaxRange];
+        TBUnit *sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kTankGunMaxRange];
         if (sUnit)
         {
             CGFloat sAngle = [self angleWith:sUnit];

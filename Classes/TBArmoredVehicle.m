@@ -67,24 +67,24 @@
 
 - (void)action
 {
-    BOOL    sFire       = NO;
-    TBUnit *sHelicopter = nil;
+    BOOL sFire = NO;
     
     [super action];
+    
     [mAAVulcan action];
     [mMissileLauncher action];
     
     if (![self isAlly])
     {
-        sHelicopter = (TBUnit *)[[TBUnitManager sharedManager] allyHelicopter];
-        
         if ([mMissileLauncher ammoCount] > 0)
         {
+            TBUnit *sHelicopter = (TBUnit *)[[TBUnitManager sharedManager] allyHelicopter];
             [mMissileLauncher fireAt:sHelicopter];
             sFire = YES;
         }
         else
         {
+            TBUnit *sHelicopter = (TBUnit *)[[TBUnitManager sharedManager] allyHelicopter];
             [mAAVulcan fireAt:sHelicopter];
             sFire = YES;
         }
@@ -97,14 +97,9 @@
         [self setPoint:sPoint];
     }
     
-    if (mHitDiscount == 0)
+    if (mHitDiscount-- == 0)
     {
         [self setTexture:mTextureNormal];
-    }
-    else
-    {
-        mHitDiscount--;
-        [self setTexture:mTextureHit];
     }
 }
 
@@ -112,8 +107,9 @@
 - (void)addDamage:(NSInteger)aDamage
 {
     [super addDamage:aDamage];
-    
-    mHitDiscount = 5;
+
+    [self setTexture:mTextureHit];
+    mHitDiscount = 10;
 }
 
 

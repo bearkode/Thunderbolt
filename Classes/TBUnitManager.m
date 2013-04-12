@@ -35,7 +35,9 @@
     TBUnit              *mEnemyHelicopter;
     
     NSMutableDictionary *mAllyUnitDict;
+    NSMutableArray      *mAllyUnits;
     NSMutableDictionary *mEnemyUnitDict;
+    NSMutableArray      *mEnemyUnits;
 }
 
 
@@ -49,7 +51,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     {
         mNextUnitID    = 0;
         mAllyUnitDict  = [[NSMutableDictionary alloc] init];
+        mAllyUnits     = [[NSMutableArray alloc] init];
         mEnemyUnitDict = [[NSMutableDictionary alloc] init];
+        mEnemyUnits    = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -78,20 +82,20 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 - (void)addUnit:(TBUnit *)aUnit
 {
+    NSAssert([aUnit unitID], @"");
+    
     [mUnitLayer addSublayer:aUnit];
-    
-    if (![aUnit unitID])
-    {
-        NSLog(@"aUnit = %@", aUnit);
-    }
-    
+
     if ([aUnit isAlly])
     {
         if ([aUnit isKindOfUnit:kTBUnitHelicopter])
         {
             mAllyHelicopter = aUnit;
         }
+        
         [mAllyUnitDict setObject:aUnit forKey:[aUnit unitID]];
+        [mAllyUnits addObject:aUnit];
+        
         NSLog(@"mAllyUnitDict = %@", mAllyUnitDict);
     }
     else
@@ -100,8 +104,38 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
         {
             mEnemyHelicopter = aUnit;
         }
+        
         [mEnemyUnitDict setObject:aUnit forKey:[aUnit unitID]];
+        [mEnemyUnits addObject:aUnit];
+        
         NSLog(@"mEnemyUnitDict = %@", mEnemyUnitDict);
+    }
+}
+
+
+- (void)removeUnit:(TBUnit *)aUnit
+{
+    [mUnitLayer removeSublayer:aUnit];
+    
+    if ([aUnit isAlly])
+    {
+        if ([aUnit isKindOfUnit:kTBUnitHelicopter])
+        {
+            mAllyHelicopter = nil;
+        }
+        
+        [mAllyUnitDict removeObjectForKey:[aUnit unitID]];
+        [mAllyUnits removeObject:aUnit];
+    }
+    else
+    {
+        if ([aUnit isKindOfUnit:kTBUnitHelicopter])
+        {
+            mEnemyHelicopter = nil;
+        }
+        
+        [mEnemyUnitDict removeObjectForKey:[aUnit unitID]];
+        [mEnemyUnits removeObject:aUnit];
     }
 }
 
@@ -122,13 +156,13 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 - (NSArray *)allyUnits
 {
-    return [mAllyUnitDict allValues];
+    return mAllyUnits;
 }
 
 
 - (NSArray *)enemyUnits
 {
-    return [mEnemyUnitDict allValues];
+    return mEnemyUnits;
 }
 
 
@@ -137,27 +171,14 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 - (void)doActions
 {
-    TBUnit  *sUnit;
-    NSArray *sUnits;
-    CGPoint  sPosition;
-
     [self removeDisabledUnits];
     
-    sUnits = [mAllyUnitDict allValues];
-    for (sUnit in sUnits)
+    for (TBUnit *sUnit in mAllyUnits)
     {
-        if ([sUnit isKindOfUnit:kTBUnitMissile] && [sUnit intersectWithGround])
-        {
-            sPosition = [sUnit point];
-            [sUnit addDamage:100];
-            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
-        }
-        
         [sUnit action];
     }
-    
-    sUnits = [mEnemyUnitDict allValues];
-    for (sUnit in sUnits)
+
+    for (TBUnit *sUnit in mEnemyUnits)
     {
         if ([mAllyHelicopter intersectWith:sUnit])
         {
@@ -173,13 +194,6 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
             }
         }
         
-        if ([sUnit isKindOfUnit:kTBUnitMissile] && [sUnit intersectWithGround])
-        {
-            sPosition = [sUnit point];
-            [sUnit addDamage:100];
-            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
-        }
-        
         [sUnit action];
     }
 }
@@ -187,13 +201,10 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 - (TBUnit *)intersectedOpponentUnit:(TBWarhead *)aWarhead
 {
-    TBUnit       *sResult   = nil;
-    TBUnit       *sUnit     = nil;
-    NSArray      *sUnits    = nil;
+    TBUnit  *sResult = nil;
+    NSArray *sUnits  = ([aWarhead isAlly]) ? mEnemyUnits : mAllyUnits;
     
-    sUnits = ([aWarhead isAlly]) ? [mEnemyUnitDict allValues] : [mAllyUnitDict allValues];
-    
-    for (sUnit in sUnits)
+    for (TBUnit *sUnit in sUnits)
     {
         if ([sUnit intersectWith:aWarhead])
         {
@@ -210,7 +221,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 {
     TBUnit  *sResult = nil;
     TBUnit  *sUnit;
-    NSArray *sUnits  = ([aUnit isAlly]) ? [mEnemyUnitDict allValues] : [mAllyUnitDict allValues];
+    NSArray *sUnits  = ([aUnit isAlly]) ? mEnemyUnits : mAllyUnits;
 
     for (sUnit in sUnits)
     {
@@ -227,12 +238,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 - (NSArray *)removeDisabledUnits
 {
-    TBUnit         *sUnit;
-    NSArray        *sUnits;
     NSMutableArray *sDisabledUnits = [NSMutableArray array];
 
-    sUnits = [mAllyUnitDict allValues];
-    for (sUnit in sUnits)
+    for (TBUnit *sUnit in mAllyUnits)
     {
         if ([sUnit isAvailable])
         {
@@ -240,19 +248,16 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
             {
                 /*   Arrived Limit   */
                 [sDisabledUnits addObject:sUnit];
-                [mAllyUnitDict removeObjectForKey:[sUnit unitID]];
             }
         }
         else
         {
             [sDisabledUnits addObject:sUnit];
-            [mAllyUnitDict removeObjectForKey:[sUnit unitID]];
-            [TBExplosionManager explosionWithUnit:sUnit];            
+            [TBExplosionManager explosionWithUnit:sUnit];
         }
     }
 
-    sUnits = [mEnemyUnitDict allValues];
-    for (sUnit in sUnits)
+    for (TBUnit *sUnit in mEnemyUnits)
     {
         if ([sUnit isAvailable])
         {
@@ -260,13 +265,11 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
             {
                 /*   Arrived Limit   */
                 [sDisabledUnits addObject:sUnit];
-                [mEnemyUnitDict removeObjectForKey:[sUnit unitID]];
             }
         }
         else
         {
             [sDisabledUnits addObject:sUnit];
-            [mEnemyUnitDict removeObjectForKey:[sUnit unitID]];
             [TBExplosionManager explosionWithUnit:sUnit];
 
             [[TBMoneyManager sharedManager] saveMoneyForUnit:sUnit];
@@ -274,26 +277,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
          }
     }
 
-    for (sUnit in sDisabledUnits)
+    for (TBUnit *sUnit in sDisabledUnits)
     {
-        if ([sUnit isAlly])
-        {
-            if ([sUnit isKindOfUnit:kTBUnitHelicopter])
-            {
-                mAllyHelicopter = nil;
-            }
-            [mAllyUnitDict removeObjectForKey:[sUnit unitID]];            
-        }
-        else
-        {
-            if ([sUnit isKindOfUnit:kTBUnitHelicopter])
-            {
-                mEnemyHelicopter = nil;
-            }
-            [mEnemyUnitDict removeObjectForKey:[sUnit unitID]];
-        }
-        
-        [mUnitLayer removeSublayers:sDisabledUnits];
+        [self removeUnit:sUnit];
     }
     
     return sDisabledUnits;

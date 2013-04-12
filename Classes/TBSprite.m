@@ -56,7 +56,8 @@ inline CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed)
 
 @implementation TBSprite
 {
-    id mDelegate;
+    id     mDelegate;
+    CGRect mFrame;
 }
 
 
@@ -84,16 +85,20 @@ inline CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed)
 
 - (CGRect)contentRect
 {
-    CGRect  sResult = CGRectZero;
-    CGPoint sPoint  = [self point];
-    CGSize  sSize   = [[self mesh] size];
+    return mFrame;
+}
+
+
+- (void)setPoint:(CGPoint)aPoint
+{
+    [super setPoint:aPoint];
     
-    sResult.origin.x    = sPoint.x - sSize.width  / 2;
-    sResult.origin.y    = sPoint.y - sSize.height / 2;
-    sResult.size.width  = sSize.width;
-    sResult.size.height = sSize.height;
+    CGSize sSize = [[self mesh] size];
     
-    return sResult;
+    mFrame.origin.x    = aPoint.x - sSize.width  / 2;
+    mFrame.origin.y    = aPoint.y - sSize.height / 2;
+    mFrame.size.width  = sSize.width;
+    mFrame.size.height = sSize.height;
 }
 
 

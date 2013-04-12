@@ -10,6 +10,7 @@
 #import "TBMissile.h"
 #import "TBTextureNames.h"
 #import "TBUnitManager.h"
+#import "TBExplosionManager.h"
 #import "TBMacro.h"
 #import "TBUnit.h"
 
@@ -109,6 +110,12 @@
 
     [[self transform] setAngle:sAngle3];
     [self setPoint:sPoint];
+    
+    if ([self intersectWithGround])
+    {
+        [self addDamage:100];
+        [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPoint.x, kMapGround + 18)];
+    }
 }
 
 

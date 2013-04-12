@@ -37,6 +37,7 @@
     
     NSMutableArray *mTextureArray;
     NSMutableArray *mContentRectArray;
+    CGRect          mContentRect;    
     
     TBWeaponType    mSelectedWeapon;
     NSInteger       mVulcanDelay;
@@ -92,15 +93,15 @@
         [self setTexture:sTexture];
         
         mContentRectArray = [[NSMutableArray alloc] init];
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(12, 4, 72, 28))];    // 0
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(12, 4, 72, 28))];    // 1
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(19, 7, 46, 24))];    // 2
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(21, 7, 32, 24))];    // 3
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(28, 6, 32, 25))];    // 4
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(37, 7, 32, 25))];    // 5 
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(16, 7, 48, 25))];    // 6
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(0, 6, 79, 26))];     // 7
-        [mContentRectArray addObject:NSStringFromCGRect(CGRectMake(0, 6, 79, 26))];     // 8
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(12, 4, 72, 28)]];    // 0
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(12, 4, 72, 28)]];    // 1
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(19, 7, 46, 24)]];    // 2
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(21, 7, 32, 24)]];    // 3
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(28, 6, 32, 25)]];    // 4
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(37, 7, 32, 25)]];    // 5
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(16, 7, 48, 25)]];    // 6
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 7
+        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 8
         
         mBulletCount     = MAX_BULLETS;
         mBombCount       = MAX_BOMBS;
@@ -145,18 +146,24 @@
 
 - (CGRect)contentRect
 {
-    CGRect sResult   = CGRectZero;
-    CGRect sContRect = CGRectFromString([mContentRectArray objectAtIndex:mTextureIndex]);
+    return mContentRect;
+}
+
+
+- (void)setPoint:(CGPoint)aPoint
+{
+    [super setPoint:aPoint];
     
-    sResult.origin.x    = [self point].x - (([[self mesh] size].width  - 30) / 2);
-    sResult.origin.y    = [self point].y - (([[self mesh] size].height - 30) / 2);
-    
-    sResult.origin.x   += sContRect.origin.x;
-    sResult.origin.y   -= sContRect.size.height;
-    sResult.size.width  = sContRect.size.width;
-    sResult.size.height = sContRect.size.height;
-    
-    return sResult;
+    CGSize sSize     = [[self mesh] size];
+    CGRect sContRect = [[mContentRectArray objectAtIndex:mTextureIndex] CGRectValue];
+
+    mContentRect.origin.x    = aPoint.x - ((sSize.width  - 30) / 2);
+    mContentRect.origin.y    = aPoint.y - ((sSize.height - 30) / 2);
+
+    mContentRect.origin.x   += sContRect.origin.x;
+    mContentRect.origin.y   -= sContRect.size.height;
+    mContentRect.size.width  = sContRect.size.width;
+    mContentRect.size.height = sContRect.size.height;
 }
 
 
