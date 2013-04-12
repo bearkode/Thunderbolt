@@ -49,9 +49,13 @@
 {
     mAltitude = aAltitude;
     mSpeed    = aSpeed;
+
+    CGPoint sPoint = [mHelicopter point];
     
-    [mHelicopter setAltitudeLever:aAltitude];
-    [mHelicopter setSpeedLever:aSpeed];
+    sPoint = [mHelicopter pointWithSpeedLever:aSpeed oldPoint:sPoint];
+    sPoint = [mHelicopter pointWithAltitudeLever:aAltitude oldPoint:sPoint];
+
+    [mHelicopter setPoint:sPoint];
 }
 
 

@@ -194,28 +194,26 @@
 #pragma mark -
 
 
-#define kSpeedSensitivitiy   20.0
-#define kAltitudeSensitivity 30.0
+#define kAltitudeSensitivity 15.0
 
 
-- (void)setSpeedLever:(CGFloat)aSpeedLever
+- (CGPoint)pointWithSpeedLever:(CGFloat)aSpeedLever oldPoint:(CGPoint)aPoint
 {
     CGFloat sDegree = aSpeedLever * -50;
-    CGPoint sPoint  = [self point];
     
     if (aSpeedLever > 0.1 || aSpeedLever < -0.1)
     {
-        mSpeed -= aSpeedLever * 2;
-        mSpeed  = (mSpeed >  10.0) ?  10.0 : mSpeed;
-        mSpeed  = (mSpeed < -10.0) ? -10.0 : mSpeed;
+        mSpeed -= aSpeedLever * 1;
+        mSpeed  = (mSpeed >  5.0) ?  5.0 : mSpeed;
+        mSpeed  = (mSpeed < -5.0) ? -5.0 : mSpeed;
     }
 
     mSpeed -= (mSpeed > 0.0) ? 0.04 : 0.0;
     mSpeed += (mSpeed < 0.0) ? 0.04 : 0.0;
     
-    if (!mIsLanded && ([self point].y - [[self mesh] size].height) > kMapGround) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
+    if (!mIsLanded && (aPoint.y - [[self mesh] size].height) > kMapGround) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
     {
-        sPoint.x += mSpeed;
+        aPoint.x += mSpeed;
 
         [[self transform] setAngle:PBVertex3Make(0, 0, sDegree)];
         
@@ -240,29 +238,28 @@
         [[self transform] setAngle:PBVertex3Make(0, 0, 0)];
     }
     
-    sPoint.x = (sPoint.x < kMinMapXPos) ? kMinMapXPos : sPoint.x;
-    sPoint.x = (sPoint.x > kMaxMapXPos) ? kMaxMapXPos : sPoint.x;
+    aPoint.x = (aPoint.x < kMinMapXPos) ? kMinMapXPos : aPoint.x;
+    aPoint.x = (aPoint.x > kMaxMapXPos) ? kMaxMapXPos : aPoint.x;
     
-    [self setPoint:sPoint];
+    return aPoint;
 }
 
 
-- (void)setAltitudeLever:(CGFloat)aAltitudeLever
+- (CGPoint)pointWithAltitudeLever:(CGFloat)aAltitudeLever oldPoint:(CGPoint)aPoint
 {
     CGFloat sAltitudeLever = (aAltitudeLever + 0.68) * kAltitudeSensitivity;
-    CGPoint sPoint         = [self point];
     CGSize  sMeshSize      = [[self mesh] size];
 
-    sPoint.y -= sAltitudeLever;
+    aPoint.y -= sAltitudeLever;
 
-    if ((sPoint.y - (sMeshSize.height / 2)) < kMapGround)
+    if ((aPoint.y - (sMeshSize.height / 2)) < kMapGround)
     {
         mIsLanded   = YES;
-        sPoint.y = kMapGround + sMeshSize.height / 2;
+        aPoint.y = kMapGround + sMeshSize.height / 2;
     }
-    else if (sPoint.y > 300)
+    else if (aPoint.y > 300)
     {
-        sPoint.y = 300;
+        aPoint.y = 300;
         mIsLanded = NO;
     }
     else
@@ -270,7 +267,7 @@
         mIsLanded = NO;
     }
 
-    [self setPoint:sPoint];
+    return aPoint;
 }
 
 

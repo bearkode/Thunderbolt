@@ -277,7 +277,7 @@
         mBackPoint = 0;
         mTimeTick  = 0;
         
-        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / 30.0];
+        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / 60.0];
         [[UIAccelerometer sharedAccelerometer] setDelegate:self];
         
         [[TBMoneyManager sharedManager] setDelegate:self];
@@ -374,7 +374,7 @@
     PBCanvas *sCanvas = [self canvas];
     CGRect    sBounds = [sCanvas bounds];
     
-    [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateMid];
+    [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateHigh];
     [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.width / 2, sBounds.size.height / 2)];
 }
 

@@ -32,9 +32,9 @@ typedef enum
 @property (nonatomic, assign)   BOOL            isMissileLaunch;
 
 
-- (void)setSpeedLever:(CGFloat)aSpeedLever;
-- (void)setAltitudeLever:(CGFloat)aAltitudeLever;
 - (void)setFireVulcan:(BOOL)aFlag;
+- (CGPoint)pointWithSpeedLever:(CGFloat)aSpeedLever oldPoint:(CGPoint)aPoint;
+- (CGPoint)pointWithAltitudeLever:(CGFloat)aAltitudeLever oldPoint:(CGPoint)aPoint;
 
 - (void)repairDamage:(NSInteger)aValue;
 - (void)fillUpBullets:(NSInteger)aCount;
