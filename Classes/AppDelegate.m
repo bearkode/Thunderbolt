@@ -63,7 +63,9 @@
     [sSoundManager loadSoundNamed:kTBSoundValkyries forKey:kTBSoundValkyries];
     [sSoundManager loadSoundNamed:kTBSoundHeli forKey:kTBSoundHeli];
     [sSoundManager loadSoundNamed:kTBSoundVulcan forKey:kTBSoundVulcan];
-    
+    [sSoundManager loadSoundNamed:kTBSoundTankExplosion forKey:kTBSoundTankExplosion];
+    [sSoundManager loadSoundNamed:kTBSoundBombExplosion forKey:kTBSoundBombExplosion];
+
     /*  Setup ViewController  */
     TBBattleViewController *sViewController = [[[TBBattleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
     UINavigationController *sNaviController = [[[UINavigationController alloc] initWithRootViewController:sViewController] autorelease];

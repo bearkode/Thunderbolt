@@ -20,7 +20,10 @@
 @implementation TBExplosionManager
 {
     PBLayer        *mExplosionLayer;
-    NSMutableArray *mExplosionArray;
+    
+    NSMutableArray *mLiveExplosions;
+    NSMutableArray *mIdleExplosions;
+    NSMutableArray *mTempExplosions;
 }
 
 
@@ -32,7 +35,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     self = [super init];
     if (self)
     {
-        mExplosionArray = [[NSMutableArray alloc] init];
+        mLiveExplosions = [[NSMutableArray alloc] init];
+        mIdleExplosions = [[NSMutableArray alloc] init];
+        mTempExplosions = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -42,10 +47,30 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 #pragma mark -
 
 
-- (void)addObject:(TBExplosion *)aExplosion
+- (TBExplosion *)idleExplosion
+{
+    TBExplosion *sExplosion = nil;
+    
+    if ([mIdleExplosions count] > 0)
+    {
+        sExplosion = [[mIdleExplosions lastObject] retain];
+        [mIdleExplosions removeLastObject];
+    }
+    else
+    {
+        sExplosion = [[TBExplosion alloc] init];
+    }
+    
+    [sExplosion reset];
+    
+    return [sExplosion autorelease];
+}
+
+
+- (void)setLiveExplosion:(TBExplosion *)aExplosion
 {
     [mExplosionLayer addSublayer:aExplosion];
-    [mExplosionArray addObject:aExplosion];
+    [mLiveExplosions addObject:aExplosion];
 }
 
 
@@ -58,11 +83,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 
 - (void)doActions
 {
-    TBExplosion *sExplosion;
-    
     [self removeFinishedExplosion];
     
-    for (sExplosion in mExplosionArray)
+    for (TBExplosion *sExplosion in mLiveExplosions)
     {
         [sExplosion action];
     }
@@ -71,20 +94,22 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 
 - (void)removeFinishedExplosion
 {
-    TBExplosion    *sExplosion;
-    NSMutableArray *sRemovedSprites = [NSMutableArray array];
+    [mTempExplosions removeAllObjects];
     
-    for (sExplosion in mExplosionArray)
+    for (TBExplosion *sExplosion in mLiveExplosions)
     {
         if ([sExplosion isFinished])
         {
-            [sRemovedSprites addObject:sExplosion];
+            [sExplosion reset];
+            [mTempExplosions addObject:sExplosion];
         }
     }
 
-    [mExplosionLayer removeSublayers:sRemovedSprites];
-    [mExplosionArray removeObjectsInArray:sRemovedSprites];
-    [sRemovedSprites removeAllObjects];
+    [mExplosionLayer removeSublayers:mTempExplosions];
+    [mLiveExplosions removeObjectsInArray:mTempExplosions];
+    [mIdleExplosions addObjectsFromArray:mTempExplosions];
+
+    [mTempExplosions removeAllObjects];
 }
 
 
@@ -120,7 +145,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 //  TODO : explosion for each team
 + (TBExplosion *)tankExplosionAtPoistion:(CGPoint)aPosition
 {
-    TBExplosion *sExplosion   = [[[TBExplosion alloc] init] autorelease];
+    TBExplosion *sExplosion   = [[self sharedManager] idleExplosion];
     PBTexture   *sTexture     = nil;
     
     sTexture = [PBTextureManager textureWithImageName:kTexEnemyTankExp00];
@@ -137,10 +162,10 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
+
+    [sExplosion setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundTankExplosion]];
     
-    [[TBExplosionManager sharedManager] addObject:sExplosion];
-#warning fix it
-//    [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
+    [[TBExplosionManager sharedManager] setLiveExplosion:sExplosion];
 
     return sExplosion;
 }
@@ -148,7 +173,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 
 + (TBExplosion *)bombExplosionAtPosition:(CGPoint)aPosition
 {
-    TBExplosion *sExplosion = [[[TBExplosion alloc] init] autorelease];
+    TBExplosion *sExplosion = [[self sharedManager] idleExplosion];
     PBTexture   *sTexture   = nil;
     
     sTexture = [PBTextureManager textureWithImageName:kTexBombExp00];
@@ -165,10 +190,10 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
+    
+    [sExplosion setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundBombExplosion]];
 
-    [[TBExplosionManager sharedManager] addObject:sExplosion];
-#warning fix it
-//    [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
+    [[TBExplosionManager sharedManager] setLiveExplosion:sExplosion];
 
     return sExplosion;
 }
@@ -176,8 +201,8 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 
 + (TBExplosion *)helicopterExplosionAtPosition:(CGPoint)aPosition isLeftAhead:(BOOL)aIsLeftAhead
 {
-    TBExplosion *sExplosion = [[[TBExplosion alloc] init] autorelease];
-    PBTexture   *sTexture = nil;
+    TBExplosion *sExplosion = [[self sharedManager] idleExplosion];
+    PBTexture   *sTexture   = nil;
     
     sTexture = [PBTextureManager textureWithImageName:(aIsLeftAhead) ? kTexHeliLExp00 : kTexHeliRExp00];
     [sTexture loadIfNeeded];
@@ -194,9 +219,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
-    [[TBExplosionManager sharedManager] addObject:sExplosion];
-#warning fix it
-//    [[TBALPlayback sharedPlayback] startSound:kTBSoundTankExplosion];
+    [sExplosion setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundTankExplosion]];
+    
+    [[TBExplosionManager sharedManager] setLiveExplosion:sExplosion];
     
     return sExplosion;
 }
@@ -204,9 +229,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 
 + (TBExplosion *)missileExplosionAtPosition:(CGPoint)aPosition angle:(CGFloat)aAngle
 {
-    TBExplosion *sExplosion = [[[TBExplosion alloc] init] autorelease];
+    TBExplosion *sExplosion = [[self sharedManager] idleExplosion];
     PBTexture   *sTexture   = nil;
-    PBVertex3    sAngle = PBVertex3Make(0, 0, aAngle);
+    PBVertex3    sAngle     = PBVertex3Make(0, 0, aAngle);
     
     [[sExplosion transform] setAngle:sAngle];
     
@@ -225,9 +250,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
-    [[TBExplosionManager sharedManager] addObject:sExplosion];
-#warning fix it
-//    [[TBALPlayback sharedPlayback] startSound:kTBSoundBombExplosion];
+    [sExplosion setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundBombExplosion]];
+    
+    [[TBExplosionManager sharedManager] setLiveExplosion:sExplosion];
     
     return sExplosion;
 }

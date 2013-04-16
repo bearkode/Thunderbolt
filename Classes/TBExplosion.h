@@ -14,6 +14,8 @@
 @interface TBExplosion : TBSprite
 
 
+- (void)reset;
+- (void)setSound:(PBSound *)aSound;
 - (void)addTexture:(PBTexture *)aTexture atPosition:(CGPoint)aPosition;
 - (BOOL)isFinished;
 

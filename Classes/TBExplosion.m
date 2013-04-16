@@ -17,6 +17,7 @@
     NSInteger       mAniIndex;
     NSMutableArray *mTextureArray;
     NSMutableArray *mPositionArray;
+    PBSoundSource  *mSoundSource;
 }
 
 
@@ -29,6 +30,9 @@
         mAniIndex         = 0;
         mTextureArray     = [[NSMutableArray alloc] init];
         mPositionArray    = [[NSMutableArray alloc] init];
+        mSoundSource      = [[PBSoundManager sharedManager] retainSoundSource];
+        
+        [mSoundSource setLooping:NO];
     }
     
     return self;
@@ -39,6 +43,7 @@
 {
     [mTextureArray release];
     [mPositionArray release];
+    [[PBSoundManager sharedManager] releaseSoundSource:mSoundSource];
     
     [super dealloc];
 }
@@ -46,6 +51,11 @@
 
 - (void)action
 {
+    if (mAniIndex == 0)
+    {
+        [mSoundSource play];
+    }
+    
     if (![self isFinished])
     {
         PBTexture *sTexture  = [mTextureArray objectAtIndex:mAniIndex];
@@ -62,6 +72,21 @@
 #pragma mark -
 
 
+- (void)reset
+{
+    mAniIndex = 0;
+    
+    [mTextureArray removeAllObjects];
+    [mPositionArray removeAllObjects];
+}
+
+
+- (void)setSound:(PBSound *)aSound
+{
+    [mSoundSource setSound:aSound];
+}
+
+
 - (void)addTexture:(PBTexture *)aTexture atPosition:(CGPoint)aPosition
 {
     if (aTexture)
@@ -76,6 +101,7 @@
 {
     if (mAniIndex == [mTextureArray count])
     {
+        [mSoundSource stop];
         return YES;
     }
     
