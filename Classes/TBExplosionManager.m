@@ -152,14 +152,17 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
     
     sTexture = [PBTextureManager textureWithImageName:kTexEnemyTankExp01];
     [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
     
     sTexture = [PBTextureManager textureWithImageName:kTexEnemyTankExp02];
     [sTexture loadIfNeeded];
+    [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
 

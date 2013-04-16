@@ -78,6 +78,8 @@
     
     [mTextureArray removeAllObjects];
     [mPositionArray removeAllObjects];
+    
+    [self setHidden:NO];
 }
 
 
@@ -101,8 +103,17 @@
 {
     if (mAniIndex == [mTextureArray count])
     {
-        [mSoundSource stop];
-        return YES;
+        if (![mSoundSource isPlaying])
+        {
+            return YES;
+        }
+
+        [self setHidden:YES];
+    }
+
+    if (mAniIndex >= [mTextureArray count])
+    {
+        mAniIndex = [mTextureArray count] - 1;
     }
     
     return NO;
