@@ -9,6 +9,7 @@
 
 #import "TBWarheadManager.h"
 #import <PBObjCUtil.h>
+#import "TBObjectPool.h"
 #import "TBUnit.h"
 #import "TBUnitManager.h"
 #import "TBExplosionManager.h"
@@ -24,36 +25,13 @@
 {
     PBLayer        *mWarheadLayer;
     
-    NSMutableArray *mWarheadArray;
-    NSMutableArray *mReusableBulletArray;
+    NSMutableArray *mWarheads;
+    NSMutableArray *mDisabledWarheads;
+    TBObjectPool   *mBulletPool;
 }
 
 
 SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
-
-
-- (TBBullet *)dequeueReusableBullet
-{
-    TBBullet *sResult = nil;
-    
-    if ([mReusableBulletArray count] > 0)
-    {
-        sResult = [[mReusableBulletArray lastObject] retain];
-        [sResult reset];
-        [mReusableBulletArray removeLastObject];
-    }
-    
-    return [sResult autorelease];
-}
-
-
-- (void)storeReusableBullet:(TBBullet *)aBullet
-{
-    [mReusableBulletArray addObject:aBullet];
-}
-
-
-#pragma mark -
 
 
 - (id)init
@@ -61,8 +39,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
     self = [super init];
     if (self)
     {
-        mWarheadArray        = [[NSMutableArray alloc] init];
-        mReusableBulletArray = [[NSMutableArray alloc] init];
+        mWarheads         = [[NSMutableArray alloc] init];
+        mDisabledWarheads = [[NSMutableArray alloc] init];
+        mBulletPool       = [[TBObjectPool alloc] initWithCapacity:10 storableClass:[TBBullet class]];
     }
     
     return self;
@@ -82,13 +61,13 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 - (void)addObject:(TBWarhead *)aWarhead
 {
     [mWarheadLayer addSublayer:aWarhead];
-    [mWarheadArray addObject:aWarhead];
+    [mWarheads addObject:aWarhead];
 }
 
 
 - (NSArray *)allWarheads
 {
-    return mWarheadArray;
+    return mWarheads;
 }
 
 
@@ -98,9 +77,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
     TBUnit      *sUnit;
     TBStructure *sStructure;
     
-    [self removeDisabledSprite];
+    [self removeDisabledWarhead];
     
-    for (sWarhead in mWarheadArray)
+    for (sWarhead in mWarheads)
     {
         [sWarhead action];
      
@@ -126,53 +105,49 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 }
 
 
-- (void)removeDisabledSprite
+- (void)removeDisabledWarhead
 {
-    TBWarhead      *sWarhead;
-    NSMutableArray *sRemovedSprites = [NSMutableArray array];
+    [mDisabledWarheads removeAllObjects];
     
-    for (sWarhead in mWarheadArray)
+    for (TBWarhead *sWarhead in mWarheads)
     {
         if (![sWarhead isAvailable])
         {
-            [sRemovedSprites addObject:sWarhead];
+            [mDisabledWarheads addObject:sWarhead];
             if ([sWarhead isMemberOfClass:[TBBullet class]])
             {
-                [self storeReusableBullet:(TBBullet *)sWarhead];
+                [mBulletPool finishUsing:sWarhead];
             }
         }
         else if ([sWarhead isMemberOfClass:[TBBomb class]] && [sWarhead intersectWithGround])
         {
-            CGPoint sPosition = [sWarhead point];
+            [mDisabledWarheads addObject:sWarhead];
             
-            [sWarhead setAvailable:NO];  
+            CGPoint sPosition = [sWarhead point];
             [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
-            [sRemovedSprites addObject:sWarhead];
         }
     }
     
-    [mWarheadLayer removeSublayers:sRemovedSprites];
-    [mWarheadArray removeObjectsInArray:sRemovedSprites];
+    [mWarheadLayer removeSublayers:mDisabledWarheads];
+    [mWarheads removeObjectsInArray:mDisabledWarheads];
+    [mDisabledWarheads removeAllObjects];
 }
 
 
 #pragma mark -
 
 
-+ (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector destructivePower:(NSUInteger)aDestructivePower
+- (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector destructivePower:(NSUInteger)aDestructivePower
 {
-    TBBullet *sBullet = [[TBWarheadManager sharedManager] dequeueReusableBullet];
+    TBBullet *sBullet = (TBBullet *)[mBulletPool object];
     
-    if (!sBullet)
-    {
-        sBullet = [[[TBBullet alloc] initWithDestructivePower:aDestructivePower] autorelease];
-    }
-    
+    [sBullet reset];
+    [sBullet setDestructivePower:aDestructivePower];
     [sBullet setTeam:aTeam];
     [sBullet setPoint:aPos];
     [sBullet setVector:aVector];
     
-    [[TBWarheadManager sharedManager] addObject:sBullet];
+    [self addObject:sBullet];
     
     return sBullet;
 }

@@ -20,6 +20,7 @@
 		2E46379A17127FEA00EA1888 /* TBEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379917127FEA00EA1888 /* TBEventView.m */; };
 		2E46379D171286E800EA1888 /* TBControlLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379C171286E800EA1888 /* TBControlLever.m */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
+		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
 		2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E868568170D7E0900D64EF7 /* TBBattleViewController.m */; };
 		2E86856A170D7EAE00D64EF7 /* libPBKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E868563170D7AC300D64EF7 /* libPBKit.a */; };
 		2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */; };
@@ -163,6 +164,8 @@
 		2E46379B171286E800EA1888 /* TBControlLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBControlLever.h; sourceTree = "<group>"; };
 		2E46379C171286E800EA1888 /* TBControlLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBControlLever.m; sourceTree = "<group>"; };
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
+		2E69154B171EA1920085B797 /* TBObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObjectPool.h; sourceTree = "<group>"; };
+		2E69154C171EA1920085B797 /* TBObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObjectPool.m; sourceTree = "<group>"; };
 		2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PBKit.xcodeproj; path = PrisonBreak/PBKit/PBKit.xcodeproj; sourceTree = "<group>"; };
 		2E868567170D7E0900D64EF7 /* TBBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleViewController.h; sourceTree = "<group>"; };
 		2E868568170D7E0900D64EF7 /* TBBattleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleViewController.m; sourceTree = "<group>"; };
@@ -335,6 +338,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2E69154A171EA16C0085B797 /* Common */,
 				A72BD30E11A2DAE80091AEC4 /* Logic */,
 				A725CB59119CA76D00276F35 /* Weapon */,
 				A7BC32AD1119B8F10052D1BA /* Objects */,
@@ -418,6 +422,15 @@
 				2E868568170D7E0900D64EF7 /* TBBattleViewController.m */,
 			);
 			name = BattleViewController;
+			sourceTree = "<group>";
+		};
+		2E69154A171EA16C0085B797 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2E69154B171EA1920085B797 /* TBObjectPool.h */,
+				2E69154C171EA1920085B797 /* TBObjectPool.m */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		2E86855F170D7AC300D64EF7 /* Products */ = {
@@ -843,6 +856,7 @@
 				2E46379D171286E800EA1888 /* TBControlLever.m in Sources */,
 				2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */,
 				2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */,
+				2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

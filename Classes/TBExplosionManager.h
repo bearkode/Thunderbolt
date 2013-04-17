@@ -31,7 +31,6 @@
 
 - (void)setExplosionLayer:(PBLayer *)aExplosionLayer;
 - (void)doActions;
-- (void)removeFinishedExplosion;
 
 
 @end

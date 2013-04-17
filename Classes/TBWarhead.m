@@ -11,6 +11,11 @@
 
 
 @implementation TBWarhead
+{
+    TBTeam    mTeam;
+    BOOL      mAvailable;
+    NSInteger mDestructivePower;
+}
 
 
 @synthesize team             = mTeam;
@@ -26,7 +31,7 @@
     
     if (self)
     {
-        mIsAvailable      = YES;
+        mAvailable        = YES;
         mDestructivePower = 0;
     }
     
@@ -41,19 +46,6 @@
 {
     return (mTeam == kTBTeamAlly) ? YES : NO;
 }
-
-
-- (BOOL)isAvailable
-{
-    return mIsAvailable;
-}
-
-
-- (void)setAvailable:(BOOL)aFlag
-{
-    mIsAvailable = aFlag;
-}
-
 
 
 @end

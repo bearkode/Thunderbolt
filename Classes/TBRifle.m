@@ -59,7 +59,11 @@
             CGFloat sAngle  = TBAngleBetweenToPoints(sBodyPosition, sTargetPosition);
             CGPoint sVector = TBVector(sAngle, 3.0);
             
-            [TBWarheadManager bulletWithTeam:sTeam position:sBodyPosition vector:sVector destructivePower:kRifleBulletPower];
+            [[TBWarheadManager sharedManager] bulletWithTeam:sTeam
+                                                    position:sBodyPosition
+                                                      vector:sVector
+                                            destructivePower:kRifleBulletPower];
+            
             mAmmoCount--;
             [self reload];
             sResult = YES;

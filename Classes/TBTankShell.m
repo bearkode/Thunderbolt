@@ -83,7 +83,7 @@
     }
     else
     {
-        mIsAvailable = NO;
+        [self setAvailable:NO];
     }
 }
 
