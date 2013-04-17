@@ -14,12 +14,15 @@
 {
     TBTeam    mTeam;
     BOOL      mAvailable;
-    NSInteger mDestructivePower;
+    NSInteger mPower;
+    CGPoint   mVector;    
 }
 
 
-@synthesize team             = mTeam;
-@synthesize destructivePower = mDestructivePower;
+@synthesize team      = mTeam;
+@synthesize power     = mPower;
+@synthesize available = mAvailable;
+@synthesize vector    = mVector;
 
 
 #pragma mark -
@@ -31,15 +34,29 @@
     
     if (self)
     {
-        mAvailable        = YES;
-        mDestructivePower = 0;
+        [self reset];
     }
     
     return self;
 }
 
 
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+
 #pragma mark -
+
+
+- (void)reset
+{
+    mTeam      = kTBTeamUnknown;
+    mAvailable = YES;
+    mPower     = 0;
+    mVector    = CGPointZero;
+}
 
 
 - (BOOL)isAlly

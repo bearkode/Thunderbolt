@@ -14,9 +14,6 @@
 @interface TBBomb : TBWarhead
 
 
-@property (nonatomic, assign) CGPoint vector;
-
-
 - (void)setSpeed:(CGFloat)aSpeed;
 
 
