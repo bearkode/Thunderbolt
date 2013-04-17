@@ -13,20 +13,14 @@
 
 
 @interface TBWarhead : TBSprite
-{
-    TBTeam    mTeam;
-    BOOL      mAvailable;
-    NSInteger mDestructivePower;
-}
 
 
-@property (nonatomic, assign) TBTeam    team;
-@property (nonatomic, assign) NSInteger destructivePower;
+@property (nonatomic, assign)               TBTeam    team;
+@property (nonatomic, assign)               NSInteger destructivePower;
+@property (nonatomic, getter = isAvailable) BOOL      available;
 
 
 - (BOOL)isAlly;
-- (BOOL)isAvailable;
-- (void)setAvailable:(BOOL)aFlag;
 
 
 @end
