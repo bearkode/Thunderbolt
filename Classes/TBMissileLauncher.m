@@ -41,6 +41,16 @@
 #pragma mark -
 
 
+//  TODO : 개선 방법을 찾아볼 것.
+//         fast enumeration 중에 미사일 유닛이 추가되면서 크래시 발생.
+- (void)launchMissle:(id)aUnit
+{
+    [TBUnitManager missileWithTeam:kTBTeamEnemy position:[mBody point] target:aUnit];
+    mAmmoCount--;
+    [self reload];
+}
+
+
 - (BOOL)fireAt:(TBUnit *)aUnit
 {
     BOOL    sResult = NO;
@@ -57,9 +67,7 @@
 
         if (sDistance <= mMaxRange)
         {
-            [TBUnitManager missileWithTeam:kTBTeamEnemy position:sBodyPosition target:aUnit];
-            mAmmoCount--;
-            [self reload];
+            [self performSelector:@selector(launchMissle:) withObject:aUnit afterDelay:0.0];
             sResult = YES;
         }
     }

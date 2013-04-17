@@ -30,8 +30,8 @@
 
 - (void)setTexture
 {
-    NSString         *sTexTank;
-    NSString         *sTexTankShoot;
+    NSString *sTexTank;
+    NSString *sTexTankShoot;
     
     if (mTeam == kTBTeamAlly)
     {
