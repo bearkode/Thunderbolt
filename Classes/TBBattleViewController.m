@@ -30,7 +30,7 @@
 #import "TBRadar.h"
 
 
-#if (0)
+#if (1)
 #define kUnitDeployDuration (60 * 10)
 #else
 #warning UNIT FAST DEPLOY
