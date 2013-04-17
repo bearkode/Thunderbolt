@@ -387,7 +387,11 @@
             sBulletPos.y = sPos1.y + (sPos2.x - sPos1.x) * sin(sAngle) + (sPos2.y - sPos1.y) * cos(sAngle);
 
             CGPoint sVector = CGPointMake((sBulletPos.x - sPos1.x) / 3.5, (sBulletPos.y - sPos2.y) / 3.5);
-            sBullet = [TBWarheadManager bulletWithTeam:kTBTeamAlly position:sBulletPos vector:sVector destructivePower:kVulcanBulletPower];
+
+            sBullet = [[TBWarheadManager sharedManager] bulletWithTeam:kTBTeamAlly
+                                                              position:sBulletPos
+                                                                vector:sVector
+                                                      destructivePower:kVulcanBulletPower];
             [sBullet setLife:100];
             mBulletCount--;
             

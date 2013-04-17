@@ -24,7 +24,7 @@
 
 + (TBWarheadManager *)sharedManager;
 
-+ (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector destructivePower:(NSUInteger)aDestructivePower;
+- (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector destructivePower:(NSUInteger)aDestructivePower;
 + (TBBomb *)bombWithTeam:(TBTeam)aTeam position:(CGPoint)aPos speed:(CGFloat)aSpeed;
 + (TBTankShell *)tankShellWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector;
 
@@ -33,7 +33,6 @@
 - (NSArray *)allWarheads;
 
 - (void)doActions;
-- (void)removeDisabledSprite;
 
 
 @end

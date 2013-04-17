@@ -83,7 +83,7 @@
     }
     else
     {
-        mIsAvailable = NO;
+        mAvailable = NO;
     }
 }
 

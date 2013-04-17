@@ -26,14 +26,13 @@
 #pragma mark -
 
 
-- (id)initWithDestructivePower:(NSUInteger)aDestructivePower
+- (id)init
 {
     self = [super initWithImageName:kTexBullet];
     
     if (self)
     {
         [[self mesh] setUsingMeshQueue:YES];
-        [self setDestructivePower:aDestructivePower];
         
         mLife   = 200;
         mVector = CGPointZero;
@@ -80,7 +79,7 @@
     }
     else
     {
-        mIsAvailable = NO;
+        mAvailable = NO;
     }
 }
 

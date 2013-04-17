@@ -15,7 +15,7 @@
 @interface TBWarhead : TBSprite
 {
     TBTeam    mTeam;
-    BOOL      mIsAvailable;
+    BOOL      mAvailable;
     NSInteger mDestructivePower;
 }
 

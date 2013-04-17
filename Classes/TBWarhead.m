@@ -26,7 +26,7 @@
     
     if (self)
     {
-        mIsAvailable      = YES;
+        mAvailable        = YES;
         mDestructivePower = 0;
     }
     
@@ -45,13 +45,13 @@
 
 - (BOOL)isAvailable
 {
-    return mIsAvailable;
+    return mAvailable;
 }
 
 
 - (void)setAvailable:(BOOL)aFlag
 {
-    mIsAvailable = aFlag;
+    mAvailable = aFlag;
 }
 
 

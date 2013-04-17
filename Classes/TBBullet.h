@@ -18,8 +18,6 @@
 @property (nonatomic, assign) CGPoint   vector;
 
 
-- (id)initWithDestructivePower:(NSUInteger)aDestructivePower;
-
 - (void)reset;
 
 

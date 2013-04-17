@@ -50,7 +50,7 @@
             CGFloat sAngle  = TBAngleBetweenToPoints(sVulcanPosition, sTargetPosition);
             CGPoint sVector = TBVector(sAngle, 3.0);
             
-            [TBWarheadManager bulletWithTeam:sTeam position:sVulcanPosition vector:sVector destructivePower:kVulcanBulletPower];
+            [[TBWarheadManager sharedManager] bulletWithTeam:sTeam position:sVulcanPosition vector:sVector destructivePower:kVulcanBulletPower];
             mAmmoCount--;
             [self reload];            
             sResult = YES;
