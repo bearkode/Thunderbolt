@@ -18,6 +18,8 @@
 
 - (id)object;
 - (void)finishUsing:(id)aObject;
+
+- (void)reset;
 - (void)vacate;
 
 

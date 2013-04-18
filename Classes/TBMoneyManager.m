@@ -49,6 +49,13 @@ SYNTHESIZE_SINGLETON_CLASS(TBMoneyManager, sharedManager);
 #pragma mark -
 
 
+- (void)setMoney:(NSUInteger)aValue
+{
+    mSum = aValue;
+    [mDelegate moneyManager:self sumDidChange:mSum];
+}
+
+
 - (void)saveMoney:(NSUInteger)aValue
 {
     mSum += aValue;

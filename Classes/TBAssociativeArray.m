@@ -81,4 +81,11 @@
 }
 
 
+- (void)removeAllObjects
+{
+    [mObjectDict removeAllObjects];
+    [mObjectArray removeAllObjects];
+}
+
+
 @end

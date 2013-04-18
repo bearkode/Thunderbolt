@@ -74,6 +74,15 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 }
 
 
+- (void)reset
+{
+    [mIdleExplosions addObjectsFromArray:mLiveExplosions];
+    [mLiveExplosions removeAllObjects];
+    [mTempExplosions removeAllObjects];
+
+}
+
+
 - (void)setExplosionLayer:(PBLayer *)aExplosionLayer
 {
     [mExplosionLayer autorelease];

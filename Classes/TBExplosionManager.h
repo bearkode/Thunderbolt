@@ -29,6 +29,7 @@
 + (TBExplosion *)missileExplosionAtPosition:(CGPoint)aPosition angle:(CGFloat)aAngle;
 
 
+- (void)reset;
 - (void)setExplosionLayer:(PBLayer *)aExplosionLayer;
 - (void)doActions;
 

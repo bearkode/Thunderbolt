@@ -41,6 +41,12 @@ SYNTHESIZE_SINGLETON_CLASS(TBScoreManager, sharedManager)
 #pragma mark -
 
 
+- (void)reset
+{
+    mScore = 0;
+}
+
+
 - (void)addScore:(NSUInteger)aScore
 {
     mScore += aScore;

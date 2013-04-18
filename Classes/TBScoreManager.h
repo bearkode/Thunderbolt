@@ -25,6 +25,7 @@
 
 + (TBScoreManager *)sharedManager;
 
+- (void)reset;
 - (void)addScore:(NSUInteger)aScore;
 - (void)addScoreForUnit:(TBUnit *)aUnit;
 

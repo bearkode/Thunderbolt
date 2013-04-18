@@ -64,6 +64,13 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 #pragma mark -
 
 
+- (void)reset
+{
+    [mAllyUnits removeAllObjects];
+    [mEnemyUnits removeAllObjects];
+}
+
+
 - (void)setUnitLayer:(PBLayer *)aUnitLayer
 {
     [mUnitLayer autorelease];

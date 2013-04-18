@@ -51,6 +51,14 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 #pragma mark -
 
 
+- (void)reset
+{
+    [mWarheads removeAllObjects];
+    [mDisabledWarheads removeAllObjects];
+    [mBulletPool reset];
+}
+
+
 - (void)setWarheadLayer:(PBLayer *)aLayer
 {
     [mWarheadLayer autorelease];

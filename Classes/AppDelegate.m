@@ -11,6 +11,7 @@
 #import <PBKit.h>
 #import "TBGameConst.h"
 #import "TBMacro.h"
+#import "TBMainViewController.h"
 #import "TBBattleViewController.h"
 #import "ProfilingOverlay.h"
 
@@ -67,8 +68,13 @@
     [sSoundManager loadSoundNamed:kTBSoundBombExplosion forKey:kTBSoundBombExplosion];
 
     /*  Setup ViewController  */
+#if (0)
     TBBattleViewController *sViewController = [[[TBBattleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
     UINavigationController *sNaviController = [[[UINavigationController alloc] initWithRootViewController:sViewController] autorelease];
+#else
+    TBMainViewController   *sViewController = [[[TBMainViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    UINavigationController *sNaviController = [[[UINavigationController alloc] initWithRootViewController:sViewController] autorelease];
+#endif
 
     [sWindow setRootViewController:sNaviController];
 

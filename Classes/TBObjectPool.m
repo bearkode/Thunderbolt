@@ -75,6 +75,13 @@
 }
 
 
+- (void)reset
+{
+    [mIdleObjects addObjectsFromArray:[mBusyObjects allObjects]];
+    [mBusyObjects removeAllObjects];
+}
+
+
 - (void)vacate
 {
     [mIdleObjects removeAllObjects];

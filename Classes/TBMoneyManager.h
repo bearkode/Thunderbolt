@@ -34,6 +34,7 @@
 + (TBMoneyManager *)sharedManager;
 + (void)useMoney:(NSUInteger)aValue;
 
+- (void)setMoney:(NSUInteger)aValue;
 - (void)saveMoney:(NSUInteger)aValue;
 - (void)saveMoneyForUnit:(TBUnit *)aUnit;
 - (void)useMoney:(NSUInteger)aValue;

@@ -20,5 +20,7 @@
 - (void)removeObjectForKey:(id)aKey;
 - (id)objectForKey:(id)aKey;
 
+- (void)removeAllObjects;
+
 
 @end

@@ -27,6 +27,7 @@
 
 + (TBUnitManager *)sharedManager;
 
+- (void)reset;
 - (void)setUnitLayer:(PBLayer *)aUnitLayer;
 
 - (NSNumber *)nextUnitID;

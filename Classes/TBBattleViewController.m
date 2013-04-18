@@ -260,7 +260,8 @@
     }
     else
     {
-        [self performSelector:@selector(makeNewAllyHelicopter) withObject:nil afterDelay:3.0];
+//        [self performSelector:@selector(makeNewAllyHelicopter) withObject:nil afterDelay:3.0];
+        [[self navigationController] popViewControllerAnimated:NO];
     }
 }
 
@@ -296,21 +297,31 @@
 
 - (void)dealloc
 {
+    NSLog(@"view controller dealloc");
     [mStar0 release];
     [mStar1 release];
     [mStar2 release];
     
+    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+    
+    [[TBWarheadManager sharedManager] reset];
     [[TBWarheadManager sharedManager] setWarheadLayer:nil];
+    [[TBExplosionManager sharedManager] reset];
     [[TBExplosionManager sharedManager] setExplosionLayer:nil];
+    [[TBUnitManager sharedManager] reset];
     [[TBUnitManager sharedManager] setUnitLayer:nil];
     
     [[TBMoneyManager sharedManager] setDelegate:nil];
+    [[TBScoreManager sharedManager] reset];
     [[TBScoreManager sharedManager] setDelegate:nil];
     
     [[PBSoundManager sharedManager] releaseSoundSource:mBGMSoundSource];
     
     [super dealloc];
 }
+
+
+#pragma mark -
 
 
 - (void)viewDidLoad
@@ -481,8 +492,11 @@
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
-    [[sHelicopter controlLever] setAltitude:[aAcceleration z] speed:[aAcceleration y]];
-    [self updateCameraPositoin];
+    if (sHelicopter)
+    {
+        [[sHelicopter controlLever] setAltitude:[aAcceleration z] speed:[aAcceleration y]];
+        [self updateCameraPositoin];
+    }
 }
 
 
@@ -494,8 +508,11 @@
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
-    [[sHelicopter controlLever] setAltitude:aAltitude speed:aSpeed];
-    [self updateCameraPositoin];    
+    if (sHelicopter)
+    {
+        [[sHelicopter controlLever] setAltitude:aAltitude speed:aSpeed];
+        [self updateCameraPositoin];
+    }
 }
 
 

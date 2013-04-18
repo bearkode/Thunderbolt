@@ -27,6 +27,7 @@
 + (TBBomb *)bombWithTeam:(TBTeam)aTeam position:(CGPoint)aPos speed:(CGFloat)aSpeed;
 + (TBTankShell *)tankShellWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector;
 
+- (void)reset;
 - (void)setWarheadLayer:(PBLayer *)aLayer;
 - (void)addObject:(TBWarhead *)aWarhead;
 - (NSArray *)allWarheads;
