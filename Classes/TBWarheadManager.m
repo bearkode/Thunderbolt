@@ -87,7 +87,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
         if (sUnit)
         {
             [sWarhead setAvailable:NO];
-            [sUnit addDamage:[sWarhead destructivePower]];
+            [sUnit addDamage:[sWarhead power]];
             [TBExplosionManager bombExplosionAtPosition:[sWarhead point]];
         }
         
@@ -97,7 +97,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
             if (sStructure && ![sStructure isDestroyed])
             {
                 [sWarhead setAvailable:NO];
-                [sStructure addDamage:[sWarhead destructivePower]];
+                [sStructure addDamage:[sWarhead power]];
                 [TBExplosionManager bombExplosionAtPosition:[sWarhead point]];
             }
         }
@@ -137,12 +137,12 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 #pragma mark -
 
 
-- (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector destructivePower:(NSUInteger)aDestructivePower
+- (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector power:(NSUInteger)aPower
 {
     TBBullet *sBullet = (TBBullet *)[mBulletPool object];
     
     [sBullet reset];
-    [sBullet setDestructivePower:aDestructivePower];
+    [sBullet setPower:aPower];
     [sBullet setTeam:aTeam];
     [sBullet setPoint:aPos];
     [sBullet setVector:aVector];

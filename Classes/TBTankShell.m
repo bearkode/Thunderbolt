@@ -15,12 +15,10 @@
 @implementation TBTankShell
 {
     NSInteger mLife;
-    CGPoint   mVector;
 }
 
 
 @synthesize life   = mLife;
-@synthesize vector = mVector;
 
 
 #pragma mark -
@@ -28,16 +26,11 @@
 
 - (id)init
 {
-    self = [super init];
+    self = [super initWithImageName:kTexBullet];
     
     if (self)
     {
-        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBullet];
-        [sTexture loadIfNeeded];
-        [self setTexture:sTexture];
-
         [self reset];
-        [self setDestructivePower:kTankShellPower];
     }
     
     return self;
@@ -55,9 +48,10 @@
 
 - (void)reset
 {
-    [self setAvailable:YES];
-    mLife   = 200;
-    mVector = CGPointZero;
+    [super reset];
+    
+    mLife = 200;
+    [self setPower:kTankShellPower];    
 }
 
 
@@ -65,16 +59,18 @@
 {
     if (mLife > 0)
     {
-        CGPoint sPoint = [self point];
+        CGPoint sVector = [self vector];
+        CGPoint sPoint  = [self point];
         
-        sPoint.x += mVector.x;
-        sPoint.y += mVector.y;
+        sPoint.x += sVector.x;
+        sPoint.y += sVector.y;
 
         [self setPoint:sPoint];
         
         if (sPoint.y < kMapGround)
         {
             mLife = 0;
+            [self setAvailable:NO];
         }
         else
         {

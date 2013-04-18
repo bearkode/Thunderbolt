@@ -16,10 +16,12 @@
 
 
 @property (nonatomic, assign)               TBTeam    team;
-@property (nonatomic, assign)               NSInteger destructivePower;
+@property (nonatomic, assign)               NSInteger power;
 @property (nonatomic, getter = isAvailable) BOOL      available;
+@property (nonatomic, assign)               CGPoint   vector;
 
 
+- (void)reset;
 - (BOOL)isAlly;
 
 

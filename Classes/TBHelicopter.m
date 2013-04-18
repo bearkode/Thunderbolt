@@ -391,7 +391,7 @@
             sBullet = [[TBWarheadManager sharedManager] bulletWithTeam:kTBTeamAlly
                                                               position:sBulletPos
                                                                 vector:sVector
-                                                      destructivePower:kVulcanBulletPower];
+                                                                 power:kVulcanBulletPower];
             [sBullet setLife:100];
             mBulletCount--;
             

@@ -15,12 +15,10 @@
 @implementation TBBullet
 {
     NSInteger mLife;
-    CGPoint   mVector;
 }
 
 
 @synthesize life   = mLife;
-@synthesize vector = mVector;
 
 
 #pragma mark -
@@ -34,8 +32,7 @@
     {
         [[self mesh] setUsingMeshQueue:YES];
         
-        mLife   = 200;
-        mVector = CGPointZero;
+        mLife = 200;
     }
     
     return self;
@@ -53,9 +50,9 @@
 
 - (void)reset
 {
-    [self setAvailable:YES];
-    mLife   = 200;
-    mVector = CGPointZero;
+    [super reset];
+    
+    mLife = 200;
 }
 
 
@@ -63,14 +60,18 @@
 {
     if (mLife > 0)
     {
-        CGPoint sPoint = [self point];
-        sPoint.x += mVector.x;
-        sPoint.y += mVector.y;
-        [self setPoint:sPoint];
+        CGPoint sPoint  = [self point];
+        CGPoint sVector = [self vector];
         
+        sPoint.x += sVector.x;
+        sPoint.y += sVector.y;
+        
+        [self setPoint:sPoint];
+
         if (sPoint.y < kMapGround)
         {
             mLife = 0;
+            [self setAvailable:NO];
         }
         else
         {

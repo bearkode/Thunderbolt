@@ -62,7 +62,7 @@
             [[TBWarheadManager sharedManager] bulletWithTeam:sTeam
                                                     position:sBodyPosition
                                                       vector:sVector
-                                            destructivePower:kRifleBulletPower];
+                                                       power:kRifleBulletPower];
             
             mAmmoCount--;
             [self reload];

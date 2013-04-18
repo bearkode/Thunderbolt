@@ -23,6 +23,7 @@
 		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
 		2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E868568170D7E0900D64EF7 /* TBBattleViewController.m */; };
 		2E86856A170D7EAE00D64EF7 /* libPBKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E868563170D7AC300D64EF7 /* libPBKit.a */; };
+		2EEC0BB5171EE8EA0063798C /* TBAssociativeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEC0BB4171EE8EA0063798C /* TBAssociativeArray.m */; };
 		2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */; };
 		2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43CA17167CA000CC376E /* ProfilingOverlayView.m */; };
 		A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFA6D1194D9ED00DA0139 /* TBMissile.m */; };
@@ -169,6 +170,8 @@
 		2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PBKit.xcodeproj; path = PrisonBreak/PBKit/PBKit.xcodeproj; sourceTree = "<group>"; };
 		2E868567170D7E0900D64EF7 /* TBBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleViewController.h; sourceTree = "<group>"; };
 		2E868568170D7E0900D64EF7 /* TBBattleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleViewController.m; sourceTree = "<group>"; };
+		2EEC0BB3171EE8EA0063798C /* TBAssociativeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAssociativeArray.h; sourceTree = "<group>"; };
+		2EEC0BB4171EE8EA0063798C /* TBAssociativeArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAssociativeArray.m; sourceTree = "<group>"; };
 		2EFB43C617167C1B00CC376E /* ProfilingOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilingOverlay.h; sourceTree = "<group>"; };
 		2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilingOverlay.m; sourceTree = "<group>"; };
 		2EFB43C917167CA000CC376E /* ProfilingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilingOverlayView.h; sourceTree = "<group>"; };
@@ -429,6 +432,8 @@
 			children = (
 				2E69154B171EA1920085B797 /* TBObjectPool.h */,
 				2E69154C171EA1920085B797 /* TBObjectPool.m */,
+				2EEC0BB3171EE8EA0063798C /* TBAssociativeArray.h */,
+				2EEC0BB4171EE8EA0063798C /* TBAssociativeArray.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -857,6 +862,7 @@
 				2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */,
 				2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */,
 				2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */,
+				2EEC0BB5171EE8EA0063798C /* TBAssociativeArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

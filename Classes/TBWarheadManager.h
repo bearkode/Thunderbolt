@@ -13,7 +13,6 @@
 
 
 @class TBWarhead;
-@class TBUnit;
 @class TBBullet;
 @class TBBomb;
 @class TBTankShell;
@@ -24,7 +23,7 @@
 
 + (TBWarheadManager *)sharedManager;
 
-- (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector destructivePower:(NSUInteger)aDestructivePower;
+- (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector power:(NSUInteger)apower;
 + (TBBomb *)bombWithTeam:(TBTeam)aTeam position:(CGPoint)aPos speed:(CGFloat)aSpeed;
 + (TBTankShell *)tankShellWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector;
 

@@ -12,30 +12,15 @@
 
 
 @implementation TBBomb
-{
-    CGPoint mVector;
-}
-
-
-@synthesize vector = mVector;
-
-
-#pragma mark -
 
 
 - (id)init
 {
-    self = [super init];
+    self = [super initWithImageName:kTexBomb];
     
     if (self)
     {
-        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBomb];
-        [sTexture loadIfNeeded];
-
-        [self setTexture:sTexture];
-        [self setDestructivePower:kBombPower];
-    
-        mVector = CGPointZero;
+        [self reset];
     }
     
     return self;
@@ -50,25 +35,28 @@
 
 - (void)action
 {
-    if (mVector.x == 0)
+    CGPoint sVector = [self vector];
+    
+    if (sVector.x == 0)
     {
     
     }
-    else if (mVector.x < 0)
+    else if (sVector.x < 0)
     {
-        mVector.x += 1.0;
+        sVector.x += 1.0;
     }
-    else if (mVector.x > 0)
+    else if (sVector.x > 0)
     {
-        mVector.x -= 1.0;
+        sVector.x -= 1.0;
     }
     
-    mVector.y += 0.4;
+    sVector.y += 0.4;
+    [self setVector:sVector];
     
     CGPoint sPoint = [self point];
     
-    sPoint.x += mVector.x;
-    sPoint.y -= mVector.y;
+    sPoint.x += sVector.x;
+    sPoint.y -= sVector.y;
     
     [self setPoint:sPoint];
 }
@@ -77,9 +65,21 @@
 #pragma mark -
 
 
+- (void)reset
+{
+    [super reset];
+    
+    [self setPower:kBombPower];
+}
+
+
 - (void)setSpeed:(CGFloat)aSpeed
 {
-    mVector.x = (NSInteger)aSpeed;
+    CGPoint sVector = [self vector];
+
+    sVector.x = aSpeed;
+    
+    [self setVector:sVector];
 }
 
 

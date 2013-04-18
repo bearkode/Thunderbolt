@@ -15,10 +15,6 @@
 
 
 @property (nonatomic, assign) NSInteger life;
-@property (nonatomic, assign) CGPoint   vector;
-
-
-- (void)reset;
 
 
 @end

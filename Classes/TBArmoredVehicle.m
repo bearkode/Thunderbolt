@@ -35,6 +35,7 @@
     {
         [self setType:kTBUnitArmoredVehicle];
         [self setDurability:kArmoredVehicleDurability];
+
         mHitDiscount = 0;
         
         [mTextureNormal autorelease];
@@ -76,17 +77,15 @@
     
     if (![self isAlly])
     {
+        TBUnit *sHelicopter = (TBUnit *)[[TBUnitManager sharedManager] allyHelicopter];
+        
         if ([mMissileLauncher ammoCount] > 0)
         {
-            TBUnit *sHelicopter = (TBUnit *)[[TBUnitManager sharedManager] allyHelicopter];
-            [mMissileLauncher fireAt:sHelicopter];
-            sFire = YES;
+            sFire = [mMissileLauncher fireAt:sHelicopter];
         }
         else
         {
-            TBUnit *sHelicopter = (TBUnit *)[[TBUnitManager sharedManager] allyHelicopter];
-            [mAAVulcan fireAt:sHelicopter];
-            sFire = YES;
+            sFire = [mAAVulcan fireAt:sHelicopter];
         }
     }
     
