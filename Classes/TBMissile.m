@@ -65,6 +65,7 @@
 
 - (void)action
 {
+    PBBeginTimeCheck();
     TBUnit *sTarget = nil;
     
     [super action];
@@ -80,9 +81,17 @@
     sTarget = [[TBUnitManager sharedManager] unitForUnitID:mTargetID];
     if (sTarget)
     {
-        CGFloat sAngle = TBRadiansToDegrees(TBAngleBetweenToPoints([self point], [sTarget point]));
-        CGFloat sDelta = sAngle - sAngle3.z;
+        CGFloat sAngle = 360 - TBRadiansToDegrees(TBAngleBetweenToPoints([self point], [sTarget point]));
         
+        sAngle = (sAngle > 360) ? (sAngle - 360) : sAngle;
+        
+        CGFloat sDelta = (sAngle - sAngle3.z);
+        
+        if (sDelta < -180)
+        {
+            sDelta = 360 + sDelta;
+        }
+ 
         if (sDelta > 0)
         {
             sAngle3.z = (sDelta < MISSILE_SENSITIVE) ? sAngle : sAngle3.z + MISSILE_SENSITIVE;
@@ -99,7 +108,7 @@
     if (mFuel > 0)
     {
         sPoint.x += sX;
-        sPoint.y += sY;
+        sPoint.y -= sY;
     }
     else
     {
@@ -116,6 +125,7 @@
         [self addDamage:100];
         [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPoint.x, kMapGround + 18)];
     }
+    PBEndTimeCheck();
 }
 
 

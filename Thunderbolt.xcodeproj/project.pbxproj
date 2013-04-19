@@ -20,6 +20,7 @@
 		2E46379D171286E800EA1888 /* TBControlLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379C171286E800EA1888 /* TBControlLever.m */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
 		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
+		2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */; };
 		2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E868568170D7E0900D64EF7 /* TBBattleViewController.m */; };
 		2E86856A170D7EAE00D64EF7 /* libPBKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E868563170D7AC300D64EF7 /* libPBKit.a */; };
 		2EE9C18D1720323900BB3D24 /* TBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9C18C1720323900BB3D24 /* TBMainViewController.m */; };
@@ -165,6 +166,8 @@
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		2E69154B171EA1920085B797 /* TBObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObjectPool.h; sourceTree = "<group>"; };
 		2E69154C171EA1920085B797 /* TBObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObjectPool.m; sourceTree = "<group>"; };
+		2E6E9ABC172129E900A9BB7F /* TBTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTestViewController.h; sourceTree = "<group>"; };
+		2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTestViewController.m; sourceTree = "<group>"; };
 		2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PBKit.xcodeproj; path = PrisonBreak/PBKit/PBKit.xcodeproj; sourceTree = "<group>"; };
 		2E868567170D7E0900D64EF7 /* TBBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleViewController.h; sourceTree = "<group>"; };
 		2E868568170D7E0900D64EF7 /* TBBattleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleViewController.m; sourceTree = "<group>"; };
@@ -346,6 +349,7 @@
 				A73DE72D110DF286008C1A67 /* TextureManagement */,
 				2E662D4D170E98210081DEC9 /* BattleViewController */,
 				2EE9C18A1720320800BB3D24 /* MainViewController */,
+				2E6E9ABF172129EF00A9BB7F /* TestViewController */,
 				1D3623240D0F684500981E51 /* AppDelegate.h */,
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
 			);
@@ -431,6 +435,15 @@
 				2EEC0BB4171EE8EA0063798C /* TBAssociativeArray.m */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		2E6E9ABF172129EF00A9BB7F /* TestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2E6E9ABC172129E900A9BB7F /* TBTestViewController.h */,
+				2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */,
+			);
+			name = TestViewController;
 			sourceTree = "<group>";
 		};
 		2E86855F170D7AC300D64EF7 /* Products */ = {
@@ -867,6 +880,7 @@
 				2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */,
 				2EEC0BB5171EE8EA0063798C /* TBAssociativeArray.m in Sources */,
 				2EE9C18D1720323900BB3D24 /* TBMainViewController.m in Sources */,
+				2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

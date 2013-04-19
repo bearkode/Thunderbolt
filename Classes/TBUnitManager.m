@@ -66,6 +66,14 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 - (void)reset
 {
+    [mUnitLayer release];
+    mUnitLayer = nil;
+    
+    mNextUnitID      = 0;
+    
+    mAllyHelicopter  = nil;
+    mEnemyHelicopter = nil;
+    
     [mAllyUnits removeAllObjects];
     [mEnemyUnits removeAllObjects];
 }

@@ -9,6 +9,7 @@
 
 #import "TBMainViewController.h"
 #import "TBBattleViewController.h"
+#import "TBTestViewController.h"
 #import "TBMoneyManager.h"
 
 
@@ -45,6 +46,13 @@
     
     CGRect sBounds = [[self view] bounds];
     
+    UIButton *sTestButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sTestButton setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin)];
+    [sTestButton setTitle:@"Test" forState:UIControlStateNormal];
+    [sTestButton setFrame:CGRectMake(sBounds.size.width - 200 - 20, sBounds.size.height - 44 - 20, 80, 44)];
+    [sTestButton addTarget:self action:@selector(testButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:sTestButton];
+    
     UIButton *sStartButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [sStartButton setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin)];
     [sStartButton setTitle:@"Start" forState:UIControlStateNormal];
@@ -68,6 +76,14 @@
     TBBattleViewController *sViewController = [[[TBBattleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 
     [[TBMoneyManager sharedManager] setMoney:1800];
+    [[self navigationController] pushViewController:sViewController animated:NO];
+}
+
+
+- (IBAction)testButtonTapped:(id)aSender
+{
+    TBTestViewController *sViewController = [[[TBTestViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    
     [[self navigationController] pushViewController:sViewController animated:NO];
 }
 

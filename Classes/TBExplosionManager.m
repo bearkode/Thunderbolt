@@ -76,6 +76,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 
 - (void)reset
 {
+    [mExplosionLayer release];
+    mExplosionLayer = nil;
+    
     [mIdleExplosions addObjectsFromArray:mLiveExplosions];
     [mLiveExplosions removeAllObjects];
     [mTempExplosions removeAllObjects];

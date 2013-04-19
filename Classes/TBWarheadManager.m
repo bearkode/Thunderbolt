@@ -53,6 +53,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 
 - (void)reset
 {
+    [mWarheadLayer release];
+    mWarheadLayer = nil;
+    
     [mWarheads removeAllObjects];
     [mDisabledWarheads removeAllObjects];
     [mBulletPool reset];
