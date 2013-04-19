@@ -70,28 +70,7 @@
 
 
 #pragma mark -
-#pragma mark Privates
-
-
-- (void)updateCameraPositoin
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    CGPoint       sHeliPos    = [sHelicopter point];
-    
-    if ([sHelicopter isLeftAhead])
-    {
-        mBackPoint -= (mBackPoint > -80) ? 8 : 0;
-    }
-    else
-    {
-        mBackPoint += (mBackPoint < 80) ? 8 : 0;
-    }
-    
-    mCameraXPos = sHeliPos.x + mBackPoint;
-}
-
-
-#pragma mark -
+#pragma mark Setups
 
 
 - (void)setupUIs
@@ -208,12 +187,49 @@
     {
         [TBMoneyManager useMoney:kTBPriceHelicopter];
         [[TBUnitManager sharedManager] addHelicopterWithTeam:kTBTeamAlly delegate:self];
+        [self updateAmmoLabel];
     }
     else
     {
         [[self navigationController] popViewControllerAnimated:NO];
     }
 }
+
+
+- (void)deployEnemyUnit
+{
+    if ([[[TBUnitManager sharedManager] enemyUnits] count] < 50)
+    {
+        if (++mTimeTick == kUnitDeployDuration)
+        {
+            mTimeTick = 0;
+            NSInteger sUnitType = rand() % 4;
+            
+            if (sUnitType == 0)
+            {
+                [[TBUnitManager sharedManager] addArmoredVehicleWithTeam:kTBTeamEnemy];
+            }
+            else if (sUnitType == 1)
+            {
+                [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamEnemy];
+            }
+            else
+            {
+                [[TBUnitManager sharedManager] addSoldierWithTeam:kTBTeamEnemy];
+            }
+            
+            [[TBMoneyManager sharedManager] saveMoney:10];
+        }
+    }
+    else
+    {
+        NSLog(@"UNIT MAX");
+    }
+}
+
+
+#pragma mark -
+#pragma mark Update UIs
 
 
 - (void)updateAmmoLabel
@@ -241,7 +257,26 @@
 }
 
 
+- (void)updateCameraPositoin
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    CGPoint       sHeliPos    = [sHelicopter point];
+    
+    if ([sHelicopter isLeftAhead])
+    {
+        mBackPoint -= (mBackPoint > -80) ? 8 : 0;
+    }
+    else
+    {
+        mBackPoint += (mBackPoint < 80) ? 8 : 0;
+    }
+    
+    mCameraXPos = sHeliPos.x + mBackPoint;
+}
+
+
 #pragma mark -
+#pragma mark Init / dealloc
 
 
 - (id)initWithNibName:(NSString *)aNibNameOrNil bundle:(NSBundle *)aNibBundleOrNil
@@ -294,6 +329,7 @@
 
 
 #pragma mark -
+#pragma mark Inherited
 
 
 - (void)viewDidLoad
@@ -405,38 +441,7 @@
 
 
 #pragma mark -
-
-
-- (void)deployEnemyUnit
-{
-    if ([[[TBUnitManager sharedManager] enemyUnits] count] < 50)
-    {
-        if (++mTimeTick == kUnitDeployDuration)
-        {
-            mTimeTick = 0;
-            NSInteger sUnitType = rand() % 4;
-            
-            if (sUnitType == 0)
-            {
-                [[TBUnitManager sharedManager] addArmoredVehicleWithTeam:kTBTeamEnemy];
-            }
-            else if (sUnitType == 1)
-            {
-                [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamEnemy];
-            }
-            else
-            {
-                [[TBUnitManager sharedManager] addSoldierWithTeam:kTBTeamEnemy];
-            }
-            
-            [[TBMoneyManager sharedManager] saveMoney:10];
-        }
-    }
-    else
-    {
-        NSLog(@"UNIT MAX");
-    }
-}
+#pragma mark PBCanvas delegate
 
 
 - (void)pbCanvasWillUpdate:(PBCanvas *)aView
@@ -458,6 +463,7 @@
 
 
 #pragma mark -
+#pragma mark Accelerometer delegate
 
 
 - (void)accelerometer:(UIAccelerometer *)aAccelerometer didAccelerate:(UIAcceleration *)aAcceleration
@@ -563,13 +569,13 @@
 {
     if ([aHelicopter isAlly])
     {
-        [self performSelector:@selector(makeNewAllyHelicopter) withObject:nil afterDelay:3.0];
+        [self performSelector:@selector(deployNewAllyHelicopter) withObject:nil afterDelay:3.0];
     }
 }
 
 
 #pragma mark -
-#pragma mark TB****Manager Delegates
+#pragma mark Manager Delegates
 
 
 - (void)moneyManager:(TBMoneyManager *)aMoneyManager sumDidChange:(NSUInteger)aSum
