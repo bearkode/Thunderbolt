@@ -10,6 +10,7 @@
 #import "TBMainViewController.h"
 #import "TBBattleViewController.h"
 #import "TBTestViewController.h"
+#import "TBCheatViewController.h"
 #import "TBMoneyManager.h"
 
 
@@ -42,14 +43,19 @@
 {
     [super viewDidLoad];
     
-    [[self navigationController] setNavigationBarHidden:YES animated:NO];
-    
     CGRect sBounds = [[self view] bounds];
-    
+
+    UIButton *sCheatButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sCheatButton setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin)];
+    [sCheatButton setTitle:@"Cheat" forState:UIControlStateNormal];
+    [sCheatButton setFrame:CGRectMake(sBounds.size.width - 280 - 20, sBounds.size.height - 44 - 20, 80, 44)];
+    [sCheatButton addTarget:self action:@selector(cheatButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:sCheatButton];
+
     UIButton *sTestButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [sTestButton setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin)];
     [sTestButton setTitle:@"Test" forState:UIControlStateNormal];
-    [sTestButton setFrame:CGRectMake(sBounds.size.width - 200 - 20, sBounds.size.height - 44 - 20, 80, 44)];
+    [sTestButton setFrame:CGRectMake(sBounds.size.width - 180 - 20, sBounds.size.height - 44 - 20, 80, 44)];
     [sTestButton addTarget:self action:@selector(testButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [[self view] addSubview:sTestButton];
     
@@ -68,6 +74,14 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)aAnimated
+{
+    [super viewWillAppear:aAnimated];
+    
+    [[self navigationController] setNavigationBarHidden:YES animated:NO];
+}
+
+
 #pragma mark -
 
 
@@ -83,6 +97,14 @@
 - (IBAction)testButtonTapped:(id)aSender
 {
     TBTestViewController *sViewController = [[[TBTestViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    
+    [[self navigationController] pushViewController:sViewController animated:NO];
+}
+
+
+- (IBAction)cheatButtonTapped:(id)aSender
+{
+    TBCheatViewController *sViewController = [[[TBCheatViewController alloc] initWithNibName:@"TBCheatViewController" bundle:nil] autorelease];
     
     [[self navigationController] pushViewController:sViewController animated:NO];
 }
