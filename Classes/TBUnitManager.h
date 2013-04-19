@@ -48,11 +48,11 @@
 - (TBHelicopter *)enemyHelicopter;
 - (TBHelicopter *)opponentHeicopter:(TBTeam)aTeam;
 
-+ (TBHelicopter *)helicopterWithTeam:(TBTeam)aTeam delegate:(id)aDelegate;
-+ (TBTank *)tankWithTeam:(TBTeam)aTeam;
-+ (TBArmoredVehicle *)armoredVehicleWithTeam:(TBTeam)aTeam;
-+ (TBSoldier *)soldierWithTeam:(TBTeam)aTeam;
-+ (TBMissile *)missileWithTeam:(TBTeam)aTeam position:(CGPoint)aPosition target:(TBUnit *)aTarget;
+- (TBHelicopter *)addHelicopterWithTeam:(TBTeam)aTeam delegate:(id)aDelegate;
+- (TBTank *)addTankWithTeam:(TBTeam)aTeam;
+- (TBArmoredVehicle *)addArmoredVehicleWithTeam:(TBTeam)aTeam;
+- (TBSoldier *)addSoldierWithTeam:(TBTeam)aTeam;
+- (TBMissile *)addMissileWithTeam:(TBTeam)aTeam position:(CGPoint)aPosition target:(TBUnit *)aTarget;
 
 
 @end

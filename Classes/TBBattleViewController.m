@@ -60,11 +60,6 @@
     PBLayer       *mStructureLayer;
     PBLayer       *mBackgroundLayer;
     
-    /*  Models  */
-    PBSprite      *mStar0;
-    PBSprite      *mStar1;
-    PBSprite      *mStar2;
-    
     /*  BGM  */
     PBSoundSource *mBGMSoundSource;
 
@@ -142,39 +137,14 @@
 
 - (void)setupStructureLayer
 {
-    TBBase       *sBase;
-    TBLandingPad *sLandingPad;
-    TBAAGunSite  *sAAGunSite;
-    
-    sBase = [[[TBBase alloc] initWithTeam:kTBTeamAlly] autorelease];
-    [sBase setPoint:CGPointMake(kMinMapXPos + 100, kMapGround + 30)];
-    [[TBStructureManager sharedManager] addStructure:sBase];
-    [mStructureLayer addSublayer:sBase];
-
-    sBase = [[[TBBase alloc] initWithTeam:kTBTeamEnemy] autorelease];
-    [sBase setPoint:CGPointMake(kMaxMapXPos - 100, kMapGround + 30)];
-    [[TBStructureManager sharedManager] addStructure:sBase];
-    [mStructureLayer addSublayer:sBase];
-
-    sLandingPad = [[[TBLandingPad alloc] initWithTeam:kTBTeamAlly] autorelease];
-    [sLandingPad setPoint:CGPointMake(kMinMapXPos + 200, kMapGround + 6)];
-    [[TBStructureManager sharedManager] addStructure:sLandingPad];
-    [mStructureLayer addSublayer:sLandingPad];
-    
-    sLandingPad = [[[TBLandingPad alloc] initWithTeam:kTBTeamEnemy] autorelease];
-    [sLandingPad setPoint:CGPointMake(kMaxMapXPos - 200, kMapGround + 6)];
-    [[TBStructureManager sharedManager] addStructure:sLandingPad];
-    [mStructureLayer addSublayer:sLandingPad];
-    
-    sAAGunSite = [[[TBAAGunSite alloc] initWithTeam:kTBTeamAlly] autorelease];
-    [sAAGunSite setPoint:CGPointMake(kMinMapXPos + 800, kMapGround + 15)];
-    [[TBStructureManager sharedManager] addStructure:sAAGunSite];
-    [mStructureLayer addSublayer:sAAGunSite];
-    
-    sAAGunSite = [[[TBAAGunSite alloc] initWithTeam:kTBTeamEnemy] autorelease];
-    [sAAGunSite setPoint:CGPointMake(kMaxMapXPos - 800, kMapGround + 15)];
-    [[TBStructureManager sharedManager] addStructure:sAAGunSite];
-    [mStructureLayer addSublayer:sAAGunSite];
+    [[TBStructureManager sharedManager] addBaseWithTeam:kTBTeamAlly position:kMinMapXPos + 100];
+    [[TBStructureManager sharedManager] addBaseWithTeam:kTBTeamEnemy position:kMaxMapXPos - 100];
+    [[TBStructureManager sharedManager] addLandingPadWithTeam:kTBTeamAlly position:kMinMapXPos + 200];
+    [[TBStructureManager sharedManager] addLandingPadWithTeam:kTBTeamEnemy position:kMaxMapXPos - 200];
+    [[TBStructureManager sharedManager] addAAGunSiteWithTeam:kTBTeamAlly position:kMinMapXPos + 800];
+    [[TBStructureManager sharedManager] addAAGunSiteWithTeam:kTBTeamAlly position:kMinMapXPos + 1500];
+    [[TBStructureManager sharedManager] addAAGunSiteWithTeam:kTBTeamEnemy position:kMaxMapXPos - 800];
+    [[TBStructureManager sharedManager] addAAGunSiteWithTeam:kTBTeamEnemy position:kMaxMapXPos - 1500];
 }
 
 
@@ -193,25 +163,6 @@
         [sLayer setPoint:CGPointMake(x, y)];
         [mBackgroundLayer addSublayer:sLayer];
     }
-    
-    [mStar0 autorelease];
-    mStar0 = [[PBSprite alloc] initWithImageName:kTexGreen];
-    [mStar0 setPoint:CGPointMake(kMinMapXPos, kMapGround + ([[mStar0 mesh] size].height / 2))];
-    [mBackgroundLayer addSublayer:mStar0];
-
-    [mStar1 autorelease];
-    mStar1 = [[PBSprite alloc] initWithImageName:kTexGreen];
-    [mStar1 setPoint:CGPointMake(kMaxMapXPos / 2, kMapGround + ([[mStar0 mesh] size].height / 2))];
-    [mBackgroundLayer addSublayer:mStar1];
-
-    [mStar2 autorelease];
-    mStar2 = [[PBSprite alloc] initWithImageName:kTexGreen];
-    [mStar2 setPoint:CGPointMake(kMaxMapXPos, kMapGround + ([[mStar0 mesh] size].height / 2))];
-    [mBackgroundLayer addSublayer:mStar2];
-    
-    PBSprite *sSprite = [[[PBSprite alloc] initWithImageName:kTexGreen] autorelease];
-    [sSprite setPoint:CGPointMake(0, 0)];
-    [mBackgroundLayer addSublayer:sSprite];
 }
 
 
@@ -240,7 +191,7 @@
                                                                       mEffectLayer,
                                                                       mRadarLayer, nil]];
     
-    
+    [[TBStructureManager sharedManager] setStructureLayer:mStructureLayer];
     [[TBWarheadManager sharedManager] setWarheadLayer:mWarheadLayer];
     [[TBExplosionManager sharedManager] setExplosionLayer:mExplosionLayer];
     [[TBUnitManager sharedManager] setUnitLayer:mUnitLayer];
@@ -251,18 +202,42 @@
 }
 
 
-- (void)makeNewAllyHelicopter
+- (void)deployNewAllyHelicopter
 {
     if ([[TBMoneyManager sharedManager] sum] >= kTBPriceHelicopter)
     {
         [TBMoneyManager useMoney:kTBPriceHelicopter];
-        [TBUnitManager helicopterWithTeam:kTBTeamAlly delegate:self];
+        [[TBUnitManager sharedManager] addHelicopterWithTeam:kTBTeamAlly delegate:self];
     }
     else
     {
-//        [self performSelector:@selector(makeNewAllyHelicopter) withObject:nil afterDelay:3.0];
         [[self navigationController] popViewControllerAnimated:NO];
     }
+}
+
+
+- (void)updateAmmoLabel
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    NSString     *sAmmoText;
+    
+    if (sHelicopter)
+    {
+        sAmmoText = [NSString stringWithFormat:@"V:%d B:%d D:%3.2f", [sHelicopter bulletCount], [sHelicopter bombCount], [sHelicopter damageRate]];
+        [mAmmoLabel setText:sAmmoText];
+    }
+}
+
+
+- (void)updateMoneyLabel:(NSUInteger)aSum
+{
+    [mMoneyLabel setText:[NSString stringWithFormat:@"$ %d", aSum]];
+}
+
+
+- (void)updateScoreLabel:(NSUInteger)aScore
+{
+    [mScoreLabel setText:[NSString stringWithFormat:@"%d", aScore]];
 }
 
 
@@ -297,13 +272,10 @@
 
 - (void)dealloc
 {
-    NSLog(@"view controller dealloc");
-    [mStar0 release];
-    [mStar1 release];
-    [mStar2 release];
-    
     [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
     
+    [[TBStructureManager sharedManager] reset];
+    [[TBStructureManager sharedManager] setStructureLayer:nil];
     [[TBWarheadManager sharedManager] reset];
     [[TBWarheadManager sharedManager] setWarheadLayer:nil];
     [[TBExplosionManager sharedManager] reset];
@@ -339,13 +311,12 @@
 #if TARGET_IPHONE_SIMULATOR
     [mEventView setControlMode:YES];
 #endif
-
     
     [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.5 green:0.5 blue:1.0 alpha:1.0]];
     [self setupUIs];
     [self setupLayers];
 
-    [self makeNewAllyHelicopter];
+    [self deployNewAllyHelicopter];
 }
 
 
@@ -353,6 +324,7 @@
 {
     [super didReceiveMemoryWarning];
 
+    [[TBStructureManager sharedManager] setStructureLayer:nil];
     [[TBWarheadManager sharedManager] setWarheadLayer:nil];
     [[TBExplosionManager sharedManager] setExplosionLayer:nil];
     [[TBUnitManager sharedManager] setUnitLayer:nil];
@@ -412,7 +384,7 @@
     if ([[TBMoneyManager sharedManager] sum] >= kTBPriceTank)
     {
         [TBMoneyManager useMoney:kTBPriceTank];
-        [TBUnitManager tankWithTeam:kTBTeamAlly];
+        [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamAlly];
     }
 }
 
@@ -446,15 +418,15 @@
             
             if (sUnitType == 0)
             {
-                [TBUnitManager armoredVehicleWithTeam:kTBTeamEnemy];
+                [[TBUnitManager sharedManager] addArmoredVehicleWithTeam:kTBTeamEnemy];
             }
             else if (sUnitType == 1)
             {
-                [TBUnitManager tankWithTeam:kTBTeamEnemy];
+                [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamEnemy];
             }
             else
             {
-                [TBUnitManager soldierWithTeam:kTBTeamEnemy];
+                [[TBUnitManager sharedManager] addSoldierWithTeam:kTBTeamEnemy];
             }
             
             [[TBMoneyManager sharedManager] saveMoney:10];
@@ -560,19 +532,6 @@
 #pragma mark Helicopter Delegates
 
 
-- (void)updateAmmoLabel
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    NSString     *sAmmoText;
-    
-    if (sHelicopter)
-    {
-        sAmmoText = [NSString stringWithFormat:@"V:%d B:%d D:%3.2f", [sHelicopter bulletCount], [sHelicopter bombCount], [sHelicopter damageRate]];
-        [mAmmoLabel setText:sAmmoText];
-    }
-}
-
-
 - (void)helicopterDamageChanged:(TBHelicopter *)aHelicopter
 {
     if ([aHelicopter isAlly])
@@ -611,18 +570,6 @@
 
 #pragma mark -
 #pragma mark TB****Manager Delegates
-
-
-- (void)updateMoneyLabel:(NSUInteger)aSum
-{
-    [mMoneyLabel setText:[NSString stringWithFormat:@"$ %d", aSum]];
-}
-
-
-- (void)updateScoreLabel:(NSUInteger)aScore
-{
-    [mScoreLabel setText:[NSString stringWithFormat:@"%d", aScore]];
-}
 
 
 - (void)moneyManager:(TBMoneyManager *)aMoneyManager sumDidChange:(NSUInteger)aSum

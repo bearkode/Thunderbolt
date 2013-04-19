@@ -318,7 +318,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 #pragma mark Unit Constructors
 
 
-+ (TBHelicopter *)helicopterWithTeam:(TBTeam)aTeam delegate:(id)aDelegate
+- (TBHelicopter *)addHelicopterWithTeam:(TBTeam)aTeam delegate:(id)aDelegate
 {
     NSNumber     *sUnitID     = [[TBUnitManager sharedManager] nextUnitID];
     TBHelicopter *sHelicopter = [[[TBHelicopter alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
@@ -331,7 +331,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 }
 
 
-+ (TBTank *)tankWithTeam:(TBTeam)aTeam
+- (TBTank *)addTankWithTeam:(TBTeam)aTeam
 {
     NSNumber *sUnitID = [[TBUnitManager sharedManager] nextUnitID];
     TBTank   *sTank   = [[[TBTank alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
@@ -342,7 +342,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 }
 
 
-+ (TBArmoredVehicle *)armoredVehicleWithTeam:(TBTeam)aTeam
+- (TBArmoredVehicle *)addArmoredVehicleWithTeam:(TBTeam)aTeam
 {
     NSNumber         *sUnitID         = [[TBUnitManager sharedManager] nextUnitID];
     TBArmoredVehicle *sArmoredVehicle = [[[TBArmoredVehicle alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
@@ -353,7 +353,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 }
 
 
-+ (TBSoldier *)soldierWithTeam:(TBTeam)aTeam
+- (TBSoldier *)addSoldierWithTeam:(TBTeam)aTeam
 {
     NSNumber  *sUnitID  = [[TBUnitManager sharedManager] nextUnitID];
     TBSoldier *sSoldier = [[[TBSoldier alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
@@ -364,7 +364,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 }
 
 
-+ (TBMissile *)missileWithTeam:(TBTeam)aTeam position:(CGPoint)aPosition target:(TBUnit *)aTarget
+- (TBMissile *)addMissileWithTeam:(TBTeam)aTeam position:(CGPoint)aPosition target:(TBUnit *)aTarget
 {
     NSNumber  *sUnitID  = [[TBUnitManager sharedManager] nextUnitID];
     TBMissile *sMissile = [[[TBMissile alloc] initWithUnitID:sUnitID team:aTeam] autorelease];

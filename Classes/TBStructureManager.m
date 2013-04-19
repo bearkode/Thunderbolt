@@ -10,11 +10,17 @@
 #import "TBStructureManager.h"
 #import "TBGameConst.h"
 #import "TBStructure.h"
+#import "TBBase.h"
+#import "TBLandingPad.h"
+#import "TBAAGunSite.h"
+
 #import "TBWarhead.h"
 
 
 @implementation TBStructureManager
 {
+    PBLayer        *mStructureLayer;
+    
     NSMutableArray *mAllyStructures;
     NSMutableArray *mEnemyStructures;
 }
@@ -36,16 +42,23 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
 }
 
 
-- (void)addStructure:(TBStructure *)aStructure
+#pragma mark -
+
+
+- (void)reset
 {
-    if ([aStructure team] == kTBTeamAlly)
-    {
-        [mAllyStructures addObject:aStructure];
-    }
-    else if ([aStructure team] == kTBTeamEnemy)
-    {
-        [mEnemyStructures addObject:aStructure];
-    }
+    [mStructureLayer release];
+    mStructureLayer = nil;
+    
+    [mAllyStructures removeAllObjects];
+    [mEnemyStructures removeAllObjects];
+}
+
+
+- (void)setStructureLayer:(PBLayer *)aStructureLayer
+{
+    [mStructureLayer autorelease];
+    mStructureLayer = [aStructureLayer retain];
 }
 
 
@@ -74,6 +87,48 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
     }
 
     return sResult;
+}
+
+
+- (void)addStructure:(TBStructure *)aStructure
+{
+    if ([aStructure team] == kTBTeamAlly)
+    {
+        [mAllyStructures addObject:aStructure];
+    }
+    else if ([aStructure team] == kTBTeamEnemy)
+    {
+        [mEnemyStructures addObject:aStructure];
+    }
+    
+    [mStructureLayer addSublayer:aStructure];
+}
+
+
+- (void)addBaseWithTeam:(TBTeam)aTeam position:(CGFloat)aPosition
+{
+    TBBase *sBase = [[[TBBase alloc] initWithTeam:aTeam] autorelease];
+    
+    [sBase setPoint:CGPointMake(aPosition, kMapGround + 30)];
+    [self addStructure:sBase];
+}
+
+
+- (void)addLandingPadWithTeam:(TBTeam)aTeam position:(CGFloat)aPosition
+{
+    TBLandingPad *sLandingPad = [[[TBLandingPad alloc] initWithTeam:aTeam] autorelease];
+    
+    [sLandingPad setPoint:CGPointMake(aPosition, kMapGround + 6)];
+    [self addStructure:sLandingPad];
+}
+
+
+- (void)addAAGunSiteWithTeam:(TBTeam)aTeam position:(CGFloat)aPosition
+{
+    TBAAGunSite *sAAGunSite = [[[TBAAGunSite alloc] initWithTeam:aTeam] autorelease];
+    
+    [sAAGunSite setPoint:CGPointMake(aPosition, kMapGround + 15)];
+    [self addStructure:sAAGunSite];
 }
 
 

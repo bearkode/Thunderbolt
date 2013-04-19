@@ -45,7 +45,7 @@
 //         fast enumeration 중에 미사일 유닛이 추가되면서 크래시 발생.
 - (void)launchMissle:(id)aUnit
 {
-    [TBUnitManager missileWithTeam:kTBTeamEnemy position:[mBody point] target:aUnit];
+    [[TBUnitManager sharedManager] addMissileWithTeam:kTBTeamEnemy position:[mBody point] target:aUnit];
     mAmmoCount--;
     [self reload];
 }

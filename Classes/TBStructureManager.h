@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 #import <PBObjCUtil.h>
+#import <PBKit.h>
+#import "TBGameConst.h"
 
 
 @class TBStructure;
@@ -20,12 +22,17 @@
 
 + (TBStructureManager *)sharedManager;
 
+- (void)reset;
+- (void)setStructureLayer:(PBLayer *)aStructureLayer;
 
-- (void)addStructure:(TBStructure *)aStructure;
 - (void)doActions;
 
-
 - (TBStructure *)intersectedOpponentStructure:(TBWarhead *)aWarhead;
+
+- (void)addStructure:(TBStructure *)aStructure;
+- (void)addBaseWithTeam:(TBTeam)aTeam position:(CGFloat)aPosition;
+- (void)addLandingPadWithTeam:(TBTeam)aTeam position:(CGFloat)aPosition;
+- (void)addAAGunSiteWithTeam:(TBTeam)aTeam position:(CGFloat)aPosition;
 
 
 @end

@@ -77,8 +77,8 @@
     [[TBExplosionManager sharedManager] setExplosionLayer:sLayer];
     [[TBUnitManager sharedManager] setUnitLayer:sLayer];
     
-    mTarget  = [TBUnitManager helicopterWithTeam:kTBTeamAlly delegate:nil];
-    mMissile = [TBUnitManager missileWithTeam:kTBTeamEnemy position:CGPointMake(280, 160) target:mTarget];
+    mTarget  = [[TBUnitManager sharedManager] addHelicopterWithTeam:kTBTeamAlly delegate:nil];
+    mMissile = [[TBUnitManager sharedManager] addMissileWithTeam:kTBTeamEnemy position:CGPointMake(280, 160) target:mTarget];
 }
 
 
