@@ -12,17 +12,19 @@
 
 @implementation TBStructure
 {
-    TBTeam     mTeam;
-    NSInteger  mDurability;
-    NSInteger  mDamage;
-    BOOL       mIsDestroyed;
+    TBTeam    mTeam;
+    NSInteger mDurability;
+    NSInteger mDamage;
+    BOOL      mDestroyed;
+    id        mDelegate;
 }
 
 
-@synthesize team        = mTeam;
-@synthesize durability  = mDurability;
-@synthesize damage      = mDamage;
-@synthesize isDestroyed = mIsDestroyed;
+@synthesize team       = mTeam;
+@synthesize durability = mDurability;
+@synthesize damage     = mDamage;
+@synthesize destroyed  = mDestroyed;
+@synthesize delegate   = mDelegate;
 
 
 #pragma mark -
@@ -34,10 +36,11 @@
     
     if (self)
     {
-        mTeam        = aTeam;
-        mDurability  = 0;
-        mDamage      = 0;
-        mIsDestroyed = NO;
+        mTeam       = aTeam;
+        mDurability = 0;
+        mDamage     = 0;
+        mDestroyed  = NO;
+        mDelegate   = nil;
     }
     
     return self;
@@ -55,13 +58,17 @@
 
 - (void)addDamage:(NSUInteger)aDamage
 {
-    if (!mIsDestroyed)
+    if (!mDestroyed)
     {
         mDamage += aDamage;
         
-        if (mDurability <= mDamage)
+        if (mDamage >= mDurability)
         {
-            mIsDestroyed = YES;
+            mDestroyed = YES;
+            if ([mDelegate respondsToSelector:@selector(structureDidDestroyed:)])
+            {
+                [mDelegate structureDidDestroyed:self];
+            }
         }
     }
 }

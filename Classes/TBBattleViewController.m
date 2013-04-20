@@ -290,15 +290,18 @@
         
         [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / 60.0];
         [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-        
-        [[TBMoneyManager sharedManager] setDelegate:self];
-        [[TBScoreManager sharedManager] setDelegate:self];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(baseDidDestroyNotification:)
+                                                     name:kTBBaseDidDestroyNotificaton
+                                                   object:nil];
         
         [PBSoundListener setOrientation:0];
         mBGMSoundSource = [[PBSoundManager sharedManager] retainSoundSource];
         [mBGMSoundSource setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundValkyries]];
         [mBGMSoundSource setLooping:YES];
         [mBGMSoundSource play];
+        
     }
     
     return self;
@@ -308,6 +311,8 @@
 - (void)dealloc
 {
     [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kTBBaseDidDestroyNotificaton object:nil];
     
     [[TBStructureManager sharedManager] reset];
     [[TBStructureManager sharedManager] setStructureLayer:nil];
@@ -395,6 +400,9 @@
     
     [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateHigh];
     [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.width / 2, sBounds.size.height / 2)];
+    
+    [[TBMoneyManager sharedManager] setDelegate:self];
+    [[TBScoreManager sharedManager] setDelegate:self];
 }
 
 
@@ -587,6 +595,26 @@
 - (void)scoreManager:(TBScoreManager *)aScoreManager scoreDidChange:(NSUInteger)aScore
 {
     [self updateScoreLabel:aScore];
+}
+
+
+#pragma mark -
+
+
+- (void)baseDidDestroyNotification:(NSNotification *)aNotification
+{
+    TBBase *sBase = (TBBase *)[[aNotification userInfo] objectForKey:@"base"];
+    
+    if ([sBase team] == kTBTeamAlly)
+    {
+        NSLog(@"Defeat");
+        [[self navigationController] popViewControllerAnimated:NO];
+    }
+    else
+    {
+        NSLog(@"Win");
+        [[self navigationController] popViewControllerAnimated:NO];
+    }
 }
 
 

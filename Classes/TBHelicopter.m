@@ -26,6 +26,7 @@
 
 @implementation TBHelicopter
 {
+    id              mDelegate;
     TBControlLever *mControlLever;
     
     NSInteger       mTick;
@@ -53,6 +54,7 @@
 }
 
 
+@synthesize delegate        = mDelegate;
 @synthesize controlLever    = mControlLever;
 @synthesize selectedWeapon  = mSelectedWeapon;
 @synthesize bulletCount     = mBulletCount;
@@ -164,14 +166,6 @@
     mContentRect.origin.y   -= sContRect.size.height;
     mContentRect.size.width  = sContRect.size.width;
     mContentRect.size.height = sContRect.size.height;
-}
-
-
-- (void)setDelegate:(id)aDelegate
-{
-    [super setDelegate:aDelegate];
-    
-    [[self delegate] helicopterWeaponDidReload:self];
 }
 
 

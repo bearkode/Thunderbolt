@@ -79,6 +79,7 @@
     {
         TBUnit *sHelicopter = (TBUnit *)[[TBUnitManager sharedManager] allyHelicopter];
         
+        NSLog(@"mMissileLauncher ammoCount = %d", [mMissileLauncher ammoCount]);
         if ([mMissileLauncher ammoCount] > 0)
         {
             sFire = [mMissileLauncher fireAt:sHelicopter];

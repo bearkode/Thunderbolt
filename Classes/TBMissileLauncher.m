@@ -43,7 +43,7 @@
 
 //  TODO : 개선 방법을 찾아볼 것.
 //         fast enumeration 중에 미사일 유닛이 추가되면서 크래시 발생.
-- (void)launchMissle:(id)aUnit
+- (void)launchMissile:(id)aUnit
 {
     [[TBUnitManager sharedManager] addMissileWithTeam:kTBTeamEnemy position:[mBody point] target:aUnit];
     mAmmoCount--;
@@ -67,7 +67,7 @@
 
         if (sDistance <= mMaxRange)
         {
-            [self performSelector:@selector(launchMissle:) withObject:aUnit afterDelay:0.0];
+            [self performSelector:@selector(launchMissile:) withObject:aUnit afterDelay:0.0];
             sResult = YES;
         }
     }

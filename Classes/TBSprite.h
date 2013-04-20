@@ -19,7 +19,7 @@ CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed);
 @interface TBSprite : PBSprite
 
 
-@property (nonatomic, assign) id delegate;
+//@property (nonatomic, assign) id delegate;
 
 
 - (CGRect)contentRect;

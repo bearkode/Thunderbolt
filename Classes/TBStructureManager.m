@@ -17,6 +17,9 @@
 #import "TBWarhead.h"
 
 
+NSString *const kTBBaseDidDestroyNotificaton = @"TBBaseDidDestroyNotification";
+
+
 @implementation TBStructureManager
 {
     PBLayer        *mStructureLayer;
@@ -72,12 +75,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
 - (TBStructure *)intersectedOpponentStructure:(TBWarhead *)aWarhead
 {
     TBStructure *sResult     = nil;
-    TBStructure *sStructure  = nil;
-    NSArray     *sStructures = nil;
+    NSArray     *sStructures = ([aWarhead isAlly]) ? mEnemyStructures : mAllyStructures;
     
-    sStructures = ([aWarhead isAlly]) ? mEnemyStructures : mAllyStructures;
-    
-    for (sStructure in sStructures)
+    for (TBStructure *sStructure in sStructures)
     {
         if ([sStructure intersectWith:aWarhead])
         {
@@ -108,8 +108,10 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
 - (void)addBaseWithTeam:(TBTeam)aTeam position:(CGFloat)aPosition
 {
     TBBase *sBase = [[[TBBase alloc] initWithTeam:aTeam] autorelease];
-    
+
+    [sBase setDelegate:self];
     [sBase setPoint:CGPointMake(aPosition, kMapGround + 30)];
+
     [self addStructure:sBase];
 }
 
@@ -118,7 +120,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
 {
     TBLandingPad *sLandingPad = [[[TBLandingPad alloc] initWithTeam:aTeam] autorelease];
     
+    [sLandingPad setDelegate:self];
     [sLandingPad setPoint:CGPointMake(aPosition, kMapGround + 6)];
+
     [self addStructure:sLandingPad];
 }
 
@@ -127,8 +131,26 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
 {
     TBAAGunSite *sAAGunSite = [[[TBAAGunSite alloc] initWithTeam:aTeam] autorelease];
     
+    [sAAGunSite setDelegate:self];
     [sAAGunSite setPoint:CGPointMake(aPosition, kMapGround + 15)];
+    
     [self addStructure:sAAGunSite];
+}
+
+
+#pragma mark -
+
+
+- (void)structureDidDestroyed:(TBStructure *)aStructure
+{
+    NSLog(@"structureDidDestroyed = %@", aStructure);
+    
+    if ([aStructure isKindOfClass:[TBBase class]])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kTBBaseDidDestroyNotificaton
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:aStructure forKey:@"base"]];
+    }
 }
 
 

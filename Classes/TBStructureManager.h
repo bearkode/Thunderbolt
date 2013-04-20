@@ -13,6 +13,9 @@
 #import "TBGameConst.h"
 
 
+extern NSString *const kTBBaseDidDestroyNotificaton;
+
+
 @class TBStructure;
 @class TBWarhead;
 
@@ -21,6 +24,7 @@
 
 
 + (TBStructureManager *)sharedManager;
+
 
 - (void)reset;
 - (void)setStructureLayer:(PBLayer *)aStructureLayer;

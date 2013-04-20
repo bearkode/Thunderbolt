@@ -56,12 +56,12 @@ inline CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed)
 
 @implementation TBSprite
 {
-    id     mDelegate;
+//    id     mDelegate;
     CGRect mFrame;
 }
 
 
-@synthesize delegate = mDelegate;
+//@synthesize delegate = mDelegate;
 
 
 #pragma mark -

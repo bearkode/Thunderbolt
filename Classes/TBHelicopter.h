@@ -23,6 +23,7 @@ typedef enum
 @interface TBHelicopter : TBUnit
 
 
+@property (nonatomic, assign)   id              delegate;
 @property (nonatomic, readonly) TBControlLever *controlLever;
 @property (nonatomic, assign)   TBWeaponType    selectedWeapon;
 @property (nonatomic, assign)   NSInteger       bulletCount;

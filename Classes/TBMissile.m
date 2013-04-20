@@ -65,7 +65,6 @@
 
 - (void)action
 {
-    PBBeginTimeCheck();
     TBUnit *sTarget = nil;
     
     [super action];
@@ -125,7 +124,6 @@
         [self addDamage:100];
         [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPoint.x, kMapGround + 18)];
     }
-    PBEndTimeCheck();
 }
 
 
