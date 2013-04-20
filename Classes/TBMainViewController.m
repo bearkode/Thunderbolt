@@ -15,6 +15,24 @@
 
 
 @implementation TBMainViewController
+{
+    UILabel *mMoneyLabel;
+}
+
+
+#pragma mark -
+
+
+- (void)updateMoneyLabel
+{
+    NSUInteger sMoney = [[TBMoneyManager sharedManager] balance];
+    NSString  *sText  = [[[NSString alloc] initWithFormat:@"Money = %d", sMoney] autorelease];
+    
+    [mMoneyLabel setText:sText];
+}
+
+
+#pragma mark -
 
 
 - (id)initWithNibName:(NSString *)aNibNameOrNil bundle:(NSBundle *)aNibBundleOrNil
@@ -32,6 +50,11 @@
 
 - (void)dealloc
 {
+    if ([[TBMoneyManager sharedManager] delegate] == self)
+    {
+        [[TBMoneyManager sharedManager] setDelegate:nil];
+    }
+    
     [super dealloc];
 }
 
@@ -44,6 +67,13 @@
     [super viewDidLoad];
     
     CGRect sBounds = [[self view] bounds];
+    
+    mMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 80, 30)];
+    [mMoneyLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [mMoneyLabel setTextColor:[UIColor whiteColor]];
+    [mMoneyLabel setBackgroundColor:[UIColor clearColor]];
+    [[self view] addSubview:mMoneyLabel];
+    [mMoneyLabel release];
 
     UIButton *sCheatButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [sCheatButton setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin)];
@@ -71,6 +101,8 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+    mMoneyLabel = nil;
 }
 
 
@@ -79,6 +111,17 @@
     [super viewWillAppear:aAnimated];
     
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
+    
+    [[TBMoneyManager sharedManager] setDelegate:self];
+    [self updateMoneyLabel];
+}
+
+
+- (void)viewWillDisappear:(BOOL)aAnimated
+{
+    [super viewWillDisappear:aAnimated];
+    
+    [[TBMoneyManager sharedManager] setDelegate:nil];
 }
 
 
@@ -89,7 +132,6 @@
 {    
     TBBattleViewController *sViewController = [[[TBBattleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 
-    [[TBMoneyManager sharedManager] setMoney:1800];
     [[self navigationController] pushViewController:sViewController animated:NO];
 }
 
@@ -107,6 +149,15 @@
     TBCheatViewController *sViewController = [[[TBCheatViewController alloc] initWithNibName:@"TBCheatViewController" bundle:nil] autorelease];
     
     [[self navigationController] pushViewController:sViewController animated:NO];
+}
+
+
+#pragma mark -
+
+
+- (void)moneyManager:(TBMoneyManager *)aMoneyManager balanceDidChange:(NSUInteger)aBalance;
+{
+    [self updateMoneyLabel];
 }
 
 

@@ -13,6 +13,7 @@
 #import "TBMacro.h"
 #import "TBMainViewController.h"
 #import "TBBattleViewController.h"
+#import "TBUserStatusManager.h"
 #import "ProfilingOverlay.h"
 
 
@@ -92,19 +93,19 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)aApplication
 {
-    
+    [[TBUserStatusManager sharedManager] saveStatus];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)aApplication
 {
-    
+
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-
+    [[TBUserStatusManager sharedManager] loadStatus];
 }
 
 

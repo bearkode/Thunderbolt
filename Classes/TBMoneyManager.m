@@ -15,7 +15,7 @@
 @implementation TBMoneyManager
 {
     id         mDelegate;
-    NSUInteger mSum;
+    NSUInteger mBalance;
 }
 
 
@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBMoneyManager, sharedManager);
     self = [super init];
     if (self)
     {
-        mSum = 1800;
+
     }
     
     return self;
@@ -49,17 +49,26 @@ SYNTHESIZE_SINGLETON_CLASS(TBMoneyManager, sharedManager);
 #pragma mark -
 
 
-- (void)setMoney:(NSUInteger)aValue
+- (void)setBalance:(NSUInteger)aValue
 {
-    mSum = aValue;
-    [mDelegate moneyManager:self sumDidChange:mSum];
+    mBalance = aValue;
+    [mDelegate moneyManager:self balanceDidChange:mBalance];
 }
+
+
+- (NSUInteger)balance
+{
+    return mBalance;
+}
+
+
+#pragma mark -
 
 
 - (void)saveMoney:(NSUInteger)aValue
 {
-    mSum += aValue;
-    [mDelegate moneyManager:self sumDidChange:mSum];
+    mBalance += aValue;
+    [mDelegate moneyManager:self balanceDidChange:mBalance];
 }
 
 
@@ -67,31 +76,25 @@ SYNTHESIZE_SINGLETON_CLASS(TBMoneyManager, sharedManager);
 {
     if ([aUnit isKindOfUnit:kTBUnitTank])
     {
-        mSum += kTBCashPrizeTank;
+        mBalance += kTBCashPrizeTank;
     }
     else if ([aUnit isKindOfUnit:kTBUnitArmoredVehicle])
     {
-        mSum += kTBCashPrizeArmoredVehicle;
+        mBalance += kTBCashPrizeArmoredVehicle;
     }
     else if ([aUnit isKindOfUnit:kTBUnitSoldier])
     {
-        mSum += kTBCashPrizeSoldier;
+        mBalance += kTBCashPrizeSoldier;
     }
     
-    [mDelegate moneyManager:self sumDidChange:mSum];    
+    [mDelegate moneyManager:self balanceDidChange:mBalance];
 }
 
 
 - (void)useMoney:(NSUInteger)aValue
 {
-    mSum -= aValue;
-    [mDelegate moneyManager:self sumDidChange:mSum];
-}
-
-
-- (NSUInteger)sum
-{
-    return mSum;
+    mBalance -= aValue;
+    [mDelegate moneyManager:self balanceDidChange:mBalance];
 }
 
 

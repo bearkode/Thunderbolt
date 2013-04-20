@@ -26,6 +26,8 @@
 		2EE9C18D1720323900BB3D24 /* TBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9C18C1720323900BB3D24 /* TBMainViewController.m */; };
 		2EE9C192172189EC00BB3D24 /* TBCheatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9C190172189EC00BB3D24 /* TBCheatViewController.m */; };
 		2EE9C193172189EC00BB3D24 /* TBCheatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EE9C191172189EC00BB3D24 /* TBCheatViewController.xib */; };
+		2EE9C19617218E0D00BB3D24 /* TBUserStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9C19517218E0D00BB3D24 /* TBUserStatusManager.m */; };
+		2EE9C1991722C28500BB3D24 /* TBHelicopterInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9C1981722C28400BB3D24 /* TBHelicopterInfo.m */; };
 		2EEC0BB5171EE8EA0063798C /* TBAssociativeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEC0BB4171EE8EA0063798C /* TBAssociativeArray.m */; };
 		2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */; };
 		2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43CA17167CA000CC376E /* ProfilingOverlayView.m */; };
@@ -178,6 +180,10 @@
 		2EE9C18F172189EC00BB3D24 /* TBCheatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCheatViewController.h; sourceTree = "<group>"; };
 		2EE9C190172189EC00BB3D24 /* TBCheatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCheatViewController.m; sourceTree = "<group>"; };
 		2EE9C191172189EC00BB3D24 /* TBCheatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBCheatViewController.xib; sourceTree = "<group>"; };
+		2EE9C19417218E0D00BB3D24 /* TBUserStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUserStatusManager.h; sourceTree = "<group>"; };
+		2EE9C19517218E0D00BB3D24 /* TBUserStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUserStatusManager.m; sourceTree = "<group>"; };
+		2EE9C1971722C28400BB3D24 /* TBHelicopterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBHelicopterInfo.h; sourceTree = "<group>"; };
+		2EE9C1981722C28400BB3D24 /* TBHelicopterInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHelicopterInfo.m; sourceTree = "<group>"; };
 		2EEC0BB3171EE8EA0063798C /* TBAssociativeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAssociativeArray.h; sourceTree = "<group>"; };
 		2EEC0BB4171EE8EA0063798C /* TBAssociativeArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAssociativeArray.m; sourceTree = "<group>"; };
 		2EFB43C617167C1B00CC376E /* ProfilingOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilingOverlay.h; sourceTree = "<group>"; };
@@ -506,6 +512,10 @@
 				A72BD31011A2DB150091AEC4 /* TBMoneyManager.m */,
 				A72BD43711A42F920091AEC4 /* TBScoreManager.h */,
 				A72BD43811A42F920091AEC4 /* TBScoreManager.m */,
+				2EE9C1971722C28400BB3D24 /* TBHelicopterInfo.h */,
+				2EE9C1981722C28400BB3D24 /* TBHelicopterInfo.m */,
+				2EE9C19417218E0D00BB3D24 /* TBUserStatusManager.h */,
+				2EE9C19517218E0D00BB3D24 /* TBUserStatusManager.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -891,6 +901,8 @@
 				2EE9C18D1720323900BB3D24 /* TBMainViewController.m in Sources */,
 				2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */,
 				2EE9C192172189EC00BB3D24 /* TBCheatViewController.m in Sources */,
+				2EE9C19617218E0D00BB3D24 /* TBUserStatusManager.m in Sources */,
+				2EE9C1991722C28500BB3D24 /* TBHelicopterInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

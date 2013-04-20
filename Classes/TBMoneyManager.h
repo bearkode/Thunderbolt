@@ -34,17 +34,24 @@
 + (TBMoneyManager *)sharedManager;
 + (void)useMoney:(NSUInteger)aValue;
 
-- (void)setMoney:(NSUInteger)aValue;
+- (void)setBalance:(NSUInteger)aValue;
+- (NSUInteger)balance;
+
 - (void)saveMoney:(NSUInteger)aValue;
 - (void)saveMoneyForUnit:(TBUnit *)aUnit;
 - (void)useMoney:(NSUInteger)aValue;
-- (NSUInteger)sum;
+
 
 @end
 
 
-@interface NSObject (TBMoneyManagerDelegate)
+#pragma mark -
 
-- (void)moneyManager:(TBMoneyManager *)aMoneyManager sumDidChange:(NSUInteger)aSum;
+
+@protocol TBMoneyManagerDelegate <NSObject>
+
+
+- (void)moneyManager:(TBMoneyManager *)aMoneyManager balanceDidChange:(NSUInteger)aBalance;
+
 
 @end

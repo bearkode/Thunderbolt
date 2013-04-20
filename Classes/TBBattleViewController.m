@@ -183,7 +183,7 @@
 
 - (void)deployNewAllyHelicopter
 {
-    if ([[TBMoneyManager sharedManager] sum] >= kTBPriceHelicopter)
+    if ([[TBMoneyManager sharedManager] balance] >= kTBPriceHelicopter)
     {
         [TBMoneyManager useMoney:kTBPriceHelicopter];
         [[TBUnitManager sharedManager] addHelicopterWithTeam:kTBTeamAlly delegate:self];
@@ -417,7 +417,7 @@
 
 - (IBAction)tankButtonTapped:(id)aSender
 {
-    if ([[TBMoneyManager sharedManager] sum] >= kTBPriceTank)
+    if ([[TBMoneyManager sharedManager] balance] >= kTBPriceTank)
     {
         [TBMoneyManager useMoney:kTBPriceTank];
         [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamAlly];
@@ -578,9 +578,9 @@
 #pragma mark Manager Delegates
 
 
-- (void)moneyManager:(TBMoneyManager *)aMoneyManager sumDidChange:(NSUInteger)aSum
+- (void)moneyManager:(TBMoneyManager *)aMoneyManager balanceDidChange:(NSUInteger)aBalance
 {
-    [self updateMoneyLabel:aSum];
+    [self updateMoneyLabel:aBalance];
 }
 
 
