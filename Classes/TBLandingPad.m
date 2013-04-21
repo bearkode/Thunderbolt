@@ -58,7 +58,8 @@
                 [sHelicopter fillUpBullets:kLandingPadFillUpBullets];
                 [sHelicopter fillUpBombs:kLandingPadFillUpBombs];
             }
-            mFillUpCount = 20;
+            
+            mFillUpCount = 40;
         }
         else
         {

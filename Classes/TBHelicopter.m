@@ -17,7 +17,7 @@
 #import "TBMoneyManager.h"
 
 
-#define MAX_BULLETS     100
+const NSUInteger kMaxBullets = 100;
 #define MAX_BOMBS       5
 #define MAX_MISSILE     2
 
@@ -31,8 +31,8 @@
     
     NSInteger       mTick;
     
-    BOOL            mIsLeftAhead;
-    BOOL            mIsLanded;
+    BOOL            mLeftAhead;
+    BOOL            mLanded;
     CGFloat         mSpeed;
     NSInteger       mTextureIndex;
     
@@ -45,9 +45,10 @@
     NSInteger       mBulletCount;
     NSInteger       mBombCount;
     NSInteger       mMissileCount;
+    
     BOOL            mIsVulcanFire;
-    BOOL            mIsBombDrop;
-    BOOL            mIsMissileLaunch;
+//    BOOL            mIsBombDrop;
+//    BOOL            mIsMissileLaunch;
     
     PBSoundSource  *mSoundSource;
     PBSoundSource  *mVulcanSoundSource;
@@ -56,12 +57,14 @@
 
 @synthesize delegate        = mDelegate;
 @synthesize controlLever    = mControlLever;
+@synthesize leftAhead       = mLeftAhead;
+@synthesize landed          = mLanded;
 @synthesize selectedWeapon  = mSelectedWeapon;
 @synthesize bulletCount     = mBulletCount;
 @synthesize bombCount       = mBombCount;
 @synthesize missileCount    = mMissileCount;
-@synthesize isBombDrop      = mIsBombDrop;
-@synthesize isMissileLaunch = mIsMissileLaunch;
+//@synthesize isBombDrop      = mIsBombDrop;
+//@synthesize isMissileLaunch = mIsMissileLaunch;
 
 
 #pragma mark -
@@ -76,15 +79,15 @@
         [self setType:kTBUnitHelicopter];
         [self setDurability:kHelicopterDurability];
         
-        mControlLever    = [[TBControlLever alloc] initWithHelicopter:self];
+        mControlLever = [[TBControlLever alloc] initWithHelicopter:self];
         
-        mTick            = 0;
+        mTick         = 0;
         
-        mIsLeftAhead     = (aTeam == kTBTeamAlly) ? NO : YES;
-        mSpeed           = 0;
-        mTextureIndex    = (aTeam == kTBTeamAlly) ? 8 : 0;
+        mLeftAhead    = (aTeam == kTBTeamAlly) ? NO : YES;
+        mSpeed        = 0;
+        mTextureIndex = (aTeam == kTBTeamAlly) ? 8 : 0;
         
-        mTextureArray    = [[NSMutableArray alloc] init];
+        mTextureArray = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 9; i++)
         {
             [mTextureArray addObject:[NSString stringWithFormat:@"heli%02d.png", i]];
@@ -105,14 +108,14 @@
         [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 7
         [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 8
         
-        mBulletCount     = MAX_BULLETS;
+        mBulletCount     = kMaxBullets;
         mBombCount       = MAX_BOMBS;
         mMissileCount    = MAX_MISSILE;
         mIsVulcanFire    = NO;
-        mIsBombDrop      = NO;
-        mIsMissileLaunch = NO;
+//        mIsBombDrop      = NO;
+//        mIsMissileLaunch = NO;
         
-        mIsLanded        = YES;
+        mLanded          = YES;
         
         PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
         
@@ -205,7 +208,7 @@
     mSpeed -= (mSpeed > 0.0) ? 0.04 : 0.0;
     mSpeed += (mSpeed < 0.0) ? 0.04 : 0.0;
     
-    if (!mIsLanded && (aPoint.y - [[self mesh] size].height) > kMapGround) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
+    if (!mLanded && (aPoint.y - [[self mesh] size].height) > kMapGround) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
     {
         aPoint.x += mSpeed;
 
@@ -213,16 +216,16 @@
         
         if (mSpeed > 0)
         {
-            if (mIsLeftAhead == YES)
+            if (mLeftAhead == YES)
             {
-                mIsLeftAhead = NO;
+                mLeftAhead = NO;
             }
         }
         else
         {
-            if (mIsLeftAhead == NO)
+            if (mLeftAhead == NO)
             {
-                mIsLeftAhead = YES;
+                mLeftAhead = YES;
             }
         }
     }
@@ -248,17 +251,17 @@
 
     if ((aPoint.y - (sMeshSize.height / 2)) < kMapGround)
     {
-        mIsLanded   = YES;
+        mLanded   = YES;
         aPoint.y = kMapGround + sMeshSize.height / 2;
     }
     else if (aPoint.y > 300)
     {
         aPoint.y = 300;
-        mIsLanded = NO;
+        mLanded = NO;
     }
     else
     {
-        mIsLanded = NO;
+        mLanded = NO;
     }
 
     return aPoint;
@@ -298,13 +301,14 @@
 
 - (void)fillUpBullets:(NSInteger)aCount
 {
-    if (mBulletCount < MAX_BULLETS)
+    if (mBulletCount < kMaxBullets)
     {
         mBulletCount += aCount;
-        if (mBulletCount > MAX_BULLETS)
+        if (mBulletCount > kMaxBullets)
         {
-            mBulletCount = MAX_BULLETS;
+            mBulletCount = kMaxBullets;
         }
+        
         [[self delegate] helicopterWeaponDidReload:self];
         [TBMoneyManager useMoney:kTBPriceBullet];        
     }
@@ -425,7 +429,7 @@
     
     if ((mTick % 2) == 0)
     {
-        if (mIsLeftAhead)
+        if (mLeftAhead)
         {
             if (mTextureIndex > 2)
             {
@@ -454,18 +458,6 @@
     
     [sTexture loadIfNeeded];
     [self setTexture:sTexture];
-}
-
-
-- (BOOL)isLeftAhead
-{
-    return mIsLeftAhead;
-}
-
-
-- (BOOL)isLanded
-{
-    return mIsLanded;
 }
 
 
