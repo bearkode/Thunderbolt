@@ -84,6 +84,7 @@
     
     [mTextureArray removeAllObjects];
     [mPositionArray removeAllObjects];
+    [[self transform] setAngle:PBVertex3Make(0, 0, 0)];
     
     [self setHidden:NO];
 }
