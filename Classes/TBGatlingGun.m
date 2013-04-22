@@ -67,18 +67,29 @@ const NSInteger kFireDelay = 8;
 #pragma mark -
 
 
+- (BOOL)canFire
+{
+    TBHelicopter *sHelicopter = (TBHelicopter *)[self body];
+    
+    return (![sHelicopter isLanded] && [self ammoCount] > 0);
+}
+
+
 - (void)setFire:(BOOL)aFlag
 {
-    mFire = aFlag;
-    
-    if (mFire)
+    if (mFire != aFlag)
     {
-        mFireDelay = 0;
-        [mSoundSource play];
-    }
-    else
-    {
-        [mSoundSource stop];
+        if (aFlag == YES && [self canFire])
+        {
+            mFire = YES;
+            mFireDelay = 0;
+            [mSoundSource play];
+        }
+        else
+        {
+            mFire = NO;
+            [mSoundSource stop];
+        }
     }
 }
 

@@ -268,7 +268,8 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 
     if ((aPoint.y - (sMeshSize.height / 2)) < kMapGround)
     {
-        mLanded   = YES;
+        mLanded  = YES;
+        [mSelectedWeapon setFire:NO];
         aPoint.y = kMapGround + sMeshSize.height / 2;
     }
     else if (aPoint.y > 300)
@@ -330,39 +331,6 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 }
 
 
-//- (void)fillUpBullets:(NSInteger)aCount
-//{
-//    if (mBulletCount < kMaxBullets)
-//    {
-//        mBulletCount += aCount;
-//        if (mBulletCount > kMaxBullets)
-//        {
-//            mBulletCount = kMaxBullets;
-//        }
-//        
-//        [[self delegate] helicopterWeaponDidReload:self];
-//        [TBMoneyManager useMoney:kTBPriceBullet];        
-//    }
-//
-//}
-
-
-//- (void)fillUpBombs:(NSInteger)aCount
-//{
-//    if (mBombCount < kMaxBombs)
-//    {
-//        mBombCount += aCount;
-//        if (mBombCount > kMaxBombs)
-//        {
-//            mBombCount = kMaxBombs;
-//        }
-//        
-//        [[self delegate] helicopterWeaponDidReload:self];
-//        [TBMoneyManager useMoney:kTBPriceBomb];
-//    }
-//}
-
-
 #pragma mark -
 
 
@@ -372,8 +340,6 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     
     sIndex = (sIndex >= ([mHardPoints count] - 1)) ? 0 : (sIndex + 1);
     mSelectedWeapon = [mHardPoints objectAtIndex:sIndex];
-    
-    NSLog(@"selected weapon = %@", mSelectedWeapon);
 }
 
 

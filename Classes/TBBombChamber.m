@@ -19,6 +19,14 @@
 }
 
 
+- (BOOL)canFire
+{
+    TBHelicopter *sBody  = (TBHelicopter *)[self body];
+    
+    return (![sBody isLanded] && [self ammoCount] > 0);
+}
+
+
 - (void)setFire:(BOOL)aFire
 {
     mFire = aFire;
@@ -42,7 +50,7 @@
 {
     if (mFire)
     {
-        if ([self ammoCount] > 0)
+        if ([self canFire])
         {
             TBHelicopter *sBody  = (TBHelicopter *)[self body];
             CGFloat       sSpeed = [sBody speed];

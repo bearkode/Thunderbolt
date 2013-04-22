@@ -79,10 +79,13 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
     
     for (TBStructure *sStructure in sStructures)
     {
-        if ([sStructure intersectWith:aWarhead])
+        if (![sStructure isDestroyed])
         {
-            sResult = sStructure;
-            break;
+            if ([sStructure intersectWith:aWarhead])
+            {
+                sResult = sStructure;
+                break;
+            }
         }
     }
 
