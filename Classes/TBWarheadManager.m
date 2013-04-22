@@ -27,7 +27,10 @@
     
     NSMutableArray *mWarheads;
     NSMutableArray *mDisabledWarheads;
+
     TBObjectPool   *mBulletPool;
+    TBObjectPool   *mBombPool;
+    TBObjectPool   *mTankShellPool;
 }
 
 
@@ -41,7 +44,10 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
     {
         mWarheads         = [[NSMutableArray alloc] init];
         mDisabledWarheads = [[NSMutableArray alloc] init];
+        
         mBulletPool       = [[TBObjectPool alloc] initWithCapacity:10 storableClass:[TBBullet class]];
+        mBombPool         = [[TBObjectPool alloc] initWithCapacity:10 storableClass:[TBBomb class]];
+        mTankShellPool    = [[TBObjectPool alloc] initWithCapacity:10 storableClass:[TBTankShell class]];
     }
     
     return self;
@@ -58,7 +64,10 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
     
     [mWarheads removeAllObjects];
     [mDisabledWarheads removeAllObjects];
+
     [mBulletPool reset];
+    [mBombPool reset];
+    [mTankShellPool reset];
 }
 
 
@@ -84,33 +93,28 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 
 - (void)doActions
 {
-    TBWarhead   *sWarhead;
-    TBUnit      *sUnit;
-    TBStructure *sStructure;
-    
     [self removeDisabledWarhead];
     
-    for (sWarhead in mWarheads)
+    for (TBWarhead *sWarhead in mWarheads)
     {
         [sWarhead action];
      
-        sUnit = [[TBUnitManager sharedManager] intersectedOpponentUnit:sWarhead];
+        TBUnit *sUnit = [[TBUnitManager sharedManager] intersectedOpponentUnit:sWarhead];
         if (sUnit)
         {
             [sWarhead setAvailable:NO];
+            
             [sUnit addDamage:[sWarhead power]];
             [[TBExplosionManager sharedManager] addBombExplosionAtPosition:[sWarhead point]];
         }
         
-        if ([sWarhead isAvailable])
+        TBStructure *sStructure = [[TBStructureManager sharedManager] intersectedOpponentStructure:sWarhead];
+        if (sStructure)
         {
-            sStructure = [[TBStructureManager sharedManager] intersectedOpponentStructure:sWarhead];
-            if (sStructure && ![sStructure isDestroyed])
-            {
-                [sWarhead setAvailable:NO];
-                [sStructure addDamage:[sWarhead power]];
-                [[TBExplosionManager sharedManager] addBombExplosionAtPosition:[sWarhead point]];
-            }
+            [sWarhead setAvailable:NO];
+            
+            [sStructure addDamage:[sWarhead power]];
+            [[TBExplosionManager sharedManager] addBombExplosionAtPosition:[sWarhead point]];
         }
     }
 }
@@ -122,20 +126,11 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
     
     for (TBWarhead *sWarhead in mWarheads)
     {
-        if (![sWarhead isAvailable])
+        if (![sWarhead available])
         {
+            TBObjectPool *sObjectPool = [sWarhead objectPool];
+            [sObjectPool finishUsing:sWarhead];
             [mDisabledWarheads addObject:sWarhead];
-            if ([sWarhead isMemberOfClass:[TBBullet class]])
-            {
-                [mBulletPool finishUsing:sWarhead];
-            }
-        }
-        else if ([sWarhead isMemberOfClass:[TBBomb class]] && [sWarhead intersectWithGround])
-        {
-            [mDisabledWarheads addObject:sWarhead];
-            
-            CGPoint sPosition = [sWarhead point];
-            [[TBExplosionManager sharedManager] addBombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
         }
     }
     
@@ -157,6 +152,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
     [sBullet setTeam:aTeam];
     [sBullet setPoint:aPos];
     [sBullet setVector:aVector];
+    [sBullet setObjectPool:mBombPool];
     
     [self addObject:sBullet];
     
@@ -166,13 +162,15 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 
 - (TBBomb *)addBombWithTeam:(TBTeam)aTeam position:(CGPoint)aPos speed:(CGFloat)aSpeed
 {
-    TBBomb *sBomb = [[[TBBomb alloc] init] autorelease];
+    TBBomb *sBomb = (TBBomb *)[mBombPool object];
     
+    [sBomb reset];
     [sBomb setTeam:aTeam];
     [sBomb setPoint:aPos];
     [sBomb setSpeed:aSpeed];
+    [sBomb setObjectPool:mBombPool];
     
-    [[TBWarheadManager sharedManager] addObject:sBomb];
+    [self addObject:sBomb];
     
     return sBomb;
 }
@@ -180,13 +178,15 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 
 - (TBTankShell *)addTankShellWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector
 {
-    TBTankShell *sTankShell = [[[TBTankShell alloc] init] autorelease];
+    TBTankShell *sTankShell = (TBTankShell *)[mTankShellPool object];
     
+    [sTankShell reset];
     [sTankShell setTeam:aTeam];
     [sTankShell setPoint:aPos];
     [sTankShell setVector:aVector];
+    [sTankShell setObjectPool:mTankShellPool];
     
-    [[TBWarheadManager sharedManager] addObject:sTankShell];
+    [self addObject:sTankShell];
     
     return sTankShell;
 }

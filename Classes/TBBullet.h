@@ -14,7 +14,4 @@
 @interface TBBullet : TBWarhead
 
 
-@property (nonatomic, assign) NSInteger life;
-
-
 @end

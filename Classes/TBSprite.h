@@ -19,9 +19,6 @@ CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed);
 @interface TBSprite : PBSprite
 
 
-//@property (nonatomic, assign) id delegate;
-
-
 - (CGRect)contentRect;
 - (BOOL)intersectWith:(TBSprite *)aSprite;
 - (BOOL)intersectWithGround;

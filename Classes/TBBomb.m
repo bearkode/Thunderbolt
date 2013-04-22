@@ -9,6 +9,7 @@
 
 #import "TBBomb.h"
 #import "TBTextureNames.h"
+#import "TBExplosionManager.h"
 
 
 @implementation TBBomb
@@ -37,11 +38,7 @@
 {
     CGPoint sVector = [self vector];
     
-    if (sVector.x == 0)
-    {
-    
-    }
-    else if (sVector.x < 0)
+    if (sVector.x < 0)
     {
         sVector.x += 1.0;
     }
@@ -50,7 +47,8 @@
         sVector.x -= 1.0;
     }
     
-    sVector.y += 0.4;
+    sVector.y += 0.2;
+    
     [self setVector:sVector];
     
     CGPoint sPoint = [self point];
@@ -59,6 +57,15 @@
     sPoint.y -= sVector.y;
     
     [self setPoint:sPoint];
+    
+    if ([self intersectWithGround])
+    {
+        [self setAvailable:NO];
+        
+        CGPoint sPoint = [self point];
+        [[TBExplosionManager sharedManager] addBombExplosionAtPosition:CGPointMake(sPoint.x, kMapGround + 18)];
+    }
+    
 }
 
 

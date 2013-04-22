@@ -8,21 +8,26 @@
  */
 
 #import "TBWarhead.h"
+#import "TBObjectPool.h"
 
 
 @implementation TBWarhead
 {
-    TBTeam    mTeam;
-    BOOL      mAvailable;
-    NSInteger mPower;
-    CGPoint   mVector;    
+    TBTeam        mTeam;
+    NSInteger     mPower;
+    NSInteger     mLife;
+    BOOL          mAvailable;
+    CGPoint       mVector;
+    TBObjectPool *mObjectPool;
 }
 
 
-@synthesize team      = mTeam;
-@synthesize power     = mPower;
-@synthesize available = mAvailable;
-@synthesize vector    = mVector;
+@synthesize team       = mTeam;
+@synthesize power      = mPower;
+@synthesize life       = mLife;
+@synthesize available  = mAvailable;
+@synthesize vector     = mVector;
+@synthesize objectPool = mObjectPool;
 
 
 #pragma mark -
@@ -53,9 +58,23 @@
 - (void)reset
 {
     mTeam      = kTBTeamUnknown;
-    mAvailable = YES;
     mPower     = 0;
+    mLife      = 0;
+    mAvailable = YES;
     mVector    = CGPointZero;
+}
+
+
+- (void)decreaseLife
+{
+    if (mLife > 0)
+    {
+        mLife--;
+    }
+    else
+    {
+        mAvailable = NO;
+    }
 }
 
 

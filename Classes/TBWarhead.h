@@ -12,16 +12,23 @@
 #import "TBGameConst.h"
 
 
+@class TBObjectPool;
+
+
 @interface TBWarhead : TBSprite
 
 
-@property (nonatomic, assign)               TBTeam    team;
-@property (nonatomic, assign)               NSInteger power;
-@property (nonatomic, getter = isAvailable) BOOL      available;
-@property (nonatomic, assign)               CGPoint   vector;
+@property (nonatomic, assign) TBTeam        team;
+@property (nonatomic, assign) NSInteger     power;
+@property (nonatomic, assign) NSInteger     life;
+@property (nonatomic, assign) BOOL          available;
+@property (nonatomic, assign) CGPoint       vector;
+@property (nonatomic, assign) TBObjectPool *objectPool;
 
 
 - (void)reset;
+
+- (void)decreaseLife;
 - (BOOL)isAlly;
 
 

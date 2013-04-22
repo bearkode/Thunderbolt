@@ -13,12 +13,6 @@
 
 
 @implementation TBBullet
-{
-    NSInteger mLife;
-}
-
-
-@synthesize life   = mLife;
 
 
 #pragma mark -
@@ -31,8 +25,6 @@
     if (self)
     {
         [[self mesh] setUsingMeshQueue:YES];
-        
-        mLife = 200;
     }
     
     return self;
@@ -51,14 +43,14 @@
 - (void)reset
 {
     [super reset];
-    
-    mLife = 200;
+
+    [self setLife:200];
 }
 
 
 - (void)action
 {
-    if (mLife > 0)
+    if ([self life] > 0)
     {
         CGPoint sPoint  = [self point];
         CGPoint sVector = [self vector];
@@ -70,12 +62,12 @@
 
         if (sPoint.y < kMapGround)
         {
-            mLife = 0;
+            [self setLife:0];
             [self setAvailable:NO];
         }
         else
         {
-            mLife--;
+            [self decreaseLife];
         }
     }
     else

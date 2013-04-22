@@ -13,15 +13,6 @@
 
 
 @implementation TBTankShell
-{
-    NSInteger mLife;
-}
-
-
-@synthesize life   = mLife;
-
-
-#pragma mark -
 
 
 - (id)init
@@ -50,14 +41,14 @@
 {
     [super reset];
     
-    mLife = 200;
+    [self setLife:200];
     [self setPower:kTankShellPower];    
 }
 
 
 - (void)action
 {
-    if (mLife > 0)
+    if ([self life] > 0)
     {
         CGPoint sVector = [self vector];
         CGPoint sPoint  = [self point];
@@ -69,12 +60,12 @@
         
         if (sPoint.y < kMapGround)
         {
-            mLife = 0;
+            [self setLife:0];
             [self setAvailable:NO];
         }
         else
         {
-            mLife--;
+            [self decreaseLife];
         }
     }
     else

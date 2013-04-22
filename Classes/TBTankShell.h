@@ -14,7 +14,4 @@
 @interface TBTankShell : TBWarhead
 
 
-@property (nonatomic, assign) NSInteger life;
-
-
 @end
