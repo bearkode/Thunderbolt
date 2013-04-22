@@ -11,7 +11,7 @@
 #import "TBWeapon.h"
 
 
-@interface TBAAVulcan : TBWeapon
+@interface TBVulcan : TBWeapon
 
 
 @end

@@ -12,7 +12,7 @@
 #import "TBGameConst.h"
 #import "TBTextureNames.h"
 #import "TBUnitManager.h"
-#import "TBAAVulcan.h"
+#import "TBVulcan.h"
 #import "TBHelicopter.h"
 #import "TBMacro.h"
 #import "TBExplosionManager.h"
@@ -20,10 +20,45 @@
 
 @implementation TBAAGunSite
 {
-    TBAAVulcan *mAAVulcan;
-    
-    NSArray    *mTextureArray;
+    TBVulcan *mVulcan;
+    NSArray  *mTextureArray;
 }
+
+
+- (void)updateTextureWithAngle:(CGFloat)aAngle
+{
+    PBTexture *sTexture = nil;
+    
+    if (aAngle < 36)
+    {
+        sTexture = [mTextureArray objectAtIndex:4];
+    }
+    else if (aAngle >= 36 && aAngle < 72)
+    {
+        sTexture = [mTextureArray objectAtIndex:3];
+    }
+    else if (aAngle >= 72 && aAngle < 108)
+    {
+        sTexture = [mTextureArray objectAtIndex:2];
+    }
+    else if (aAngle >= 108 && aAngle < 144)
+    {
+        sTexture = [mTextureArray objectAtIndex:1];
+    }
+    else if (aAngle >= 144)
+    {
+        sTexture = [mTextureArray objectAtIndex:0];
+    }
+    
+    if (sTexture && sTexture != [self texture])
+    {
+        [sTexture loadIfNeeded];
+        [self setTexture:sTexture];
+    }
+}
+
+
+#pragma mark -
 
 
 - (id)initWithTeam:(TBTeam)aTeam
@@ -34,8 +69,8 @@
     {
         [self setDurability:kAAGunSiteDurability];
         
-        mAAVulcan = [[TBAAVulcan alloc] init];
-        [mAAVulcan setBody:self];
+        mVulcan = [[TBVulcan alloc] init];
+        [mVulcan setBody:self];
         
         mTextureArray = [[NSArray alloc] initWithObjects:[PBTextureManager textureWithImageName:kTexAAGun01],
                                                          [PBTextureManager textureWithImageName:kTexAAGun01],
@@ -54,11 +89,14 @@
 
 - (void)dealloc
 {
-    [mAAVulcan release];
+    [mVulcan release];
     [mTextureArray release];
     
     [super dealloc];
 }
+
+
+#pragma mark -
 
 
 - (void)addDamage:(NSUInteger)aDamage
@@ -79,52 +117,23 @@
 
 - (void)action
 {
-    [super action];
-    
     if (![self isDestroyed])
     {
-        [mAAVulcan action];
+        [super action];
+        [mVulcan action];
         
-        TBHelicopter *sHelicopter     = [[TBUnitManager sharedManager] opponentHeicopter:[self team]];
-        CGPoint       sSitePosition   = [self point];
-        CGPoint       sTargetPosition = [sHelicopter point];
-        CGFloat       sAngle;
-        CGFloat       sDistance;
-        PBTexture    *sTexture = nil;
-        
-        sDistance = TBDistanceBetweenToPoints(sSitePosition, sTargetPosition);
-        
-        if (sHelicopter && sDistance < [mAAVulcan maxRange])
+        TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] opponentHeicopter:[self team]];
+        if (sHelicopter)
         {
-            sAngle = TBRadiansToDegrees(TBAngleBetweenToPoints(sSitePosition, sTargetPosition));
-            if (sAngle < 36)
-            {
-                sTexture = [mTextureArray objectAtIndex:4];
-            }
-            else if (sAngle >= 36 && sAngle < 72)
-            {
-                sTexture = [mTextureArray objectAtIndex:3];
-            }
-            else if (sAngle >= 72 && sAngle < 108)
-            {
-                sTexture = [mTextureArray objectAtIndex:2];
-            }
-            else if (sAngle >= 108 && sAngle < 144)
-            {
-                sTexture = [mTextureArray objectAtIndex:1];
-            }
-            else if (sAngle >= 144)
-            {
-                sTexture = [mTextureArray objectAtIndex:0];
-            }
+            CGPoint sSitePosition   = [self point];
+            CGPoint sTargetPosition = [sHelicopter point];
+            CGFloat sDistance       = TBDistanceBetweenToPoints(sSitePosition, sTargetPosition);
             
-            if (sTexture && sTexture != [self texture])
+            if ([mVulcan inRange:sDistance])
             {
-                [sTexture loadIfNeeded];
-                [self setTexture:sTexture];
+                [self updateTextureWithAngle:TBRadiansToDegrees(TBAngleBetweenToPoints(sSitePosition, sTargetPosition))];
+                [mVulcan fireAt:sHelicopter];
             }
-            
-            [mAAVulcan fireAt:sHelicopter];
         }
     }
 }

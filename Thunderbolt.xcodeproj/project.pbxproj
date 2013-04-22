@@ -45,7 +45,7 @@
 		A720E71F111F725700CA7792 /* bomb_exp01.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E71C111F725700CA7792 /* bomb_exp01.png */; };
 		A720E720111F725700CA7792 /* bomb_exp02.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E71D111F725700CA7792 /* bomb_exp02.png */; };
 		A725CC2A119D9AF800276F35 /* TBWeapon.m in Sources */ = {isa = PBXBuildFile; fileRef = A725CC29119D9AF800276F35 /* TBWeapon.m */; };
-		A725CC36119D9BC400276F35 /* TBAAVulcan.m in Sources */ = {isa = PBXBuildFile; fileRef = A725CC35119D9BC400276F35 /* TBAAVulcan.m */; };
+		A725CC36119D9BC400276F35 /* TBVulcan.m in Sources */ = {isa = PBXBuildFile; fileRef = A725CC35119D9BC400276F35 /* TBVulcan.m */; };
 		A72BD31111A2DB150091AEC4 /* TBMoneyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A72BD31011A2DB150091AEC4 /* TBMoneyManager.m */; };
 		A72BD43911A42F920091AEC4 /* TBScoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A72BD43811A42F920091AEC4 /* TBScoreManager.m */; };
 		A72BD49511A4381F0091AEC4 /* TBRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = A72BD49411A4381F0091AEC4 /* TBRadar.m */; };
@@ -212,8 +212,8 @@
 		A720E71D111F725700CA7792 /* bomb_exp02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb_exp02.png; sourceTree = "<group>"; };
 		A725CC28119D9AF800276F35 /* TBWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBWeapon.h; sourceTree = "<group>"; };
 		A725CC29119D9AF800276F35 /* TBWeapon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBWeapon.m; sourceTree = "<group>"; };
-		A725CC34119D9BC400276F35 /* TBAAVulcan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAAVulcan.h; sourceTree = "<group>"; };
-		A725CC35119D9BC400276F35 /* TBAAVulcan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAAVulcan.m; sourceTree = "<group>"; };
+		A725CC34119D9BC400276F35 /* TBVulcan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVulcan.h; sourceTree = "<group>"; };
+		A725CC35119D9BC400276F35 /* TBVulcan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBVulcan.m; sourceTree = "<group>"; };
 		A72BD30F11A2DB150091AEC4 /* TBMoneyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMoneyManager.h; sourceTree = "<group>"; };
 		A72BD31011A2DB150091AEC4 /* TBMoneyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMoneyManager.m; sourceTree = "<group>"; };
 		A72BD43711A42F920091AEC4 /* TBScoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBScoreManager.h; sourceTree = "<group>"; };
@@ -493,8 +493,8 @@
 			children = (
 				A725CC28119D9AF800276F35 /* TBWeapon.h */,
 				A725CC29119D9AF800276F35 /* TBWeapon.m */,
-				A725CC34119D9BC400276F35 /* TBAAVulcan.h */,
-				A725CC35119D9BC400276F35 /* TBAAVulcan.m */,
+				A725CC34119D9BC400276F35 /* TBVulcan.h */,
+				A725CC35119D9BC400276F35 /* TBVulcan.m */,
 				A7B5AB17119FD00D00FC9F33 /* TBMissileLauncher.h */,
 				A7B5AB18119FD00E00FC9F33 /* TBMissileLauncher.m */,
 				A75A5C07119FF7AE002B9360 /* TBTankGun.h */,
@@ -878,7 +878,7 @@
 				A71FFB7811961DCE00DA0139 /* TBWarheadManager.m in Sources */,
 				A71FFC5211965E4300DA0139 /* TBExplosionManager.m in Sources */,
 				A725CC2A119D9AF800276F35 /* TBWeapon.m in Sources */,
-				A725CC36119D9BC400276F35 /* TBAAVulcan.m in Sources */,
+				A725CC36119D9BC400276F35 /* TBVulcan.m in Sources */,
 				A79BD780119F66F20021574B /* TBArmoredVehicle.m in Sources */,
 				A7B5AB19119FD00E00FC9F33 /* TBMissileLauncher.m in Sources */,
 				A75A5C09119FF7AE002B9360 /* TBTankGun.m in Sources */,

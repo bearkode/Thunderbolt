@@ -11,9 +11,6 @@
 #import "TBStructure.h"
 
 
-@class TBAAVulcan;
-
-
 @interface TBAAGunSite : TBStructure
 
 

@@ -7,12 +7,12 @@
  *
  */
 
-#import "TBAAVulcan.h"
+#import "TBVulcan.h"
 #import "TBUnit.h"
 #import "TBWarheadManager.h"
 
 
-@implementation TBAAVulcan
+@implementation TBVulcan
 
 
 - (id)init

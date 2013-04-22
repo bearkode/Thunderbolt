@@ -11,7 +11,7 @@
 #import "TBTextureNames.h"
 #import "TBUnitManager.h"
 
-#import "TBAAVulcan.h"
+#import "TBVulcan.h"
 #import "TBMissileLauncher.h"
 
 
@@ -28,7 +28,7 @@ const CGFloat kAPCSpeed = 0.5;
     
     NSInteger          mHitDiscount;
         
-    TBAAVulcan        *mAAVulcan;
+    TBVulcan          *mVulcan;
     TBMissileLauncher *mMissileLauncher;
 }
 
@@ -55,10 +55,10 @@ const CGFloat kAPCSpeed = 0.5;
         [self setTexture:mTextureNormal];
         [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + ([[self mesh] size].height / 2))];
         
-        mAAVulcan        = [[TBAAVulcan alloc] init];
+        mVulcan        = [[TBVulcan alloc] init];
         mMissileLauncher = [[TBMissileLauncher alloc] init];
         
-        [mAAVulcan setBody:self];
+        [mVulcan setBody:self];
         [mMissileLauncher setBody:self];
     }
     
@@ -68,7 +68,7 @@ const CGFloat kAPCSpeed = 0.5;
 
 - (void)dealloc
 {
-    [mAAVulcan        release];
+    [mVulcan        release];
     [mMissileLauncher release];
     
     [super dealloc];
@@ -81,7 +81,7 @@ const CGFloat kAPCSpeed = 0.5;
     
     [super action];
     
-    [mAAVulcan action];
+    [mVulcan action];
     [mMissileLauncher action];
     
     if (![self isAlly])
@@ -94,7 +94,7 @@ const CGFloat kAPCSpeed = 0.5;
         }
         else
         {
-            sFire = [mAAVulcan fireAt:sHelicopter];
+            sFire = [mVulcan fireAt:sHelicopter];
         }
     }
     

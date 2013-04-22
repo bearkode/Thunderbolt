@@ -13,7 +13,7 @@
 #import "TBWarheadManager.h"
 #import "TBHelicopter.h"
 
-#import "TBAAVulcan.h"
+#import "TBVulcan.h"
 #import "TBMissileLauncher.h"
 
 
@@ -22,7 +22,7 @@
     NSUInteger         mTextureIndex;
     NSArray           *mTextureKeys;
     
-    TBAAVulcan        *mAAVulcan;
+    TBVulcan          *mVulcan;
     TBMissileLauncher *mMissileLauncher;
 }
 
@@ -53,10 +53,10 @@
                                                             kTexBase06, kTexBase06, kTexBase06, kTexBase06, kTexBase06,
                                                             kTexBase07, kTexBase07, kTexBase07, kTexBase07, kTexBase07, nil];
         
-        mAAVulcan        = [[TBAAVulcan alloc] init];
+        mVulcan        = [[TBVulcan alloc] init];
         mMissileLauncher = [[TBMissileLauncher alloc] init];
         
-        [mAAVulcan setBody:self];
+        [mVulcan setBody:self];
         [mMissileLauncher setBody:self];
     }
     
@@ -67,7 +67,7 @@
 - (void)dealloc
 {
     [mTextureKeys     release];
-    [mAAVulcan        release];
+    [mVulcan        release];
     [mMissileLauncher release];
     
     [super dealloc];
@@ -95,7 +95,7 @@
         }
         
         TBUnit *sTarget = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
-        [mAAVulcan action];
+        [mVulcan action];
         [mMissileLauncher action];
         
 #if (0)
