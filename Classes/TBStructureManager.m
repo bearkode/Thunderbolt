@@ -143,8 +143,6 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
 
 - (void)structureDidDestroyed:(TBStructure *)aStructure
 {
-    NSLog(@"structureDidDestroyed = %@", aStructure);
-    
     if ([aStructure isKindOfClass:[TBBase class]])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:kTBBaseDidDestroyNotificaton

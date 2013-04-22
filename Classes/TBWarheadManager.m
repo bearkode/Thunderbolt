@@ -152,7 +152,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
     [sBullet setTeam:aTeam];
     [sBullet setPoint:aPos];
     [sBullet setVector:aVector];
-    [sBullet setObjectPool:mBombPool];
+    [sBullet setObjectPool:mBulletPool];
     
     [self addObject:sBullet];
     
