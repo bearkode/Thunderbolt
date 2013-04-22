@@ -19,6 +19,7 @@
     TBTeam     mTeam;
     
     NSUInteger mReloadCount;
+    NSUInteger mMaxAmmoCount;
     NSUInteger mAmmoCount;
     
     NSUInteger mReloadTime;
@@ -26,14 +27,15 @@
 }
 
 
-@synthesize body        = mBody;
-@synthesize team        = mTeam;
+@synthesize body         = mBody;
+@synthesize team         = mTeam;
 
-@synthesize reloadCount = mReloadCount;
-@synthesize ammoCount   = mAmmoCount;
+@synthesize reloadCount  = mReloadCount;
+@synthesize maxAmmoCount = mMaxAmmoCount;
+@synthesize ammoCount    = mAmmoCount;
 
-@synthesize reloadTime  = mReloadTime;
-@synthesize maxRange    = mMaxRange;
+@synthesize reloadTime   = mReloadTime;
+@synthesize maxRange     = mMaxRange;
 
 
 #pragma mark -
@@ -133,6 +135,14 @@
 }
 
 
+/*  For User Control  */
+- (void)setFire:(BOOL)aFire
+{
+
+}
+
+
+/*  For AI Control  */
 - (BOOL)fireAt:(TBUnit *)aUnit
 {
     return NO;
@@ -142,6 +152,11 @@
 - (void)supplyAmmo:(NSUInteger)aCount
 {
     mAmmoCount += aCount;
+    
+    if (mAmmoCount > mMaxAmmoCount)
+    {
+        mAmmoCount = mMaxAmmoCount;
+    }
 }
 
 

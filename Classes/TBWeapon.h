@@ -15,6 +15,9 @@
 @class TBUnit;
 
 
+#define kSupplyAmmoToMax    1000
+
+
 @interface TBWeapon : NSObject
 
 
@@ -22,6 +25,7 @@
 @property (nonatomic, readonly) TBTeam     team;
 
 @property (nonatomic, readonly) NSUInteger reloadCount;
+@property (nonatomic, assign)   NSUInteger maxAmmoCount;
 @property (nonatomic, assign)   NSUInteger ammoCount;
 
 @property (nonatomic, assign)   NSUInteger reloadTime;
@@ -39,7 +43,10 @@
 - (void)decreaseAmmoCount;
 - (CGPoint)mountPoint;
 - (BOOL)inRange:(CGFloat)aDistance;
+
+- (void)setFire:(BOOL)aFire;
 - (BOOL)fireAt:(TBUnit *)aUnit;
+
 - (void)supplyAmmo:(NSUInteger)aCount;
 
 

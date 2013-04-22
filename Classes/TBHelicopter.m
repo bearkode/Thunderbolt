@@ -10,6 +10,10 @@
 #import "TBHelicopter.h"
 #import "TBGameConst.h"
 #import "TBMacro.h"
+
+#import "TBGatlingGun.h"
+#import "TBBombChamber.h"
+
 #import "TBBullet.h"
 #import "TBBomb.h"
 
@@ -17,11 +21,11 @@
 #import "TBMoneyManager.h"
 
 
-const NSUInteger kMaxBullets  = 100;
-const NSInteger  kMaxBombs    = 5;
-const NSInteger  kMaxMissiles = 2;
+const NSUInteger kHardPointCount      = 2;
 
-const NSInteger  kVulcanDelay = 8;
+const NSUInteger kMaxBullets          = 100;
+const NSInteger  kMaxBombs            = 5;
+const NSInteger  kMaxMissiles         = 2;
 
 const CGFloat    kAltitudeSensitivity = 15.0;
 
@@ -45,16 +49,12 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     NSMutableArray *mContentRectArray;
     CGRect          mContentRect;    
     
-    TBWeaponType    mSelectedWeapon;
-    NSInteger       mVulcanDelay;
-    NSInteger       mBulletCount;
+    NSMutableArray *mHardPoints;
+    TBWeapon       *mSelectedWeapon;
     NSInteger       mBombCount;
     NSInteger       mMissileCount;
     
-    BOOL            mFireVulcan;
-    
     PBSoundSource  *mSoundSource;
-    PBSoundSource  *mVulcanSoundSource;
 }
 
 
@@ -62,11 +62,35 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 @synthesize controlLever    = mControlLever;
 @synthesize leftAhead       = mLeftAhead;
 @synthesize landed          = mLanded;
+@synthesize speed           = mSpeed;
 @synthesize selectedWeapon  = mSelectedWeapon;
-@synthesize bulletCount     = mBulletCount;
-@synthesize bombCount       = mBombCount;
-@synthesize missileCount    = mMissileCount;
-@synthesize fireVulcan      = mFireVulcan;
+//@synthesize bulletCount     = mBulletCount;
+//@synthesize bombCount       = mBombCount;
+//@synthesize missileCount    = mMissileCount;
+//@synthesize fireVulcan      = mFireVulcan;
+
+
+#pragma mark -
+
+
+- (void)setupHardPoints
+{
+    mHardPoints = [[NSMutableArray alloc] initWithCapacity:kHardPointCount];
+    
+    TBGatlingGun *sGatlingGun = [[[TBGatlingGun alloc] init] autorelease];
+    [sGatlingGun setBody:self];
+    [sGatlingGun setMaxAmmoCount:kMaxBullets];
+    [sGatlingGun supplyAmmo:kSupplyAmmoToMax];
+    [mHardPoints addObject:sGatlingGun];
+    
+    TBBombChamber *sBombChamber = [[[TBBombChamber alloc] init] autorelease];
+    [sBombChamber setBody:self];
+    [sBombChamber setMaxAmmoCount:kMaxBombs];
+    [sBombChamber supplyAmmo:kSupplyAmmoToMax];
+    [mHardPoints addObject:sBombChamber];
+    
+    mSelectedWeapon = sGatlingGun;
+}
 
 
 #pragma mark -
@@ -110,24 +134,20 @@ const CGFloat    kAltitudeSensitivity = 15.0;
         [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 7
         [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 8
         
-        mBulletCount     = kMaxBullets;
-        mBombCount       = kMaxBombs;
-        mMissileCount    = kMaxMissiles;
-        mFireVulcan      = NO;
+        /*  Arm  */
+        [self setupHardPoints];
+        
+//        mBulletCount     = kMaxBullets;
+//        mBombCount       = kMaxBombs;
+//        mMissileCount    = kMaxMissiles;
+//        mFireVulcan      = NO;
         mLanded          = YES;
         
-        PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
-        
-        mSoundSource = [sSoundManager retainSoundSource];
-        [mSoundSource setSound:[sSoundManager soundForKey:kTBSoundHeli]];
+        mSoundSource = [[PBSoundManager sharedManager] retainSoundSource];
+        [mSoundSource setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundHeli]];
         [mSoundSource setDistance:1];
         [mSoundSource setLooping:YES];
         [mSoundSource play];
-        
-        mVulcanSoundSource = [sSoundManager retainSoundSource];
-        [mVulcanSoundSource setSound:[sSoundManager soundForKey:kTBSoundVulcan]];
-        [mVulcanSoundSource setDistance:1];
-        [mVulcanSoundSource setLooping:YES];
     }
     
     return self;
@@ -138,11 +158,12 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 {
     [mControlLever release];
     
-    [mTextureArray     release];
+    [mTextureArray release];
     [mContentRectArray release];
+    
+    [mHardPoints release];
 
     [[PBSoundManager sharedManager] releaseSoundSource:mSoundSource];
-    [[PBSoundManager sharedManager] releaseSoundSource:mVulcanSoundSource];
     
     [super dealloc];
 }
@@ -264,22 +285,6 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 }
 
 
-- (void)setFireVulcan:(BOOL)aFlag
-{
-    mFireVulcan = aFlag;
-
-    if (mFireVulcan)
-    {
-        mVulcanDelay = 0;
-        [mVulcanSoundSource play];
-    }
-    else
-    {
-        [mVulcanSoundSource stop];
-    }
-}
-
-
 - (void)repairDamage:(NSInteger)aValue
 {
     if ([self damage])
@@ -291,103 +296,90 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 }
 
 
-- (void)fillUpBullets:(NSInteger)aCount
+- (void)fillUpAmmos
 {
-    if (mBulletCount < kMaxBullets)
+    [mHardPoints makeObjectsPerformSelector:@selector(fillUp)];
+}
+
+
+- (NSInteger)bulletCount
+{
+    for (TBWeapon *sWeapon in mHardPoints)
     {
-        mBulletCount += aCount;
-        if (mBulletCount > kMaxBullets)
+        if ([sWeapon isKindOfClass:[TBGatlingGun class]])
         {
-            mBulletCount = kMaxBullets;
+            return [sWeapon ammoCount];
         }
-        
-        [[self delegate] helicopterWeaponDidReload:self];
-        [TBMoneyManager useMoney:kTBPriceBullet];        
     }
-}
-
-
-- (void)fillUpBombs:(NSInteger)aCount
-{
-    if (mBombCount < kMaxBombs)
-    {
-        mBombCount += aCount;
-        if (mBombCount > kMaxBombs)
-        {
-            mBombCount = kMaxBombs;
-        }
-        
-        [[self delegate] helicopterWeaponDidReload:self];
-        [TBMoneyManager useMoney:kTBPriceBomb];
-    }
-}
-
-
-- (void)dropBomb
-{
-    if (mBombCount > 0)
-    {
-        CGPoint sPoint = [self point];
-        
-        [[TBWarheadManager sharedManager] addBombWithTeam:kTBTeamAlly position:CGPointMake(sPoint.x, sPoint.y - 10) speed:mSpeed];
-        mBombCount--;
-        
-        [[self delegate] helicopter:self weaponFired:1];
-    }
-}
-
-
-- (void)fireVulcan
-{
-    CGFloat   sAngle;
-    CGPoint   sPos1;
-    CGPoint   sPos2;
-    CGPoint   sBulletPos = CGPointZero;
-    TBBullet *sBullet;
     
-    if (mFireVulcan)
+    return 0;
+}
+
+
+- (NSInteger)bombCount
+{
+    for (TBWeapon *sWeapon in mHardPoints)
     {
-        if (mBulletCount > 0)
+        if ([sWeapon isKindOfClass:[TBBombChamber class]])
         {
-            PBVertex3 sAngle3 = [[self transform] angle];
-            
-            sAngle = TBDegreesToRadians(sAngle3.z);
-            sPos1  = [self point];
-            sPos2  = sPos1;
-
-            if ([self isLeftAhead])
-            {
-                sPos2.x -= 30;
-                sPos2.y -= 10;
-            }
-            else
-            {
-                sPos2.x += 30;
-                sPos2.y -= 10;
-            }
-            
-            sAngle = -sAngle;
-            sBulletPos.x = sPos1.x + (sPos2.x - sPos1.x) * cos(sAngle) - (sPos2.y - sPos1.y) * sin(sAngle);
-            sBulletPos.y = sPos1.y + (sPos2.x - sPos1.x) * sin(sAngle) + (sPos2.y - sPos1.y) * cos(sAngle);
-
-            CGPoint sVector = CGPointMake((sBulletPos.x - sPos1.x) / 3.5, (sBulletPos.y - sPos2.y) / 3.5);
-
-            sBullet = [[TBWarheadManager sharedManager] addBulletWithTeam:kTBTeamAlly position:sBulletPos vector:sVector power:kVulcanBulletPower];
-            [sBullet setLife:100];
-            mBulletCount--;
-            
-            [[self delegate] helicopter:self weaponFired:0];
-        }
-
-        if (mBulletCount == 0)
-        {
-            [self setFireVulcan:NO];
-        }
-        else
-        {
-            mVulcanDelay = kVulcanDelay;
+            return [sWeapon ammoCount];
         }
     }
+    
+    return 0;
+}
+
+
+//- (void)fillUpBullets:(NSInteger)aCount
+//{
+//    if (mBulletCount < kMaxBullets)
+//    {
+//        mBulletCount += aCount;
+//        if (mBulletCount > kMaxBullets)
+//        {
+//            mBulletCount = kMaxBullets;
+//        }
+//        
+//        [[self delegate] helicopterWeaponDidReload:self];
+//        [TBMoneyManager useMoney:kTBPriceBullet];        
+//    }
+//
+//}
+
+
+//- (void)fillUpBombs:(NSInteger)aCount
+//{
+//    if (mBombCount < kMaxBombs)
+//    {
+//        mBombCount += aCount;
+//        if (mBombCount > kMaxBombs)
+//        {
+//            mBombCount = kMaxBombs;
+//        }
+//        
+//        [[self delegate] helicopterWeaponDidReload:self];
+//        [TBMoneyManager useMoney:kTBPriceBomb];
+//    }
+//}
+
+
+#pragma mark -
+
+
+- (void)selectNextWeapon
+{
+    NSInteger sIndex = [mHardPoints indexOfObject:mSelectedWeapon];
+    
+    sIndex = (sIndex >= ([mHardPoints count] - 1)) ? 0 : (sIndex + 1);
+    mSelectedWeapon = [mHardPoints objectAtIndex:sIndex];
+    
+    NSLog(@"selected weapon = %@", mSelectedWeapon);
+}
+
+
+- (void)setFire:(BOOL)aFire
+{
+    [mSelectedWeapon setFire:aFire];
 }
 
 
@@ -395,20 +387,15 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 {
     [super action];
     
-    if (mFireVulcan && mBulletCount > 0)
+    if (![self isLanded])
     {
-        mVulcanDelay--;
-        if (mVulcanDelay <= 0)
-        {
-            [self fireVulcan];
-        }
+        [mSelectedWeapon action];
     }
-    
+  
     if (++mTick == 100)
     {
         mTick = 0;
     }
-    
     
     if ((mTick % 2) == 0)
     {

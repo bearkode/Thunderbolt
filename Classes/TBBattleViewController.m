@@ -437,14 +437,7 @@
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
-    if ([sHelicopter selectedWeapon] == kWeaponVulcan)
-    {
-        [sHelicopter setSelectedWeapon:kWeaponBomb];
-    }
-    else
-    {
-        [sHelicopter setSelectedWeapon:kWeaponVulcan];
-    }
+    [sHelicopter selectNextWeapon];
 }
 
 
@@ -504,41 +497,25 @@
 
 - (void)eventView:(TBEventView *)aEventView touchBegan:(CGPoint)aPoint
 {
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    
-    if ([sHelicopter selectedWeapon] == kWeaponVulcan &&
-        [sHelicopter bulletCount] > 0 &&
-        ![sHelicopter isLanded])
-    {
-        [sHelicopter setFireVulcan:YES];
-    }
+    [[[TBUnitManager sharedManager] allyHelicopter] setFire:YES];
 }
 
 
 - (void)eventView:(TBEventView *)aEventView touchCancelled:(CGPoint)aPoint
 {
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    
-    [sHelicopter setFireVulcan:NO];
+    [[[TBUnitManager sharedManager] allyHelicopter] setFire:NO];
 }
 
 
 - (void)eventView:(TBEventView *)aEventView touchEnded:(CGPoint)aPoint
 {
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    
-    [sHelicopter setFireVulcan:NO];
+    [[[TBUnitManager sharedManager] allyHelicopter] setFire:NO];
 }
 
 
 - (void)eventView:(TBEventView *)aEventView touchTapCount:(NSInteger)aTabCount
 {
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    
-    if ([sHelicopter selectedWeapon] == kWeaponBomb && ![sHelicopter isLanded])
-    {
-        [sHelicopter dropBomb];
-    }
+
 }
 
 

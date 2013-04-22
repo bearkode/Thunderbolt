@@ -20,6 +20,9 @@ typedef enum
 } TBWeaponType;
 
 
+@class TBWeapon;
+
+
 @interface TBHelicopter : TBUnit
 
 
@@ -29,27 +32,31 @@ typedef enum
 @property (nonatomic, readonly)                        TBControlLever *controlLever;
 @property (nonatomic, readonly, getter = isLeftAhead)  BOOL            leftAhead;
 @property (nonatomic, readonly, getter = isLanded)     BOOL            landed;
+@property (nonatomic, readonly)                        CGFloat         speed;
 
 /*  Weapon  */
-@property (nonatomic, assign)                          TBWeaponType    selectedWeapon;
-@property (nonatomic, readonly, getter = isFireVulcan) BOOL            fireVulcan;
-@property (nonatomic, assign)                          NSInteger       bulletCount;
-@property (nonatomic, assign)                          NSInteger       bombCount;
-@property (nonatomic, assign)                          NSInteger       missileCount;
+@property (nonatomic, assign)                          TBWeapon       *selectedWeapon;
+//@property (nonatomic, readonly, getter = isFireVulcan) BOOL            fireVulcan;
+//@property (nonatomic, assign)                          NSInteger       bulletCount;
+//@property (nonatomic, assign)                          NSInteger       bombCount;
+//@property (nonatomic, assign)                          NSInteger       missileCount;
 
 
 #pragma mark -
 
 
-- (void)setFireVulcan:(BOOL)aFlag;
 - (CGPoint)pointWithSpeedLever:(CGFloat)aSpeedLever oldPoint:(CGPoint)aPoint;
 - (CGPoint)pointWithAltitudeLever:(CGFloat)aAltitudeLever oldPoint:(CGPoint)aPoint;
 
 - (void)repairDamage:(NSInteger)aValue;
-- (void)fillUpBullets:(NSInteger)aCount;
-- (void)fillUpBombs:(NSInteger)aCount;
+- (void)fillUpAmmos;
+- (NSInteger)bulletCount;
+- (NSInteger)bombCount;
+//- (void)fillUpBullets:(NSInteger)aCount;
+//- (void)fillUpBombs:(NSInteger)aCount;
 
-- (void)dropBomb;
+- (void)selectNextWeapon;
+- (void)setFire:(BOOL)aFire;
 
 
 @end

@@ -16,6 +16,9 @@
 		2E009DAF1713069F00A362F2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAD1713069F00A362F2 /* Default-568h@2x.png */; };
 		2E009DB01713069F00A362F2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAE1713069F00A362F2 /* Default@2x.png */; };
 		2E009DB3171306DB00A362F2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E51D111E5E8A00CA7792 /* Default.png */; };
+		2E33AB8C172530F900DE26D5 /* TBBombChamber.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E33AB8B172530F900DE26D5 /* TBBombChamber.m */; };
+		2E33AB8F1725322D00DE26D5 /* TBRocketLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E33AB8E1725322C00DE26D5 /* TBRocketLauncher.m */; };
+		2E33AB921725397C00DE26D5 /* TBGatlingGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E33AB911725397C00DE26D5 /* TBGatlingGun.m */; };
 		2E46379A17127FEA00EA1888 /* TBEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379917127FEA00EA1888 /* TBEventView.m */; };
 		2E46379D171286E800EA1888 /* TBControlLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379C171286E800EA1888 /* TBControlLever.m */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
@@ -163,6 +166,12 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2E009DAD1713069F00A362F2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2E009DAE1713069F00A362F2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		2E33AB8A172530F800DE26D5 /* TBBombChamber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBombChamber.h; sourceTree = "<group>"; };
+		2E33AB8B172530F900DE26D5 /* TBBombChamber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBombChamber.m; sourceTree = "<group>"; };
+		2E33AB8D1725322C00DE26D5 /* TBRocketLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBRocketLauncher.h; sourceTree = "<group>"; };
+		2E33AB8E1725322C00DE26D5 /* TBRocketLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBRocketLauncher.m; sourceTree = "<group>"; };
+		2E33AB901725397B00DE26D5 /* TBGatlingGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGatlingGun.h; sourceTree = "<group>"; };
+		2E33AB911725397C00DE26D5 /* TBGatlingGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGatlingGun.m; sourceTree = "<group>"; };
 		2E46379817127FEA00EA1888 /* TBEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBEventView.h; sourceTree = "<group>"; };
 		2E46379917127FEA00EA1888 /* TBEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBEventView.m; sourceTree = "<group>"; };
 		2E46379B171286E800EA1888 /* TBControlLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBControlLever.h; sourceTree = "<group>"; };
@@ -495,6 +504,12 @@
 				A725CC29119D9AF800276F35 /* TBWeapon.m */,
 				A725CC34119D9BC400276F35 /* TBVulcan.h */,
 				A725CC35119D9BC400276F35 /* TBVulcan.m */,
+				2E33AB901725397B00DE26D5 /* TBGatlingGun.h */,
+				2E33AB911725397C00DE26D5 /* TBGatlingGun.m */,
+				2E33AB8A172530F800DE26D5 /* TBBombChamber.h */,
+				2E33AB8B172530F900DE26D5 /* TBBombChamber.m */,
+				2E33AB8D1725322C00DE26D5 /* TBRocketLauncher.h */,
+				2E33AB8E1725322C00DE26D5 /* TBRocketLauncher.m */,
 				A7B5AB17119FD00D00FC9F33 /* TBMissileLauncher.h */,
 				A7B5AB18119FD00E00FC9F33 /* TBMissileLauncher.m */,
 				A75A5C07119FF7AE002B9360 /* TBTankGun.h */,
@@ -903,6 +918,9 @@
 				2EE9C192172189EC00BB3D24 /* TBCheatViewController.m in Sources */,
 				2EE9C19617218E0D00BB3D24 /* TBUserStatusManager.m in Sources */,
 				2EE9C1991722C28500BB3D24 /* TBHelicopterInfo.m in Sources */,
+				2E33AB8C172530F900DE26D5 /* TBBombChamber.m in Sources */,
+				2E33AB8F1725322D00DE26D5 /* TBRocketLauncher.m in Sources */,
+				2E33AB921725397C00DE26D5 /* TBGatlingGun.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

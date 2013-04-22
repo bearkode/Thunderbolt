@@ -55,8 +55,9 @@
             if ([self intersectWith:sHelicopter])
             {
                 [sHelicopter repairDamage:kLandingPadRepairDamage];
-                [sHelicopter fillUpBullets:kLandingPadFillUpBullets];
-                [sHelicopter fillUpBombs:kLandingPadFillUpBombs];
+                [sHelicopter fillUpAmmos];
+//                [sHelicopter fillUpBullets:kLandingPadFillUpBullets];
+//                [sHelicopter fillUpBombs:kLandingPadFillUpBombs];
             }
             
             mFillUpCount = 40;
