@@ -13,6 +13,7 @@
 #import "TBHelicopter.h"
 #import "TBBullet.h"
 #import "TBWarheadManager.h"
+#import "TBMoneyManager.h"
 
 
 const NSInteger kFireDelay = 8;
@@ -70,8 +71,6 @@ const NSInteger kFireDelay = 8;
 {
     mFire = aFlag;
     
-    NSLog(@"setFire = %d", mFire);
-    
     if (mFire)
     {
         mFireDelay = 0;
@@ -82,6 +81,19 @@ const NSInteger kFireDelay = 8;
         [mSoundSource stop];
     }
 }
+
+
+- (void)fillUp
+{
+    TBHelicopter *sHelicopter = (TBHelicopter *)[self body];
+    
+    [self supplyAmmo:kLandingPadFillUpBullets];
+    [TBMoneyManager useMoney:kTBPriceBullet];    
+    [[sHelicopter delegate] helicopterWeaponDidReload:sHelicopter];
+}
+
+
+#pragma mark -
 
 
 - (void)action

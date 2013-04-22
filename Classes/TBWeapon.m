@@ -149,6 +149,12 @@
 }
 
 
+- (void)fillUp
+{
+
+}
+
+
 - (void)supplyAmmo:(NSUInteger)aCount
 {
     mAmmoCount += aCount;

@@ -10,6 +10,7 @@
 #import "TBBombChamber.h"
 #import "TBHelicopter.h"
 #import "TBWarheadManager.h"
+#import "TBMoneyManager.h"
 
 
 @implementation TBBombChamber
@@ -22,6 +23,19 @@
 {
     mFire = aFire;
 }
+
+
+- (void)fillUp
+{
+    TBHelicopter *sHelicopter = (TBHelicopter *)[self body];
+    
+    [self supplyAmmo:kLandingPadFillUpBombs];
+    [TBMoneyManager useMoney:kTBPriceBullet];
+    [[sHelicopter delegate] helicopterWeaponDidReload:sHelicopter];
+}
+
+
+#pragma mark -
 
 
 - (void)action
