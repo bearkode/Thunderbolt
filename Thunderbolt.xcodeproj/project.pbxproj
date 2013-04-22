@@ -21,6 +21,8 @@
 		2E33AB921725397C00DE26D5 /* TBGatlingGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E33AB911725397C00DE26D5 /* TBGatlingGun.m */; };
 		2E46379A17127FEA00EA1888 /* TBEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379917127FEA00EA1888 /* TBEventView.m */; };
 		2E46379D171286E800EA1888 /* TBControlLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379C171286E800EA1888 /* TBControlLever.m */; };
+		2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FBD17257E6400140A39 /* rifleman.png */; };
+		2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FBE17257E6400140A39 /* rifleman@2x.png */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
 		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
 		2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */; };
@@ -176,6 +178,8 @@
 		2E46379917127FEA00EA1888 /* TBEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBEventView.m; sourceTree = "<group>"; };
 		2E46379B171286E800EA1888 /* TBControlLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBControlLever.h; sourceTree = "<group>"; };
 		2E46379C171286E800EA1888 /* TBControlLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBControlLever.m; sourceTree = "<group>"; };
+		2E5E5FBD17257E6400140A39 /* rifleman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rifleman.png; sourceTree = "<group>"; };
+		2E5E5FBE17257E6400140A39 /* rifleman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rifleman@2x.png"; sourceTree = "<group>"; };
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		2E69154B171EA1920085B797 /* TBObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObjectPool.h; sourceTree = "<group>"; };
 		2E69154C171EA1920085B797 /* TBObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObjectPool.m; sourceTree = "<group>"; };
@@ -616,6 +620,8 @@
 				A78A1D9C11EA150100DA9574 /* AAGunDestroyed.png */,
 				A72BD4CE11A43A2F0091AEC4 /* radar_back.png */,
 				A72BD53B11A49E360091AEC4 /* radar_obj.png */,
+				2E5E5FBD17257E6400140A39 /* rifleman.png */,
+				2E5E5FBE17257E6400140A39 /* rifleman@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -865,6 +871,8 @@
 				2E009DB01713069F00A362F2 /* Default@2x.png in Resources */,
 				2E009DB3171306DB00A362F2 /* Default.png in Resources */,
 				2EE9C193172189EC00BB3D24 /* TBCheatViewController.xib in Resources */,
+				2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */,
+				2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

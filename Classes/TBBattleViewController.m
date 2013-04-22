@@ -31,7 +31,7 @@
 
 
 #if (1)
-#define kUnitDeployDuration (60 * 10)
+#define kUnitDeployDuration (60 * 5)
 #else
 #warning UNIT FAST DEPLOY
 #define kUnitDeployDuration (10)

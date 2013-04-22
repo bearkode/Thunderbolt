@@ -22,7 +22,6 @@
     NSUInteger mMaxFlare;
     NSUInteger mMaxChaff;
     
-
     CGFloat    mMaxSpeed;
     CGFloat    mAltitudeSensitivity;
     NSUInteger mDurability;

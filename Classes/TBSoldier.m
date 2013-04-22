@@ -8,6 +8,7 @@
  */
 
 #import "TBSoldier.h"
+#import "TBTextureNames.h"
 #import "TBRifle.h"
 #import "TBUnitManager.h"
 
@@ -20,10 +21,42 @@ const CGFloat kSoldierSpeed = 0.5;
 
 @implementation TBSoldier
 {
-    NSUInteger      mTick;
-    NSMutableArray *mTextureArray;
+    NSUInteger mTick;
+    NSUInteger mIndex;
+    TBRifle   *mRifle;
+}
+
+
+#pragma mark -
+
+
++ (Class)meshClass
+{
+    return [PBTileMesh class];
+}
+
+
+- (void)setupTexture
+{
+    [(PBTileMesh *)[self mesh] setTileSize:CGSizeMake(21, 21)];
     
-    TBRifle        *mRifle;
+    PBTexture *sTexture = [PBTextureManager textureWithImageName:kRifleman];
+    [sTexture loadIfNeeded];
+    [self setTexture:sTexture];
+    
+    mTick  = 0;
+    mIndex = 0;
+}
+
+
+- (void)setupAttrs
+{
+    [self setType:kTBUnitSoldier];
+    [self setDurability:kSoldierDurability];
+    [self setPoint:CGPointMake(kMaxMapXPos + 50, 51)];
+    
+    mRifle = [[TBRifle alloc] init];
+    [mRifle setBody:self];
 }
 
 
@@ -36,22 +69,8 @@ const CGFloat kSoldierSpeed = 0.5;
     
     if (self)
     {
-        [self setType:kTBUnitSoldier];
-        [self setDurability:kSoldierDurability];
-        [self setPoint:CGPointMake(kMaxMapXPos + 50, 53)];
-        
-        mTick         = 1;
-        mTextureArray = [[NSMutableArray alloc] init];
-        [mTextureArray addObject:[NSString stringWithFormat:@"em00.png"]];
-        [mTextureArray addObject:[NSString stringWithFormat:@"em01.png"]];
-        [mTextureArray addObject:[NSString stringWithFormat:@"em02.png"]];
-        [mTextureArray addObject:[NSString stringWithFormat:@"em03.png"]];
-        [mTextureArray addObject:[NSString stringWithFormat:@"em04.png"]];
-        [mTextureArray addObject:[NSString stringWithFormat:@"em05.png"]];
-        [mTextureArray addObject:[NSString stringWithFormat:@"em06.png"]];
-        
-        mRifle = [[TBRifle alloc] init];
-        [mRifle setBody:self];
+        [self setupAttrs];
+        [self setupTexture];
     }
     
     return self;
@@ -60,8 +79,7 @@ const CGFloat kSoldierSpeed = 0.5;
 
 - (void)dealloc
 {
-    [mTextureArray release];
-    [mRifle        release];
+    [mRifle release];
     
     [super dealloc];
 }
@@ -74,16 +92,15 @@ const CGFloat kSoldierSpeed = 0.5;
 {
     [super action];
     
-    CGFloat sAngle;
-    TBUnit *sUnit;
-    BOOL    sFire = NO;
+    BOOL sFire = NO;
     
     [mRifle action];
     
-    sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kRifleMaxRange];
+    TBUnit *sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kRifleMaxRange];
     if (sUnit)
     {
-        sAngle = [self angleWith:sUnit];
+        CGFloat sAngle = [self angleWith:sUnit];
+        
         if ((sAngle >= -100.0 && sAngle <= -85.0) ||
             (sAngle <= 100.0 && sAngle >= 85.0))
         {
@@ -92,16 +109,21 @@ const CGFloat kSoldierSpeed = 0.5;
         }
     }
 
-    if (!sFire)
+    if (sFire)
+    {
+        [(PBTileMesh *)[self mesh] selectTileAtIndex:12];
+    }
+    else
     {
         [self moveWithVector:CGPointMake(([self isAlly]) ? kSoldierSpeed : -kSoldierSpeed, 0)];
+        [(PBTileMesh *)[self mesh] selectTileAtIndex:mIndex];
     }
     
-    mTick = (mTick == 24) ? 0 : mTick + 1;
-    NSString  *sTextureName = [mTextureArray objectAtIndex:(NSUInteger)(mTick / 5) + 1];
-    PBTexture *sTexture     = [PBTextureManager textureWithImageName:sTextureName];
-    [sTexture loadIfNeeded];
-    [self setTexture:sTexture];
+    if (mTick++ == 1)
+    {
+        mTick = 0;
+        mIndex = (mIndex > 10) ? 0 : (mIndex + 1);
+    }
 }
 
 

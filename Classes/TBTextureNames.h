@@ -59,3 +59,5 @@
 #define kTexMissileExp00    @"missile_exp00.png"
 #define kTexMissileExp01    @"missile_exp01.png"
 #define kTexMissileExp02    @"missile_exp02.png"
+
+#define kRifleman           @"rifleman"
