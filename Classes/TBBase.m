@@ -53,8 +53,11 @@
                                                             kTexBase06, kTexBase06, kTexBase06, kTexBase06, kTexBase06,
                                                             kTexBase07, kTexBase07, kTexBase07, kTexBase07, kTexBase07, nil];
         
-        mAAVulcan        = [[TBAAVulcan alloc] initWithBody:self team:aTeam];
-        mMissileLauncher = [[TBMissileLauncher alloc] initWithBody:self team:aTeam];
+        mAAVulcan        = [[TBAAVulcan alloc] init];
+        mMissileLauncher = [[TBMissileLauncher alloc] init];
+        
+        [mAAVulcan setBody:self];
+        [mMissileLauncher setBody:self];
     }
     
     return self;
@@ -92,7 +95,6 @@
         }
         
         TBUnit *sTarget = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
-
         [mAAVulcan action];
         [mMissileLauncher action];
         
@@ -109,6 +111,7 @@
         {
             if ([mMissileLauncher fireAt:sTarget])
             {
+                NSLog(@"missile fire = %d", [self team]);
                 [mMissileLauncher supplyAmmo:1];
             }
         }

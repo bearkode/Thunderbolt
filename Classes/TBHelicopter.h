@@ -35,8 +35,6 @@ typedef enum
 @property (nonatomic, assign)                         NSInteger       bulletCount;
 @property (nonatomic, assign)                         NSInteger       bombCount;
 @property (nonatomic, assign)                         NSInteger       missileCount;
-//@property (nonatomic, assign)                         BOOL            isBombDrop;
-//@property (nonatomic, assign)                         BOOL            isMissileLaunch;
 
 
 #pragma mark -

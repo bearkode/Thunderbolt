@@ -99,7 +99,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
         {
             [sWarhead setAvailable:NO];
             [sUnit addDamage:[sWarhead power]];
-            [TBExplosionManager bombExplosionAtPosition:[sWarhead point]];
+            [[TBExplosionManager sharedManager] addBombExplosionAtPosition:[sWarhead point]];
         }
         
         if ([sWarhead isAvailable])
@@ -109,7 +109,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
             {
                 [sWarhead setAvailable:NO];
                 [sStructure addDamage:[sWarhead power]];
-                [TBExplosionManager bombExplosionAtPosition:[sWarhead point]];
+                [[TBExplosionManager sharedManager] addBombExplosionAtPosition:[sWarhead point]];
             }
         }
     }
@@ -135,7 +135,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
             [mDisabledWarheads addObject:sWarhead];
             
             CGPoint sPosition = [sWarhead point];
-            [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
+            [[TBExplosionManager sharedManager] addBombExplosionAtPosition:CGPointMake(sPosition.x, kMapGround + 18)];
         }
     }
     
@@ -148,7 +148,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 #pragma mark -
 
 
-- (TBBullet *)bulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector power:(NSUInteger)aPower
+- (TBBullet *)addBulletWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector power:(NSUInteger)aPower
 {
     TBBullet *sBullet = (TBBullet *)[mBulletPool object];
     
@@ -164,7 +164,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 }
 
 
-+ (TBBomb *)bombWithTeam:(TBTeam)aTeam position:(CGPoint)aPos speed:(CGFloat)aSpeed
+- (TBBomb *)addBombWithTeam:(TBTeam)aTeam position:(CGPoint)aPos speed:(CGFloat)aSpeed
 {
     TBBomb *sBomb = [[[TBBomb alloc] init] autorelease];
     
@@ -178,7 +178,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 }
 
 
-+ (TBTankShell *)tankShellWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector
+- (TBTankShell *)addTankShellWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector
 {
     TBTankShell *sTankShell = [[[TBTankShell alloc] init] autorelease];
     

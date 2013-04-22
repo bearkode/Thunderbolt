@@ -21,6 +21,9 @@
 }
 
 
+#pragma mark -
+
+
 - (id)init
 {
     self = [super init];
@@ -47,6 +50,9 @@
     
     [super dealloc];
 }
+
+
+#pragma mark -
 
 
 - (void)action

@@ -15,44 +15,55 @@
 @implementation TBAAVulcan
 
 
-- (id)initWithBody:(TBSprite *)aBody team:(TBTeam)aTeam
+- (id)init
 {
-    self = [super initWithBody:aBody team:aTeam];
+    self = [super init];
     
     if (self)
     {
-        mReloadCount = 0;
-        mReloadTime  = kAAVulcanReloadTime;
-        mMaxRange    = kAAVulcanMaxRange;
-        mAmmoCount   = 100;
+        [self reset];
     }
     
     return self;
 }
 
 
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+
+#pragma mark -
+
+
+- (void)reset
+{
+    [super reset];
+    
+    [self setReloadTime:kAAVulcanReloadTime];
+    [self setMaxRange:kAAVulcanMaxRange];
+    [self setAmmoCount:100];
+}
+
+
 - (BOOL)fireAt:(TBUnit *)aTarget
 {
-    BOOL    sResult = NO;
-    CGPoint sTargetPosition;
-    CGPoint sVulcanPosition;
-    CGFloat sDistance;
-    TBTeam  sTeam = ([aTarget isAlly]) ? kTBTeamEnemy : kTBTeamAlly;
+    BOOL sResult = NO;
     
     if ([self isReloaded])
     {
-        sTargetPosition = [aTarget point];
-        sVulcanPosition = [mBody point];
-        sDistance       = TBDistanceBetweenToPoints(sVulcanPosition, sTargetPosition);
-        
-        if (sDistance <= mMaxRange)
+        CGFloat sDistance = TBDistanceBetweenToPoints([aTarget point], [self mountPoint]);
+
+        if ([self inRange:sDistance])
         {
-            CGFloat sAngle  = TBAngleBetweenToPoints(sVulcanPosition, sTargetPosition);
+            CGFloat sAngle  = TBAngleBetweenToPoints([self mountPoint], [aTarget point]);
             CGPoint sVector = TBVector(sAngle, 3.0);
             
-            [[TBWarheadManager sharedManager] bulletWithTeam:sTeam position:sVulcanPosition vector:sVector power:kVulcanBulletPower];
-            mAmmoCount--;
-            [self reload];            
+            [[TBWarheadManager sharedManager] addBulletWithTeam:[aTarget opponentTeam] position:[self mountPoint] vector:sVector power:kVulcanBulletPower];
+            [self decreaseAmmoCount];
+            [self reload];
+
             sResult = YES;
         }
     }

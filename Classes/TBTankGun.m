@@ -15,17 +15,13 @@
 @implementation TBTankGun
 
 
-- (id)initWithBody:(TBSprite *)aBody team:(TBTeam)aTeam
+- (id)init
 {
-    self = [super initWithBody:aBody team:aTeam];
+    self = [super init];
     
     if (self)
     {
-        mReloadCount = 0;
-        mAmmoCount   = 30;
-
-        mReloadTime  = kTankGunReloadTime;
-        mMaxRange    = kTankGunMaxRange;
+        [self reset];
     }
     
     return self;
@@ -41,25 +37,35 @@
 #pragma mark -
 
 
+- (void)reset
+{
+    [super reset];
+    
+    [self setAmmoCount:30];
+    [self setReloadTime:kTankGunReloadTime];
+    [self setMaxRange:kTankGunMaxRange];
+}
+
+
 - (BOOL)fireAt:(TBUnit *)aTarget
 {
-    BOOL    sResult = NO;
-    CGPoint sTargetPosition;
-    CGPoint sTankPosition;
-    TBTeam  sTeam = ([aTarget isAlly]) ? kTBTeamEnemy : kTBTeamAlly;
+    BOOL sResult = NO;
 
     if ([self isReloaded])
     {
-        sTargetPosition = [aTarget point];
-        sTankPosition   = [mBody point];
+        CGFloat sDistance = TBDistanceBetweenToPoints([aTarget point], [self mountPoint]);
 
-        CGFloat sAngle  = TBAngleBetweenToPoints(sTankPosition, sTargetPosition);
-        CGPoint sVector = TBVector(sAngle, 4.0);
+        if ([self inRange:sDistance])
+        {
+            CGFloat sAngle  = TBAngleBetweenToPoints([self mountPoint], [aTarget point]);
+            CGPoint sVector = TBVector(sAngle, 4.0);
             
-        [TBWarheadManager tankShellWithTeam:sTeam position:sTankPosition vector:sVector];
-        mAmmoCount--;
-        [self reload];
-        sResult = YES;
+            [[TBWarheadManager sharedManager] addTankShellWithTeam:[aTarget opponentTeam] position:[self mountPoint] vector:sVector];
+            [self decreaseAmmoCount];
+            [self reload];
+            
+            sResult = YES;
+        }
     }
 
     return sResult;

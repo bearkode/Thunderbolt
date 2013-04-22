@@ -21,12 +21,12 @@
 + (TBExplosionManager *)sharedManager;
 
 
-+ (void)explosionWithUnit:(TBUnit *)aUnit;
+- (void)addExplosionWithUnit:(TBUnit *)aUnit;
 
-+ (TBExplosion *)tankExplosionAtPoistion:(CGPoint)aPosition;
-+ (TBExplosion *)bombExplosionAtPosition:(CGPoint)aPosition;
-+ (TBExplosion *)helicopterExplosionAtPosition:(CGPoint)aPosition isLeftAhead:(BOOL)aIsLeftAhead;
-+ (TBExplosion *)missileExplosionAtPosition:(CGPoint)aPosition angle:(CGFloat)aAngle;
+- (TBExplosion *)addTankExplosionAtPoistion:(CGPoint)aPosition;
+- (TBExplosion *)addBombExplosionAtPosition:(CGPoint)aPosition;
+- (TBExplosion *)addHelicopterExplosionAtPosition:(CGPoint)aPosition leftAhead:(BOOL)aLeftAhead;
+- (TBExplosion *)addMissileExplosionAtPosition:(CGPoint)aPosition angle:(CGFloat)aAngle;
 
 
 - (void)reset;

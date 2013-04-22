@@ -122,7 +122,7 @@
     if ([self intersectWithGround])
     {
         [self addDamage:100];
-        [TBExplosionManager bombExplosionAtPosition:CGPointMake(sPoint.x, kMapGround + 18)];
+        [[TBExplosionManager sharedManager] addBombExplosionAtPosition:CGPointMake(sPoint.x, kMapGround + 18)];
     }
 }
 

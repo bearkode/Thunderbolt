@@ -9,12 +9,26 @@
 
 #import "TBWeapon.h"
 #import "TBSprite.h"
+#import "TBUnit.h"
+#import "TBStructure.h"
 
 
 @implementation TBWeapon
+{
+    TBSprite  *mBody;
+    TBTeam     mTeam;
+    
+    NSUInteger mReloadCount;
+    NSUInteger mAmmoCount;
+    
+    NSUInteger mReloadTime;
+    CGFloat    mMaxRange;
+}
 
 
+@synthesize body        = mBody;
 @synthesize team        = mTeam;
+
 @synthesize reloadCount = mReloadCount;
 @synthesize ammoCount   = mAmmoCount;
 
@@ -25,26 +39,70 @@
 #pragma mark -
 
 
-- (id)initWithBody:(TBSprite *)aBody team:(TBTeam)aTeam
+- (id)init
 {
     self = [super init];
     
     if (self)
     {
-        mBody = aBody;
-        mTeam = aTeam;
+        [self reset];
     }
     
     return self;
 }
 
 
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+
 #pragma mark -
+
+
+- (void)action
+{
+    if (mReloadCount > 0)
+    {
+        mReloadCount--;
+    }
+}
+
+
+#pragma mark -
+
+
+- (void)reset
+{
+    mBody        = nil;
+    mTeam        = kTBTeamUnknown;
+    mReloadCount = 0;
+    mAmmoCount   = 0;
+    mReloadTime  = 0;
+    mMaxRange    = 0;
+}
+
+
+- (void)setBody:(TBSprite *)aBody
+{
+    mBody = aBody;
+    
+    if ([aBody isKindOfClass:[TBUnit class]])
+    {
+        mTeam = [(TBUnit *)aBody team];
+    }
+    else if ([aBody isKindOfClass:[TBStructure class]])
+    {
+        mTeam = [(TBStructure *)aBody team];
+    }
+
+}
 
 
 - (BOOL)isReloaded
 {
-    return (mReloadCount == 0) ? YES : NO;
+    return (mReloadCount == 0);
 }
 
 
@@ -54,12 +112,24 @@
 }
 
 
-- (void)action
+- (void)decreaseAmmoCount
 {
-    if (mReloadCount > 0)
+    if (mAmmoCount)
     {
-        mReloadCount--;
+        mAmmoCount--;
     }
+}
+
+
+- (CGPoint)mountPoint
+{
+    return [mBody point];
+}
+
+
+- (BOOL)inRange:(CGFloat)aDistance
+{
+    return (aDistance <= mMaxRange);
 }
 
 

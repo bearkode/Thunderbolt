@@ -16,34 +16,29 @@
 
 
 @interface TBWeapon : NSObject
-{
-    TBSprite  *mBody;
-    TBTeam     mTeam;
-    
-    NSUInteger mReloadCount;
-    NSUInteger mAmmoCount;
-    
-    NSUInteger mReloadTime;
-    CGFloat    mMaxRange;
-}
 
 
-@property (nonatomic, readonly) TBTeam team;
+@property (nonatomic, readonly) TBSprite  *body;
+@property (nonatomic, readonly) TBTeam     team;
 
 @property (nonatomic, readonly) NSUInteger reloadCount;
-@property (nonatomic, readonly) NSUInteger ammoCount;
+@property (nonatomic, assign)   NSUInteger ammoCount;
 
-@property (nonatomic, readonly) NSUInteger reloadTime;
-@property (nonatomic, readonly) CGFloat    maxRange;
+@property (nonatomic, assign)   NSUInteger reloadTime;
+@property (nonatomic, assign)   CGFloat    maxRange;
 
 
-- (id)initWithBody:(TBSprite *)aBody team:(TBTeam)aTeam;
+- (void)setBody:(TBSprite *)aBody;
 
 - (void)action;
 
+- (void)reset;
+
 - (BOOL)isReloaded;
 - (void)reload;
-
+- (void)decreaseAmmoCount;
+- (CGPoint)mountPoint;
+- (BOOL)inRange:(CGFloat)aDistance;
 - (BOOL)fireAt:(TBUnit *)aUnit;
 - (void)supplyAmmo:(NSUInteger)aCount;
 

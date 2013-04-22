@@ -46,6 +46,7 @@ typedef enum
 
 - (BOOL)isKindOfUnit:(TBUnitType)aType;
 - (BOOL)isAlly;
+- (TBTeam)opponentTeam;
 - (void)addDamage:(NSInteger)aDamage;
 - (BOOL)isAvailable;
 - (CGFloat)damageRate;

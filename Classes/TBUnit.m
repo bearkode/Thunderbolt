@@ -73,6 +73,12 @@
 }
 
 
+- (TBTeam)opponentTeam
+{
+    return (mTeam == kTBTeamAlly) ? kTBTeamEnemy : kTBTeamAlly;
+}
+
+
 - (void)addDamage:(NSInteger)aDamage
 {
     mDamage += aDamage;

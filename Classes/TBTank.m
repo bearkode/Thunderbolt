@@ -81,7 +81,8 @@
             [self setPoint:CGPointMake(-50, kMapGround + ([[self mesh] size].height / 2))];
         }
         
-        mTankGun = [[TBTankGun alloc] initWithBody:self team:aTeam];
+        mTankGun = [[TBTankGun alloc] init];
+        [mTankGun setBody:self];
     }
     
     return self;

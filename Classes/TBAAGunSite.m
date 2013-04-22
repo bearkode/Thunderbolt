@@ -34,7 +34,9 @@
     {
         [self setDurability:kAAGunSiteDurability];
         
-        mAAVulcan     = [[TBAAVulcan alloc] initWithBody:self team:aTeam];        
+        mAAVulcan = [[TBAAVulcan alloc] init];
+        [mAAVulcan setBody:self];
+        
         mTextureArray = [[NSArray alloc] initWithObjects:[PBTextureManager textureWithImageName:kTexAAGun01],
                                                          [PBTextureManager textureWithImageName:kTexAAGun01],
                                                          [PBTextureManager textureWithImageName:kTexAAGun02],
@@ -70,7 +72,7 @@
         [sTexture loadIfNeeded];
         [self setTexture:sTexture];
 
-        [TBExplosionManager tankExplosionAtPoistion:[self point]];
+        [[TBExplosionManager sharedManager] addTankExplosionAtPoistion:[self point]];
     }
 }
 

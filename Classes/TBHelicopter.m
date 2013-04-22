@@ -47,8 +47,6 @@ const NSUInteger kMaxBullets = 100;
     NSInteger       mMissileCount;
     
     BOOL            mIsVulcanFire;
-//    BOOL            mIsBombDrop;
-//    BOOL            mIsMissileLaunch;
     
     PBSoundSource  *mSoundSource;
     PBSoundSource  *mVulcanSoundSource;
@@ -63,8 +61,6 @@ const NSUInteger kMaxBullets = 100;
 @synthesize bulletCount     = mBulletCount;
 @synthesize bombCount       = mBombCount;
 @synthesize missileCount    = mMissileCount;
-//@synthesize isBombDrop      = mIsBombDrop;
-//@synthesize isMissileLaunch = mIsMissileLaunch;
 
 
 #pragma mark -
@@ -112,9 +108,6 @@ const NSUInteger kMaxBullets = 100;
         mBombCount       = MAX_BOMBS;
         mMissileCount    = MAX_MISSILE;
         mIsVulcanFire    = NO;
-//        mIsBombDrop      = NO;
-//        mIsMissileLaunch = NO;
-        
         mLanded          = YES;
         
         PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
@@ -343,7 +336,7 @@ const NSUInteger kMaxBullets = 100;
     {
         CGPoint sPoint = [self point];
         
-        [TBWarheadManager bombWithTeam:kTBTeamAlly position:CGPointMake(sPoint.x, sPoint.y - 10) speed:mSpeed];
+        [[TBWarheadManager sharedManager] addBombWithTeam:kTBTeamAlly position:CGPointMake(sPoint.x, sPoint.y - 10) speed:mSpeed];
         mBombCount--;
         
         [[self delegate] helicopter:self weaponFired:1];
@@ -386,10 +379,7 @@ const NSUInteger kMaxBullets = 100;
 
             CGPoint sVector = CGPointMake((sBulletPos.x - sPos1.x) / 3.5, (sBulletPos.y - sPos2.y) / 3.5);
 
-            sBullet = [[TBWarheadManager sharedManager] bulletWithTeam:kTBTeamAlly
-                                                              position:sBulletPos
-                                                                vector:sVector
-                                                                 power:kVulcanBulletPower];
+            sBullet = [[TBWarheadManager sharedManager] addBulletWithTeam:kTBTeamAlly position:sBulletPos vector:sVector power:kVulcanBulletPower];
             [sBullet setLife:100];
             mBulletCount--;
             

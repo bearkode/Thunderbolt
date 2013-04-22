@@ -15,15 +15,12 @@
 @implementation TBRifle
 
 
-- (id)initWithBody:(TBSprite *)aBody team:(TBTeam)aTeam
+- (id)init
 {
-    self = [super initWithBody:aBody team:aTeam];
+    self = [super init];
     if (self)
     {
-        mReloadCount = 0;
-        mReloadTime  = kRifleReloadTime;
-        mMaxRange    = kRifleMaxRange;
-        mAmmoCount   = 20;
+        [self reset];
     }
     
     return self;
@@ -39,32 +36,42 @@
 #pragma mark -
 
 
+- (void)reset
+{
+    [super reset];
+
+    [self setReloadTime:kRifleReloadTime];
+    [self setMaxRange:kRifleMaxRange];
+    [self setAmmoCount:20];
+}
+
+
+- (CGPoint)mountPoint
+{
+    CGPoint sMountPoint = [[self body] point];
+    
+    sMountPoint.y += 15;
+    
+    return sMountPoint;
+}
+
+
 - (BOOL)fireAt:(TBUnit *)aUnit
 {
-    BOOL    sResult = NO;
-    CGPoint sTargetPosition;
-    CGPoint sBodyPosition;
-    CGFloat sDistance;
-    TBTeam  sTeam = ([aUnit isAlly]) ? kTBTeamEnemy : kTBTeamAlly;
+    BOOL sResult = NO;
 
     if ([self isReloaded])
     {
-        sTargetPosition = [aUnit point];
-        sBodyPosition   = [mBody point];
-        sBodyPosition.y = sBodyPosition.y + 15;
-        sDistance       = TBDistanceBetweenToPoints(sBodyPosition, sTargetPosition);
+        CGFloat sDistance = TBDistanceBetweenToPoints([aUnit point], [self mountPoint]);
         
-        if (sDistance <= mMaxRange)
+        if ([self inRange:sDistance])
         {
-            CGFloat sAngle  = TBAngleBetweenToPoints(sBodyPosition, sTargetPosition);
+            CGFloat sAngle  = TBAngleBetweenToPoints([self mountPoint], [aUnit point]);
             CGPoint sVector = TBVector(sAngle, 3.0);
             
-            [[TBWarheadManager sharedManager] bulletWithTeam:sTeam
-                                                    position:sBodyPosition
-                                                      vector:sVector
-                                                       power:kRifleBulletPower];
+            [[TBWarheadManager sharedManager] addBulletWithTeam:[aUnit opponentTeam] position:[self mountPoint] vector:sVector power:kRifleBulletPower];
             
-            mAmmoCount--;
+            [self decreaseAmmoCount];
             [self reload];
             sResult = YES;
         }

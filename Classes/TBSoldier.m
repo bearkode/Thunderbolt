@@ -44,7 +44,8 @@
         [mTextureArray addObject:[NSString stringWithFormat:@"em05.png"]];
         [mTextureArray addObject:[NSString stringWithFormat:@"em06.png"]];
         
-        mRifle = [[TBRifle alloc] initWithBody:self team:aTeam];
+        mRifle = [[TBRifle alloc] init];
+        [mRifle setBody:self];
     }
     
     return self;

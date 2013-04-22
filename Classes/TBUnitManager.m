@@ -263,7 +263,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
         else
         {
             [sDisabledUnits addObject:sUnit];
-            [TBExplosionManager explosionWithUnit:sUnit];
+            [[TBExplosionManager sharedManager] addExplosionWithUnit:sUnit];
         }
     }
 
@@ -280,7 +280,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
         else
         {
             [sDisabledUnits addObject:sUnit];
-            [TBExplosionManager explosionWithUnit:sUnit];
+            [[TBExplosionManager sharedManager] addExplosionWithUnit:sUnit];
 
             [[TBMoneyManager sharedManager] saveMoneyForUnit:sUnit];
             [[TBScoreManager sharedManager] addScoreForUnit:sUnit];

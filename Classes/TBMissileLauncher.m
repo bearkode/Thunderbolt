@@ -16,16 +16,13 @@
 @implementation TBMissileLauncher
 
 
-- (id)initWithBody:(TBSprite *)aBody team:(TBTeam)aTeam
+- (id)init
 {
-    self = [super initWithBody:aBody team:aTeam];
+    self = [super init];
     
     if (self)
     {
-        mReloadCount = 0;
-        mReloadTime  = kMissileReloadTime;
-        mMaxRange    = kMissileMaxRange;
-        mAmmoCount   = 1;
+        [self reset];
     }
     
     return self;
@@ -41,33 +38,47 @@
 #pragma mark -
 
 
+- (void)reset
+{
+    [super reset];
+    
+    [self setReloadTime:kMissileReloadTime];
+    [self setMaxRange:kMissileMaxRange];
+    [self setAmmoCount:1];
+}
+
+
+- (CGPoint)mountPoint
+{
+    CGPoint sMountPoint = [[self body] point];
+    
+    sMountPoint.y += 20;
+    
+    return sMountPoint;
+}
+
 //  TODO : 개선 방법을 찾아볼 것.
 //         fast enumeration 중에 미사일 유닛이 추가되면서 크래시 발생.
 - (void)launchMissile:(id)aUnit
 {
-    [[TBUnitManager sharedManager] addMissileWithTeam:kTBTeamEnemy position:[mBody point] target:aUnit];
-    mAmmoCount--;
+    [[TBUnitManager sharedManager] addMissileWithTeam:kTBTeamEnemy position:[self mountPoint] target:aUnit];
+    [self decreaseAmmoCount];
     [self reload];
 }
 
 
 - (BOOL)fireAt:(TBUnit *)aUnit
 {
-    BOOL    sResult = NO;
-    CGPoint sTargetPosition;
-    CGPoint sBodyPosition;
-    CGFloat sDistance;
+    BOOL sResult = NO;
 
     if ([self isReloaded])
     {
-        sTargetPosition = [aUnit point];
-        sBodyPosition   = [mBody point];
-        sBodyPosition.y = sBodyPosition.y + 20;
-        sDistance       = TBDistanceBetweenToPoints(sBodyPosition, sTargetPosition);
+        CGFloat sDistance = TBDistanceBetweenToPoints([self mountPoint], [aUnit point]);
 
-        if (sDistance <= mMaxRange)
+        if ([self inRange:sDistance])
         {
             [self performSelector:@selector(launchMissile:) withObject:aUnit afterDelay:0.0];
+            
             sResult = YES;
         }
     }

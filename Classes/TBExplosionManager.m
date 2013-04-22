@@ -128,20 +128,20 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 #pragma mark -
 
 
-+ (void)explosionWithUnit:(TBUnit *)aUnit
+- (void)addExplosionWithUnit:(TBUnit *)aUnit
 {
     if ([aUnit isKindOfUnit:kTBUnitTank])
     {
-        [TBExplosionManager tankExplosionAtPoistion:[aUnit point]];
+        [self addTankExplosionAtPoistion:[aUnit point]];
     }
     else if ([aUnit isKindOfUnit:kTBUnitMissile])
     {
         PBVertex3 sAngle = [[aUnit transform] angle];
-        [TBExplosionManager missileExplosionAtPosition:[aUnit point] angle:sAngle.z];
+        [self addMissileExplosionAtPosition:[aUnit point] angle:sAngle.z];
     }
     else if ([aUnit isKindOfUnit:kTBUnitHelicopter])
     {
-        [TBExplosionManager helicopterExplosionAtPosition:[aUnit point] isLeftAhead:[(TBHelicopter *)aUnit isLeftAhead]];
+        [self addHelicopterExplosionAtPosition:[aUnit point] leftAhead:[(TBHelicopter *)aUnit isLeftAhead]];
     }
     else if ([aUnit isKindOfUnit:kTBUnitSoldier])
     {
@@ -149,15 +149,15 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     }
     else
     {
-        [TBExplosionManager tankExplosionAtPoistion:[aUnit point]];
+        [self addTankExplosionAtPoistion:[aUnit point]];
     }
 }
 
 
 //  TODO : explosion for each team
-+ (TBExplosion *)tankExplosionAtPoistion:(CGPoint)aPosition
+- (TBExplosion *)addTankExplosionAtPoistion:(CGPoint)aPosition
 {
-    TBExplosion *sExplosion   = [[self sharedManager] idleExplosion];
+    TBExplosion *sExplosion   = [self idleExplosion];
     PBTexture   *sTexture     = nil;
     
     sTexture = [PBTextureManager textureWithImageName:kTexEnemyTankExp00];
@@ -186,9 +186,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 }
 
 
-+ (TBExplosion *)bombExplosionAtPosition:(CGPoint)aPosition
+- (TBExplosion *)addBombExplosionAtPosition:(CGPoint)aPosition
 {
-    TBExplosion *sExplosion = [[self sharedManager] idleExplosion];
+    TBExplosion *sExplosion = [self idleExplosion];
     PBTexture   *sTexture   = nil;
     
     sTexture = [PBTextureManager textureWithImageName:kTexBombExp00];
@@ -214,22 +214,22 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 }
 
 
-+ (TBExplosion *)helicopterExplosionAtPosition:(CGPoint)aPosition isLeftAhead:(BOOL)aIsLeftAhead
+- (TBExplosion *)addHelicopterExplosionAtPosition:(CGPoint)aPosition leftAhead:(BOOL)aLeftAhead
 {
-    TBExplosion *sExplosion = [[self sharedManager] idleExplosion];
+    TBExplosion *sExplosion = [self idleExplosion];
     PBTexture   *sTexture   = nil;
     
-    sTexture = [PBTextureManager textureWithImageName:(aIsLeftAhead) ? kTexHeliLExp00 : kTexHeliRExp00];
+    sTexture = [PBTextureManager textureWithImageName:(aLeftAhead) ? kTexHeliLExp00 : kTexHeliRExp00];
     [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
-    sTexture = [PBTextureManager textureWithImageName:(aIsLeftAhead) ? kTexHeliLExp01 : kTexHeliRExp01];
+    sTexture = [PBTextureManager textureWithImageName:(aLeftAhead) ? kTexHeliLExp01 : kTexHeliRExp01];
     [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     
-    sTexture = [PBTextureManager textureWithImageName:(aIsLeftAhead) ? kTexHeliLExp02 : kTexHeliRExp02];
+    sTexture = [PBTextureManager textureWithImageName:(aLeftAhead) ? kTexHeliLExp02 : kTexHeliRExp02];
     [sTexture loadIfNeeded];
     [sExplosion addTexture:sTexture atPosition:aPosition];
     [sExplosion addTexture:sTexture atPosition:aPosition];
@@ -242,9 +242,9 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 }
 
 
-+ (TBExplosion *)missileExplosionAtPosition:(CGPoint)aPosition angle:(CGFloat)aAngle
+- (TBExplosion *)addMissileExplosionAtPosition:(CGPoint)aPosition angle:(CGFloat)aAngle
 {
-    TBExplosion *sExplosion = [[self sharedManager] idleExplosion];
+    TBExplosion *sExplosion = [self idleExplosion];
     PBTexture   *sTexture   = nil;
     PBVertex3    sAngle     = PBVertex3Make(0, 0, aAngle);
     

@@ -49,8 +49,11 @@
         [self setTexture:mTextureNormal];
         [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + ([[self mesh] size].height / 2))];
         
-        mAAVulcan        = [[TBAAVulcan alloc] initWithBody:self team:aTeam];
-        mMissileLauncher = [[TBMissileLauncher alloc] initWithBody:self team:aTeam];
+        mAAVulcan        = [[TBAAVulcan alloc] init];
+        mMissileLauncher = [[TBMissileLauncher alloc] init];
+        
+        [mAAVulcan setBody:self];
+        [mMissileLauncher setBody:self];
     }
     
     return self;
