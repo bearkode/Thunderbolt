@@ -1,5 +1,5 @@
 /*
- *  TBSoldier.h
+ *  TBRifleman.h
  *  Thunderbolt
  *
  *  Created by bearkode on 10. 7. 22..
@@ -11,7 +11,7 @@
 #import "TBUnit.h"
 
 
-@interface TBSoldier : TBUnit
+@interface TBRifleman : TBUnit
 
 
 @end

@@ -105,7 +105,7 @@
 		A7901E9011F882D2000BA30C /* em04.png in Resources */ = {isa = PBXBuildFile; fileRef = A7901E8911F882D2000BA30C /* em04.png */; };
 		A7901E9111F882D2000BA30C /* em05.png in Resources */ = {isa = PBXBuildFile; fileRef = A7901E8A11F882D2000BA30C /* em05.png */; };
 		A7901E9211F882D2000BA30C /* em06.png in Resources */ = {isa = PBXBuildFile; fileRef = A7901E8B11F882D2000BA30C /* em06.png */; };
-		A7901E9E11F88440000BA30C /* TBSoldier.m in Sources */ = {isa = PBXBuildFile; fileRef = A7901E9D11F88440000BA30C /* TBSoldier.m */; };
+		A7901E9E11F88440000BA30C /* TBRifleman.m in Sources */ = {isa = PBXBuildFile; fileRef = A7901E9D11F88440000BA30C /* TBRifleman.m */; };
 		A79BD77B119F609A0021574B /* SAM.png in Resources */ = {isa = PBXBuildFile; fileRef = A79BD77A119F609A0021574B /* SAM.png */; };
 		A79BD77D119F61C70021574B /* SAM_shoot.png in Resources */ = {isa = PBXBuildFile; fileRef = A79BD77C119F61C70021574B /* SAM_shoot.png */; };
 		A79BD780119F66F20021574B /* TBArmoredVehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BD77F119F66F20021574B /* TBArmoredVehicle.m */; };
@@ -293,8 +293,8 @@
 		A7901E8911F882D2000BA30C /* em04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = em04.png; sourceTree = "<group>"; };
 		A7901E8A11F882D2000BA30C /* em05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = em05.png; sourceTree = "<group>"; };
 		A7901E8B11F882D2000BA30C /* em06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = em06.png; sourceTree = "<group>"; };
-		A7901E9C11F88440000BA30C /* TBSoldier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSoldier.h; sourceTree = "<group>"; };
-		A7901E9D11F88440000BA30C /* TBSoldier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSoldier.m; sourceTree = "<group>"; };
+		A7901E9C11F88440000BA30C /* TBRifleman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBRifleman.h; sourceTree = "<group>"; };
+		A7901E9D11F88440000BA30C /* TBRifleman.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBRifleman.m; sourceTree = "<group>"; };
 		A79BD77A119F609A0021574B /* SAM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SAM.png; sourceTree = "<group>"; };
 		A79BD77C119F61C70021574B /* SAM_shoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SAM_shoot.png; sourceTree = "<group>"; };
 		A79BD77E119F66F20021574B /* TBArmoredVehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBArmoredVehicle.h; sourceTree = "<group>"; };
@@ -663,8 +663,8 @@
 				A79BD77F119F66F20021574B /* TBArmoredVehicle.m */,
 				A71FFA6C1194D9ED00DA0139 /* TBMissile.h */,
 				A71FFA6D1194D9ED00DA0139 /* TBMissile.m */,
-				A7901E9C11F88440000BA30C /* TBSoldier.h */,
-				A7901E9D11F88440000BA30C /* TBSoldier.m */,
+				A7901E9C11F88440000BA30C /* TBRifleman.h */,
+				A7901E9D11F88440000BA30C /* TBRifleman.m */,
 			);
 			name = Units;
 			sourceTree = "<group>";
@@ -912,7 +912,7 @@
 				A7D9182011A67027006ABF25 /* TBRadarObject.m in Sources */,
 				A7BF9DC411DF8A8D001F8F6B /* TBAAGunSite.m in Sources */,
 				A7A7782811E217D7001CE8D1 /* TBStructureManager.m in Sources */,
-				A7901E9E11F88440000BA30C /* TBSoldier.m in Sources */,
+				A7901E9E11F88440000BA30C /* TBRifleman.m in Sources */,
 				A78DF06F11F890A0002AFCC9 /* TBRifle.m in Sources */,
 				2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */,
 				2E46379A17127FEA00EA1888 /* TBEventView.m in Sources */,

@@ -18,7 +18,7 @@
 @class TBHelicopter;
 @class TBTank;
 @class TBArmoredVehicle;
-@class TBSoldier;
+@class TBRifleman;
 @class TBMissile;
 
 
@@ -50,7 +50,7 @@
 - (TBHelicopter *)addHelicopterWithTeam:(TBTeam)aTeam delegate:(id)aDelegate;
 - (TBTank *)addTankWithTeam:(TBTeam)aTeam;
 - (TBArmoredVehicle *)addArmoredVehicleWithTeam:(TBTeam)aTeam;
-- (TBSoldier *)addSoldierWithTeam:(TBTeam)aTeam;
+- (TBRifleman *)addRiflemanWithTeam:(TBTeam)aTeam;
 - (TBMissile *)addMissileWithTeam:(TBTeam)aTeam position:(CGPoint)aPosition target:(TBUnit *)aTarget;
 
 

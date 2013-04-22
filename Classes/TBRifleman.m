@@ -1,5 +1,5 @@
 /*
- *  TBSoldier.m
+ *  TBRifleman.m
  *  Thunderbolt
  *
  *  Created by bearkode on 10. 7. 22..
@@ -7,7 +7,7 @@
  *
  */
 
-#import "TBSoldier.h"
+#import "TBRifleman.h"
 #import "TBTextureNames.h"
 #import "TBRifle.h"
 #import "TBUnitManager.h"
@@ -19,7 +19,7 @@ const CGFloat kSoldierSpeed = 0.5;
 #pragma mark -
 
 
-@implementation TBSoldier
+@implementation TBRifleman
 {
     NSUInteger mTick;
     NSUInteger mIndex;

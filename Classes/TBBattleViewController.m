@@ -215,7 +215,7 @@
             }
             else
             {
-                [[TBUnitManager sharedManager] addSoldierWithTeam:kTBTeamEnemy];
+                [[TBUnitManager sharedManager] addRiflemanWithTeam:kTBTeamEnemy];
             }
             
             [[TBMoneyManager sharedManager] saveMoney:10];

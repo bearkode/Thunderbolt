@@ -21,7 +21,7 @@
 #import "TBHelicopter.h"
 #import "TBTank.h"
 #import "TBArmoredVehicle.h"
-#import "TBSoldier.h"
+#import "TBRifleman.h"
 #import "TBMissile.h"
 
 
@@ -340,14 +340,14 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 }
 
 
-- (TBSoldier *)addSoldierWithTeam:(TBTeam)aTeam
+- (TBRifleman *)addRiflemanWithTeam:(TBTeam)aTeam
 {
-    NSNumber  *sUnitID  = [[TBUnitManager sharedManager] nextUnitID];
-    TBSoldier *sSoldier = [[[TBSoldier alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
+    NSNumber   *sUnitID   = [[TBUnitManager sharedManager] nextUnitID];
+    TBRifleman *sRifleman = [[[TBRifleman alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
-    [self addUnit:sSoldier];
+    [self addUnit:sRifleman];
     
-    return sSoldier;
+    return sRifleman;
 }
 
 
