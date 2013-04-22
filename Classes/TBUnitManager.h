@@ -27,27 +27,26 @@
 
 + (TBUnitManager *)sharedManager;
 
+/*  Config  */
 - (void)reset;
 - (void)setUnitLayer:(PBLayer *)aUnitLayer;
 
-- (NSNumber *)nextUnitID;
-- (void)addUnit:(TBUnit *)aUnit;
-- (TBUnit *)unitForUnitID:(NSNumber *)aUnitID;
-
-- (NSArray *)allyUnits;
-- (NSArray *)enemyUnits;
-
+/*  Actions  */
 - (void)doActions;
 
+/*  Access Units  */
+- (NSArray *)allyUnits;
+- (NSArray *)enemyUnits;
+- (TBUnit *)unitForUnitID:(NSNumber *)aUnitID;
 - (TBUnit *)intersectedOpponentUnit:(TBWarhead *)aWarhead;
 - (TBUnit *)opponentUnitOf:(TBUnit *)aUnit inRange:(CGFloat)aRange;
 
-- (NSArray *)removeDisabledUnits;
-
+/*  Helicopter  */
 - (TBHelicopter *)allyHelicopter;
 - (TBHelicopter *)enemyHelicopter;
 - (TBHelicopter *)opponentHeicopter:(TBTeam)aTeam;
 
+/*  Add New Unit  */
 - (TBHelicopter *)addHelicopterWithTeam:(TBTeam)aTeam delegate:(id)aDelegate;
 - (TBTank *)addTankWithTeam:(TBTeam)aTeam;
 - (TBArmoredVehicle *)addArmoredVehicleWithTeam:(TBTeam)aTeam;
