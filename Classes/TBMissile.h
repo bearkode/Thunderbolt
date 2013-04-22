@@ -15,7 +15,7 @@
 
 
 @property (nonatomic, copy)   NSNumber *targetID;
-@property (nonatomic, assign) NSInteger destructivePower;
+@property (nonatomic, assign) NSInteger power;
 
 
 @end

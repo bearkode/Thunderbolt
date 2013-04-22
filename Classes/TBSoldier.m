@@ -12,6 +12,12 @@
 #import "TBUnitManager.h"
 
 
+const CGFloat kSoldierSpeed = 0.5;
+
+
+#pragma mark -
+
+
 @implementation TBSoldier
 {
     NSUInteger      mTick;
@@ -88,9 +94,7 @@
 
     if (!sFire)
     {
-        CGPoint sPoint = [self point];
-        sPoint.x += ([self isAlly]) ? 0.5 : -0.5;
-        [self setPoint:sPoint];
+        [self moveWithVector:CGPointMake(([self isAlly]) ? kSoldierSpeed : -kSoldierSpeed, 0)];
     }
     
     mTick = (mTick == 24) ? 0 : mTick + 1;

@@ -15,7 +15,10 @@
 #import "TBHelicopter.h"
 
 
-#define kTankSpeed 0.5
+const CGFloat kTankSpeed = 0.5;
+
+
+#pragma mark -
 
 
 @implementation TBTank
@@ -129,9 +132,7 @@
     
     if (!sFire)
     {
-        CGPoint sPoint = [self point];
-        sPoint.x += ([self isAlly]) ? kTankSpeed : -kTankSpeed;
-        [self setPoint:sPoint];
+        [self moveWithVector:CGPointMake(([self isAlly]) ? kTankSpeed : -kTankSpeed, 0)];
     }
     
     if (mHitDiscount-- == 0)

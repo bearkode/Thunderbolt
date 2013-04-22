@@ -17,11 +17,16 @@
 #import "TBMoneyManager.h"
 
 
-const NSUInteger kMaxBullets = 100;
-#define MAX_BOMBS       5
-#define MAX_MISSILE     2
+const NSUInteger kMaxBullets  = 100;
+const NSInteger  kMaxBombs    = 5;
+const NSInteger  kMaxMissiles = 2;
 
-#define kVulcanDelay    8
+const NSInteger  kVulcanDelay = 8;
+
+const CGFloat    kAltitudeSensitivity = 15.0;
+
+
+#pragma mark -
 
 
 @implementation TBHelicopter
@@ -46,7 +51,7 @@ const NSUInteger kMaxBullets = 100;
     NSInteger       mBombCount;
     NSInteger       mMissileCount;
     
-    BOOL            mIsVulcanFire;
+    BOOL            mFireVulcan;
     
     PBSoundSource  *mSoundSource;
     PBSoundSource  *mVulcanSoundSource;
@@ -61,6 +66,7 @@ const NSUInteger kMaxBullets = 100;
 @synthesize bulletCount     = mBulletCount;
 @synthesize bombCount       = mBombCount;
 @synthesize missileCount    = mMissileCount;
+@synthesize fireVulcan      = mFireVulcan;
 
 
 #pragma mark -
@@ -105,9 +111,9 @@ const NSUInteger kMaxBullets = 100;
         [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 8
         
         mBulletCount     = kMaxBullets;
-        mBombCount       = MAX_BOMBS;
-        mMissileCount    = MAX_MISSILE;
-        mIsVulcanFire    = NO;
+        mBombCount       = kMaxBombs;
+        mMissileCount    = kMaxMissiles;
+        mFireVulcan      = NO;
         mLanded          = YES;
         
         PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
@@ -182,9 +188,6 @@ const NSUInteger kMaxBullets = 100;
 
 
 #pragma mark -
-
-
-#define kAltitudeSensitivity 15.0
 
 
 - (CGPoint)pointWithSpeedLever:(CGFloat)aSpeedLever oldPoint:(CGPoint)aPoint
@@ -263,9 +266,9 @@ const NSUInteger kMaxBullets = 100;
 
 - (void)setFireVulcan:(BOOL)aFlag
 {
-    mIsVulcanFire = aFlag;
+    mFireVulcan = aFlag;
 
-    if (mIsVulcanFire)
+    if (mFireVulcan)
     {
         mVulcanDelay = 0;
         [mVulcanSoundSource play];
@@ -306,23 +309,17 @@ const NSUInteger kMaxBullets = 100;
 
 - (void)fillUpBombs:(NSInteger)aCount
 {
-    if (mBombCount < MAX_BOMBS)
+    if (mBombCount < kMaxBombs)
     {
         mBombCount += aCount;
-        if (mBombCount > MAX_BOMBS)
+        if (mBombCount > kMaxBombs)
         {
-            mBombCount = MAX_BOMBS;
+            mBombCount = kMaxBombs;
         }
         
         [[self delegate] helicopterWeaponDidReload:self];
         [TBMoneyManager useMoney:kTBPriceBomb];
     }
-}
-
-
-- (BOOL)isVulcanFiring
-{
-    return mIsVulcanFire;
 }
 
 
@@ -348,7 +345,7 @@ const NSUInteger kMaxBullets = 100;
     CGPoint   sBulletPos = CGPointZero;
     TBBullet *sBullet;
     
-    if (mIsVulcanFire)
+    if (mFireVulcan)
     {
         if (mBulletCount > 0)
         {
@@ -398,7 +395,7 @@ const NSUInteger kMaxBullets = 100;
 {
     [super action];
     
-    if (mIsVulcanFire && mBulletCount > 0)
+    if (mFireVulcan && mBulletCount > 0)
     {
         mVulcanDelay--;
         if (mVulcanDelay <= 0)

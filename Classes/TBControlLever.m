@@ -29,7 +29,7 @@
     
     if (self)
     {
-        mHelicopter= aHelicopter;
+        mHelicopter = aHelicopter;
     }
     
     return self;

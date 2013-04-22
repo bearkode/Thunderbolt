@@ -8,24 +8,21 @@
  */
 
 #import "TBUnitManager.h"
-
 #import "TBAssociativeArray.h"
-
-#import "TBUnit.h"
-#import "TBWarhead.h"
-
-#import "TBHelicopter.h"
-#import "TBTank.h"
-#import "TBArmoredVehicle.h"
-#import "TBSoldier.h"
-#import "TBMissile.h"
-
 #import "TBGameConst.h"
 #import "TBMacro.h"
 
 #import "TBExplosionManager.h"
 #import "TBMoneyManager.h"
 #import "TBScoreManager.h"
+
+#import "TBUnit.h"
+#import "TBWarhead.h"
+#import "TBHelicopter.h"
+#import "TBTank.h"
+#import "TBArmoredVehicle.h"
+#import "TBSoldier.h"
+#import "TBMissile.h"
 
 
 @implementation TBUnitManager
@@ -39,6 +36,7 @@
     
     TBAssociativeArray *mAllyUnits;
     TBAssociativeArray *mEnemyUnits;
+    NSMutableArray     *mDisabledUnits;
 }
 
 
@@ -51,10 +49,11 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     
     if (self)
     {
-        mNextUnitID = 0;
-    
-        mAllyUnits  = [[TBAssociativeArray alloc] init];
-        mEnemyUnits = [[TBAssociativeArray alloc] init];
+        mAllyUnits     = [[TBAssociativeArray alloc] init];
+        mEnemyUnits    = [[TBAssociativeArray alloc] init];
+        mDisabledUnits = [[NSMutableArray alloc] init];
+        
+        [self reset];
     }
     
     return self;
@@ -67,40 +66,32 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 - (NSNumber *)nextUnitID
 {
-    NSNumber *sResult = [NSNumber numberWithInteger:mNextUnitID];
-    
-    mNextUnitID++;
-    
-    return sResult;
+    return [NSNumber numberWithInteger:mNextUnitID++];
 }
 
 
 - (void)addUnit:(TBUnit *)aUnit
 {
     NSAssert([aUnit unitID], @"");
+
+    TBAssociativeArray *sUnits = ([aUnit isAlly]) ? mAllyUnits : mEnemyUnits;
     
     [mUnitLayer addSublayer:aUnit];
+    [sUnits setObject:aUnit forKey:[aUnit unitID]];
     
-    if ([aUnit isAlly])
+    if ([aUnit isKindOfUnit:kTBUnitHelicopter])
     {
-        if ([aUnit isKindOfUnit:kTBUnitHelicopter])
+        if ([aUnit isAlly])
         {
             mAllyHelicopter = aUnit;
         }
-        
-        [mAllyUnits setObject:aUnit forKey:[aUnit unitID]];
-        NSLog(@"mAllyUnits = %@", [mAllyUnits array]);
-    }
-    else
-    {
-        if ([aUnit isKindOfUnit:kTBUnitHelicopter])
+        else
         {
             mEnemyHelicopter = aUnit;
         }
-        
-        [mEnemyUnits setObject:aUnit forKey:[aUnit unitID]];
-        NSLog(@"mEnemyUnits = %@", [mEnemyUnits array]);
     }
+    
+    NSLog(@"sUnits = %@", [sUnits array]);
 }
 
 
@@ -129,53 +120,35 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 }
 
 
-- (NSArray *)removeDisabledUnits
+- (void)removeDisabledUnits
 {
-    NSMutableArray *sDisabledUnits = [NSMutableArray array];
+    [mDisabledUnits removeAllObjects];
     
     for (TBUnit *sUnit in [mAllyUnits array])
     {
-        if ([sUnit isAvailable])
+        if (![sUnit isAvailable])
         {
-            if ([sUnit point].x > (kMaxMapXPos + 50))
-            {
-                /*   Arrived Limit   */
-                [sDisabledUnits addObject:sUnit];
-            }
-        }
-        else
-        {
-            [sDisabledUnits addObject:sUnit];
-            [[TBExplosionManager sharedManager] addExplosionWithUnit:sUnit];
+            [mDisabledUnits addObject:sUnit];
         }
     }
     
     for (TBUnit *sUnit in [mEnemyUnits array])
     {
-        if ([sUnit isAvailable])
+        if (![sUnit isAvailable])
         {
-            if ([sUnit point].x < -50)
-            {
-                /*   Arrived Limit   */
-                [sDisabledUnits addObject:sUnit];
-            }
-        }
-        else
-        {
-            [sDisabledUnits addObject:sUnit];
-            [[TBExplosionManager sharedManager] addExplosionWithUnit:sUnit];
+            [mDisabledUnits addObject:sUnit];
             
             [[TBMoneyManager sharedManager] saveMoneyForUnit:sUnit];
             [[TBScoreManager sharedManager] addScoreForUnit:sUnit];
         }
     }
     
-    for (TBUnit *sUnit in sDisabledUnits)
+    for (TBUnit *sUnit in mDisabledUnits)
     {
         [self removeUnit:sUnit];
     }
     
-    return sDisabledUnits;
+    [mDisabledUnits removeAllObjects];
 }
 
 
@@ -224,7 +197,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
         {
             if ([sUnit isKindOfUnit:kTBUnitMissile])
             {
-                [mAllyHelicopter addDamage:[(TBMissile *)sUnit destructivePower]];
+                [mAllyHelicopter addDamage:[(TBMissile *)sUnit power]];
                 [sUnit addDamage:100];
             }
             else

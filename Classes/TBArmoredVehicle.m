@@ -15,6 +15,12 @@
 #import "TBMissileLauncher.h"
 
 
+const CGFloat kAPCSpeed = 0.5;
+
+
+#pragma mark -
+
+
 @implementation TBArmoredVehicle
 {
     PBTexture         *mTextureNormal;
@@ -94,9 +100,7 @@
     
     if (!sFire)
     {
-        CGPoint sPoint = [self point];
-        sPoint.x += ([self isAlly]) ? 1.0 : -1.0;
-        [self setPoint:sPoint];
+        [self moveWithVector:CGPointMake(([self isAlly]) ? kAPCSpeed : -kAPCSpeed, 0)];
     }
     
     if (mHitDiscount-- == 0)

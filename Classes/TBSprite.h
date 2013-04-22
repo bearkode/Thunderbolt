@@ -25,6 +25,8 @@ CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed);
 - (CGFloat)distanceWith:(TBSprite *)aSprite;
 - (CGFloat)angleWith:(TBSprite *)aSprite;
 
+- (void)moveWithVector:(CGPoint)aVector;
+
 - (void)action;
 
 

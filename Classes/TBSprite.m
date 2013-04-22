@@ -146,6 +146,23 @@ inline CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed)
 }
 
 
+#pragma mark -
+
+
+- (void)moveWithVector:(CGPoint)aVector
+{
+    CGPoint sPoint = [self point];
+    
+    sPoint.x += aVector.x;
+    sPoint.y += aVector.y;
+    
+    [self setPoint:sPoint];
+}
+
+
+#pragma mark -
+
+
 - (void)action
 {
 

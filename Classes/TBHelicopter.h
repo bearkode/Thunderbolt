@@ -23,18 +23,19 @@ typedef enum
 @interface TBHelicopter : TBUnit
 
 
-@property (nonatomic, assign)                         id              delegate;
+@property (nonatomic, assign)                          id              delegate;
 
 /*  Movement  */
-@property (nonatomic, readonly)                       TBControlLever *controlLever;
-@property (nonatomic, readonly, getter = isLeftAhead) BOOL leftAhead;
-@property (nonatomic, readonly, getter = isLanded)    BOOL landed;
+@property (nonatomic, readonly)                        TBControlLever *controlLever;
+@property (nonatomic, readonly, getter = isLeftAhead)  BOOL            leftAhead;
+@property (nonatomic, readonly, getter = isLanded)     BOOL            landed;
 
 /*  Weapon  */
-@property (nonatomic, assign)                         TBWeaponType    selectedWeapon;
-@property (nonatomic, assign)                         NSInteger       bulletCount;
-@property (nonatomic, assign)                         NSInteger       bombCount;
-@property (nonatomic, assign)                         NSInteger       missileCount;
+@property (nonatomic, assign)                          TBWeaponType    selectedWeapon;
+@property (nonatomic, readonly, getter = isFireVulcan) BOOL            fireVulcan;
+@property (nonatomic, assign)                          NSInteger       bulletCount;
+@property (nonatomic, assign)                          NSInteger       bombCount;
+@property (nonatomic, assign)                          NSInteger       missileCount;
 
 
 #pragma mark -
@@ -48,7 +49,6 @@ typedef enum
 - (void)fillUpBullets:(NSInteger)aCount;
 - (void)fillUpBombs:(NSInteger)aCount;
 
-- (BOOL)isVulcanFiring;
 - (void)dropBomb;
 
 

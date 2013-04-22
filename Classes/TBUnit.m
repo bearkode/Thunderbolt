@@ -8,6 +8,7 @@
  */
 
 #import "TBUnit.h"
+#import "TBExplosionManager.h"
 
 
 @implementation TBUnit
@@ -17,7 +18,7 @@
     TBTeam     mTeam;
     NSInteger  mDurability;
     NSInteger  mDamage;
-    NSInteger  mFuel;
+    BOOL       mAvailable;
 }
 
 
@@ -29,7 +30,7 @@
 @synthesize team       = mTeam;
 @synthesize durability = mDurability;
 @synthesize damage     = mDamage;
-@synthesize fuel       = mFuel;
+@synthesize available  = mAvailable;
 
 
 #pragma mark -
@@ -46,7 +47,7 @@
         mTeam       = aTeam;
         mDurability = 100;
         mDamage     = 0;
-        mFuel       = 8000;
+        mAvailable  = YES;
     }
     
     return self;
@@ -61,11 +62,21 @@
 }
 
 
+#pragma mark -
+
+
 - (void)action
 {
     [super action];
     
-    mFuel = (mFuel == 0) ? 0 : mFuel - 1;
+    if ([self isAvailable])
+    {
+        if (([self point].x > (kMaxMapXPos + 50)) ||
+            ([self point].x < (kMinMapXPos -50)))
+        {
+            mAvailable = NO;
+        }
+    }
 }
 
 
@@ -95,7 +106,10 @@
     mDamage += aDamage;
     if (mDamage > mDurability)
     {
-        mDamage = mDurability;
+        mDamage    = mDurability;
+        mAvailable = NO;
+        
+        [[TBExplosionManager sharedManager] addExplosionWithUnit:self];
     }
 }
 
@@ -107,17 +121,6 @@
         mDamage -= aValue;
         mDamage = (mDamage < 0) ? 0 : mDamage;
     }
-}
-
-
-- (BOOL)isAvailable
-{
-    if (mDamage >= mDurability)
-    {
-        return NO;
-    }
-    
-    return YES;
 }
 
 

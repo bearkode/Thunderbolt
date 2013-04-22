@@ -23,15 +23,18 @@ typedef enum
 } TBUnitType;
 
 
+#pragma mark -
+
+
 @interface TBUnit : TBSprite
 
 
-@property (nonatomic, assign)   TBUnitType type;
-@property (nonatomic, retain)   NSNumber  *unitID;
-@property (nonatomic, readonly) TBTeam     team;
-@property (nonatomic, assign)   NSInteger  durability;
-@property (nonatomic, assign)   NSInteger  damage;
-@property (nonatomic, assign)   NSInteger  fuel;
+@property (nonatomic, assign)                         TBUnitType type;
+@property (nonatomic, retain)                         NSNumber  *unitID;
+@property (nonatomic, readonly)                       TBTeam     team;
+@property (nonatomic, assign)                         NSInteger  durability;
+@property (nonatomic, assign)                         NSInteger  damage;
+@property (nonatomic, readonly, getter = isAvailable) BOOL available;
 
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam;

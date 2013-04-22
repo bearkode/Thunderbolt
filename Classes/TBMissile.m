@@ -15,21 +15,23 @@
 #import "TBUnit.h"
 
 
-#define MISSILE_FUEL        250.0
-#define MISSILE_SPEED       5.8
-#define MISSILE_SENSITIVE   2.8
+const NSInteger kMissileFuel         = 300;
+const CGFloat   kMissileSpeed        = 5.8;
+const CGFloat   kMissileSensitive    = 2.8;
+const CGFloat   kMissileAcceleration = 0.1;
 
 
 @implementation TBMissile
 {
     NSNumber *mTargetID;
-    NSInteger mDestructivePower;
+    NSInteger mPower;
     CGFloat   mSpeed;
+    NSInteger mFuel;
 }
 
 
-@synthesize targetID         = mTargetID;
-@synthesize destructivePower = mDestructivePower;
+@synthesize targetID = mTargetID;
+@synthesize power    = mPower;
 
 
 #pragma mark -
@@ -43,10 +45,10 @@
     {
         [self setType:kTBUnitMissile];
         [self setDurability:kMissileDurability];
-        [self setFuel:MISSILE_FUEL];
-
-        mDestructivePower = kMissilePower;
-        mSpeed            = 0.0;
+        
+        mPower = kMissilePower;
+        mSpeed = 0.0;
+        mFuel  = kMissileFuel;
         
         PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexMissile];
         [sTexture loadIfNeeded];
@@ -72,9 +74,9 @@
     CGPoint   sPoint  = [self point];
     PBVertex3 sAngle3 = [[self transform] angle];
     
-    if (mSpeed < MISSILE_SPEED)
+    if (mSpeed < kMissileSpeed)
     {
-        mSpeed += 0.2;
+        mSpeed += kMissileAcceleration;
     }
     
     sTarget = [[TBUnitManager sharedManager] unitForUnitID:mTargetID];
@@ -93,18 +95,18 @@
  
         if (sDelta > 0)
         {
-            sAngle3.z = (sDelta < MISSILE_SENSITIVE) ? sAngle : sAngle3.z + MISSILE_SENSITIVE;
+            sAngle3.z = (sDelta < kMissileSensitive) ? sAngle : sAngle3.z + kMissileSensitive;
         }
         else
         {
-            sAngle3.z = (sDelta > -MISSILE_SENSITIVE) ? sAngle : sAngle3.z - MISSILE_SENSITIVE;
+            sAngle3.z = (sDelta > -kMissileSensitive) ? sAngle : sAngle3.z - kMissileSensitive;
         }
     }
 
     CGFloat sX = cos(TBDegreesToRadians(sAngle3.z)) * mSpeed;
     CGFloat sY = sin(TBDegreesToRadians(sAngle3.z)) * mSpeed;
     
-    if ([self fuel] > 0)
+    if (mFuel-- > 0)
     {
         sPoint.x += sX;
         sPoint.y -= sY;
@@ -121,7 +123,7 @@
     
     if ([self intersectWithGround])
     {
-        [self addDamage:100];
+        [self addDamage:1000];
         [[TBExplosionManager sharedManager] addBombExplosionAtPosition:CGPointMake(sPoint.x, kMapGround + 18)];
     }
 }
