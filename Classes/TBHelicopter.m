@@ -167,13 +167,13 @@ const NSUInteger kMaxBullets = 100;
 
 - (void)addDamage:(NSInteger)aDamage
 {
-    if (mDamage < mDurability)
+    if ([self isAvailable])
     {
         [super addDamage:aDamage];
         
         [[self delegate] helicopterDamageChanged:self];
 
-        if (mDamage >= mDurability)
+        if (![self isAvailable])
         {
             [[self delegate] helicopterDidDestroy:self];
         }
@@ -279,13 +279,9 @@ const NSUInteger kMaxBullets = 100;
 
 - (void)repairDamage:(NSInteger)aValue
 {
-    if (mDamage > 0)
+    if ([self damage])
     {
-        mDamage -= aValue;
-        if (mDamage < 0)
-        {
-            mDamage = 0;
-        }
+        [self repair:aValue];
         [[self delegate] helicopterDamageChanged:self];
         [TBMoneyManager useMoney:kTBPriceRepair];
     }

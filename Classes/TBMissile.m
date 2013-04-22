@@ -16,7 +16,7 @@
 
 
 #define MISSILE_FUEL        250.0
-#define MISSILE_SPEED       5.8//11.7
+#define MISSILE_SPEED       5.8
 #define MISSILE_SENSITIVE   2.8
 
 
@@ -104,7 +104,7 @@
     CGFloat sX = cos(TBDegreesToRadians(sAngle3.z)) * mSpeed;
     CGFloat sY = sin(TBDegreesToRadians(sAngle3.z)) * mSpeed;
     
-    if (mFuel > 0)
+    if ([self fuel] > 0)
     {
         sPoint.x += sX;
         sPoint.y -= sY;

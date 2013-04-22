@@ -24,14 +24,6 @@ typedef enum
 
 
 @interface TBUnit : TBSprite
-{
-    TBUnitType mType;
-    NSNumber  *mUnitID;
-    TBTeam     mTeam;
-    NSInteger  mDurability;
-    NSInteger  mDamage;
-    NSInteger  mFuel;
-}
 
 
 @property (nonatomic, assign)   TBUnitType type;
@@ -47,7 +39,10 @@ typedef enum
 - (BOOL)isKindOfUnit:(TBUnitType)aType;
 - (BOOL)isAlly;
 - (TBTeam)opponentTeam;
+
 - (void)addDamage:(NSInteger)aDamage;
+- (void)repair:(NSInteger)aValue;
+
 - (BOOL)isAvailable;
 - (CGFloat)damageRate;
 

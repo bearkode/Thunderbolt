@@ -55,7 +55,10 @@ typedef enum
 @end
 
 
-@interface NSObject (TBHelicopterProtocol)
+#pragma mark -
+
+
+@protocol TBHelicopterDelegate <NSObject>
 
 
 - (void)helicopterDamageChanged:(TBHelicopter *)aHelicopter;

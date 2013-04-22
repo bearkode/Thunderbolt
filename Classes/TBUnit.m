@@ -11,6 +11,17 @@
 
 
 @implementation TBUnit
+{
+    TBUnitType mType;
+    NSNumber  *mUnitID;
+    TBTeam     mTeam;
+    NSInteger  mDurability;
+    NSInteger  mDamage;
+    NSInteger  mFuel;
+}
+
+
+#pragma mark -
 
 
 @synthesize type       = mType;
@@ -85,6 +96,16 @@
     if (mDamage > mDurability)
     {
         mDamage = mDurability;
+    }
+}
+
+
+- (void)repair:(NSInteger)aValue
+{
+    if (mDamage)
+    {
+        mDamage -= aValue;
+        mDamage = (mDamage < 0) ? 0 : mDamage;
     }
 }
 

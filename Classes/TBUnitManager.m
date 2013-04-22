@@ -325,7 +325,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     
     [sHelicopter setDelegate:aDelegate];    
     [sHelicopter setPoint:CGPointMake(kMinMapXPos + 200, kMapGround + ([[sHelicopter mesh] size].height /2))];
-    [[TBUnitManager sharedManager] addUnit:sHelicopter];
+    [self addUnit:sHelicopter];
     
     return sHelicopter;
 }
@@ -336,7 +336,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     NSNumber *sUnitID = [[TBUnitManager sharedManager] nextUnitID];
     TBTank   *sTank   = [[[TBTank alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
-    [[TBUnitManager sharedManager] addUnit:sTank];
+    [self addUnit:sTank];
     
     return sTank;
 }
@@ -347,7 +347,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     NSNumber         *sUnitID         = [[TBUnitManager sharedManager] nextUnitID];
     TBArmoredVehicle *sArmoredVehicle = [[[TBArmoredVehicle alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
-    [[TBUnitManager sharedManager] addUnit:sArmoredVehicle];
+    [self addUnit:sArmoredVehicle];
     
     return sArmoredVehicle;
 }
@@ -358,7 +358,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     NSNumber  *sUnitID  = [[TBUnitManager sharedManager] nextUnitID];
     TBSoldier *sSoldier = [[[TBSoldier alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
     
-    [[TBUnitManager sharedManager] addUnit:sSoldier];
+    [self addUnit:sSoldier];
     
     return sSoldier;
 }
@@ -375,7 +375,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     PBVertex3 sAngle = PBVertex3Make(0, 0, TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget point])));
     [[sMissile transform] setAngle:sAngle];
     
-    [[TBUnitManager sharedManager] addUnit:sMissile];
+    [self addUnit:sMissile];
     
     return sMissile;
 }

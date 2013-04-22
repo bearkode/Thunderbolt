@@ -33,7 +33,7 @@
     NSString *sTexTank;
     NSString *sTexTankShoot;
     
-    if (mTeam == kTBTeamAlly)
+    if ([self isAlly])
     {
         sTexTank      = kTexAllyTank;
         sTexTankShoot = kTexAllyTankShoot;
@@ -72,13 +72,13 @@
 
         [self setTexture];
         
-        if (mTeam == kTBTeamEnemy)
+        if ([self isAlly])
         {
-            [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + ([[self mesh] size].height / 2))];
+            [self setPoint:CGPointMake(-50, kMapGround + ([[self mesh] size].height / 2))];
         }
         else
         {
-            [self setPoint:CGPointMake(-50, kMapGround + ([[self mesh] size].height / 2))];
+            [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + ([[self mesh] size].height / 2))];
         }
         
         mTankGun = [[TBTankGun alloc] init];

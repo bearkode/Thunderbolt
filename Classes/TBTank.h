@@ -11,9 +11,6 @@
 #import "TBUnit.h"
 
 
-@class TBTankGun;
-
-
 @interface TBTank : TBUnit
 
 
