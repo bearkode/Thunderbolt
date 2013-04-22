@@ -58,7 +58,7 @@
         if ([self inRange:sDistance])
         {
             CGFloat sAngle  = TBAngleBetweenToPoints([self mountPoint], [aTarget point]);
-            CGPoint sVector = TBVector(sAngle, 3.0);
+            CGPoint sVector = TBMakeVector(sAngle, 3.0);
             
             [[TBWarheadManager sharedManager] addBulletWithTeam:[aTarget opponentTeam] position:[self mountPoint] vector:sVector power:kVulcanBulletPower];
             [self decreaseAmmoCount];

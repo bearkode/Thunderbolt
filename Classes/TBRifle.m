@@ -67,7 +67,7 @@
         if ([self inRange:sDistance])
         {
             CGFloat sAngle  = TBAngleBetweenToPoints([self mountPoint], [aUnit point]);
-            CGPoint sVector = TBVector(sAngle, 3.0);
+            CGPoint sVector = TBMakeVector(sAngle, 3.0);
             
             [[TBWarheadManager sharedManager] addBulletWithTeam:[aUnit opponentTeam] position:[self mountPoint] vector:sVector power:kRifleBulletPower];
             

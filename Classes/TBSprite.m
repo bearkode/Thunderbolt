@@ -45,7 +45,7 @@ inline CGFloat TBDistanceBetweenToPoints(CGPoint aPt1, CGPoint aPt2)
 }
 
 
-inline CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed)
+inline CGPoint TBMakeVector(CGFloat aAngle, CGFloat aSpeed)
 {
     CGFloat sX = cos(aAngle) * aSpeed;
     CGFloat sY = sin(aAngle) * aSpeed;

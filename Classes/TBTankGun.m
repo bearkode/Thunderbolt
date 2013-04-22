@@ -58,7 +58,7 @@
         if ([self inRange:sDistance])
         {
             CGFloat sAngle  = TBAngleBetweenToPoints([self mountPoint], [aTarget point]);
-            CGPoint sVector = TBVector(sAngle, 4.0);
+            CGPoint sVector = TBMakeVector(sAngle, 4.0);
             
             [[TBWarheadManager sharedManager] addTankShellWithTeam:[aTarget opponentTeam] position:[self mountPoint] vector:sVector];
             [self decreaseAmmoCount];

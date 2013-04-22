@@ -13,7 +13,7 @@
 
 CGFloat TBAngleBetweenToPoints(CGPoint aPt1, CGPoint aPt2);
 CGFloat TBDistanceBetweenToPoints(CGPoint aPt1, CGPoint aPt2);
-CGPoint TBVector(CGFloat aAngle, CGFloat aSpeed);
+CGPoint TBMakeVector(CGFloat aAngle, CGFloat aSpeed);
 
 
 @interface TBSprite : PBSprite
