@@ -31,6 +31,7 @@
 #define kTexBombExp00       @"bomb_exp00.png"
 #define kTexBombExp01       @"bomb_exp01.png"
 #define kTexBombExp02       @"bomb_exp02.png"
+#define kTexBase            @"base.png"
 #define kTexBase00          @"base00.png"
 #define kTexBase01          @"base01.png"
 #define kTexBase02          @"base02.png"

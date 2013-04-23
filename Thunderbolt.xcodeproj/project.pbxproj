@@ -23,6 +23,7 @@
 		2E46379D171286E800EA1888 /* TBControlLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379C171286E800EA1888 /* TBControlLever.m */; };
 		2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FBD17257E6400140A39 /* rifleman.png */; };
 		2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FBE17257E6400140A39 /* rifleman@2x.png */; };
+		2E5E5FC31727432D00140A39 /* base.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FC21727432D00140A39 /* base.png */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
 		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
 		2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */; };
@@ -180,6 +181,7 @@
 		2E46379C171286E800EA1888 /* TBControlLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBControlLever.m; sourceTree = "<group>"; };
 		2E5E5FBD17257E6400140A39 /* rifleman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rifleman.png; sourceTree = "<group>"; };
 		2E5E5FBE17257E6400140A39 /* rifleman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rifleman@2x.png"; sourceTree = "<group>"; };
+		2E5E5FC21727432D00140A39 /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base.png; sourceTree = "<group>"; };
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		2E69154B171EA1920085B797 /* TBObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObjectPool.h; sourceTree = "<group>"; };
 		2E69154C171EA1920085B797 /* TBObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObjectPool.m; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				A720E71B111F725700CA7792 /* bomb_exp00.png */,
 				A720E71C111F725700CA7792 /* bomb_exp01.png */,
 				A720E71D111F725700CA7792 /* bomb_exp02.png */,
+				2E5E5FC21727432D00140A39 /* base.png */,
 				A7AF9CB911400B4000726807 /* base_00.png */,
 				A78A1E0611EB634500DA9574 /* base00.png */,
 				A78A1E0711EB634500DA9574 /* base01.png */,
@@ -873,6 +876,7 @@
 				2EE9C193172189EC00BB3D24 /* TBCheatViewController.xib in Resources */,
 				2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */,
 				2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */,
+				2E5E5FC31727432D00140A39 /* base.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

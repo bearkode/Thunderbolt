@@ -19,11 +19,34 @@
 
 @implementation TBBase
 {
+    NSInteger          mTick;
     NSUInteger         mTextureIndex;
     NSArray           *mTextureKeys;
     
     TBVulcan          *mVulcan;
     TBMissileLauncher *mMissileLauncher;
+}
+
+
+#pragma mark -
+
+
++ (Class)meshClass
+{
+    return [PBTileMesh class];
+}
+
+
+- (void)setupTexture
+{
+    [(PBTileMesh *)[self mesh] setTileSize:CGSizeMake(60, 65)];
+    
+    PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBase];
+    [sTexture loadIfNeeded];
+    [self setTexture:sTexture];
+
+    mTick         = 0;
+    mTextureIndex = 0;
 }
 
 
@@ -38,20 +61,8 @@
     {
         [self setDurability:kBaseDurability];
         
+        [self setupTexture];
         
-        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBase00];
-        [sTexture loadIfNeeded];
-        [self setTexture:sTexture];
-
-        mTextureIndex    = 0;
-        mTextureKeys     = [[NSArray alloc] initWithObjects:kTexBase00, kTexBase00, kTexBase00, kTexBase00, kTexBase00,
-                                                            kTexBase01, kTexBase01, kTexBase01, kTexBase01, kTexBase01,
-                                                            kTexBase02, kTexBase02, kTexBase02, kTexBase02, kTexBase02,
-                                                            kTexBase03, kTexBase03, kTexBase03, kTexBase03, kTexBase03,
-                                                            kTexBase04, kTexBase04, kTexBase04, kTexBase04, kTexBase04,
-                                                            kTexBase05, kTexBase05, kTexBase05, kTexBase05, kTexBase05,
-                                                            kTexBase06, kTexBase06, kTexBase06, kTexBase06, kTexBase06,
-                                                            kTexBase07, kTexBase07, kTexBase07, kTexBase07, kTexBase07, nil];
         
         mVulcan        = [[TBVulcan alloc] init];
         mMissileLauncher = [[TBMissileLauncher alloc] init];
@@ -80,18 +91,12 @@
     
     if (![self isDestroyed])
     {
-        NSString  *sTextureName = [mTextureKeys objectAtIndex:mTextureIndex];
-        PBTexture *sTexture     = [PBTextureManager textureWithImageName:sTextureName];
-        
-        if ([self texture] != sTexture)
+        if (mTick++ > 5)
         {
-            [sTexture loadIfNeeded];
-            [self setTexture:sTexture];
-        }
-        
-        if (++mTextureIndex >= [mTextureKeys count])
-        {
-            mTextureIndex = 0;
+            mTick = 0;
+            
+            [(PBTileMesh *)[self mesh] selectTileAtIndex:mTextureIndex];
+            mTextureIndex = (mTextureIndex >= 7) ? 0 : (mTextureIndex + 1);
         }
         
         TBUnit *sTarget = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
@@ -111,7 +116,6 @@
         {
             if ([mMissileLauncher fireAt:sTarget])
             {
-                NSLog(@"missile fire = %d", [self team]);
                 [mMissileLauncher supplyAmmo:1];
             }
         }
