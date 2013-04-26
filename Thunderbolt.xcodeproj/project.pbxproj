@@ -24,6 +24,8 @@
 		2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FBD17257E6400140A39 /* rifleman.png */; };
 		2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FBE17257E6400140A39 /* rifleman@2x.png */; };
 		2E5E5FC31727432D00140A39 /* base.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FC21727432D00140A39 /* base.png */; };
+		2E5E6006172AC91000140A39 /* AH1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E6004172AC90F00140A39 /* AH1.png */; };
+		2E5E6007172AC91000140A39 /* AH1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E6005172AC90F00140A39 /* AH1@2x.png */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
 		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
 		2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */; };
@@ -182,6 +184,8 @@
 		2E5E5FBD17257E6400140A39 /* rifleman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rifleman.png; sourceTree = "<group>"; };
 		2E5E5FBE17257E6400140A39 /* rifleman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rifleman@2x.png"; sourceTree = "<group>"; };
 		2E5E5FC21727432D00140A39 /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base.png; sourceTree = "<group>"; };
+		2E5E6004172AC90F00140A39 /* AH1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AH1.png; sourceTree = "<group>"; };
+		2E5E6005172AC90F00140A39 /* AH1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AH1@2x.png"; sourceTree = "<group>"; };
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		2E69154B171EA1920085B797 /* TBObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObjectPool.h; sourceTree = "<group>"; };
 		2E69154C171EA1920085B797 /* TBObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObjectPool.m; sourceTree = "<group>"; };
@@ -625,6 +629,8 @@
 				A72BD53B11A49E360091AEC4 /* radar_obj.png */,
 				2E5E5FBD17257E6400140A39 /* rifleman.png */,
 				2E5E5FBE17257E6400140A39 /* rifleman@2x.png */,
+				2E5E6004172AC90F00140A39 /* AH1.png */,
+				2E5E6005172AC90F00140A39 /* AH1@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -877,6 +883,8 @@
 				2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */,
 				2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */,
 				2E5E5FC31727432D00140A39 /* base.png in Resources */,
+				2E5E6006172AC91000140A39 /* AH1.png in Resources */,
+				2E5E6007172AC91000140A39 /* AH1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

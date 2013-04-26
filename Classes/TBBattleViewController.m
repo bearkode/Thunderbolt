@@ -137,7 +137,7 @@
     for (NSInteger x = -400; x <= kMaxMapXPos + 400; x += [sGroundTexture size].width)
     {
         PBLayer *sLayer = [[[PBLayer alloc] init] autorelease];
-        [[sLayer mesh] setUsingMeshQueue:YES];
+        [[sLayer mesh] setMeshRenderOption:kPBMeshRenderOptionUsingMeshQueue];
         [sLayer setTexture:sGroundTexture];
         [sLayer setPoint:CGPointMake(x, y)];
         [mBackgroundLayer addSublayer:sLayer];

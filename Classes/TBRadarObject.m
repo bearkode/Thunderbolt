@@ -20,7 +20,7 @@
     
     if (self)
     {
-        [[self mesh] setUsingMeshQueue:YES];
+        [[self mesh] setMeshRenderOption:kPBMeshRenderOptionUsingMeshQueue];
         
         PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRadarObject];
         [sTexture loadIfNeeded];

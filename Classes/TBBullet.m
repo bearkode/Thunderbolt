@@ -24,7 +24,7 @@
     
     if (self)
     {
-        [[self mesh] setUsingMeshQueue:YES];
+        [[self mesh] setMeshRenderOption:kPBMeshRenderOptionUsingMeshQueue];
     }
     
     return self;
