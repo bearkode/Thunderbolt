@@ -12,7 +12,7 @@
 #import <PBObjCUtil.h>
 
 
-const NSUInteger kMinMoney = 5000;
+const NSUInteger kMinMoney = 1800;
 
 
 NSString *const kLastPlayDateKey = @"TBLastPlayDate";

@@ -21,6 +21,7 @@ typedef enum
 
 
 @class TBWeapon;
+@class TBHelicopterInfo;
 
 
 @interface TBHelicopter : TBUnit
@@ -36,14 +37,12 @@ typedef enum
 
 /*  Weapon  */
 @property (nonatomic, assign)                          TBWeapon       *selectedWeapon;
-//@property (nonatomic, readonly, getter = isFireVulcan) BOOL            fireVulcan;
-//@property (nonatomic, assign)                          NSInteger       bulletCount;
-//@property (nonatomic, assign)                          NSInteger       bombCount;
-//@property (nonatomic, assign)                          NSInteger       missileCount;
 
 
 #pragma mark -
 
+
+- (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam info:(TBHelicopterInfo *)aInfo;
 
 - (CGPoint)pointWithSpeedLever:(CGFloat)aSpeedLever oldPoint:(CGPoint)aPoint;
 - (CGPoint)pointWithAltitudeLever:(CGFloat)aAltitudeLever oldPoint:(CGPoint)aPoint;
@@ -52,8 +51,6 @@ typedef enum
 - (void)fillUpAmmos;
 - (NSInteger)bulletCount;
 - (NSInteger)bombCount;
-//- (void)fillUpBullets:(NSInteger)aCount;
-//- (void)fillUpBombs:(NSInteger)aCount;
 
 - (void)selectNextWeapon;
 - (void)setFire:(BOOL)aFire;

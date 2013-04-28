@@ -24,19 +24,23 @@
 #import "TBRifleman.h"
 #import "TBMissile.h"
 
+#import "TBHelicopterInfo.h"
+
 
 @implementation TBUnitManager
 {
     PBLayer            *mUnitLayer;
 
     NSInteger           mNextUnitID;
-    
+
     TBUnit             *mAllyHelicopter;
     TBUnit             *mEnemyHelicopter;
     
     TBAssociativeArray *mAllyUnits;
     TBAssociativeArray *mEnemyUnits;
     NSMutableArray     *mDisabledUnits;
+    
+    TBHelicopterInfo   *mHelicopterInfo;
 }
 
 
@@ -216,6 +220,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 #pragma mark Access Units
 
 
+
 - (NSArray *)allyUnits
 {
     return [mAllyUnits array];
@@ -283,6 +288,13 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 #pragma mark Helicopter
 
 
+- (void)setHelicopterInfo:(TBHelicopterInfo *)aHelicopterInfo
+{
+    [mHelicopterInfo autorelease];
+    mHelicopterInfo = [aHelicopterInfo retain];
+}
+
+
 - (TBHelicopter *)allyHelicopter
 {
     return (TBHelicopter *)mAllyHelicopter;
@@ -308,9 +320,15 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 - (TBHelicopter *)addHelicopterWithTeam:(TBTeam)aTeam delegate:(id)aDelegate
 {
     NSNumber     *sUnitID     = [[TBUnitManager sharedManager] nextUnitID];
-    TBHelicopter *sHelicopter = [[[TBHelicopter alloc] initWithUnitID:sUnitID team:aTeam] autorelease];
+    TBHelicopter *sHelicopter = nil;
+
+    if (!mHelicopterInfo)
+    {
+        mHelicopterInfo = [[TBHelicopterInfo MD500Info] retain];
+    }
     
-    [sHelicopter setDelegate:aDelegate];    
+    sHelicopter = [[[TBHelicopter alloc] initWithUnitID:sUnitID team:aTeam info:mHelicopterInfo] autorelease];
+    [sHelicopter setDelegate:aDelegate];
     [sHelicopter setPoint:CGPointMake(kMinMapXPos + 200, kMapGround + ([[sHelicopter mesh] size].height /2))];
     [self addUnit:sHelicopter];
     

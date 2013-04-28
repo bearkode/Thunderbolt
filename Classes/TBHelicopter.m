@@ -10,6 +10,7 @@
 #import "TBHelicopter.h"
 #import "TBGameConst.h"
 #import "TBMacro.h"
+#import "TBTextureNames.h"
 
 #import "TBGatlingGun.h"
 #import "TBBombChamber.h"
@@ -19,6 +20,8 @@
 
 #import "TBWarheadManager.h"
 #import "TBMoneyManager.h"
+
+#import "TBHelicopterInfo.h"
 
 
 const NSUInteger kHardPointCount      = 2;
@@ -44,10 +47,7 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     BOOL            mLanded;
     CGFloat         mSpeed;
     NSInteger       mTextureIndex;
-    
-    NSMutableArray *mTextureArray;
-    NSMutableArray *mContentRectArray;
-    CGRect          mContentRect;    
+    CGRect          mContentRect;
     
     NSMutableArray *mHardPoints;
     TBWeapon       *mSelectedWeapon;
@@ -64,10 +64,15 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 @synthesize landed          = mLanded;
 @synthesize speed           = mSpeed;
 @synthesize selectedWeapon  = mSelectedWeapon;
-//@synthesize bulletCount     = mBulletCount;
-//@synthesize bombCount       = mBombCount;
-//@synthesize missileCount    = mMissileCount;
-//@synthesize fireVulcan      = mFireVulcan;
+
+
+#pragma mark -
+
+
++ (Class)meshClass
+{
+    return [PBTileMesh class];
+}
 
 
 #pragma mark -
@@ -96,7 +101,7 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 #pragma mark -
 
 
-- (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam
+- (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam info:(TBHelicopterInfo *)aInfo
 {
     self = [super initWithUnitID:aUnitID team:aTeam];
 
@@ -106,45 +111,23 @@ const CGFloat    kAltitudeSensitivity = 15.0;
         [self setDurability:kHelicopterDurability];
         
         mControlLever = [[TBControlLever alloc] initWithHelicopter:self];
+        mLeftAhead    = (aTeam == kTBTeamAlly) ? NO : YES;
+        mLanded       = YES;
+        mSpeed        = 0;
         
         mTick         = 0;
+        mTextureIndex = (aTeam == kTBTeamAlly) ? 0 : 23;
         
-        mLeftAhead    = (aTeam == kTBTeamAlly) ? NO : YES;
-        mSpeed        = 0;
-        mTextureIndex = (aTeam == kTBTeamAlly) ? 8 : 0;
-        
-        mTextureArray = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0; i < 9; i++)
-        {
-            [mTextureArray addObject:[NSString stringWithFormat:@"heli%02d.png", i]];
-        }
-        
-        PBTexture *sTexture = [PBTextureManager textureWithImageName:[mTextureArray objectAtIndex:mTextureIndex]];
+        [(PBTileMesh *)[self mesh] setTileSize:[aInfo tileSize]];
+        PBTexture *sTexture = [PBTextureManager textureWithImageName:[aInfo imageName]];
         [sTexture loadIfNeeded];
         [self setTexture:sTexture];
-        
-        mContentRectArray = [[NSMutableArray alloc] init];
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(12, 4, 72, 28)]];    // 0
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(12, 4, 72, 28)]];    // 1
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(19, 7, 46, 24)]];    // 2
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(21, 7, 32, 24)]];    // 3
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(28, 6, 32, 25)]];    // 4
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(37, 7, 32, 25)]];    // 5
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(16, 7, 48, 25)]];    // 6
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 7
-        [mContentRectArray addObject:[NSValue valueWithCGRect:CGRectMake(0, 6, 79, 26)]];     // 8
         
         /*  Arm  */
         [self setupHardPoints];
         
-//        mBulletCount     = kMaxBullets;
-//        mBombCount       = kMaxBombs;
-//        mMissileCount    = kMaxMissiles;
-//        mFireVulcan      = NO;
-        mLanded          = YES;
-        
         mSoundSource = [[PBSoundManager sharedManager] retainSoundSource];
-        [mSoundSource setSound:[[PBSoundManager sharedManager] soundForKey:kTBSoundHeli]];
+        [mSoundSource setSound:[[PBSoundManager sharedManager] soundForKey:[aInfo soundName]]];
         [mSoundSource setDistance:1];
         [mSoundSource setLooping:YES];
         [mSoundSource play];
@@ -157,9 +140,6 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 - (void)dealloc
 {
     [mControlLever release];
-    
-    [mTextureArray release];
-    [mContentRectArray release];
     
     [mHardPoints release];
 
@@ -180,15 +160,11 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     [super setPoint:aPoint];
     
     CGSize sSize     = [[self mesh] size];
-    CGRect sContRect = [[mContentRectArray objectAtIndex:mTextureIndex] CGRectValue];
 
-    mContentRect.origin.x    = aPoint.x - ((sSize.width  - 30) / 2);
-    mContentRect.origin.y    = aPoint.y - ((sSize.height - 30) / 2);
-
-    mContentRect.origin.x   += sContRect.origin.x;
-    mContentRect.origin.y   -= sContRect.size.height;
-    mContentRect.size.width  = sContRect.size.width;
-    mContentRect.size.height = sContRect.size.height;
+    mContentRect.origin.x    = aPoint.x - (sSize.width / 2);
+    mContentRect.origin.y    = aPoint.y - (sSize.height / 2);
+    mContentRect.size.width  = sSize.width;
+    mContentRect.size.height = sSize.height;
 }
 
 
@@ -365,9 +341,9 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     
     if ((mTick % 2) == 0)
     {
-        if (mLeftAhead)
+        if (!mLeftAhead)
         {
-            if (mTextureIndex > 2)
+            if (mTextureIndex > 1)
             {
                 mTextureIndex--;
             }
@@ -378,22 +354,18 @@ const CGFloat    kAltitudeSensitivity = 15.0;
         }
         else
         {
-            if (mTextureIndex < 7)
+            if (mTextureIndex < 24)
             {
                 mTextureIndex++;
             }
             else
             {
-                mTextureIndex = (mTextureIndex == 7) ? 8 : 7;
+                mTextureIndex = (mTextureIndex == 23) ? 24 : 23;
             }
         }
+        
+        [(PBTileMesh *)[self mesh] selectTileAtIndex:mTextureIndex];
     }
-    
-    NSString  *sTextureName = [mTextureArray objectAtIndex:mTextureIndex];
-    PBTexture *sTexture     = [PBTextureManager textureWithImageName:sTextureName];
-    
-    [sTexture loadIfNeeded];
-    [self setTexture:sTexture];
 }
 
 

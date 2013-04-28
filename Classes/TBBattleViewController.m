@@ -28,6 +28,7 @@
 #import "TBTank.h"
 
 #import "TBRadar.h"
+#import "TBHelicopterInfo.h"
 
 
 #if (1)
@@ -66,6 +67,8 @@
     CGFloat        mBackPoint;
     CGFloat        mCameraXPos;
     NSInteger      mTimeTick;
+    
+    TBHelicopterInfo *mHeliInfo;
 }
 
 
@@ -186,6 +189,7 @@
     if ([[TBMoneyManager sharedManager] balance] >= kTBPriceHelicopter)
     {
         [TBMoneyManager useMoney:kTBPriceHelicopter];
+        [[TBUnitManager sharedManager] setHelicopterInfo:mHeliInfo];
         [[TBUnitManager sharedManager] addHelicopterWithTeam:kTBTeamAlly delegate:self];
         [self updateAmmoLabel];
     }
@@ -329,6 +333,8 @@
     
     [[PBSoundManager sharedManager] releaseSoundSource:mBGMSoundSource];
     
+    [mHeliInfo release];
+    
     [super dealloc];
 }
 
@@ -416,6 +422,16 @@
     {
         return NO;
     }
+}
+
+
+#pragma mark -
+
+
+- (void)setHelicopterInfo:(TBHelicopterInfo *)aHelicopterInfo
+{
+    [mHeliInfo autorelease];
+    mHeliInfo = [aHelicopterInfo retain];
 }
 
 

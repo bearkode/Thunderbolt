@@ -14,6 +14,7 @@ typedef enum
 
 #define kTBSoundValkyries           @"Valkyries.3gp"
 #define kTBSoundHeli                @"heli.caf"
+#define kTBSound500MD               @"500MD4.caf"
 #define kTBSoundVulcan              @"vulcan.caf"
 #define kTBSoundTankExplosion       @"tank_explosion.caf"
 #define kTBSoundBombExplosion       @"bomb_explosion.caf"

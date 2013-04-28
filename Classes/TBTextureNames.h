@@ -61,4 +61,11 @@
 #define kTexMissileExp01    @"missile_exp01.png"
 #define kTexMissileExp02    @"missile_exp02.png"
 
-#define kRifleman           @"rifleman"
+#define kTexAH1             @"AH1"
+#define kTexSuperCobra      @"SuperCobra"
+#define kTexUH1             @"UH1"
+#define kTexUH1N            @"UH1N"
+#define kTex500D            @"500D"
+
+
+#define kTexRifleman        @"rifleman"

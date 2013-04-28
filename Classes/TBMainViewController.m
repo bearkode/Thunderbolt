@@ -12,11 +12,13 @@
 #import "TBTestViewController.h"
 #import "TBCheatViewController.h"
 #import "TBMoneyManager.h"
+#import "TBHelicopterInfo.h"
 
 
 @implementation TBMainViewController
 {
-    UILabel *mMoneyLabel;
+    UILabel          *mMoneyLabel;
+    TBHelicopterInfo *mHelicopterInfo;
 }
 
 
@@ -54,6 +56,8 @@
     {
         [[TBMoneyManager sharedManager] setDelegate:nil];
     }
+    
+    [mHelicopterInfo release];
     
     [super dealloc];
 }
@@ -95,6 +99,37 @@
     [sStartButton setFrame:CGRectMake(sBounds.size.width - 80 - 20, sBounds.size.height - 44 - 20, 80, 44)];
     [sStartButton addTarget:self action:@selector(startButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [[self view] addSubview:sStartButton];
+    
+    //  Helicopter
+    UIButton *sMD500Button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sMD500Button setTitle:@"MD500" forState:UIControlStateNormal];
+    [sMD500Button setFrame:CGRectMake(30, 30, 70, 35)];
+    [sMD500Button addTarget:self action:@selector(MD500ButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:sMD500Button];
+
+    UIButton *sUH1Button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sUH1Button setTitle:@"UH1" forState:UIControlStateNormal];
+    [sUH1Button setFrame:CGRectMake(30 + 80, 30, 70, 35)];
+    [sUH1Button addTarget:self action:@selector(UH1ButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:sUH1Button];
+
+    UIButton *sUH1NButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sUH1NButton setTitle:@"UN1N" forState:UIControlStateNormal];
+    [sUH1NButton setFrame:CGRectMake(30 + 80 * 2, 30, 70, 35)];
+    [sUH1NButton addTarget:self action:@selector(UH1NButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:sUH1NButton];
+
+    UIButton *sAH1Button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sAH1Button setTitle:@"AH1" forState:UIControlStateNormal];
+    [sAH1Button setFrame:CGRectMake(30 + 80 * 3, 30, 70, 35)];
+    [sAH1Button addTarget:self action:@selector(AH1ButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:sAH1Button];
+
+    UIButton *sAH1WButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sAH1WButton setTitle:@"AH1W" forState:UIControlStateNormal];
+    [sAH1WButton setFrame:CGRectMake(30 + 80 * 4, 30, 70, 35)];
+    [sAH1WButton addTarget:self action:@selector(AH1WButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:sAH1WButton];
 }
 
 
@@ -113,6 +148,7 @@
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     
     [[TBMoneyManager sharedManager] setDelegate:self];
+    [[TBMoneyManager sharedManager] setBalance:1800];
     [self updateMoneyLabel];
 }
 
@@ -131,6 +167,8 @@
 - (IBAction)startButtonTapped:(id)aSender
 {    
     TBBattleViewController *sViewController = [[[TBBattleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    
+    [sViewController setHelicopterInfo:mHelicopterInfo];
 
     [[self navigationController] pushViewController:sViewController animated:NO];
 }
@@ -149,6 +187,41 @@
     TBCheatViewController *sViewController = [[[TBCheatViewController alloc] initWithNibName:@"TBCheatViewController" bundle:nil] autorelease];
     
     [[self navigationController] pushViewController:sViewController animated:NO];
+}
+
+
+- (IBAction)MD500ButtonTapped:(id)aSender
+{
+    [mHelicopterInfo autorelease];
+    mHelicopterInfo = [[TBHelicopterInfo MD500Info] retain];
+}
+
+
+- (IBAction)UH1ButtonTapped:(id)aSender
+{
+    [mHelicopterInfo autorelease];
+    mHelicopterInfo = [[TBHelicopterInfo UH1Info] retain];
+}
+
+
+- (IBAction)UH1NButtonTapped:(id)aSender
+{
+    [mHelicopterInfo autorelease];
+    mHelicopterInfo = [[TBHelicopterInfo UH1NInfo] retain];
+}
+
+
+- (IBAction)AH1ButtonTapped:(id)aSender
+{
+    [mHelicopterInfo autorelease];
+    mHelicopterInfo = [[TBHelicopterInfo AH1CobraInfo] retain];
+}
+
+
+- (IBAction)AH1WButtonTapped:(id)aSender
+{
+    [mHelicopterInfo autorelease];
+    mHelicopterInfo = [[TBHelicopterInfo AH1WSuperCobraInfo] retain];
 }
 
 

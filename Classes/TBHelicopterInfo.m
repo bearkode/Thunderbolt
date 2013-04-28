@@ -8,10 +8,16 @@
  */
 
 #import "TBHelicopterInfo.h"
+#import "TBGameConst.h"
+#import "TBTextureNames.h"
 
 
 @implementation TBHelicopterInfo
 {
+    CGSize    mTileSize;
+    NSString *mImageName;
+    NSString *mSoundName;
+
     /*  Load  */
     NSUInteger mMaxBullet;
     NSUInteger mMaxBomb;
@@ -26,5 +32,99 @@
     CGFloat    mAltitudeSensitivity;
     NSUInteger mDurability;
 }
+
+
+@synthesize tileSize  = mTileSize;
+@synthesize imageName = mImageName;
+@synthesize soundName = mSoundName;
+
+
+#pragma mark -
+
+
+- (id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+    
+    }
+    
+    return self;
+}
+
+
+- (void)dealloc
+{
+    [mImageName release];
+    [mSoundName release];
+    
+    [super dealloc];
+}
+
+
+#pragma mark -
+
+
++ (TBHelicopterInfo *)MD500Info
+{
+    TBHelicopterInfo *sInfo = [[[TBHelicopterInfo alloc] init] autorelease];
+    
+    [sInfo setTileSize:CGSizeMake(122 / 2, 50 / 2)];
+    [sInfo setImageName:kTex500D];
+    [sInfo setSoundName:kTBSound500MD];
+    
+    return sInfo;
+}
+
+
++ (TBHelicopterInfo *)UH1Info
+{
+    TBHelicopterInfo *sInfo = [[[TBHelicopterInfo alloc] init] autorelease];
+    
+    [sInfo setTileSize:CGSizeMake(180 / 2, 56 / 2)];
+    [sInfo setImageName:kTexUH1];
+    [sInfo setSoundName:kTBSoundHeli];
+
+    return sInfo;
+}
+
+
++ (TBHelicopterInfo *)UH1NInfo
+{
+    TBHelicopterInfo *sInfo = [[[TBHelicopterInfo alloc] init] autorelease];
+    
+    [sInfo setTileSize:CGSizeMake(264 / 2, 54 / 2)];
+    [sInfo setImageName:kTexUH1N];
+    [sInfo setSoundName:kTBSoundHeli];
+
+    return sInfo;
+}
+
+
++ (TBHelicopterInfo *)AH1CobraInfo
+{
+    TBHelicopterInfo *sInfo = [[[TBHelicopterInfo alloc] init] autorelease];
+    
+    [sInfo setTileSize:CGSizeMake(186 / 2, 44 / 2)];
+    [sInfo setImageName:kTexAH1];
+    [sInfo setSoundName:kTBSoundHeli];
+
+    return sInfo;
+}
+
+
++ (TBHelicopterInfo *)AH1WSuperCobraInfo
+{
+    TBHelicopterInfo *sInfo = [[[TBHelicopterInfo alloc] init] autorelease];
+
+    [sInfo setTileSize:CGSizeMake(210 / 2, 46 / 2)];
+    [sInfo setImageName:kTexSuperCobra];
+    [sInfo setSoundName:kTBSoundHeli];
+
+    return sInfo;
+}
+
 
 @end

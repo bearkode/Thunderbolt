@@ -40,7 +40,7 @@ const CGFloat kSoldierSpeed = 0.5;
 {
     [(PBTileMesh *)[self mesh] setTileSize:CGSizeMake(21, 21)];
     
-    PBTexture *sTexture = [PBTextureManager textureWithImageName:kRifleman];
+    PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRifleman];
     [sTexture loadIfNeeded];
     [self setTexture:sTexture];
     

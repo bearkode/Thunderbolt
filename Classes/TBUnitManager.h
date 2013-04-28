@@ -21,6 +21,8 @@
 @class TBRifleman;
 @class TBMissile;
 
+@class TBHelicopterInfo;
+
 
 @interface TBUnitManager : NSObject
 
@@ -42,6 +44,7 @@
 - (TBUnit *)opponentUnitOf:(TBUnit *)aUnit inRange:(CGFloat)aRange;
 
 /*  Helicopter  */
+- (void)setHelicopterInfo:(TBHelicopterInfo *)aHelicopterInfo;
 - (TBHelicopter *)allyHelicopter;
 - (TBHelicopter *)enemyHelicopter;
 - (TBHelicopter *)opponentHeicopter:(TBTeam)aTeam;

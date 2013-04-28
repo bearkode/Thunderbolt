@@ -13,4 +13,16 @@
 @interface TBHelicopterInfo : NSObject
 
 
+@property (nonatomic, assign) CGSize    tileSize;
+@property (nonatomic, retain) NSString *imageName;
+@property (nonatomic, retain) NSString *soundName;
+
+
++ (TBHelicopterInfo *)MD500Info;
++ (TBHelicopterInfo *)UH1Info;
++ (TBHelicopterInfo *)UH1NInfo;
++ (TBHelicopterInfo *)AH1CobraInfo;
++ (TBHelicopterInfo *)AH1WSuperCobraInfo;
+
+
 @end
