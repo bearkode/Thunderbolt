@@ -65,7 +65,7 @@
 #define kTexSuperCobra      @"SuperCobra"
 #define kTexUH1             @"UH1"
 #define kTexUH1N            @"UH1N"
-#define kTex500D            @"500D"
+#define kTexMD500           @"MD500"
 
 
 #define kTexRifleman        @"rifleman"

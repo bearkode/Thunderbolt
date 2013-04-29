@@ -71,9 +71,9 @@
 {
     TBHelicopterInfo *sInfo = [[[TBHelicopterInfo alloc] init] autorelease];
     
-    [sInfo setTileSize:CGSizeMake(122 / 2, 50 / 2)];
-    [sInfo setImageName:kTex500D];
-    [sInfo setSoundName:kTBSound500MD];
+    [sInfo setTileSize:CGSizeMake(138 / 2, 56 / 2)];
+    [sInfo setImageName:kTexMD500];
+    [sInfo setSoundName:kTBSoundMD500];
     
     return sInfo;
 }
@@ -107,7 +107,7 @@
 {
     TBHelicopterInfo *sInfo = [[[TBHelicopterInfo alloc] init] autorelease];
     
-    [sInfo setTileSize:CGSizeMake(186 / 2, 44 / 2)];
+    [sInfo setTileSize:CGSizeMake(224 / 2, 54 / 2)];
     [sInfo setImageName:kTexAH1];
     [sInfo setSoundName:kTBSoundHeli];
 
@@ -119,7 +119,7 @@
 {
     TBHelicopterInfo *sInfo = [[[TBHelicopterInfo alloc] init] autorelease];
 
-    [sInfo setTileSize:CGSizeMake(210 / 2, 46 / 2)];
+    [sInfo setTileSize:CGSizeMake(234 / 2, 56 / 2)];
     [sInfo setImageName:kTexSuperCobra];
     [sInfo setSoundName:kTBSoundHeli];
 

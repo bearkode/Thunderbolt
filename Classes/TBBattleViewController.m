@@ -487,6 +487,9 @@
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
+
+    NSLog(@"z - %f y - %f", [aAcceleration z], [aAcceleration y]);
+    
     if (sHelicopter)
     {
         [[sHelicopter controlLever] setAltitude:[aAcceleration z] speed:[aAcceleration y]];

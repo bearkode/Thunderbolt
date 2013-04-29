@@ -64,7 +64,7 @@
     PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
     [sSoundManager loadSoundNamed:kTBSoundValkyries forKey:kTBSoundValkyries];
     [sSoundManager loadSoundNamed:kTBSoundHeli forKey:kTBSoundHeli];
-    [sSoundManager loadSoundNamed:kTBSound500MD forKey:kTBSound500MD];
+    [sSoundManager loadSoundNamed:kTBSoundMD500 forKey:kTBSoundMD500];
     [sSoundManager loadSoundNamed:kTBSoundVulcan forKey:kTBSoundVulcan];
     [sSoundManager loadSoundNamed:kTBSoundTankExplosion forKey:kTBSoundTankExplosion];
     [sSoundManager loadSoundNamed:kTBSoundBombExplosion forKey:kTBSoundBombExplosion];
