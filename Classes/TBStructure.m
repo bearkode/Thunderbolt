@@ -36,6 +36,8 @@
     
     if (self)
     {
+        [[self mesh] setMeshRenderOption:kPBMeshRenderOptionUsingMeshQueue];
+        
         mTeam       = aTeam;
         mDurability = 0;
         mDamage     = 0;

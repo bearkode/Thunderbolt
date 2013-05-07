@@ -60,11 +60,9 @@
     if (self)
     {
         [self setDurability:kBaseDurability];
-        
         [self setupTexture];
         
-        
-        mVulcan        = [[TBVulcan alloc] init];
+        mVulcan          = [[TBVulcan alloc] init];
         mMissileLauncher = [[TBMissileLauncher alloc] init];
         
         [mVulcan setBody:self];
@@ -94,9 +92,8 @@
         if (mTick++ > 5)
         {
             mTick = 0;
-            
-            [(PBTileMesh *)[self mesh] selectTileAtIndex:mTextureIndex];
-            mTextureIndex = (mTextureIndex >= 7) ? 0 : (mTextureIndex + 1);
+            [(PBTileMesh *)[self mesh] selectTileAtIndex:mTextureIndex++];
+            mTextureIndex = (mTextureIndex > 7) ? 0 : mTextureIndex;
         }
         
         TBUnit *sTarget = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];

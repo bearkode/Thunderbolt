@@ -487,8 +487,7 @@
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
-
-    NSLog(@"z - %f y - %f", [aAcceleration z], [aAcceleration y]);
+//    NSLog(@"z - %f y - %f", [aAcceleration z], [aAcceleration y]);
     
     if (sHelicopter)
     {

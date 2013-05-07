@@ -43,6 +43,7 @@
     if (self)
     {
         [self setUnitID:aUnitID];
+        [[self mesh] setMeshRenderOption:kPBMeshRenderOptionUsingMeshQueue];
         
         mTeam       = aTeam;
         mDurability = 100;
