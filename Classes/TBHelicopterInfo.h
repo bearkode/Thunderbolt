@@ -16,6 +16,7 @@
 @property (nonatomic, assign) CGSize    tileSize;
 @property (nonatomic, retain) NSString *imageName;
 @property (nonatomic, retain) NSString *soundName;
+@property (nonatomic, assign) CGPoint   tailRotorPosition;
 
 
 + (TBHelicopterInfo *)MD500Info;

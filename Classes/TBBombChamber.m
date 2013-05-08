@@ -35,11 +35,12 @@
 
 - (void)fillUp
 {
-    TBHelicopter *sHelicopter = (TBHelicopter *)[self body];
-    
-    [self supplyAmmo:kLandingPadFillUpBombs];
-    [TBMoneyManager useMoney:kTBPriceBullet];
-    [[sHelicopter delegate] helicopterWeaponDidReload:sHelicopter];
+    if ([TBMoneyManager useMoney:kTBPriceBullet])
+    {
+        TBHelicopter *sHelicopter = (TBHelicopter *)[self body];
+        [self supplyAmmo:kLandingPadFillUpBombs];
+        [[sHelicopter delegate] helicopterWeaponDidReload:sHelicopter];
+    }
 }
 
 

@@ -13,7 +13,7 @@
 #import "TBUnitManager.h"
 
 
-const CGFloat kSoldierSpeed = 0.5;
+const CGFloat kRiflemanSpeed = 0.5;
 
 
 #pragma mark -
@@ -115,7 +115,7 @@ const CGFloat kSoldierSpeed = 0.5;
     }
     else
     {
-        [self moveWithVector:CGPointMake(([self isAlly]) ? kSoldierSpeed : -kSoldierSpeed, 0)];
+        [self moveWithVector:CGPointMake(([self isAlly]) ? kRiflemanSpeed : -kRiflemanSpeed, 0)];
         [(PBTileMesh *)[self mesh] selectTileAtIndex:mIndex];
     }
     

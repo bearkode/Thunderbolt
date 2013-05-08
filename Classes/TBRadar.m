@@ -72,11 +72,32 @@
 }
 
 
+- (void)setRadarObjectWithUnit:(TBUnit *)aUnit canvas:(PBCanvas *)aCanvas
+{
+    CGSize         sRadarSize    = [[self mesh] size];
+    CGRect         sCanvasBounds = [aCanvas bounds];
+    CGPoint        sPoint        = [aUnit point];
+    TBRadarObject *sRadarObject  = [self radarObject];
+    
+    if ([aUnit isKindOfUnit:kTBUnitHelicopter] || [aUnit isKindOfUnit:kTBUnitMissile])
+    {
+        sPoint = CGPointMake(sPoint.x / kMaxMapXPos * sRadarSize.width, sPoint.y / sCanvasBounds.size.height * sRadarSize.height);
+    }
+    else
+    {
+        sPoint = CGPointMake(sPoint.x / kMaxMapXPos * sRadarSize.width, [[sRadarObject mesh] size].height);
+    }
+    
+    sPoint.x -= (sRadarSize.width / 2);
+    sPoint.y -= (sRadarSize.height / 2);
+    
+    [sRadarObject setHidden:NO];
+    [sRadarObject setPoint:sPoint];
+}
+
+
 - (void)updateWithCanvas:(PBCanvas *)aCanvas
 {
-    CGSize sRadarSize    = [[self mesh] size];
-    CGRect sCanvasBounds = [aCanvas bounds];
-
     mUseIndex = 0;
     [self setPoint:CGPointMake([[aCanvas camera] position].x, 300.0)];
     
@@ -87,28 +108,12 @@
 
     for (TBUnit *sUnit in [[TBUnitManager sharedManager] allyUnits])
     {
-        CGPoint        sPoint       = [sUnit point];
-        TBRadarObject *sRadarObject = [self radarObject];
-        
-        sPoint    = CGPointMake(sPoint.x / kMaxMapXPos * sRadarSize.width, sPoint.y / sCanvasBounds.size.height * sRadarSize.height);
-        sPoint.x -= (sRadarSize.width / 2);
-        sPoint.y -= (sRadarSize.height / 2);
-        
-        [sRadarObject setHidden:NO];
-        [sRadarObject setPoint:sPoint];
+        [self setRadarObjectWithUnit:sUnit canvas:aCanvas];
     }
     
     for (TBUnit *sUnit in [[TBUnitManager sharedManager] enemyUnits])
     {
-        CGPoint        sPoint       = [sUnit point];
-        TBRadarObject *sRadarObject = [self radarObject];
-        
-        sPoint    = CGPointMake(sPoint.x / kMaxMapXPos * sRadarSize.width, sPoint.y / sCanvasBounds.size.height * sRadarSize.height);
-        sPoint.x -= (sRadarSize.width / 2);
-        sPoint.y -= (sRadarSize.height / 2);
-        
-        [sRadarObject setHidden:NO];
-        [sRadarObject setPoint:sPoint];
+        [self setRadarObjectWithUnit:sUnit canvas:aCanvas];
     }
 }
 

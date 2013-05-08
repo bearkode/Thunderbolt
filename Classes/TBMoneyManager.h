@@ -32,14 +32,14 @@
 
 
 + (TBMoneyManager *)sharedManager;
-+ (void)useMoney:(NSUInteger)aValue;
++ (BOOL)useMoney:(NSUInteger)aValue;
 
 - (void)setBalance:(NSUInteger)aValue;
 - (NSUInteger)balance;
 
 - (void)saveMoney:(NSUInteger)aValue;
 - (void)saveMoneyForUnit:(TBUnit *)aUnit;
-- (void)useMoney:(NSUInteger)aValue;
+- (BOOL)useMoney:(NSUInteger)aValue;
 
 
 @end

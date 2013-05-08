@@ -17,6 +17,7 @@
     CGSize    mTileSize;
     NSString *mImageName;
     NSString *mSoundName;
+    CGPoint   mTailRotorPosition;
 
     /*  Load  */
     NSUInteger mMaxBullet;
@@ -34,9 +35,10 @@
 }
 
 
-@synthesize tileSize  = mTileSize;
-@synthesize imageName = mImageName;
-@synthesize soundName = mSoundName;
+@synthesize tileSize          = mTileSize;
+@synthesize imageName         = mImageName;
+@synthesize soundName         = mSoundName;
+@synthesize tailRotorPosition = mTailRotorPosition;
 
 
 #pragma mark -
@@ -86,6 +88,7 @@
     [sInfo setTileSize:CGSizeMake(180 / 2, 56 / 2)];
     [sInfo setImageName:kTexUH1];
     [sInfo setSoundName:kTBSoundHeli];
+    [sInfo setTailRotorPosition:CGPointMake(50, 5)];
 
     return sInfo;
 }
@@ -98,7 +101,8 @@
     [sInfo setTileSize:CGSizeMake(264 / 2, 54 / 2)];
     [sInfo setImageName:kTexUH1N];
     [sInfo setSoundName:kTBSoundHeli];
-
+    [sInfo setTailRotorPosition:CGPointMake(47, 5)];
+    
     return sInfo;
 }
 
@@ -110,6 +114,7 @@
     [sInfo setTileSize:CGSizeMake(224 / 2, 54 / 2)];
     [sInfo setImageName:kTexAH1];
     [sInfo setSoundName:kTBSoundHeli];
+    [sInfo setTailRotorPosition:CGPointMake(50, 5)];
 
     return sInfo;
 }
@@ -122,7 +127,8 @@
     [sInfo setTileSize:CGSizeMake(234 / 2, 56 / 2)];
     [sInfo setImageName:kTexSuperCobra];
     [sInfo setSoundName:kTBSoundHeli];
-
+    [sInfo setTailRotorPosition:CGPointMake(55, 6)];
+    
     return sInfo;
 }
 

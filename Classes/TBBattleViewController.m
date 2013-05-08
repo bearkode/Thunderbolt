@@ -186,9 +186,8 @@
 
 - (void)deployNewAllyHelicopter
 {
-    if ([[TBMoneyManager sharedManager] balance] >= kTBPriceHelicopter)
+    if ([TBMoneyManager useMoney:kTBPriceHelicopter])
     {
-        [TBMoneyManager useMoney:kTBPriceHelicopter];
         [[TBUnitManager sharedManager] setHelicopterInfo:mHeliInfo];
         [[TBUnitManager sharedManager] addHelicopterWithTeam:kTBTeamAlly delegate:self];
         [self updateAmmoLabel];

@@ -25,9 +25,9 @@
 SYNTHESIZE_SINGLETON_CLASS(TBMoneyManager, sharedManager);
 
 
-+ (void)useMoney:(NSUInteger)aValue
++ (BOOL)useMoney:(NSUInteger)aValue
 {
-    [[TBMoneyManager sharedManager] useMoney:aValue];
+    return [[TBMoneyManager sharedManager] useMoney:aValue];
 }
 
 
@@ -91,10 +91,16 @@ SYNTHESIZE_SINGLETON_CLASS(TBMoneyManager, sharedManager);
 }
 
 
-- (void)useMoney:(NSUInteger)aValue
+- (BOOL)useMoney:(NSUInteger)aValue
 {
-    mBalance -= aValue;
-    [mDelegate moneyManager:self balanceDidChange:mBalance];
+    if (mBalance > aValue)
+    {
+        mBalance -= aValue;
+        [mDelegate moneyManager:self balanceDidChange:mBalance];
+        return YES;
+    }
+    
+    return NO;
 }
 
 

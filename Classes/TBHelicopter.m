@@ -38,6 +38,9 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 
 @implementation TBHelicopter
 {
+    PBLayer        *mTailRotor;
+    CGFloat         mRotorAngle;
+    
     id              mDelegate;
     TBControlLever *mControlLever;
     
@@ -53,6 +56,8 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     TBWeapon       *mSelectedWeapon;
     NSInteger       mBombCount;
     NSInteger       mMissileCount;
+    
+    TBHelicopterInfo *mInfo;
     
     PBSoundSource  *mSoundSource;
 }
@@ -98,6 +103,20 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 }
 
 
+- (void)setupTailRotor
+{
+    PBTexture *sRotorTexture = [PBTextureManager textureWithImageName:@"TailRotor"];
+    [sRotorTexture loadIfNeeded];
+    
+    mTailRotor = [[[PBLayer alloc] init] autorelease];
+    [mTailRotor setTexture:sRotorTexture];
+    [mTailRotor setHidden:YES];
+    [self addSublayer:mTailRotor];
+
+    mRotorAngle = 0;
+}
+
+
 #pragma mark -
 
 
@@ -109,6 +128,7 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     {
         [self setType:kTBUnitHelicopter];
         [self setDurability:kHelicopterDurability];
+        [self setupTailRotor];
         
         mControlLever = [[TBControlLever alloc] initWithHelicopter:self];
         mLeftAhead    = (aTeam == kTBTeamAlly) ? NO : YES;
@@ -131,6 +151,8 @@ const CGFloat    kAltitudeSensitivity = 15.0;
         [mSoundSource setDistance:1];
         [mSoundSource setLooping:YES];
         [mSoundSource play];
+        
+        mInfo = [aInfo retain];
     }
     
     return self;
@@ -144,6 +166,7 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     [mHardPoints release];
 
     [[PBSoundManager sharedManager] releaseSoundSource:mSoundSource];
+    [mInfo release];
     
     [super dealloc];
 }
@@ -266,9 +289,11 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 {
     if ([self damage])
     {
-        [self repair:aValue];
-        [[self delegate] helicopterDamageChanged:self];
-        [TBMoneyManager useMoney:kTBPriceRepair];
+        if ([TBMoneyManager useMoney:kTBPriceRepair])
+        {
+            [self repair:aValue];
+            [[self delegate] helicopterDamageChanged:self];
+        }
     }
 }
 
@@ -325,9 +350,46 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 }
 
 
+- (void)updateTailRotor
+{
+    mRotorAngle += 34;
+    if (mRotorAngle > 360)
+    {
+        mRotorAngle -= 360;
+    }
+    [[mTailRotor transform] setAngle:PBVertex3Make(0, 0, mRotorAngle)];
+    
+
+    if ([mTailRotor hidden])
+    {
+        CGPoint sPoint = [mInfo tailRotorPosition];
+        
+        if (mTextureIndex == 0 || mTextureIndex == 1)
+        {
+            sPoint.x = -sPoint.x;
+            [mTailRotor setHidden:NO];
+            [mTailRotor setPoint:sPoint];
+        }
+        else if (mTextureIndex == 23 || mTextureIndex == 24)
+        {
+            [mTailRotor setHidden:NO];
+            [mTailRotor setPoint:sPoint];
+        }
+    }
+    else
+    {
+        if (mTextureIndex != 0 && mTextureIndex != 1 && mTextureIndex != 23 && mTextureIndex != 24)
+        {
+            [mTailRotor setHidden:YES];
+        }
+    }
+}
+
+
 - (void)action
 {
     [super action];
+    [self updateTailRotor];
     
     if (![self isLanded])
     {
@@ -354,7 +416,7 @@ const CGFloat    kAltitudeSensitivity = 15.0;
         }
         else
         {
-            if (mTextureIndex < 24)
+            if (mTextureIndex < 23)
             {
                 mTextureIndex++;
             }
