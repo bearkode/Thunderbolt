@@ -274,7 +274,7 @@
         mBackPoint += (mBackPoint < 80) ? 8 : 0;
     }
     
-    mCameraXPos = sHeliPos.x + mBackPoint;
+    mCameraXPos = (NSInteger)(sHeliPos.x + mBackPoint);
 }
 
 
