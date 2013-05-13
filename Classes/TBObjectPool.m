@@ -85,6 +85,7 @@
 - (void)vacate
 {
     [mIdleObjects removeAllObjects];
+    [mBusyObjects removeAllObjects];
 }
 
 

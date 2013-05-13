@@ -11,6 +11,7 @@
 #import "TBTextureNames.h"
 #import "TBUnitManager.h"
 #import "TBExplosionManager.h"
+#import "TBSmokeManager.h"
 #import "TBMacro.h"
 #import "TBUnit.h"
 
@@ -125,6 +126,11 @@ const CGFloat   kMissileAcceleration = 0.1;
     {
         [self addDamage:1000];
         [[TBExplosionManager sharedManager] addBombExplosionAtPosition:CGPointMake(sPoint.x, kMapGround + 18)];
+    }
+    
+    if (mFuel > 230)
+    {
+        [[TBSmokeManager sharedManager] addSmokeAtPoint:sPoint];
     }
 }
 

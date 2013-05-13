@@ -14,11 +14,13 @@
 #import "TBEventView.h"
 #import "TBControlLever.h"
 
-#import "TBMoneyManager.h"
 #import "TBUnitManager.h"
 #import "TBWarheadManager.h"
 #import "TBExplosionManager.h"
 #import "TBStructureManager.h"
+#import "TBSmokeManager.h"
+
+#import "TBMoneyManager.h"
 #import "TBScoreManager.h"
 
 #import "TBBase.h"
@@ -55,6 +57,7 @@
     /*  Layers : not retained  */
     PBLayer       *mRadarLayer;
     PBLayer       *mEffectLayer;
+    PBLayer       *mSmokeLayer;
     PBLayer       *mWarheadLayer;
     PBLayer       *mExplosionLayer;
     PBLayer       *mUnitLayer;
@@ -159,6 +162,7 @@
 {
     mRadarLayer      = [[[PBLayer alloc] init] autorelease];
     mEffectLayer     = [[[PBLayer alloc] init] autorelease];
+    mSmokeLayer      = [[[PBLayer alloc] init] autorelease];
     mWarheadLayer    = [[[PBLayer alloc] init] autorelease];
     mExplosionLayer  = [[[PBLayer alloc] init] autorelease];
     mUnitLayer       = [[[PBLayer alloc] init] autorelease];
@@ -170,6 +174,7 @@
                                                                       mUnitLayer,
                                                                       mExplosionLayer,
                                                                       mWarheadLayer,
+                                                                      mSmokeLayer,
                                                                       mEffectLayer,
                                                                       mRadarLayer, nil]];
     
@@ -177,6 +182,9 @@
     [[TBWarheadManager sharedManager] setWarheadLayer:mWarheadLayer];
     [[TBExplosionManager sharedManager] setExplosionLayer:mExplosionLayer];
     [[TBUnitManager sharedManager] setUnitLayer:mUnitLayer];
+    [[TBSmokeManager sharedManager] setSmokeLayer:mSmokeLayer];
+    
+    //  TODO : layer를 매니저가 가지는 구조로 변경.
     
     [self setupBackgroundLayer];
     [self setupStructureLayer];
@@ -325,6 +333,8 @@
     [[TBExplosionManager sharedManager] setExplosionLayer:nil];
     [[TBUnitManager sharedManager] reset];
     [[TBUnitManager sharedManager] setUnitLayer:nil];
+    [[TBSmokeManager sharedManager] reset];
+    [[TBSmokeManager sharedManager] setSmokeLayer:nil];
     
     [[TBMoneyManager sharedManager] setDelegate:nil];
     [[TBScoreManager sharedManager] reset];
@@ -472,6 +482,7 @@
     [[TBUnitManager      sharedManager] doActions];
     [[TBWarheadManager   sharedManager] doActions];
     [[TBExplosionManager sharedManager] doActions];
+    [[TBSmokeManager     sharedManager] doActions];
 
     [mRadar updateWithCanvas:[self canvas]];
 //    PBEndTimeCheck();
