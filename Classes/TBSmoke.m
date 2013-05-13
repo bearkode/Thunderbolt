@@ -60,7 +60,7 @@
 {
     mIndex++;
     
-    [[self transform] setScale:(0.1 + mIndex / 19.0)];
+    [[self transform] setScale:(0.0 + mIndex / 20.0)];
     [[self transform] setAlpha:(1.0 - mIndex / 15.0)];
     
     if (mIndex > 15)

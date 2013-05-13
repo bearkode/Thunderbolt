@@ -377,7 +377,8 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     [sMissile setPoint:aPosition];
     [sMissile setTargetID:[aTarget unitID]];
     
-    PBVertex3 sAngle = PBVertex3Make(0, 0, TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget point])));
+    PBVertex3 sAngle = PBVertex3Make(0, 0, 360 - TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget point])));
+    sAngle.z = (sAngle.z > 360) ? (sAngle.z - 360) : sAngle.z;
     [[sMissile transform] setAngle:sAngle];
     
     [self addUnit:sMissile];
