@@ -165,7 +165,6 @@
         mBackPoint = 0;
         mTimeTick  = 0;
         
-        NSLog(@"motion manager alloc");
         mMotionManager = [[CMMotionManager alloc] init];
         [mMotionManager setAccelerometerUpdateInterval:(1.0 / 60.0)];
         [mMotionManager startAccelerometerUpdates];
@@ -258,7 +257,6 @@
 
 - (void)pbSceneWillUpdate:(PBScene *)aScene
 {
-    //    PBBeginTimeCheck();
     CGPoint sCameraPos = [[[self canvas] camera] position];
     [[[self canvas] camera] setPosition:CGPointMake(mCameraXPos, sCameraPos.y)];
     
@@ -342,8 +340,6 @@
         [[sHelicopter controlLever] setAltitude:sAcceleration.z speed:sAcceleration.y];
         [self updateCameraPositoin];
     }
-    
-    //    PBEndTimeCheck();
 }
 
 
@@ -361,7 +357,6 @@
         {
             [[self delegate] battleScene:self didFinishBattle:NO];
         }
-//        [[self navigationController] popViewControllerAnimated:NO];
     }
 }
 
@@ -507,11 +502,11 @@
 
 - (IBAction)tankButtonTapped:(id)aSender
 {
-    //    if ([[TBMoneyManager sharedManager] balance] >= kTBPriceTank)
-    //    {
-    //        [TBMoneyManager useMoney:kTBPriceTank];
-    //        [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamAlly];
-    //    }
+    if ([[TBMoneyManager sharedManager] balance] >= kTBPriceTank)
+    {
+        [TBMoneyManager useMoney:kTBPriceTank];
+        [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamAlly];
+    }
 }
 
 
@@ -521,6 +516,7 @@
 
     [sHelicopter selectNextWeapon];
 }
+
 
 #pragma mark -
 #pragma mark EventView Delegate

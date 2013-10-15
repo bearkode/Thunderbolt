@@ -136,7 +136,6 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     }
     else if ([aUnit isKindOfUnit:kTBUnitMissile])
     {
-//        PBVertex3 sAngle = [[aUnit transform] angle];
         PBVertex3 sAngle = [aUnit angle];
         [self addMissileExplosionAtPosition:[aUnit point] angle:sAngle.z];
     }
@@ -249,7 +248,6 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     PBTexture   *sTexture   = nil;
     PBVertex3    sAngle     = PBVertex3Make(0, 0, aAngle);
     
-//    [[sExplosion transform] setAngle:sAngle];
     [sExplosion setAngle:sAngle];
     
     sTexture = [PBTextureManager textureWithImageName:kTexMissileExp00];

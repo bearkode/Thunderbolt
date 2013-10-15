@@ -65,6 +65,9 @@ const CGFloat   kMissileAcceleration = 0.1;
 }
 
 
+#pragma mark -
+
+
 - (void)action
 {
     TBUnit *sTarget = nil;
@@ -72,7 +75,6 @@ const CGFloat   kMissileAcceleration = 0.1;
     [super action];
 
     CGPoint   sPoint  = [self point];
-//    PBVertex3 sAngle3 = [[self transform] angle];
     PBVertex3 sAngle3 = [self angle];
     
     if (mSpeed < kMissileSpeed)
@@ -119,7 +121,6 @@ const CGFloat   kMissileAcceleration = 0.1;
         mSpeed = (mSpeed <= 0) ? 0.0 : mSpeed - 0.1;
     }
 
-//    [[self transform] setAngle:sAngle3];
     [self setAngle:sAngle3];
     [self setPoint:sPoint];
     
