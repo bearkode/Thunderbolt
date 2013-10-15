@@ -30,7 +30,7 @@ const NSUInteger kMaxBullets          = 100;
 const NSInteger  kMaxBombs            = 5;
 const NSInteger  kMaxMissiles         = 2;
 
-const CGFloat    kAltitudeSensitivity = 15.0;
+const CGFloat    kAltitudeSensitivity = 7.0;
 
 
 #pragma mark -
@@ -251,16 +251,16 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 
 - (CGPoint)pointWithAltitudeLever:(CGFloat)aAltitudeLever oldPoint:(CGPoint)aPoint
 {
-    CGFloat sAltitudeLever = (aAltitudeLever + 0.68) * kAltitudeSensitivity;
-    CGSize  sMeshSize      = [self tileSize];
+    CGFloat sAltitudeLever = aAltitudeLever * kAltitudeSensitivity;
+    CGSize  sSize          = [self tileSize];
 
-    aPoint.y -= sAltitudeLever;
+    aPoint.y += sAltitudeLever;
 
-    if ((aPoint.y - (sMeshSize.height / 2)) < kMapGround)
+    if ((aPoint.y - (sSize.height / 2)) < kMapGround)
     {
         mLanded  = YES;
         [mSelectedWeapon setFire:NO];
-        aPoint.y = kMapGround + sMeshSize.height / 2;
+        aPoint.y = kMapGround + sSize.height / 2;
     }
     else if (aPoint.y > 300)
     {

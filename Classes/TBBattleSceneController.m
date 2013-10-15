@@ -9,7 +9,6 @@
 
 #import "TBBattleSceneController.h"
 #import <PBKit.h>
-#import <CoreMotion/CoreMotion.h>
 
 #import "TBUnitManager.h"
 #import "TBWarheadManager.h"
@@ -27,6 +26,7 @@
 #import "TBBase.h"
 
 #import "TBEventView.h"
+#import "TBController.h"
 
 
 #if (1)
@@ -60,7 +60,8 @@
     
     /*  BGM  */
     PBSoundSource        *mBGMSoundSource;
-    CMMotionManager      *mMotionManager;
+
+    TBController         *mController;
 }
 
 
@@ -73,7 +74,7 @@
 - (void)setupUIs
 {
     CGRect   sBounds    = [[self controlView] bounds];
-    UIColor *sBackColor = [UIColor blackColor];
+    UIColor *sBackColor = [UIColor clearColor];
     
     mAmmoLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 40, 140, 30)] autorelease];
     [mAmmoLabel setAutoresizingMask:(UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin)];
@@ -152,6 +153,53 @@
 
 
 #pragma mark -
+#pragma mark Update UIs
+
+
+- (void)updateAmmoLabel
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    NSString     *sAmmoText;
+    
+    if (sHelicopter)
+    {
+        sAmmoText = [NSString stringWithFormat:@"V:%d B:%d D:%3.2f", [sHelicopter bulletCount], [sHelicopter bombCount], [sHelicopter damageRate]];
+        [mAmmoLabel setText:sAmmoText];
+    }
+}
+
+
+- (void)updateMoneyLabel:(NSUInteger)aSum
+{
+    [mMoneyLabel setText:[NSString stringWithFormat:@"$ %d", aSum]];
+}
+
+
+- (void)updateScoreLabel:(NSUInteger)aScore
+{
+    [mScoreLabel setText:[NSString stringWithFormat:@"%d", aScore]];
+}
+
+
+- (void)updateCameraPositoin
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    CGPoint       sHeliPos    = [sHelicopter point];
+    
+    if ([sHelicopter isLeftAhead])
+    {
+        mBackPoint -= (mBackPoint > -80) ? 8 : 0;
+    }
+    else
+    {
+        mBackPoint += (mBackPoint < 80) ? 8 : 0;
+    }
+    
+    mCameraXPos = (NSInteger)(sHeliPos.x + mBackPoint);
+}
+
+
+#pragma mark -
 
 
 - (id)initWithDelegate:(id)aDelegate
@@ -165,9 +213,8 @@
         mBackPoint = 0;
         mTimeTick  = 0;
         
-        mMotionManager = [[CMMotionManager alloc] init];
-        [mMotionManager setAccelerometerUpdateInterval:(1.0 / 60.0)];
-        [mMotionManager startAccelerometerUpdates];
+        mController = [[TBController alloc] init];
+        [mController setControllerMode:kTBControllerModeMotion];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(baseDidDestroyNotification:)
@@ -201,8 +248,8 @@
     
     [mLayerManager release];
 
-    [mMotionManager stopAccelerometerUpdates];
-    [mMotionManager release];
+    [mController setControllerMode:kTBControllerModeNone];
+    [mController release];
     
     [mHeliInfo release];
 
@@ -252,6 +299,28 @@
 
 
 #pragma mark -
+#pragma mark Actions
+
+
+- (IBAction)tankButtonTapped:(id)aSender
+{
+    if ([[TBMoneyManager sharedManager] balance] >= kTBPriceTank)
+    {
+        [TBMoneyManager useMoney:kTBPriceTank];
+        [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamAlly];
+    }
+}
+
+
+- (IBAction)ammoButtonTapped:(id)aSender
+{
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
+    
+    [sHelicopter selectNextWeapon];
+}
+
+
+#pragma mark -
 #pragma mark PBCanvas delegate
 
 
@@ -270,74 +339,14 @@
     
     [mRadar updateWithCanvas:[self canvas]];
     
-#if (0)
-    if ([[GCController controllers] count])
-    {
-        CGFloat                sYValue = -0.68;
-        GCController          *sController = [[GCController controllers] objectAtIndex:0];
-        GCGamepad             *sGamepad    = [sController gamepad];
-        GCControllerAxisInput *sXAxisInput = [[sGamepad dpad] xAxis];
-        GCControllerAxisInput *sYAxisInput = [[sGamepad dpad] yAxis];
-        TBHelicopter  *sHelicopter   = [[TBUnitManager sharedManager] allyHelicopter];
-        
-        //        NSLog(@"x value = %f", [sXAxisInput value]);
-        NSLog(@"y value = %f", [sYAxisInput value]);
-        
-        CGFloat y = -[sYAxisInput value];
-        CGFloat x = -[sXAxisInput value];
-        
-        //        if (y > 0 && sYValue < -0.2)
-        //        {
-        //            sYValue += 0.01;
-        //        }
-        //        else if (y < 0 && sYValue > -0.8)
-        //        {
-        //            sYValue -= 0.01;
-        //        }
-        
-        sYValue += (y / 2.0);
-        
-        NSLog(@"sYValue = %f", sYValue);
-        
-        if ([[sGamepad buttonA] value] > 0.1)
-        {
-            [[[TBUnitManager sharedManager] allyHelicopter] setFire:YES];
-        }
-        else
-        {
-            [[[TBUnitManager sharedManager] allyHelicopter] setFire:NO];
-        }
-        
-        
-        if (sHelicopter)
-        {
-            [[sHelicopter controlLever] setAltitude:sYValue speed:x / 1.5];
-            [self updateCameraPositoin];
-        }
-    }
-    else
-    {
-        CMAcceleration sAcceleration = [[mMotionManager accelerometerData] acceleration];
-        TBHelicopter  *sHelicopter   = [[TBUnitManager sharedManager] allyHelicopter];
-        
-        NSLog(@"z - %f y - %f", sAcceleration.z, sAcceleration.y);
-        
-        if (sHelicopter)
-        {
-            [[sHelicopter controlLever] setAltitude:sAcceleration.z speed:sAcceleration.y];
-            [self updateCameraPositoin];
-        }
-    }
-#endif
-    
-    CMAcceleration sAcceleration = [[mMotionManager accelerometerData] acceleration];
     TBHelicopter  *sHelicopter   = [[TBUnitManager sharedManager] allyHelicopter];
-    
-//    NSLog(@"z - %f y - %f", sAcceleration.z, sAcceleration.y);
-    
+
     if (sHelicopter)
     {
-        [[sHelicopter controlLever] setAltitude:sAcceleration.z speed:sAcceleration.y];
+        CGFloat sAltitude = [mController yAxisValue];
+        CGFloat sSpeed    = [mController xAxisValue];
+        
+        [[sHelicopter controlLever] setAltitude:sAltitude speed:sSpeed];
         [self updateCameraPositoin];
     }
 }
@@ -410,53 +419,6 @@
 
 
 #pragma mark -
-#pragma mark Update UIs
-
-
-- (void)updateAmmoLabel
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    NSString     *sAmmoText;
-    
-    if (sHelicopter)
-    {
-        sAmmoText = [NSString stringWithFormat:@"V:%d B:%d D:%3.2f", [sHelicopter bulletCount], [sHelicopter bombCount], [sHelicopter damageRate]];
-        [mAmmoLabel setText:sAmmoText];
-    }
-}
-
-
-- (void)updateMoneyLabel:(NSUInteger)aSum
-{
-    [mMoneyLabel setText:[NSString stringWithFormat:@"$ %d", aSum]];
-}
-
-
-- (void)updateScoreLabel:(NSUInteger)aScore
-{
-    [mScoreLabel setText:[NSString stringWithFormat:@"%d", aScore]];
-}
-
-
-- (void)updateCameraPositoin
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    CGPoint       sHeliPos    = [sHelicopter point];
-    
-    if ([sHelicopter isLeftAhead])
-    {
-        mBackPoint -= (mBackPoint > -80) ? 8 : 0;
-    }
-    else
-    {
-        mBackPoint += (mBackPoint < 80) ? 8 : 0;
-    }
-    
-    mCameraXPos = (NSInteger)(sHeliPos.x + mBackPoint);
-}
-
-
-#pragma mark -
 #pragma mark Helicopter Delegates
 
 
@@ -493,28 +455,6 @@
     {
         [self performSelector:@selector(deployNewAllyHelicopter) withObject:nil afterDelay:3.0];
     }
-}
-
-
-#pragma mark -
-#pragma mark Actions
-
-
-- (IBAction)tankButtonTapped:(id)aSender
-{
-    if ([[TBMoneyManager sharedManager] balance] >= kTBPriceTank)
-    {
-        [TBMoneyManager useMoney:kTBPriceTank];
-        [[TBUnitManager sharedManager] addTankWithTeam:kTBTeamAlly];
-    }
-}
-
-
-- (IBAction)ammoButtonTapped:(id)aSender
-{
-    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-
-    [sHelicopter selectNextWeapon];
 }
 
 
@@ -569,12 +509,10 @@
 
     if ([sBase team] == kTBTeamAlly)
     {
-        NSLog(@"Defeat");
         sIsWin = NO;
     }
     else
     {
-        NSLog(@"Win");
         sIsWin = YES;
     }
     

@@ -37,6 +37,7 @@
 		2E61B850180CDA5A00D20D3E /* TBMainSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B84F180CDA5A00D20D3E /* TBMainSceneController.m */; };
 		2E61B853180CE1FB00D20D3E /* TBBattleSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B852180CE1FB00D20D3E /* TBBattleSceneController.m */; };
 		2E61B856180CEDE900D20D3E /* TBBattleLayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */; };
+		2E61B85A180D210C00D20D3E /* TBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B859180D210C00D20D3E /* TBController.m */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
 		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
 		2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */; };
@@ -201,6 +202,8 @@
 		2E61B852180CE1FB00D20D3E /* TBBattleSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleSceneController.m; sourceTree = "<group>"; };
 		2E61B854180CEDE900D20D3E /* TBBattleLayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleLayerManager.h; sourceTree = "<group>"; };
 		2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleLayerManager.m; sourceTree = "<group>"; };
+		2E61B858180D210C00D20D3E /* TBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBController.h; sourceTree = "<group>"; };
+		2E61B859180D210C00D20D3E /* TBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBController.m; sourceTree = "<group>"; };
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		2E69154B171EA1920085B797 /* TBObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObjectPool.h; sourceTree = "<group>"; };
 		2E69154C171EA1920085B797 /* TBObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObjectPool.m; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 		2E662D4D170E98210081DEC9 /* BattleViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2E61B858180D210C00D20D3E /* TBController.h */,
+				2E61B859180D210C00D20D3E /* TBController.m */,
 				2E46379817127FEA00EA1888 /* TBEventView.h */,
 				2E46379917127FEA00EA1888 /* TBEventView.m */,
 				2E868567170D7E0900D64EF7 /* TBBattleViewController.h */,
@@ -921,6 +926,7 @@
 				A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */,
 				A71FFB7811961DCE00DA0139 /* TBWarheadManager.m in Sources */,
 				2E61B850180CDA5A00D20D3E /* TBMainSceneController.m in Sources */,
+				2E61B85A180D210C00D20D3E /* TBController.m in Sources */,
 				A71FFC5211965E4300DA0139 /* TBExplosionManager.m in Sources */,
 				A725CC2A119D9AF800276F35 /* TBWeapon.m in Sources */,
 				A725CC36119D9BC400276F35 /* TBVulcan.m in Sources */,
