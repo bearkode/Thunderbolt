@@ -20,11 +20,9 @@
     
     if (self)
     {
-        [[self mesh] setMeshRenderOption:kPBMeshRenderOptionUsingMeshQueue];
-        
         PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRadarObject];
-        [sTexture loadIfNeeded];
         [self setTexture:sTexture];
+        [self setTileSize:[sTexture size]];
     }
     
     return self;

@@ -31,19 +31,10 @@
 #pragma mark -
 
 
-+ (Class)meshClass
-{
-    return [PBTileMesh class];
-}
-
-
 - (void)setupTexture
 {
-    [(PBTileMesh *)[self mesh] setTileSize:CGSizeMake(60, 65)];
-    
-    PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexBase];
-    [sTexture loadIfNeeded];
-    [self setTexture:sTexture];
+    [self setTexture:[PBTextureManager textureWithImageName:kTexBase]];
+    [self setTileSize:CGSizeMake(60, 65)];
 
     mTick         = 0;
     mTextureIndex = 0;
@@ -92,7 +83,7 @@
         if (mTick++ > 5)
         {
             mTick = 0;
-            [(PBTileMesh *)[self mesh] selectTileAtIndex:mTextureIndex++];
+            [self selectTileAtIndex:mTextureIndex++];
             mTextureIndex = (mTextureIndex > 7) ? 0 : mTextureIndex;
         }
         

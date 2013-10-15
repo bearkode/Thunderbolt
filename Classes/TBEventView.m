@@ -38,6 +38,7 @@
     if (self)
     {
         mControlMode = NO;
+//        [self setBackgroundColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.5]];
     }
     
     return self;

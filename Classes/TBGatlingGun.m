@@ -121,7 +121,8 @@ const NSInteger kFireDelay = 8;
             if ([self ammoCount] > 0)
             {
                 TBHelicopter *sBody   = (TBHelicopter *)[self body];
-                PBVertex3     sAngle3 = [[sBody transform] angle];
+//                PBVertex3     sAngle3 = [[sBody transform] angle];
+                PBVertex3     sAngle3 = [sBody angle];
                 CGFloat       sAngle;
                 CGPoint       sPos1;
                 CGPoint       sPos2;

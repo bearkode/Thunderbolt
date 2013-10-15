@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
-		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		2E009DAF1713069F00A362F2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAD1713069F00A362F2 /* Default-568h@2x.png */; };
 		2E009DB01713069F00A362F2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAE1713069F00A362F2 /* Default@2x.png */; };
 		2E009DB3171306DB00A362F2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E51D111E5E8A00CA7792 /* Default.png */; };
@@ -36,11 +32,24 @@
 		2E5E601F172C251B00140A39 /* UH1N@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E6019172C251B00140A39 /* UH1N@2x.png */; };
 		2E5E6023172DDE4200140A39 /* MD500.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E6021172DDE4200140A39 /* MD500.png */; };
 		2E5E6024172DDE4200140A39 /* MD500@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E6022172DDE4200140A39 /* MD500@2x.png */; };
+		2E61B84A180CD82200D20D3E /* TBSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B849180CD82200D20D3E /* TBSceneController.m */; };
+		2E61B84D180CD91B00D20D3E /* TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B84C180CD91B00D20D3E /* TBViewController.m */; };
+		2E61B850180CDA5A00D20D3E /* TBMainSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B84F180CDA5A00D20D3E /* TBMainSceneController.m */; };
+		2E61B853180CE1FB00D20D3E /* TBBattleSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B852180CE1FB00D20D3E /* TBBattleSceneController.m */; };
+		2E61B856180CEDE900D20D3E /* TBBattleLayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
 		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
 		2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */; };
 		2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E868568170D7E0900D64EF7 /* TBBattleViewController.m */; };
 		2E86856A170D7EAE00D64EF7 /* libPBKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E868563170D7AC300D64EF7 /* libPBKit.a */; };
+		2E90F9711807EE5500D18A92 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		2E90F9721807EE6200D18A92 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2E90F9731807EE8000D18A92 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
+		2E90F9741807EE9400D18A92 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AD029411235F9700359C54 /* OpenAL.framework */; };
+		2E90F9751807EEA200D18A92 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73DE6FD110DF0FC008C1A67 /* CoreGraphics.framework */; };
+		2E90F9761807EEB900D18A92 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		2E90F9771807EEC300D18A92 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E696A8E1803CB78003A0AA4 /* CoreMotion.framework */; };
+		2E90F97A1807EF0A00D18A92 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AD02A011235FF500359C54 /* AudioToolbox.framework */; };
 		2EB4E96E173A9937009EDFBB /* TailRotor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EB4E96C173A9937009EDFBB /* TailRotor.png */; };
 		2EB4E96F173A9937009EDFBB /* TailRotor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EB4E96D173A9937009EDFBB /* TailRotor@2x.png */; };
 		2EB4E97B1741265A009EDFBB /* TBSmoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB4E97A1741265A009EDFBB /* TBSmoke.m */; };
@@ -79,14 +88,11 @@
 		A7303C33111336A10097B02E /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = A7303C32111336A10097B02E /* bullet.png */; };
 		A733A7581111E0BC00FA6062 /* enemy_tank.png in Resources */ = {isa = PBXBuildFile; fileRef = A733A7571111E0BC00FA6062 /* enemy_tank.png */; };
 		A733A77B1111E26700FA6062 /* TBTank.m in Sources */ = {isa = PBXBuildFile; fileRef = A733A77A1111E26700FA6062 /* TBTank.m */; };
-		A73DE6FE110DF0FC008C1A67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73DE6FD110DF0FC008C1A67 /* CoreGraphics.framework */; };
 		A73DE74B110DF3BF008C1A67 /* TBSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = A73DE74A110DF3BF008C1A67 /* TBSprite.m */; };
 		A73DE9FD110E4E96008C1A67 /* TBHelicopter.m in Sources */ = {isa = PBXBuildFile; fileRef = A73DE9FC110E4E96008C1A67 /* TBHelicopter.m */; };
 		A73DEB6C110F2986008C1A67 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = A73DEB6B110F2986008C1A67 /* green.png */; };
 		A75A5C09119FF7AE002B9360 /* TBTankGun.m in Sources */ = {isa = PBXBuildFile; fileRef = A75A5C08119FF7AE002B9360 /* TBTankGun.m */; };
 		A75A5C6C11A02180002B9360 /* TBTankShell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75A5C6B11A02180002B9360 /* TBTankShell.m */; };
-		A7736B08111B144A00B9174C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7736B07111B144A00B9174C /* AVFoundation.framework */; };
-		A7858C06112AD72D00F27970 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7858C05112AD72D00F27970 /* MediaPlayer.framework */; };
 		A785DD35112ACD6500487CCB /* bomb_explosion.caf in Resources */ = {isa = PBXBuildFile; fileRef = A785DD34112ACD6500487CCB /* bomb_explosion.caf */; };
 		A785DD37112ACDCE00487CCB /* tank_explosion.caf in Resources */ = {isa = PBXBuildFile; fileRef = A785DD36112ACDCE00487CCB /* tank_explosion.caf */; };
 		A78A1C4111E88C5200DA9574 /* heli_l_exp00.png in Resources */ = {isa = PBXBuildFile; fileRef = A78A1C3B11E88C5200DA9574 /* heli_l_exp00.png */; };
@@ -106,8 +112,6 @@
 		A79BD780119F66F20021574B /* TBArmoredVehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BD77F119F66F20021574B /* TBArmoredVehicle.m */; };
 		A7A7782811E217D7001CE8D1 /* TBStructureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A7782711E217D7001CE8D1 /* TBStructureManager.m */; };
 		A7AD01FA1122EE7300359C54 /* vulcan.caf in Resources */ = {isa = PBXBuildFile; fileRef = A7AD01F91122EE7300359C54 /* vulcan.caf */; };
-		A7AD029511235F9700359C54 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AD029411235F9700359C54 /* OpenAL.framework */; };
-		A7AD02A111235FF500359C54 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AD02A011235FF500359C54 /* AudioToolbox.framework */; };
 		A7AF9C85114005DB00726807 /* TBStructure.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF9C84114005DB00726807 /* TBStructure.m */; };
 		A7AF9CA01140088400726807 /* TBBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF9C9F1140088400726807 /* TBBase.m */; };
 		A7AF9CEC11428B6800726807 /* landingPad00.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AF9CEB11428B6800726807 /* landingPad00.png */; };
@@ -187,9 +191,21 @@
 		2E5E6019172C251B00140A39 /* UH1N@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UH1N@2x.png"; sourceTree = "<group>"; };
 		2E5E6021172DDE4200140A39 /* MD500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MD500.png; sourceTree = "<group>"; };
 		2E5E6022172DDE4200140A39 /* MD500@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MD500@2x.png"; sourceTree = "<group>"; };
+		2E61B848180CD82200D20D3E /* TBSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSceneController.h; sourceTree = "<group>"; };
+		2E61B849180CD82200D20D3E /* TBSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSceneController.m; sourceTree = "<group>"; };
+		2E61B84B180CD91B00D20D3E /* TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBViewController.h; sourceTree = "<group>"; };
+		2E61B84C180CD91B00D20D3E /* TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBViewController.m; sourceTree = "<group>"; };
+		2E61B84E180CDA5A00D20D3E /* TBMainSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMainSceneController.h; sourceTree = "<group>"; };
+		2E61B84F180CDA5A00D20D3E /* TBMainSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMainSceneController.m; sourceTree = "<group>"; };
+		2E61B851180CE1FB00D20D3E /* TBBattleSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleSceneController.h; sourceTree = "<group>"; };
+		2E61B852180CE1FB00D20D3E /* TBBattleSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleSceneController.m; sourceTree = "<group>"; };
+		2E61B854180CEDE900D20D3E /* TBBattleLayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleLayerManager.h; sourceTree = "<group>"; };
+		2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleLayerManager.m; sourceTree = "<group>"; };
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		2E69154B171EA1920085B797 /* TBObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObjectPool.h; sourceTree = "<group>"; };
 		2E69154C171EA1920085B797 /* TBObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObjectPool.m; sourceTree = "<group>"; };
+		2E696A8E1803CB78003A0AA4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		2E696A901803CF15003A0AA4 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		2E6E9ABC172129E900A9BB7F /* TBTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTestViewController.h; sourceTree = "<group>"; };
 		2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTestViewController.m; sourceTree = "<group>"; };
 		2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PBKit.xcodeproj; path = PrisonBreak/PBKit/PBKit.xcodeproj; sourceTree = "<group>"; };
@@ -337,16 +353,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E90F97A1807EF0A00D18A92 /* AudioToolbox.framework in Frameworks */,
+				2E90F9771807EEC300D18A92 /* CoreMotion.framework in Frameworks */,
+				2E90F9761807EEB900D18A92 /* QuartzCore.framework in Frameworks */,
+				2E90F9751807EEA200D18A92 /* CoreGraphics.framework in Frameworks */,
+				2E90F9741807EE9400D18A92 /* OpenAL.framework in Frameworks */,
+				2E90F9731807EE8000D18A92 /* OpenGLES.framework in Frameworks */,
+				2E90F9721807EE6200D18A92 /* UIKit.framework in Frameworks */,
+				2E90F9711807EE5500D18A92 /* Foundation.framework in Frameworks */,
 				2E86856A170D7EAE00D64EF7 /* libPBKit.a in Frameworks */,
-				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
-				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
-				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
-				A73DE6FE110DF0FC008C1A67 /* CoreGraphics.framework in Frameworks */,
-				A7736B08111B144A00B9174C /* AVFoundation.framework in Frameworks */,
-				A7AD029511235F9700359C54 /* OpenAL.framework in Frameworks */,
-				A7AD02A111235FF500359C54 /* AudioToolbox.framework in Frameworks */,
-				A7858C06112AD72D00F27970 /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +371,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2E61B847180CD80500D20D3E /* Foundation */,
 				2E69154A171EA16C0085B797 /* Common */,
 				A72BD30E11A2DAE80091AEC4 /* Logic */,
 				A725CB59119CA76D00276F35 /* Weapon */,
@@ -416,6 +432,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E696A901803CF15003A0AA4 /* GameController.framework */,
+				2E696A8E1803CB78003A0AA4 /* CoreMotion.framework */,
 				28FD15070DC6FC5B0079059D /* QuartzCore.framework */,
 				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -429,6 +447,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2E61B847180CD80500D20D3E /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				2E61B848180CD82200D20D3E /* TBSceneController.h */,
+				2E61B849180CD82200D20D3E /* TBSceneController.m */,
+				2E61B84B180CD91B00D20D3E /* TBViewController.h */,
+				2E61B84C180CD91B00D20D3E /* TBViewController.m */,
+			);
+			name = Foundation;
+			sourceTree = "<group>";
+		};
 		2E662D4D170E98210081DEC9 /* BattleViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +465,10 @@
 				2E46379917127FEA00EA1888 /* TBEventView.m */,
 				2E868567170D7E0900D64EF7 /* TBBattleViewController.h */,
 				2E868568170D7E0900D64EF7 /* TBBattleViewController.m */,
+				2E61B851180CE1FB00D20D3E /* TBBattleSceneController.h */,
+				2E61B852180CE1FB00D20D3E /* TBBattleSceneController.m */,
+				2E61B854180CEDE900D20D3E /* TBBattleLayerManager.h */,
+				2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */,
 			);
 			name = BattleViewController;
 			sourceTree = "<group>";
@@ -487,6 +520,8 @@
 			children = (
 				2EE9C18B1720323900BB3D24 /* TBMainViewController.h */,
 				2EE9C18C1720323900BB3D24 /* TBMainViewController.m */,
+				2E61B84E180CDA5A00D20D3E /* TBMainSceneController.h */,
+				2E61B84F180CDA5A00D20D3E /* TBMainSceneController.m */,
 			);
 			name = MainViewController;
 			sourceTree = "<group>";
@@ -885,6 +920,7 @@
 				A7AF9DC81142AEFE00726807 /* TBUnitManager.m in Sources */,
 				A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */,
 				A71FFB7811961DCE00DA0139 /* TBWarheadManager.m in Sources */,
+				2E61B850180CDA5A00D20D3E /* TBMainSceneController.m in Sources */,
 				A71FFC5211965E4300DA0139 /* TBExplosionManager.m in Sources */,
 				A725CC2A119D9AF800276F35 /* TBWeapon.m in Sources */,
 				A725CC36119D9BC400276F35 /* TBVulcan.m in Sources */,
@@ -895,14 +931,17 @@
 				A72BD31111A2DB150091AEC4 /* TBMoneyManager.m in Sources */,
 				A72BD43911A42F920091AEC4 /* TBScoreManager.m in Sources */,
 				A72BD49511A4381F0091AEC4 /* TBRadar.m in Sources */,
+				2E61B84D180CD91B00D20D3E /* TBViewController.m in Sources */,
 				A7D9182011A67027006ABF25 /* TBRadarObject.m in Sources */,
 				A7BF9DC411DF8A8D001F8F6B /* TBAAGunSite.m in Sources */,
 				A7A7782811E217D7001CE8D1 /* TBStructureManager.m in Sources */,
 				A7901E9E11F88440000BA30C /* TBRifleman.m in Sources */,
+				2E61B853180CE1FB00D20D3E /* TBBattleSceneController.m in Sources */,
 				A78DF06F11F890A0002AFCC9 /* TBRifle.m in Sources */,
 				2E868569170D7E0A00D64EF7 /* TBBattleViewController.m in Sources */,
 				2E46379A17127FEA00EA1888 /* TBEventView.m in Sources */,
 				2E46379D171286E800EA1888 /* TBControlLever.m in Sources */,
+				2E61B84A180CD82200D20D3E /* TBSceneController.m in Sources */,
 				2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */,
 				2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */,
 				2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */,
@@ -910,6 +949,7 @@
 				2EE9C18D1720323900BB3D24 /* TBMainViewController.m in Sources */,
 				2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */,
 				2EE9C192172189EC00BB3D24 /* TBCheatViewController.m in Sources */,
+				2E61B856180CEDE900D20D3E /* TBBattleLayerManager.m in Sources */,
 				2EE9C19617218E0D00BB3D24 /* TBUserStatusManager.m in Sources */,
 				2EE9C1991722C28500BB3D24 /* TBHelicopterInfo.m in Sources */,
 				2E33AB8C172530F900DE26D5 /* TBBombChamber.m in Sources */,
@@ -935,6 +975,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
 				COPY_PHASE_STRIP = NO;
@@ -945,8 +986,9 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrisonBreak/PBKit/**";
 				INFOPLIST_FILE = "Thunderbolt-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Thunderbolt;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -957,6 +999,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
 				COPY_PHASE_STRIP = YES;
@@ -965,7 +1008,8 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrisonBreak/PBKit/**";
 				INFOPLIST_FILE = "Thunderbolt-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Thunderbolt;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

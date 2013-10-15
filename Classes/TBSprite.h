@@ -16,7 +16,7 @@ CGFloat TBDistanceBetweenToPoints(CGPoint aPt1, CGPoint aPt2);
 CGPoint TBMakeVector(CGFloat aAngle, CGFloat aSpeed);
 
 
-@interface TBSprite : PBSprite
+@interface TBSprite : PBTileNode
 
 
 - (CGRect)contentRect;

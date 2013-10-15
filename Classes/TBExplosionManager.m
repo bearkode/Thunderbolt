@@ -19,7 +19,7 @@
 
 @implementation TBExplosionManager
 {
-    PBLayer        *mExplosionLayer;
+    PBNode         *mExplosionLayer;
     
     NSMutableArray *mLiveExplosions;
     NSMutableArray *mIdleExplosions;
@@ -69,7 +69,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 
 - (void)setLiveExplosion:(TBExplosion *)aExplosion
 {
-    [mExplosionLayer addSublayer:aExplosion];
+    [mExplosionLayer addSubNode:aExplosion];
     [mLiveExplosions addObject:aExplosion];
 }
 
@@ -86,7 +86,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
 }
 
 
-- (void)setExplosionLayer:(PBLayer *)aExplosionLayer
+- (void)setExplosionLayer:(PBNode *)aExplosionLayer
 {
     [mExplosionLayer autorelease];
     mExplosionLayer = [aExplosionLayer retain];
@@ -117,7 +117,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
         }
     }
 
-    [mExplosionLayer removeSublayers:mTempExplosions];
+    [mExplosionLayer removeSubNodes:mTempExplosions];
     [mLiveExplosions removeObjectsInArray:mTempExplosions];
     [mIdleExplosions addObjectsFromArray:mTempExplosions];
 
@@ -136,7 +136,8 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     }
     else if ([aUnit isKindOfUnit:kTBUnitMissile])
     {
-        PBVertex3 sAngle = [[aUnit transform] angle];
+//        PBVertex3 sAngle = [[aUnit transform] angle];
+        PBVertex3 sAngle = [aUnit angle];
         [self addMissileExplosionAtPosition:[aUnit point] angle:sAngle.z];
     }
     else if ([aUnit isKindOfUnit:kTBUnitHelicopter])
@@ -248,7 +249,8 @@ SYNTHESIZE_SINGLETON_CLASS(TBExplosionManager, sharedManager)
     PBTexture   *sTexture   = nil;
     PBVertex3    sAngle     = PBVertex3Make(0, 0, aAngle);
     
-    [[sExplosion transform] setAngle:sAngle];
+//    [[sExplosion transform] setAngle:sAngle];
+    [sExplosion setAngle:sAngle];
     
     sTexture = [PBTextureManager textureWithImageName:kTexMissileExp00];
     [sTexture loadIfNeeded];

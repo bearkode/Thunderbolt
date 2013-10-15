@@ -29,7 +29,7 @@
 
 @implementation TBUnitManager
 {
-    PBLayer            *mUnitLayer;
+    PBNode             *mUnitLayer;
 
     NSInteger           mNextUnitID;
 
@@ -80,7 +80,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
     TBAssociativeArray *sUnits = ([aUnit isAlly]) ? mAllyUnits : mEnemyUnits;
     
-    [mUnitLayer addSublayer:aUnit];
+    [mUnitLayer addSubNode:aUnit];
     [sUnits setObject:aUnit forKey:[aUnit unitID]];
     
     if ([aUnit isKindOfUnit:kTBUnitHelicopter])
@@ -101,7 +101,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 - (void)removeUnit:(TBUnit *)aUnit
 {
-    [mUnitLayer removeSublayer:aUnit];
+    [mUnitLayer removeSubNode:aUnit];
     
     if ([aUnit isAlly])
     {
@@ -175,7 +175,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 }
 
 
-- (void)setUnitLayer:(PBLayer *)aUnitLayer
+- (void)setUnitLayer:(PBNode *)aUnitLayer
 {
     [mUnitLayer autorelease];
     mUnitLayer = [aUnitLayer retain];
@@ -329,7 +329,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     
     sHelicopter = [[[TBHelicopter alloc] initWithUnitID:sUnitID team:aTeam info:mHelicopterInfo] autorelease];
     [sHelicopter setDelegate:aDelegate];
-    [sHelicopter setPoint:CGPointMake(kMinMapXPos + 200, kMapGround + ([[sHelicopter mesh] size].height /2))];
+    [sHelicopter setPoint:CGPointMake(kMinMapXPos + 200, kMapGround + ([sHelicopter tileSize].height /2))];
     [self addUnit:sHelicopter];
     
     return sHelicopter;
@@ -379,7 +379,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     
     PBVertex3 sAngle = PBVertex3Make(0, 0, 360 - TBRadiansToDegrees(TBAngleBetweenToPoints(aPosition, [aTarget point])));
     sAngle.z = (sAngle.z > 360) ? (sAngle.z - 360) : sAngle.z;
-    [[sMissile transform] setAngle:sAngle];
+    [sMissile setAngle:sAngle];
     
     [self addUnit:sMissile];
     

@@ -17,10 +17,11 @@
 
 - (id)init
 {
-    self = [super initWithImageName:kTexBullet];
+    self = [super initWithImageNamed:kTexBullet];
     
     if (self)
     {
+        [self setTileSize:[self textureSize]];
         [self reset];
     }
     

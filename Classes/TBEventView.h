@@ -15,7 +15,9 @@
 
 @property (nonatomic, assign) id delegate;
 
+
 - (void)setControlMode:(BOOL)aFlag;
+
 
 @end
 

@@ -47,15 +47,11 @@ const CGFloat kTankSpeed = 0.5;
         sTexTankShoot = kTexEnemyTankShoot;
     }
     
-    [mTextureNormal autorelease];
     mTextureNormal = [[PBTextureManager textureWithImageName:sTexTank] retain];
-    [mTextureNormal loadIfNeeded];
-    
-    [mTextureHit autorelease];
-    mTextureHit = [[PBTextureManager textureWithImageName:sTexTankShoot] retain];
-    [mTextureHit loadIfNeeded];
+    mTextureHit    = [[PBTextureManager textureWithImageName:sTexTankShoot] retain];
     
     [self setTexture:mTextureNormal];
+    [self setTileSize:[mTextureNormal size]];
 }
 
 
@@ -75,13 +71,15 @@ const CGFloat kTankSpeed = 0.5;
 
         [self setTexture];
         
+        CGSize sSize = [self tileSize];
+        
         if ([self isAlly])
         {
-            [self setPoint:CGPointMake(-50, kMapGround + ([[self mesh] size].height / 2))];
+            [self setPoint:CGPointMake(-50, kMapGround + (sSize.height / 2))];
         }
         else
         {
-            [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + ([[self mesh] size].height / 2))];
+            [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + (sSize.height / 2))];
         }
         
         mTankGun = [[TBTankGun alloc] init];
@@ -138,6 +136,7 @@ const CGFloat kTankSpeed = 0.5;
     if (mHitDiscount-- == 0)
     {
         [self setTexture:mTextureNormal];
+        [self setTileSize:[mTextureNormal size]];
     }
 }
 
@@ -147,6 +146,7 @@ const CGFloat kTankSpeed = 0.5;
     [super addDamage:aDamage];
     
     [self setTexture:mTextureHit];
+    [self setTileSize:[mTextureHit size]];
     mHitDiscount = 10;
 }
 

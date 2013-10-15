@@ -24,6 +24,7 @@
 
 - (id)initWithTeam:(TBTeam)aTeam;
 
+
 - (void)addDamage:(NSUInteger)aDamage;
 
 

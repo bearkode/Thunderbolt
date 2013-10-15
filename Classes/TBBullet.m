@@ -20,11 +20,11 @@
 
 - (id)init
 {
-    self = [super initWithImageName:kTexBullet];
+    self = [super initWithImageNamed:kTexBullet];
     
     if (self)
     {
-        [[self mesh] setMeshRenderOption:kPBMeshRenderOptionUsingMeshQueue];
+        [self setTileSize:[self textureSize]];
     }
     
     return self;

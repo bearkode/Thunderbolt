@@ -8,9 +8,10 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "TBViewController.h"
 
 
-@interface TBMainViewController : UIViewController
+@interface TBMainViewController : TBViewController
 
 
 @end

@@ -30,7 +30,7 @@
 
 
 - (void)reset;
-- (void)setExplosionLayer:(PBLayer *)aExplosionLayer;
+- (void)setExplosionLayer:(PBNode *)aExplosionLayer;
 - (void)doActions;
 
 

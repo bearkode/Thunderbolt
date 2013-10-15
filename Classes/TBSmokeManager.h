@@ -18,7 +18,7 @@
 
 - (void)reset;
 - (void)doActions;
-- (void)setSmokeLayer:(PBLayer *)aLayer;
+- (void)setSmokeLayer:(PBNode *)aLayer;
 - (void)addSmokeAtPoint:(CGPoint)aPoint;
 
 

@@ -60,6 +60,8 @@
     [self setWindow:sWindow];
     [sWindow makeKeyAndVisible];
     
+    [aApplication setStatusBarHidden:YES];
+    
     /*  Setup SoundManager  */
     PBSoundManager *sSoundManager = [PBSoundManager sharedManager];
     [sSoundManager loadSoundNamed:kTBSoundValkyries forKey:kTBSoundValkyries];
@@ -80,7 +82,7 @@
 
     [sWindow setRootViewController:sNaviController];
 
-    [self performSelector:@selector(showPrifilingOverlay) withObject:nil afterDelay:0.5];
+//    [self performSelector:@selector(showPrifilingOverlay) withObject:nil afterDelay:0.5];
     
     return YES;
 }

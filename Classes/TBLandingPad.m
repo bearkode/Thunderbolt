@@ -28,18 +28,24 @@
     
     if (self)
     {
+        [self setTexture:[PBTextureManager textureWithImageName:kTexLandingPad00]];
+        [self setTileSize:[self textureSize]];
         [self setDurability:kLandingPadDurability];
-        
-        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexLandingPad00];
-
-        [sTexture loadIfNeeded];
-        [self setTexture:sTexture];
         
         mFillUpCount = 0;
     }
     
     return self;
 }
+
+
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+
+#pragma mark -
 
 
 - (void)action
@@ -56,8 +62,6 @@
             {
                 [sHelicopter repairDamage:kLandingPadRepairDamage];
                 [sHelicopter fillUpAmmos];
-//                [sHelicopter fillUpBullets:kLandingPadFillUpBullets];
-//                [sHelicopter fillUpBombs:kLandingPadFillUpBombs];
             }
             
             mFillUpCount = 40;

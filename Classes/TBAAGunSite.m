@@ -79,8 +79,8 @@
                                                          [PBTextureManager textureWithImageName:kTexAAGun04], nil];
 
         PBTexture *sTexture = [mTextureArray objectAtIndex:0];
-        [sTexture loadIfNeeded];
         [self setTexture:sTexture];
+        [self setTileSize:[sTexture size]];
     }
     
     return self;

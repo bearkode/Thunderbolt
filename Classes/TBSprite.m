@@ -92,7 +92,7 @@ inline CGPoint TBMakeVector(CGFloat aAngle, CGFloat aSpeed)
 {
     [super setPoint:aPoint];
     
-    CGSize sSize = [[self mesh] size];
+    CGSize sSize = [self tileSize];//[[self mesh] size];
     
     mFrame.origin.x    = aPoint.x - sSize.width  / 2;
     mFrame.origin.y    = aPoint.y - sSize.height / 2;
@@ -110,7 +110,7 @@ inline CGPoint TBMakeVector(CGFloat aAngle, CGFloat aSpeed)
 - (BOOL)intersectWithGround
 {
     CGPoint sPoint = [self point];
-    CGSize  sSize  = [[self mesh] size];
+    CGSize  sSize  = [self tileSize];//[[self mesh] size];
     
     if ((sPoint.y - sSize.height) < kMapGround)
     {

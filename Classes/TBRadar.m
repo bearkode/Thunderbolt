@@ -28,9 +28,8 @@
     if (self)
     {
         PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRadarBackground];
-        
-        [sTexture loadIfNeeded];
         [self setTexture:sTexture];
+        [self setTileSize:[sTexture size]];
         
         mObjects = [[NSMutableArray alloc] initWithCapacity:100];
     }
@@ -62,7 +61,7 @@
     {
         sResult = [[TBRadarObject alloc] init];
         [mObjects addObject:sResult];
-        [self addSublayer:sResult];
+        [self addSubNode:sResult];
         [sResult release];
     }
     
@@ -74,7 +73,7 @@
 
 - (void)setRadarObjectWithUnit:(TBUnit *)aUnit canvas:(PBCanvas *)aCanvas
 {
-    CGSize         sRadarSize    = [[self mesh] size];
+    CGSize         sRadarSize    = [self tileSize];
     CGRect         sCanvasBounds = [aCanvas bounds];
     CGPoint        sPoint        = [aUnit point];
     TBRadarObject *sRadarObject  = [self radarObject];
@@ -85,7 +84,7 @@
     }
     else
     {
-        sPoint = CGPointMake(sPoint.x / kMaxMapXPos * sRadarSize.width, [[sRadarObject mesh] size].height);
+        sPoint = CGPointMake(sPoint.x / kMaxMapXPos * sRadarSize.width, [sRadarObject tileSize].height);
     }
     
     sPoint.x -= (sRadarSize.width / 2);

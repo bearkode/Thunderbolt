@@ -17,10 +17,11 @@
 
 - (id)init
 {
-    self = [super initWithImageName:kTexBomb];
+    self = [super initWithImageNamed:kTexBomb];
     
     if (self)
     {
+        [self setTileSize:[self textureSize]];
         [self reset];
     }
     
@@ -32,6 +33,9 @@
 {
     [super dealloc];
 }
+
+
+#pragma mark -
 
 
 - (void)action

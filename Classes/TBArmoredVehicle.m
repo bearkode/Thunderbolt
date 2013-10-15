@@ -44,16 +44,12 @@ const CGFloat kAPCSpeed = 0.5;
 
         mHitDiscount = 0;
         
-        [mTextureNormal autorelease];
         mTextureNormal = [[PBTextureManager textureWithImageName:kTexSAM] retain];
-        [mTextureNormal loadIfNeeded];
-        
-        [mTextureHit autorelease];
-        mTextureHit = [[PBTextureManager textureWithImageName:kTexSAMShoot] retain];
-        [mTextureHit loadIfNeeded];
+        mTextureHit    = [[PBTextureManager textureWithImageName:kTexSAMShoot] retain];
 
         [self setTexture:mTextureNormal];
-        [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + ([[self mesh] size].height / 2))];
+        [self setTileSize:[mTextureNormal size]];
+        [self setPoint:CGPointMake(kMaxMapXPos + 50, kMapGround + ([self tileSize].height / 2))];
         
         mVulcan        = [[TBVulcan alloc] init];
         mMissileLauncher = [[TBMissileLauncher alloc] init];
@@ -106,6 +102,7 @@ const CGFloat kAPCSpeed = 0.5;
     if (mHitDiscount-- == 0)
     {
         [self setTexture:mTextureNormal];
+        [self setTileSize:[mTextureNormal size]];
     }
 }
 
@@ -115,6 +112,7 @@ const CGFloat kAPCSpeed = 0.5;
     [super addDamage:aDamage];
 
     [self setTexture:mTextureHit];
+    [self setTileSize:[mTextureHit size]];
     mHitDiscount = 10;
 }
 

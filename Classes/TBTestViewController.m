@@ -72,10 +72,12 @@
     
     [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]];
 
-    PBLayer *sLayer = [[self canvas] rootLayer];
-    [[TBWarheadManager sharedManager] setWarheadLayer:sLayer];
-    [[TBExplosionManager sharedManager] setExplosionLayer:sLayer];
-    [[TBUnitManager sharedManager] setUnitLayer:sLayer];
+//    PBNode *sLayer = [[self canvas] rootLayer];
+    // TODO : scene으로 구조 변경.
+    
+//    [[TBWarheadManager sharedManager] setWarheadLayer:sLayer];
+//    [[TBExplosionManager sharedManager] setExplosionLayer:sLayer];
+//    [[TBUnitManager sharedManager] setUnitLayer:sLayer];
     
     mTarget  = [[TBUnitManager sharedManager] addHelicopterWithTeam:kTBTeamAlly delegate:nil];
     mMissile = [[TBUnitManager sharedManager] addMissileWithTeam:kTBTeamEnemy position:CGPointMake(280, 160) target:mTarget];

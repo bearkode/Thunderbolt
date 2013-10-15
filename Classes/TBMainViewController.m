@@ -13,12 +13,15 @@
 #import "TBCheatViewController.h"
 #import "TBMoneyManager.h"
 #import "TBHelicopterInfo.h"
+#import "TBMainSceneController.h"
 
 
 @implementation TBMainViewController
 {
-    UILabel          *mMoneyLabel;
-    TBHelicopterInfo *mHelicopterInfo;
+    TBMainSceneController *mSceneController;
+
+    UILabel               *mMoneyLabel;
+    TBHelicopterInfo      *mHelicopterInfo;
 }
 
 
@@ -43,7 +46,7 @@
     
     if (self)
     {
-
+        mSceneController = [[TBMainSceneController alloc] initWithDelegate:self];
     }
     
     return self;
@@ -52,6 +55,8 @@
 
 - (void)dealloc
 {
+    [mSceneController release];
+    
     if ([[TBMoneyManager sharedManager] delegate] == self)
     {
         [[TBMoneyManager sharedManager] setDelegate:nil];
@@ -69,6 +74,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self presentSceneController:mSceneController];
     
     CGRect sBounds = [[self view] bounds];
     

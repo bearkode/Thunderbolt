@@ -31,7 +31,7 @@
 
 /*  Config  */
 - (void)reset;
-- (void)setUnitLayer:(PBLayer *)aUnitLayer;
+- (void)setUnitLayer:(PBNode *)aUnitLayer;
 
 /*  Actions  */
 - (void)doActions;

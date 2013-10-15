@@ -44,16 +44,15 @@ const CGFloat   kMissileAcceleration = 0.1;
     
     if (self)
     {
+        [self setTexture:[PBTextureManager textureWithImageName:kTexMissile]];
+        [self setTileSize:[self textureSize]];
+
         [self setType:kTBUnitMissile];
         [self setDurability:kMissileDurability];
         
         mPower = kMissilePower;
         mSpeed = 0.0;
         mFuel  = kMissileFuel;
-        
-        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexMissile];
-        [sTexture loadIfNeeded];
-        [self setTexture:sTexture];
     }
     
     return self;
@@ -73,7 +72,8 @@ const CGFloat   kMissileAcceleration = 0.1;
     [super action];
 
     CGPoint   sPoint  = [self point];
-    PBVertex3 sAngle3 = [[self transform] angle];
+//    PBVertex3 sAngle3 = [[self transform] angle];
+    PBVertex3 sAngle3 = [self angle];
     
     if (mSpeed < kMissileSpeed)
     {
@@ -119,7 +119,8 @@ const CGFloat   kMissileAcceleration = 0.1;
         mSpeed = (mSpeed <= 0) ? 0.0 : mSpeed - 0.1;
     }
 
-    [[self transform] setAngle:sAngle3];
+//    [[self transform] setAngle:sAngle3];
+    [self setAngle:sAngle3];
     [self setPoint:sPoint];
     
     if ([self intersectWithGround])

@@ -27,7 +27,7 @@ extern NSString *const kTBBaseDidDestroyNotificaton;
 
 
 - (void)reset;
-- (void)setStructureLayer:(PBLayer *)aStructureLayer;
+- (void)setStructureLayer:(PBNode *)aStructureLayer;
 
 - (void)doActions;
 

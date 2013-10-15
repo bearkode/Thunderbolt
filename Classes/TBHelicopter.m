@@ -38,7 +38,7 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 
 @implementation TBHelicopter
 {
-    PBLayer        *mTailRotor;
+    PBSpriteNode   *mTailRotor;
     CGFloat         mRotorAngle;
     
     id              mDelegate;
@@ -74,10 +74,10 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 #pragma mark -
 
 
-+ (Class)meshClass
-{
-    return [PBTileMesh class];
-}
+//+ (Class)meshClass
+//{
+//    return [PBTileMesh class];
+//}
 
 
 #pragma mark -
@@ -108,10 +108,10 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     PBTexture *sRotorTexture = [PBTextureManager textureWithImageName:@"TailRotor"];
     [sRotorTexture loadIfNeeded];
     
-    mTailRotor = [[[PBLayer alloc] init] autorelease];
+    mTailRotor = [[[PBSpriteNode alloc] init] autorelease];
     [mTailRotor setTexture:sRotorTexture];
     [mTailRotor setHidden:YES];
-    [self addSublayer:mTailRotor];
+    [self addSubNode:mTailRotor];
 
     mRotorAngle = 0;
 }
@@ -134,14 +134,12 @@ const CGFloat    kAltitudeSensitivity = 15.0;
         mLeftAhead    = (aTeam == kTBTeamAlly) ? NO : YES;
         mLanded       = YES;
         mSpeed        = 0;
-        
         mTick         = 0;
         mTextureIndex = (aTeam == kTBTeamAlly) ? 0 : 23;
         
-        [(PBTileMesh *)[self mesh] setTileSize:[aInfo tileSize]];
         PBTexture *sTexture = [PBTextureManager textureWithImageName:[aInfo imageName]];
-        [sTexture loadIfNeeded];
         [self setTexture:sTexture];
+        [self setTileSize:[aInfo tileSize]];
         
         /*  Arm  */
         [self setupHardPoints];
@@ -182,7 +180,8 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 {
     [super setPoint:aPoint];
     
-    CGSize sSize     = [[self mesh] size];
+//    CGSize sSize     = [[self mesh] size];
+    CGSize sSize = [self tileSize];
 
     mContentRect.origin.x    = aPoint.x - (sSize.width / 2);
     mContentRect.origin.y    = aPoint.y - (sSize.height / 2);
@@ -224,11 +223,13 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     mSpeed -= (mSpeed > 0.0) ? 0.04 : 0.0;
     mSpeed += (mSpeed < 0.0) ? 0.04 : 0.0;
     
-    if (!mLanded && (aPoint.y - [[self mesh] size].height) > kMapGround) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
+    CGSize sSize = [self tileSize];
+    
+    if (!mLanded && (aPoint.y - sSize.height) > kMapGround) //  TODO : 헬기가 땅에 크래쉬하는걸 구현하려면 뒷부분 수정
     {
         aPoint.x += mSpeed;
 
-        [[self transform] setAngle:PBVertex3Make(0, 0, sDegree)];
+        [self setAngle:PBVertex3Make(0, 0, sDegree)];
         
         if (mSpeed > 0)
         {
@@ -248,7 +249,7 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     else
     {
         mSpeed = 0;
-        [[self transform] setAngle:PBVertex3Make(0, 0, 0)];
+        [self setAngle:PBVertex3Make(0, 0, 0)];
     }
     
     aPoint.x = (aPoint.x < kMinMapXPos) ? kMinMapXPos : aPoint.x;
@@ -261,7 +262,7 @@ const CGFloat    kAltitudeSensitivity = 15.0;
 - (CGPoint)pointWithAltitudeLever:(CGFloat)aAltitudeLever oldPoint:(CGPoint)aPoint
 {
     CGFloat sAltitudeLever = (aAltitudeLever + 0.68) * kAltitudeSensitivity;
-    CGSize  sMeshSize      = [[self mesh] size];
+    CGSize  sMeshSize      = [self tileSize];//[[self mesh] size];
 
     aPoint.y -= sAltitudeLever;
 
@@ -357,7 +358,8 @@ const CGFloat    kAltitudeSensitivity = 15.0;
     {
         mRotorAngle -= 360;
     }
-    [[mTailRotor transform] setAngle:PBVertex3Make(0, 0, mRotorAngle)];
+//    [[mTailRotor transform] setAngle:];
+    [mTailRotor setAngle:PBVertex3Make(0, 0, mRotorAngle)];
     
 
     if ([mTailRotor hidden])
@@ -426,7 +428,8 @@ const CGFloat    kAltitudeSensitivity = 15.0;
             }
         }
         
-        [(PBTileMesh *)[self mesh] selectTileAtIndex:mTextureIndex];
+//        [(PBTileMesh *)[self mesh] selectTileAtIndex:mTextureIndex];
+        [self selectTileAtIndex:mTextureIndex];
     }
 }
 

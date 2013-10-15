@@ -30,19 +30,11 @@ const CGFloat kRiflemanSpeed = 0.5;
 #pragma mark -
 
 
-+ (Class)meshClass
-{
-    return [PBTileMesh class];
-}
-
-
 - (void)setupTexture
 {
-    [(PBTileMesh *)[self mesh] setTileSize:CGSizeMake(21, 21)];
-    
-    PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRifleman];
-    [sTexture loadIfNeeded];
-    [self setTexture:sTexture];
+    [self setTexture:[PBTextureManager textureWithImageName:kTexRifleman]];
+    [self setTileSize:CGSizeMake(21, 21)];
+
     
     mTick  = 0;
     mIndex = 0;
@@ -111,12 +103,12 @@ const CGFloat kRiflemanSpeed = 0.5;
 
     if (sFire)
     {
-        [(PBTileMesh *)[self mesh] selectTileAtIndex:12];
+        [self selectTileAtIndex:12];
     }
     else
     {
         [self moveWithVector:CGPointMake(([self isAlly]) ? kRiflemanSpeed : -kRiflemanSpeed, 0)];
-        [(PBTileMesh *)[self mesh] selectTileAtIndex:mIndex];
+        [self selectTileAtIndex:mIndex];
     }
     
     if (mTick++ == 1)

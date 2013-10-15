@@ -68,6 +68,7 @@
         NSValue   *sPosition = [mPositionArray objectAtIndex:mAniIndex];
         
         [self setTexture:sTexture];
+        [self setTileSize:[sTexture size]];
         [self setPoint:[sPosition CGPointValue]];
         
         mAniIndex++;
@@ -84,7 +85,7 @@
     
     [mTextureArray removeAllObjects];
     [mPositionArray removeAllObjects];
-    [[self transform] setAngle:PBVertex3Make(0, 0, 0)];
+    [self setAngle:PBVertex3Make(0.0, 0.0, 0.0)];
     
     [self setHidden:NO];
 }

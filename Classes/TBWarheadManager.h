@@ -28,7 +28,7 @@
 - (TBTankShell *)addTankShellWithTeam:(TBTeam)aTeam position:(CGPoint)aPos vector:(CGPoint)aVector;
 
 - (void)reset;
-- (void)setWarheadLayer:(PBLayer *)aLayer;
+- (void)setWarheadLayer:(PBNode *)aLayer;
 - (void)addObject:(TBWarhead *)aWarhead;
 - (NSArray *)allWarheads;
 

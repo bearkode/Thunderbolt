@@ -23,7 +23,7 @@
 
 @implementation TBWarheadManager
 {
-    PBLayer        *mWarheadLayer;
+    PBNode         *mWarheadLayer;
     
     NSMutableArray *mWarheads;
     NSMutableArray *mDisabledWarheads;
@@ -71,7 +71,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 }
 
 
-- (void)setWarheadLayer:(PBLayer *)aLayer
+- (void)setWarheadLayer:(PBNode *)aLayer
 {
     [mWarheadLayer autorelease];
     mWarheadLayer = [aLayer retain];
@@ -80,7 +80,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
 
 - (void)addObject:(TBWarhead *)aWarhead
 {
-    [mWarheadLayer addSublayer:aWarhead];
+    [mWarheadLayer addSubNode:aWarhead];
     [mWarheads addObject:aWarhead];
 }
 
@@ -134,7 +134,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBWarheadManager, sharedManager)
         }
     }
     
-    [mWarheadLayer removeSublayers:mDisabledWarheads];
+    [mWarheadLayer removeSubNodes:mDisabledWarheads];
     [mWarheads removeObjectsInArray:mDisabledWarheads];
     [mDisabledWarheads removeAllObjects];
 }

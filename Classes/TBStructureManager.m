@@ -22,7 +22,7 @@ NSString *const kTBBaseDidDestroyNotificaton = @"TBBaseDidDestroyNotification";
 
 @implementation TBStructureManager
 {
-    PBLayer        *mStructureLayer;
+    PBNode         *mStructureLayer;
     
     NSMutableArray *mAllyStructures;
     NSMutableArray *mEnemyStructures;
@@ -58,7 +58,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
 }
 
 
-- (void)setStructureLayer:(PBLayer *)aStructureLayer
+- (void)setStructureLayer:(PBNode *)aStructureLayer
 {
     [mStructureLayer autorelease];
     mStructureLayer = [aStructureLayer retain];
@@ -104,7 +104,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBStructureManager, sharedManager);
         [mEnemyStructures addObject:aStructure];
     }
     
-    [mStructureLayer addSublayer:aStructure];
+    [mStructureLayer addSubNode:aStructure];
 }
 
 

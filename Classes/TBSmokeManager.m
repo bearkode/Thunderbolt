@@ -15,7 +15,7 @@
 
 @implementation TBSmokeManager
 {
-    PBLayer        *mSmokeLayer;
+    PBNode         *mSmokeLayer;
 
     TBObjectPool   *mObjectPool;
     NSMutableArray *mSmokes;
@@ -41,7 +41,7 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
 
 - (void)reset
 {
-    [mSmokeLayer removeFromSuperlayer];
+    [mSmokeLayer removeFromSuperNode];
     [mSmokeLayer release];
     mSmokeLayer = nil;
     
@@ -63,7 +63,7 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
     {
         if (![sSmoke action])
         {
-            [sSmoke removeFromSuperlayer];
+            [sSmoke removeFromSuperNode];
             [sDisabledSmokes addObject:sSmoke];
             [mObjectPool finishUsing:sSmoke];
         }
@@ -73,9 +73,9 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
 }
 
 
-- (void)setSmokeLayer:(PBLayer *)aLayer
+- (void)setSmokeLayer:(PBNode *)aLayer
 {
-    [mSmokeLayer removeFromSuperlayer];
+    [mSmokeLayer removeFromSuperNode];
     [mSmokeLayer autorelease];
     mSmokeLayer = [aLayer retain];
 }
@@ -86,7 +86,7 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
     TBSmoke *sSmoke = (TBSmoke *)[mObjectPool object];
     [sSmoke reset];
     [sSmoke setPoint:aPoint];
-    [mSmokeLayer addSublayer:sSmoke];
+    [mSmokeLayer addSubNode:sSmoke];
     [mSmokes addObject:sSmoke];
 }
 

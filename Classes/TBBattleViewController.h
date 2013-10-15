@@ -7,15 +7,16 @@
  *
  */
 
-#import "PBViewController.h"
+#import "TBViewController.h"
 
 
 @class TBHelicopterInfo;
 
 
-@interface TBBattleViewController : PBViewController <UIAccelerometerDelegate>
+@interface TBBattleViewController : TBViewController
 
 
 - (void)setHelicopterInfo:(TBHelicopterInfo *)aHelicopterInfo;
+
 
 @end

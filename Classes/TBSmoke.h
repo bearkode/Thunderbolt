@@ -10,7 +10,7 @@
 #import <PBKit.h>
 
 
-@interface TBSmoke : PBLayer
+@interface TBSmoke : PBTileNode
 
 
 - (void)reset;
