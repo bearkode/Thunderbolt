@@ -29,8 +29,23 @@
 
 
 - (void)delegateAction:(id)aSender;
-- (void)didPresent;
-- (void)didDismiss;
+- (void)sceneDidPresent;
+- (void)sceneDidResize;
+- (void)sceneDidDismiss;
+
+
+#pragma mark -
+
+- (void)pbSceneWillResize:(PBScene *)aScene;
+- (void)pbSceneDidResize:(PBScene *)aScene;
+
+- (void)pbSceneWillUpdate:(PBScene *)aScene;
+- (void)pbSceneDidUpdate:(PBScene *)aScene;
+- (void)pbSceneWillRender:(PBScene *)aScene;
+- (void)pbSceneDidRender:(PBScene *)aScene;
+
+- (void)pbScene:(PBScene *)aScene didTapCanvasPoint:(CGPoint)aCanvasPoint;
+- (void)pbScene:(PBScene *)aScene didLongTapCanvasPoint:(CGPoint)aCanvasPoint;
 
 
 @end

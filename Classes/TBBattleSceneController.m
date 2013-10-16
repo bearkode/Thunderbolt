@@ -276,8 +276,10 @@
 #pragma mark -
 
 
-- (void)didPresent
+- (void)sceneDidPresent
 {
+    [super sceneDidResize];
+    
     CGRect sBounds = [[UIScreen mainScreen] bounds];
     
     [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateHigh];
@@ -295,6 +297,14 @@
 #endif
 
     [self deployNewAllyHelicopter];
+}
+
+
+- (void)sceneDidResize
+{
+    [super sceneDidResize];
+    
+    NSLog(@"frame = %@", NSStringFromCGRect([[self controlView] frame]));
 }
 
 
@@ -321,11 +331,13 @@
 
 
 #pragma mark -
-#pragma mark PBCanvas delegate
+#pragma mark PBScene delegate
 
 
 - (void)pbSceneWillUpdate:(PBScene *)aScene
 {
+    [super pbSceneWillUpdate:aScene];
+    
     CGPoint sCameraPos = [[[self canvas] camera] position];
     [[[self canvas] camera] setPosition:CGPointMake(mCameraXPos, sCameraPos.y)];
     
@@ -350,6 +362,9 @@
         [self updateCameraPositoin];
     }
 }
+
+
+#pragma mark -
 
 
 - (void)deployNewAllyHelicopter

@@ -82,7 +82,7 @@
 #pragma mark -
 
 
-- (void)didPresent
+- (void)sceneDidPresent
 {
     [[self canvas] setBackgroundColor:[PBColor blackColor]];
 

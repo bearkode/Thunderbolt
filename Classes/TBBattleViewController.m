@@ -52,6 +52,7 @@
     [super viewDidLoad];
     
     [[self navigationController] setNavigationBarHidden:YES];
+
     [self presentSceneController:mSceneController];
 }
 

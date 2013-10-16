@@ -75,14 +75,15 @@
         [[self view] sendSubviewToBack:sControlView];
         [[self view] sendSubviewToBack:[self canvas]];
         
-        [mSceneController didPresent];
+        [mSceneController sceneDidPresent];
     }
 }
 
 
 - (void)dismissSceneController
 {
-    [mSceneController didDismiss];
+    //  TODO : 뭔가 추가적인 작업이 필요.
+    [mSceneController sceneDidDismiss];
 }
 
 
