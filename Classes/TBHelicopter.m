@@ -139,7 +139,6 @@ const CGFloat    kAltitudeSensitivity = 7.0;
         [mSoundSource setSound:[[PBSoundManager sharedManager] soundForKey:[aInfo soundName]]];
         [mSoundSource setDistance:1];
         [mSoundSource setLooping:YES];
-        [mSoundSource play];
         
         mInfo = [aInfo retain];
     }
@@ -197,6 +196,19 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 
 
 #pragma mark -
+
+
+- (void)setEnableSound:(BOOL)aFlag
+{
+    if (aFlag)
+    {
+        [mSoundSource play];
+    }
+    else
+    {
+        [mSoundSource stop];
+    }
+}
 
 
 - (CGPoint)pointWithSpeedLever:(CGFloat)aSpeedLever oldPoint:(CGPoint)aPoint

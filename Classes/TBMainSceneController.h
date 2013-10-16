@@ -13,4 +13,7 @@
 @interface TBMainSceneController : TBSceneController
 
 
+- (void)setPositions:(NSArray *)aPositions;
+
+
 @end

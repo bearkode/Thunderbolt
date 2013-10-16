@@ -38,6 +38,10 @@
 		2E61B853180CE1FB00D20D3E /* TBBattleSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B852180CE1FB00D20D3E /* TBBattleSceneController.m */; };
 		2E61B856180CEDE900D20D3E /* TBBattleLayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */; };
 		2E61B85A180D210C00D20D3E /* TBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E61B859180D210C00D20D3E /* TBController.m */; };
+		2E61B85F180D3AF100D20D3E /* button_h.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E61B85B180D3AF100D20D3E /* button_h.png */; };
+		2E61B860180D3AF100D20D3E /* button_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E61B85C180D3AF100D20D3E /* button_h@2x.png */; };
+		2E61B861180D3AF100D20D3E /* button_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E61B85D180D3AF100D20D3E /* button_n.png */; };
+		2E61B862180D3AF100D20D3E /* button_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E61B85E180D3AF100D20D3E /* button_n@2x.png */; };
 		2E662D4F170E9DD20081DEC9 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E662D4E170E9DD20081DEC9 /* ground.png */; };
 		2E69154D171EA1920085B797 /* TBObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E69154C171EA1920085B797 /* TBObjectPool.m */; };
 		2E6E9ABE172129E900A9BB7F /* TBTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E9ABD172129E900A9BB7F /* TBTestViewController.m */; };
@@ -204,6 +208,10 @@
 		2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleLayerManager.m; sourceTree = "<group>"; };
 		2E61B858180D210C00D20D3E /* TBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBController.h; sourceTree = "<group>"; };
 		2E61B859180D210C00D20D3E /* TBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBController.m; sourceTree = "<group>"; };
+		2E61B85B180D3AF100D20D3E /* button_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_h.png; sourceTree = "<group>"; };
+		2E61B85C180D3AF100D20D3E /* button_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_h@2x.png"; sourceTree = "<group>"; };
+		2E61B85D180D3AF100D20D3E /* button_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_n.png; sourceTree = "<group>"; };
+		2E61B85E180D3AF100D20D3E /* button_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_n@2x.png"; sourceTree = "<group>"; };
 		2E662D4E170E9DD20081DEC9 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		2E69154B171EA1920085B797 /* TBObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObjectPool.h; sourceTree = "<group>"; };
 		2E69154C171EA1920085B797 /* TBObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObjectPool.m; sourceTree = "<group>"; };
@@ -598,6 +606,10 @@
 				2E009DAD1713069F00A362F2 /* Default-568h@2x.png */,
 				2E009DAE1713069F00A362F2 /* Default@2x.png */,
 				A720E522111E5FDF00CA7792 /* icon.png */,
+				2E61B85B180D3AF100D20D3E /* button_h.png */,
+				2E61B85C180D3AF100D20D3E /* button_h@2x.png */,
+				2E61B85D180D3AF100D20D3E /* button_n.png */,
+				2E61B85E180D3AF100D20D3E /* button_n@2x.png */,
 				2E662D4E170E9DD20081DEC9 /* ground.png */,
 				A78A1C3B11E88C5200DA9574 /* heli_l_exp00.png */,
 				A78A1C3C11E88C5200DA9574 /* heli_l_exp01.png */,
@@ -844,8 +856,10 @@
 				A720E544111EA5D700CA7792 /* enemy_tank_exp01.png in Resources */,
 				A720E545111EA5D700CA7792 /* enemy_tank_exp02.png in Resources */,
 				A720E71E111F725700CA7792 /* bomb_exp00.png in Resources */,
+				2E61B862180D3AF100D20D3E /* button_n@2x.png in Resources */,
 				A720E71F111F725700CA7792 /* bomb_exp01.png in Resources */,
 				A720E720111F725700CA7792 /* bomb_exp02.png in Resources */,
+				2E61B85F180D3AF100D20D3E /* button_h.png in Resources */,
 				A7AD01FA1122EE7300359C54 /* vulcan.caf in Resources */,
 				A785DD35112ACD6500487CCB /* bomb_explosion.caf in Resources */,
 				A785DD37112ACDCE00487CCB /* tank_explosion.caf in Resources */,
@@ -858,6 +872,7 @@
 				A7BF98BB11DE25C5001F8F6B /* ally_tank_exp00.png in Resources */,
 				A7BF98BC11DE25C5001F8F6B /* ally_tank_exp01.png in Resources */,
 				A7BF98BD11DE25C5001F8F6B /* ally_tank_exp02.png in Resources */,
+				2E61B860180D3AF100D20D3E /* button_h@2x.png in Resources */,
 				A7BF98BE11DE25C5001F8F6B /* ally_tank_shoot.png in Resources */,
 				A7BF98BF11DE25C5001F8F6B /* ally_tank.png in Resources */,
 				A7BF9D9211DF82F4001F8F6B /* AAGun00.png in Resources */,
@@ -890,6 +905,7 @@
 				2E5E601A172C251B00140A39 /* SuperCobra.png in Resources */,
 				2E5E601B172C251B00140A39 /* SuperCobra@2x.png in Resources */,
 				2E5E601C172C251B00140A39 /* UH1.png in Resources */,
+				2E61B861180D3AF100D20D3E /* button_n.png in Resources */,
 				2E5E601D172C251B00140A39 /* UH1@2x.png in Resources */,
 				2E5E601E172C251B00140A39 /* UH1N.png in Resources */,
 				2E5E601F172C251B00140A39 /* UH1N@2x.png in Resources */,

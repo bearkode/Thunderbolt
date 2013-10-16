@@ -44,6 +44,9 @@ typedef enum
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam info:(TBHelicopterInfo *)aInfo;
 
+
+- (void)setEnableSound:(BOOL)aFlag;
+
 - (CGPoint)pointWithSpeedLever:(CGFloat)aSpeedLever oldPoint:(CGPoint)aPoint;
 - (CGPoint)pointWithAltitudeLever:(CGFloat)aAltitudeLever oldPoint:(CGPoint)aPoint;
 

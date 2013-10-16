@@ -76,6 +76,7 @@
     [sInfo setTileSize:CGSizeMake(138 / 2, 56 / 2)];
     [sInfo setImageName:kTexMD500];
     [sInfo setSoundName:kTBSoundMD500];
+    [sInfo setTailRotorPosition:CGPointMake(28, 5)];
     
     return sInfo;
 }
@@ -88,7 +89,7 @@
     [sInfo setTileSize:CGSizeMake(180 / 2, 56 / 2)];
     [sInfo setImageName:kTexUH1];
     [sInfo setSoundName:kTBSoundHeli];
-    [sInfo setTailRotorPosition:CGPointMake(50, 5)];
+    [sInfo setTailRotorPosition:CGPointMake(40, 5)];
 
     return sInfo;
 }

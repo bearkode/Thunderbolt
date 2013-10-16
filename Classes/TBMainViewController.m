@@ -21,6 +21,8 @@
     TBMainSceneController *mSceneController;
 
     UILabel               *mMoneyLabel;
+    NSMutableArray        *mHeliButtons;
+    
     TBHelicopterInfo      *mHelicopterInfo;
 }
 
@@ -37,6 +39,61 @@
 }
 
 
+- (void)setupButtons
+{
+    CGRect  sBounds = [[self view] bounds];
+    UIView *sBoard  = [[[UIView alloc] initWithFrame:CGRectMake((sBounds.size.width - 430) / 2.0, 30, 430, 100)] autorelease];
+    
+    [sBoard setBackgroundColor:[UIColor clearColor]];
+    [sBoard setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin)];
+    [[self view] addSubview:sBoard];
+    
+    {
+        NSArray  *sTitles    = @[@"MD500", @"UH1N", @"AH1", @"AH1W"];
+        NSArray  *sSelectors = @[@"MD500ButtonTapped:", @"UH1NButtonTapped:", @"AH1ButtonTapped:", @"AH1WButtonTapped:"];
+        NSInteger sXPos      = 0;
+        
+        [mHeliButtons removeAllObjects];
+        
+        for (NSInteger i = 0; i < [sTitles count]; i++)
+        {
+            NSString *sTitle    = [sTitles objectAtIndex:i];
+            NSString *sSelector = [sSelectors objectAtIndex:i];
+            UIButton *sButton   = [UIButton buttonWithType:UIButtonTypeCustom];
+            
+            [sButton setBackgroundImage:[UIImage imageNamed:@"button_n"] forState:UIControlStateNormal];
+            [sButton setBackgroundImage:[UIImage imageNamed:@"button_h"] forState:UIControlStateSelected];
+            [sButton setTitle:sTitle forState:UIControlStateNormal];
+            [sButton setTitleEdgeInsets:UIEdgeInsetsMake(70, 0, 0, 0)];
+            [[sButton titleLabel] setFont:[UIFont boldSystemFontOfSize:14]];
+            [sButton addTarget:self action:NSSelectorFromString(sSelector) forControlEvents:UIControlEventTouchUpInside];
+            [sButton setFrame:CGRectMake(sXPos, 0, 100, 100)];
+
+            if (i == 0)
+            {
+                [sButton setSelected:YES];
+            }
+            
+            [sBoard addSubview:sButton];
+            [mHeliButtons addObject:sButton];
+            
+            sXPos += (100.0 + 10.0);
+        }
+    }
+}
+
+
+- (void)selectButton:(UIButton *)aButton
+{
+    for (UIButton *sButton in mHeliButtons)
+    {
+        [sButton setSelected:NO];
+    }
+    
+    [aButton setSelected:YES];
+}
+
+
 #pragma mark -
 
 
@@ -47,6 +104,7 @@
     if (self)
     {
         mSceneController = [[TBMainSceneController alloc] initWithDelegate:self];
+        mHeliButtons     = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -56,6 +114,7 @@
 - (void)dealloc
 {
     [mSceneController release];
+    [mHeliButtons release];
     
     if ([[TBMoneyManager sharedManager] delegate] == self)
     {
@@ -107,36 +166,8 @@
     [sStartButton addTarget:self action:@selector(startButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [[self view] addSubview:sStartButton];
     
-    //  Helicopter
-    UIButton *sMD500Button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [sMD500Button setTitle:@"MD500" forState:UIControlStateNormal];
-    [sMD500Button setFrame:CGRectMake(30, 30, 70, 35)];
-    [sMD500Button addTarget:self action:@selector(MD500ButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [[self view] addSubview:sMD500Button];
-
-    UIButton *sUH1Button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [sUH1Button setTitle:@"UH1" forState:UIControlStateNormal];
-    [sUH1Button setFrame:CGRectMake(30 + 80, 30, 70, 35)];
-    [sUH1Button addTarget:self action:@selector(UH1ButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [[self view] addSubview:sUH1Button];
-
-    UIButton *sUH1NButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [sUH1NButton setTitle:@"UN1N" forState:UIControlStateNormal];
-    [sUH1NButton setFrame:CGRectMake(30 + 80 * 2, 30, 70, 35)];
-    [sUH1NButton addTarget:self action:@selector(UH1NButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [[self view] addSubview:sUH1NButton];
-
-    UIButton *sAH1Button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [sAH1Button setTitle:@"AH1" forState:UIControlStateNormal];
-    [sAH1Button setFrame:CGRectMake(30 + 80 * 3, 30, 70, 35)];
-    [sAH1Button addTarget:self action:@selector(AH1ButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [[self view] addSubview:sAH1Button];
-
-    UIButton *sAH1WButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [sAH1WButton setTitle:@"AH1W" forState:UIControlStateNormal];
-    [sAH1WButton setFrame:CGRectMake(30 + 80 * 4, 30, 70, 35)];
-    [sAH1WButton addTarget:self action:@selector(AH1WButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [[self view] addSubview:sAH1WButton];
+    [self setupButtons];
+    [self AH1WButtonTapped:[mHeliButtons lastObject]];
 }
 
 
@@ -156,7 +187,28 @@
     
     [[TBMoneyManager sharedManager] setDelegate:self];
     [[TBMoneyManager sharedManager] setBalance:1800];
+
     [self updateMoneyLabel];
+}
+
+
+- (void)viewDidAppear:(BOOL)aAnimated
+{
+    [super viewDidAppear:aAnimated];
+
+    NSMutableArray *sPositions = [NSMutableArray array];
+    
+    for (UIButton *sButton in mHeliButtons)
+    {
+        CGRect  sFrame       = [sButton frame];
+        CGPoint sCenterPoint = CGPointMake(CGRectGetMidX(sFrame), CGRectGetMidY(sFrame));
+        
+        sCenterPoint = [[sButton superview] convertPoint:sCenterPoint toView:[self view]];
+
+        [sPositions addObject:[NSValue valueWithCGPoint:sCenterPoint]];
+    }
+    
+    [mSceneController setPositions:sPositions];
 }
 
 
@@ -201,6 +253,8 @@
 {
     [mHelicopterInfo autorelease];
     mHelicopterInfo = [[TBHelicopterInfo MD500Info] retain];
+    
+    [self selectButton:aSender];
 }
 
 
@@ -208,6 +262,8 @@
 {
     [mHelicopterInfo autorelease];
     mHelicopterInfo = [[TBHelicopterInfo UH1Info] retain];
+    
+    [self selectButton:aSender];
 }
 
 
@@ -215,6 +271,8 @@
 {
     [mHelicopterInfo autorelease];
     mHelicopterInfo = [[TBHelicopterInfo UH1NInfo] retain];
+    
+    [self selectButton:aSender];
 }
 
 
@@ -222,6 +280,8 @@
 {
     [mHelicopterInfo autorelease];
     mHelicopterInfo = [[TBHelicopterInfo AH1CobraInfo] retain];
+    
+    [self selectButton:aSender];
 }
 
 
@@ -229,6 +289,8 @@
 {
     [mHelicopterInfo autorelease];
     mHelicopterInfo = [[TBHelicopterInfo AH1WSuperCobraInfo] retain];
+    
+    [self selectButton:aSender];
 }
 
 

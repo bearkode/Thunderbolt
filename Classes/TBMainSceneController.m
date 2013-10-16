@@ -25,22 +25,30 @@
     
     sHeliInfo   = [TBHelicopterInfo MD500Info];
     sHelicopter = [[[TBHelicopter alloc] initWithUnitID:nil team:kTBTeamAlly info:sHeliInfo] autorelease];
+    [sHelicopter setEnableSound:NO];
+    [sHelicopter setScale:PBVertex3Make(0.7, 0.7, 1.0)];
     [mHelicopters addObject:sHelicopter];
     
-    sHeliInfo = [TBHelicopterInfo UH1Info];
-    sHelicopter = [[[TBHelicopter alloc] initWithUnitID:nil team:kTBTeamAlly info:sHeliInfo] autorelease];
-    [mHelicopters addObject:sHelicopter];
+//    sHeliInfo = [TBHelicopterInfo UH1Info];
+//    sHelicopter = [[[TBHelicopter alloc] initWithUnitID:nil team:kTBTeamAlly info:sHeliInfo] autorelease];
+//    [mHelicopters addObject:sHelicopter];
 
     sHeliInfo = [TBHelicopterInfo UH1NInfo];
     sHelicopter = [[[TBHelicopter alloc] initWithUnitID:nil team:kTBTeamAlly info:sHeliInfo] autorelease];
+    [sHelicopter setEnableSound:NO];
+    [sHelicopter setScale:PBVertex3Make(0.7, 0.7, 1.0)];
     [mHelicopters addObject:sHelicopter];
 
     sHeliInfo = [TBHelicopterInfo AH1CobraInfo];
     sHelicopter = [[[TBHelicopter alloc] initWithUnitID:nil team:kTBTeamAlly info:sHeliInfo] autorelease];
+    [sHelicopter setEnableSound:NO];
+    [sHelicopter setScale:PBVertex3Make(0.7, 0.7, 1.0)];
     [mHelicopters addObject:sHelicopter];
 
     sHeliInfo = [TBHelicopterInfo AH1WSuperCobraInfo];
     sHelicopter = [[[TBHelicopter alloc] initWithUnitID:nil team:kTBTeamAlly info:sHeliInfo] autorelease];
+    [sHelicopter setEnableSound:NO];
+    [sHelicopter setScale:PBVertex3Make(0.7, 0.7, 1.0)];
     [mHelicopters addObject:sHelicopter];
 }
 
@@ -80,12 +88,12 @@
 
     [[self scene] addSubNodes:mHelicopters];
 
-    NSInteger x = -220;
+    NSInteger x = -190;
     for (TBHelicopter *sHelicopter in mHelicopters)
     {
         [sHelicopter selectTileAtIndex:0];
-        [sHelicopter setPoint:CGPointMake(x, 100)];
-        x += 100;
+        [sHelicopter setPoint:CGPointMake(x, 80)];
+        x += 120;
     }
 }
 
@@ -95,9 +103,32 @@
 
 - (void)pbSceneWillUpdate:(PBScene *)aScene
 {
-    for (TBHelicopter *sHelicopter in mHelicopters)
+    static BOOL      sOdd   = YES;
+    static NSInteger sIndex = 2;
+    
+    if (sOdd)
     {
-        [sHelicopter selectNextTile];
+        for (TBHelicopter *sHelicopter in mHelicopters)
+        {
+            [sHelicopter selectTileAtIndex:sIndex];
+        }
+        
+        sIndex++;
+        
+        if (sIndex >= ([[mHelicopters objectAtIndex:0] tileCount] - 2))
+        {
+            sIndex = 2;
+        }
+        else if (sIndex == 23)
+        {
+            sIndex = 25;
+        }
+        
+        sOdd = NO;
+    }
+    else
+    {
+        sOdd = YES;
     }
 }
 
@@ -105,6 +136,23 @@
 - (void)pbSceneDidUpdate:(PBScene *)aScene
 {
 
+}
+
+
+#pragma mark -
+
+
+- (void)setPositions:(NSArray *)aPositions
+{
+    for (NSInteger i = 0; i < [aPositions count]; i++)
+    {
+        TBHelicopter *sHelicopter  = [mHelicopters objectAtIndex:i];
+        NSValue      *sPointValue  = [aPositions objectAtIndex:i];
+        CGPoint       sPoint       = [sPointValue CGPointValue];
+        CGPoint       sCanvasPoint = [[self canvas] canvasPointFromViewPoint:sPoint];
+        
+        [sHelicopter setPoint:sCanvasPoint];
+    }
 }
 
 

@@ -330,6 +330,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     sHelicopter = [[[TBHelicopter alloc] initWithUnitID:sUnitID team:aTeam info:mHelicopterInfo] autorelease];
     [sHelicopter setDelegate:aDelegate];
     [sHelicopter setPoint:CGPointMake(kMinMapXPos + 200, kMapGround + ([sHelicopter tileSize].height /2))];
+    [sHelicopter setEnableSound:YES];
     [self addUnit:sHelicopter];
     
     return sHelicopter;
