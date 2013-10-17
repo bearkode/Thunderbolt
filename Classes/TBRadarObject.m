@@ -16,13 +16,11 @@
 
 - (id)init
 {
-    self = [super init];
+    self = [super initWithImageNamed:kTexRadarObject];
     
     if (self)
     {
-        PBTexture *sTexture = [PBTextureManager textureWithImageName:kTexRadarObject];
-        [self setTexture:sTexture];
-        [self setTileSize:[sTexture size]];
+
     }
     
     return self;

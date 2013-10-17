@@ -221,6 +221,16 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
 
 
 
+- (NSArray *)allUnits
+{
+    NSMutableArray *sArray = [NSMutableArray arrayWithArray:[mAllyUnits array]];
+    
+    [sArray addObjectsFromArray:[mEnemyUnits array]];
+    
+    return sArray;
+}
+
+
 - (NSArray *)allyUnits
 {
     return [mAllyUnits array];

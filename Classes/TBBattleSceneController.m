@@ -304,7 +304,7 @@
 {
     [super sceneDidResize];
     
-    NSLog(@"frame = %@", NSStringFromCGRect([[self controlView] frame]));
+    [mRadar setCanvasSize:[[self controlView] bounds].size];
 }
 
 
@@ -337,10 +337,13 @@
 - (void)pbSceneWillUpdate:(PBScene *)aScene
 {
     [super pbSceneWillUpdate:aScene];
-    
+
     CGPoint sCameraPos = [[[self canvas] camera] position];
     [[[self canvas] camera] setPosition:CGPointMake(mCameraXPos, sCameraPos.y)];
     
+    [mRadar setPoint:CGPointMake(mCameraXPos, 300.0)];
+    [mRadar update];
+
     [self deployEnemyUnit];
     
     [[TBStructureManager sharedManager] doActions];
@@ -349,10 +352,7 @@
     [[TBExplosionManager sharedManager] doActions];
     [[TBSmokeManager     sharedManager] doActions];
     
-    [mRadar updateWithCanvas:[self canvas]];
-    
-    TBHelicopter  *sHelicopter   = [[TBUnitManager sharedManager] allyHelicopter];
-
+    TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     if (sHelicopter)
     {
         CGFloat sAltitude = [mController yAxisValue];
@@ -373,6 +373,7 @@
     {
         [[TBUnitManager sharedManager] setHelicopterInfo:mHeliInfo];
         [[TBUnitManager sharedManager] addHelicopterWithTeam:kTBTeamAlly delegate:self];
+        [self updateCameraPositoin];
         [self updateAmmoLabel];
     }
     else
@@ -519,18 +520,9 @@
 
 - (void)baseDidDestroyNotification:(NSNotification *)aNotification
 {
-    BOOL    sIsWin = NO;
     TBBase *sBase  = (TBBase *)[[aNotification userInfo] objectForKey:@"base"];
+    BOOL    sIsWin = ([sBase team] == kTBTeamEnemy) ? YES : NO;
 
-    if ([sBase team] == kTBTeamAlly)
-    {
-        sIsWin = NO;
-    }
-    else
-    {
-        sIsWin = YES;
-    }
-    
     if ([[self delegate] respondsToSelector:@selector(battleScene:didFinishBattle:)])
     {
         [[self delegate] battleScene:self didFinishBattle:sIsWin];

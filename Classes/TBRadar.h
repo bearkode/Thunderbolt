@@ -11,10 +11,11 @@
 #import "TBSprite.h"
 
 
-@interface TBRadar : TBSprite
+@interface TBRadar : PBDynamicNode
 
 
-- (void)updateWithCanvas:(PBCanvas *)aCanvas;
+- (void)setCanvasSize:(CGSize)aCanvasSize;
+- (void)update;
 
 
 @end

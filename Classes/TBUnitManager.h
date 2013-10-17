@@ -37,6 +37,7 @@
 - (void)doActions;
 
 /*  Access Units  */
+- (NSArray *)allUnits;
 - (NSArray *)allyUnits;
 - (NSArray *)enemyUnits;
 - (TBUnit *)unitForUnitID:(NSNumber *)aUnitID;

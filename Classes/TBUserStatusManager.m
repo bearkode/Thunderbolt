@@ -70,7 +70,7 @@ SYNTHESIZE_SHARED_INSTANCE(TBUserStatusManager, sharedManager)
 - (void)loadStatus
 {
     NSUserDefaults *sUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSDate         *sLastPlayDate = [[sUserDefaults objectForKey:kLastPlayDateKey] retain];
+    NSDate         *sLastPlayDate = [sUserDefaults objectForKey:kLastPlayDateKey];
     NSUInteger      sMoney        = [[sUserDefaults objectForKey:kMoneyKey] integerValue];
     
     NSLog(@"sLastPlayDate = %@", sLastPlayDate);

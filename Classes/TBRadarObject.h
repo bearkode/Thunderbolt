@@ -8,10 +8,10 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "TBSprite.h"
+#import <PBKit.h>
 
 
-@interface TBRadarObject : TBSprite
+@interface TBRadarObject : PBSpriteNode
 
 
 @end
