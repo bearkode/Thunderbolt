@@ -10,6 +10,7 @@
 #import "TBTankShell.h"
 #import "TBGameConst.h"
 #import "TBTextureNames.h"
+#import "TBMacro.h"
 
 
 @implementation TBTankShell
@@ -73,6 +74,16 @@
     {
         [self setAvailable:NO];
     }
+}
+
+
+- (void)setVector:(CGPoint)aVector
+{
+    [super setVector:aVector];
+    
+    CGFloat sAngle = 90 - TBRadiansToDegrees(TBAngleBetweenToPoints(CGPointMake(0, 0), aVector));
+    
+    [self setAngle:PBVertex3Make(0, 0, sAngle)];
 }
 
 

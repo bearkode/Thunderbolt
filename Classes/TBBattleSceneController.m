@@ -283,7 +283,7 @@
     CGRect sBounds = [[UIScreen mainScreen] bounds];
     
     [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateHigh];
-    [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.2 green:0.3 blue:1.0 alpha:1.0]];
+    [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.2 green:0.3 blue:0.7 alpha:1.0]];
     [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.height / 2, sBounds.size.width / 2)];
     [[self scene] setSubNodes:[mLayerManager layers]];
     

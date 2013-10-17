@@ -14,6 +14,9 @@
 		2E009DB3171306DB00A362F2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E51D111E5E8A00CA7792 /* Default.png */; };
 		2E08E82C180E7968005FF876 /* radar_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82A180E7968005FF876 /* radar_move.png */; };
 		2E08E82D180E7968005FF876 /* radar_move@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82B180E7968005FF876 /* radar_move@2x.png */; };
+		2E08E831180F90D1005FF876 /* bullet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82F180F90D1005FF876 /* bullet@2x.png */; };
+		2E08E834180FB37A005FF876 /* repair.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E832180FB37A005FF876 /* repair.png */; };
+		2E08E835180FB37A005FF876 /* repair@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E833180FB37A005FF876 /* repair@2x.png */; };
 		2E33AB8C172530F900DE26D5 /* TBBombChamber.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E33AB8B172530F900DE26D5 /* TBBombChamber.m */; };
 		2E33AB8F1725322D00DE26D5 /* TBRocketLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E33AB8E1725322C00DE26D5 /* TBRocketLauncher.m */; };
 		2E33AB921725397C00DE26D5 /* TBGatlingGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E33AB911725397C00DE26D5 /* TBGatlingGun.m */; };
@@ -182,6 +185,9 @@
 		2E009DAE1713069F00A362F2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2E08E82A180E7968005FF876 /* radar_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar_move.png; sourceTree = "<group>"; };
 		2E08E82B180E7968005FF876 /* radar_move@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radar_move@2x.png"; sourceTree = "<group>"; };
+		2E08E82F180F90D1005FF876 /* bullet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullet@2x.png"; sourceTree = "<group>"; };
+		2E08E832180FB37A005FF876 /* repair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = repair.png; sourceTree = "<group>"; };
+		2E08E833180FB37A005FF876 /* repair@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repair@2x.png"; sourceTree = "<group>"; };
 		2E33AB8A172530F800DE26D5 /* TBBombChamber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBombChamber.h; sourceTree = "<group>"; };
 		2E33AB8B172530F900DE26D5 /* TBBombChamber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBombChamber.m; sourceTree = "<group>"; };
 		2E33AB8D1725322C00DE26D5 /* TBRocketLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBRocketLauncher.h; sourceTree = "<group>"; };
@@ -649,6 +655,7 @@
 				A79BD77A119F609A0021574B /* SAM.png */,
 				A79BD77C119F61C70021574B /* SAM_shoot.png */,
 				A7303C32111336A10097B02E /* bullet.png */,
+				2E08E82F180F90D1005FF876 /* bullet@2x.png */,
 				A7BC32E41119BF6A0052D1BA /* bomb.png */,
 				A71FFA9C1194E6D700DA0139 /* missile.png */,
 				A78A1CD211E9370A00DA9574 /* missile_exp00.png */,
@@ -692,6 +699,8 @@
 				2EB4E96D173A9937009EDFBB /* TailRotor@2x.png */,
 				2EB4E97C174126CF009EDFBB /* smoke.png */,
 				2EB4E97D174126CF009EDFBB /* smoke@2x.png */,
+				2E08E832180FB37A005FF876 /* repair.png */,
+				2E08E833180FB37A005FF876 /* repair@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -883,9 +892,11 @@
 				A720E544111EA5D700CA7792 /* enemy_tank_exp01.png in Resources */,
 				A720E545111EA5D700CA7792 /* enemy_tank_exp02.png in Resources */,
 				A720E71E111F725700CA7792 /* bomb_exp00.png in Resources */,
+				2E08E831180F90D1005FF876 /* bullet@2x.png in Resources */,
 				2EA66180180E3C8D003E368B /* radar_back_m@2x.png in Resources */,
 				2E61B862180D3AF100D20D3E /* button_n@2x.png in Resources */,
 				A720E71F111F725700CA7792 /* bomb_exp01.png in Resources */,
+				2E08E834180FB37A005FF876 /* repair.png in Resources */,
 				A720E720111F725700CA7792 /* bomb_exp02.png in Resources */,
 				2E61B85F180D3AF100D20D3E /* button_h.png in Resources */,
 				A7AD01FA1122EE7300359C54 /* vulcan.caf in Resources */,
@@ -902,6 +913,7 @@
 				A7BF98BD11DE25C5001F8F6B /* ally_tank_exp02.png in Resources */,
 				2E61B860180D3AF100D20D3E /* button_h@2x.png in Resources */,
 				A7BF98BE11DE25C5001F8F6B /* ally_tank_shoot.png in Resources */,
+				2E08E835180FB37A005FF876 /* repair@2x.png in Resources */,
 				A7BF98BF11DE25C5001F8F6B /* ally_tank.png in Resources */,
 				2EA6617F180E3C8D003E368B /* radar_back_m.png in Resources */,
 				A7BF9D9211DF82F4001F8F6B /* AAGun00.png in Resources */,
