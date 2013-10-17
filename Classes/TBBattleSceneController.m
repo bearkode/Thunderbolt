@@ -438,12 +438,18 @@
 #pragma mark Helicopter Delegates
 
 
-- (void)helicopterDamageChanged:(TBHelicopter *)aHelicopter
+- (void)helicopterDamageDidChange:(TBHelicopter *)aHelicopter
 {
     if ([aHelicopter isAlly])
     {
         [self updateAmmoLabel];
     }
+}
+
+
+- (void)helicopterDidRepair:(TBHelicopter *)aHelicopter
+{
+
 }
 
 
@@ -456,7 +462,7 @@
 }
 
 
-- (void)helicopter:(TBHelicopter *)aHelicopter weaponFired:(NSInteger)aWeaponIndex
+- (void)helicopter:(TBHelicopter *)aHelicopter weaponDidFire:(NSInteger)aWeaponIndex
 {
     if ([aHelicopter isAlly])
     {

@@ -33,14 +33,22 @@
 }
 
 
-- (void)fillUp
+- (BOOL)fillUp
 {
+    BOOL sReloaded = NO;
+    
     if ([TBMoneyManager useMoney:kTBPriceBullet])
     {
         TBHelicopter *sHelicopter = (TBHelicopter *)[self body];
-        [self supplyAmmo:kLandingPadFillUpBombs];
-        [[sHelicopter delegate] helicopterWeaponDidReload:sHelicopter];
+        
+        sReloaded = [self supplyAmmo:kLandingPadFillUpBombs];
+        if (sReloaded)
+        {
+            [[sHelicopter delegate] helicopterWeaponDidReload:sHelicopter];
+        }
     }
+    
+    return sReloaded;
 }
 
 
@@ -60,7 +68,7 @@
             [[TBWarheadManager sharedManager] addBombWithTeam:kTBTeamAlly position:CGPointMake(sPoint.x, sPoint.y - 10) speed:sSpeed];
             [self decreaseAmmoCount];
             
-            [[sBody delegate] helicopter:sBody weaponFired:1];
+            [[sBody delegate] helicopter:sBody weaponDidFire:1];
         }
         
         mFire = NO;

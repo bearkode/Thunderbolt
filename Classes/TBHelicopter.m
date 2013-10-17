@@ -17,6 +17,7 @@
 
 #import "TBBullet.h"
 #import "TBBomb.h"
+#import "TBRepairIndicator.h"
 
 #import "TBWarheadManager.h"
 #import "TBMoneyManager.h"
@@ -38,28 +39,30 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 
 @implementation TBHelicopter
 {
-    PBSpriteNode   *mTailRotor;
-    CGFloat         mRotorAngle;
+    PBSpriteNode      *mTailRotor;
+    CGFloat            mRotorAngle;
     
-    id              mDelegate;
-    TBControlLever *mControlLever;
+    id                 mDelegate;
+    TBControlLever    *mControlLever;
     
-    NSInteger       mTick;
+    NSInteger          mTick;
     
-    BOOL            mLeftAhead;
-    BOOL            mLanded;
-    CGFloat         mSpeed;
-    NSInteger       mTextureIndex;
-    CGRect          mContentRect;
+    BOOL               mLeftAhead;
+    BOOL               mLanded;
+    CGFloat            mSpeed;
+    NSInteger          mTextureIndex;
+    CGRect             mContentRect;
     
-    NSMutableArray *mHardPoints;
-    TBWeapon       *mSelectedWeapon;
-    NSInteger       mBombCount;
-    NSInteger       mMissileCount;
+    NSMutableArray    *mHardPoints;
+    TBWeapon          *mSelectedWeapon;
+    NSInteger          mBombCount;
+    NSInteger          mMissileCount;
     
-    TBHelicopterInfo *mInfo;
+    TBHelicopterInfo  *mInfo;
     
-    PBSoundSource  *mSoundSource;
+    PBSoundSource     *mSoundSource;
+    
+    TBRepairIndicator *mRepairIndicator;
 }
 
 
@@ -141,6 +144,12 @@ const CGFloat    kAltitudeSensitivity = 7.0;
         [mSoundSource setLooping:YES];
         
         mInfo = [aInfo retain];
+        
+        mRepairIndicator = [[TBRepairIndicator alloc] init];
+        [mRepairIndicator setEnabled:NO];
+        [self addSubNode:mRepairIndicator];
+        
+        [self addDamage:100];
     }
     
     return self;
@@ -155,6 +164,8 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 
     [[PBSoundManager sharedManager] releaseSoundSource:mSoundSource];
     [mInfo release];
+    
+    [mRepairIndicator release];
     
     [super dealloc];
 }
@@ -185,7 +196,7 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     {
         [super addDamage:aDamage];
         
-        [[self delegate] helicopterDamageChanged:self];
+        [[self delegate] helicopterDamageDidChange:self];
 
         if (![self isAvailable])
         {
@@ -295,7 +306,14 @@ const CGFloat    kAltitudeSensitivity = 7.0;
         if ([TBMoneyManager useMoney:kTBPriceRepair])
         {
             [self repair:aValue];
-            [[self delegate] helicopterDamageChanged:self];
+            [[self delegate] helicopterDamageDidChange:self];
+            [[self delegate] helicopterDidRepair:self];
+            
+            if (![mRepairIndicator isEnabled])
+            {
+                [mRepairIndicator setPoint:CGPointMake(0, 30)];
+                [mRepairIndicator setEnabled:YES];
+            }
         }
     }
 }
@@ -303,7 +321,23 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 
 - (void)fillUpAmmos
 {
-    [mHardPoints makeObjectsPerformSelector:@selector(fillUp)];
+    BOOL sReloaded = NO;
+    
+    for (TBWeapon *sWeapon in mHardPoints)
+    {
+        BOOL sFilledUp = [sWeapon fillUp];
+        
+        if (!sReloaded && sFilledUp)
+        {
+            sReloaded = YES;
+        }
+    }
+    
+    if (![mRepairIndicator isEnabled] && sReloaded)
+    {
+        [mRepairIndicator setPoint:CGPointMake(0, 30)];
+        [mRepairIndicator setEnabled:YES];
+    }
 }
 
 
@@ -393,7 +427,9 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 - (void)action
 {
     [super action];
+    
     [self updateTailRotor];
+    [mRepairIndicator action];
     
     if (![self isLanded])
     {

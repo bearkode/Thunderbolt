@@ -94,14 +94,22 @@ const NSInteger kFireDelay = 8;
 }
 
 
-- (void)fillUp
+- (BOOL)fillUp
 {
+    BOOL sReloaded = NO;
+    
     if ([TBMoneyManager useMoney:kTBPriceBullet])
     {
         TBHelicopter *sHelicopter = (TBHelicopter *)[self body];
-        [self supplyAmmo:kLandingPadFillUpBullets];
-        [[sHelicopter delegate] helicopterWeaponDidReload:sHelicopter];
+        sReloaded = [self supplyAmmo:kLandingPadFillUpBullets];
+        
+        if (sReloaded)
+        {
+            [[sHelicopter delegate] helicopterWeaponDidReload:sHelicopter];
+        }
     }
+    
+    return sReloaded;
 }
 
 
@@ -152,7 +160,7 @@ const NSInteger kFireDelay = 8;
                 [sBullet setLife:100];
                 [self decreaseAmmoCount];
                 
-                [[sBody delegate] helicopter:sBody weaponFired:0];
+                [[sBody delegate] helicopter:sBody weaponDidFire:0];
             }
             
             if ([self ammoCount] == 0)

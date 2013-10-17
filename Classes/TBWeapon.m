@@ -149,20 +149,28 @@
 }
 
 
-- (void)fillUp
+- (BOOL)fillUp
 {
-
+    return NO;
 }
 
 
-- (void)supplyAmmo:(NSUInteger)aCount
+- (BOOL)supplyAmmo:(NSUInteger)aCount
 {
-    mAmmoCount += aCount;
+    BOOL sReloaded = NO;
     
-    if (mAmmoCount > mMaxAmmoCount)
+    if (mAmmoCount < mMaxAmmoCount)
     {
-        mAmmoCount = mMaxAmmoCount;
+        mAmmoCount += aCount;
+        sReloaded = YES;
+    
+        if (mAmmoCount >= mMaxAmmoCount)
+        {
+            mAmmoCount = mMaxAmmoCount;
+        }
     }
+    
+    return sReloaded;
 }
 
 

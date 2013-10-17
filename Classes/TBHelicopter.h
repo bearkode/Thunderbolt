@@ -68,9 +68,10 @@ typedef enum
 @protocol TBHelicopterDelegate <NSObject>
 
 
-- (void)helicopterDamageChanged:(TBHelicopter *)aHelicopter;
+- (void)helicopterDamageDidChange:(TBHelicopter *)aHelicopter;
+- (void)helicopterDidRepair:(TBHelicopter *)aHelicopter;
 - (void)helicopterWeaponDidReload:(TBHelicopter *)aHelicopter;
-- (void)helicopter:(TBHelicopter *)aHelicopter weaponFired:(NSInteger)aWeaponIndex;
+- (void)helicopter:(TBHelicopter *)aHelicopter weaponDidFire:(NSInteger)aWeaponIndex;
 - (void)helicopterDidDestroy:(TBHelicopter *)aHelicopter;
 
 

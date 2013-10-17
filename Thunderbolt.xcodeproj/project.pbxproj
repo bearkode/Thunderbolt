@@ -12,6 +12,7 @@
 		2E009DAF1713069F00A362F2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAD1713069F00A362F2 /* Default-568h@2x.png */; };
 		2E009DB01713069F00A362F2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAE1713069F00A362F2 /* Default@2x.png */; };
 		2E009DB3171306DB00A362F2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E51D111E5E8A00CA7792 /* Default.png */; };
+		2E015AD6180FBBC9001723C6 /* TBRepairIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E015AD5180FBBC9001723C6 /* TBRepairIndicator.m */; };
 		2E08E82C180E7968005FF876 /* radar_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82A180E7968005FF876 /* radar_move.png */; };
 		2E08E82D180E7968005FF876 /* radar_move@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82B180E7968005FF876 /* radar_move@2x.png */; };
 		2E08E831180F90D1005FF876 /* bullet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82F180F90D1005FF876 /* bullet@2x.png */; };
@@ -183,6 +184,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2E009DAD1713069F00A362F2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2E009DAE1713069F00A362F2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		2E015AD4180FBBC9001723C6 /* TBRepairIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBRepairIndicator.h; sourceTree = "<group>"; };
+		2E015AD5180FBBC9001723C6 /* TBRepairIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBRepairIndicator.m; sourceTree = "<group>"; };
 		2E08E82A180E7968005FF876 /* radar_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar_move.png; sourceTree = "<group>"; };
 		2E08E82B180E7968005FF876 /* radar_move@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radar_move@2x.png"; sourceTree = "<group>"; };
 		2E08E82F180F90D1005FF876 /* bullet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullet@2x.png"; sourceTree = "<group>"; };
@@ -619,6 +622,8 @@
 				A72BD49411A4381F0091AEC4 /* TBRadar.m */,
 				A7D9181E11A67027006ABF25 /* TBRadarObject.h */,
 				A7D9181F11A67027006ABF25 /* TBRadarObject.m */,
+				2E015AD4180FBBC9001723C6 /* TBRepairIndicator.h */,
+				2E015AD5180FBBC9001723C6 /* TBRepairIndicator.m */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -985,6 +990,7 @@
 				A720E54A111EA68900CA7792 /* TBExplosion.m in Sources */,
 				A7AF9C85114005DB00726807 /* TBStructure.m in Sources */,
 				A7AF9CA01140088400726807 /* TBBase.m in Sources */,
+				2E015AD6180FBBC9001723C6 /* TBRepairIndicator.m in Sources */,
 				A7AF9CF211428C0400726807 /* TBLandingPad.m in Sources */,
 				A7AF9DC81142AEFE00726807 /* TBUnitManager.m in Sources */,
 				A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */,
