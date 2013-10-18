@@ -42,6 +42,7 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 {
     PBSpriteNode      *mTailRotor;
     CGFloat            mRotorAngle;
+    TBRepairIndicator *mRepairIndicator;
     
     id                 mDelegate;
     TBControlLever    *mControlLever;
@@ -50,7 +51,7 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     
     BOOL               mLeftAhead;
     BOOL               mLanded;
-    BOOL               mCrashing;
+//    BOOL               mCrashing;
     CGFloat            mSpeed;
     NSInteger          mTextureIndex;
     CGRect             mContentRect;
@@ -63,8 +64,6 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     TBHelicopterInfo  *mInfo;
     
     PBSoundSource     *mSoundSource;
-    
-    TBRepairIndicator *mRepairIndicator;
 }
 
 
@@ -203,10 +202,6 @@ const CGFloat    kAltitudeSensitivity = 7.0;
         if (sDestroyed)
         {
             [self setState:kTBUnitStateCrashing];
-            mCrashing = YES;
-            
-//            [self setAvailable:YES];
-//            [[self delegate] helicopterDidDestroy:self];
         }
     }
     
@@ -280,16 +275,31 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 }
 
 
+- (BOOL)checkLandCollision:(CGPoint)aPoint
+{
+    CGSize sSize = [self tileSize];
+    
+    if ((aPoint.y - (sSize.height / 2)) < kMapGround)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+
 - (CGPoint)pointWithAltitudeLever:(CGFloat)aAltitudeLever oldPoint:(CGPoint)aPoint
 {
     CGFloat sAltitudeLever = aAltitudeLever * kAltitudeSensitivity;
     CGSize  sSize          = [self tileSize];
     
-    if (!mCrashing)
+    if ([self state] == kTBUnitStateNormal)
     {
         aPoint.y += sAltitudeLever;
         
-        if ((aPoint.y - (sSize.height / 2)) < kMapGround)
+        if ([self checkLandCollision:aPoint])
         {
             mLanded  = YES;
             [mSelectedWeapon setFire:NO];
@@ -305,11 +315,11 @@ const CGFloat    kAltitudeSensitivity = 7.0;
             mLanded = NO;
         }
     }
-    else
+    else if ([self state] == kTBUnitStateCrashing)
     {
         aPoint.y -= 1.5;
         
-        if ((aPoint.y - (sSize.height / 2)) < kMapGround)
+        if ([self checkLandCollision:aPoint])
         {
             [self setState:kTBUnitStateDestroyed];
             [mDelegate helicopterDidDestroy:self];
@@ -517,7 +527,7 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     [self updateSmoke];
     [mRepairIndicator action];
 
-    if (mCrashing)
+    if ([self state] == kTBUnitStateCrashing)
     {
         [self spin];
     }
