@@ -50,6 +50,7 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     
     BOOL               mLeftAhead;
     BOOL               mLanded;
+    BOOL               mCrashing;
     CGFloat            mSpeed;
     NSInteger          mTextureIndex;
     CGRect             mContentRect;
@@ -189,19 +190,27 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 }
 
 
-- (void)addDamage:(NSInteger)aDamage
+- (BOOL)addDamage:(NSInteger)aDamage
 {
-    if ([self isAvailable])
+    BOOL sDestroyed = NO;
+    
+    if ([self state] == kTBUnitStateNormal)
     {
-        [super addDamage:aDamage];
-        
-        [[self delegate] helicopterDamageDidChange:self];
+        sDestroyed = [super addDamage:aDamage];
 
-        if (![self isAvailable])
+        [mDelegate helicopterDamageDidChange:self];
+
+        if (sDestroyed)
         {
-            [[self delegate] helicopterDidDestroy:self];
+            [self setState:kTBUnitStateCrashing];
+            mCrashing = YES;
+            
+//            [self setAvailable:YES];
+//            [[self delegate] helicopterDidDestroy:self];
         }
     }
+    
+    return sDestroyed;
 }
 
 
@@ -275,23 +284,36 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 {
     CGFloat sAltitudeLever = aAltitudeLever * kAltitudeSensitivity;
     CGSize  sSize          = [self tileSize];
-
-    aPoint.y += sAltitudeLever;
-
-    if ((aPoint.y - (sSize.height / 2)) < kMapGround)
+    
+    if (!mCrashing)
     {
-        mLanded  = YES;
-        [mSelectedWeapon setFire:NO];
-        aPoint.y = kMapGround + sSize.height / 2;
-    }
-    else if (aPoint.y > 300)
-    {
-        aPoint.y = 300;
-        mLanded = NO;
+        aPoint.y += sAltitudeLever;
+        
+        if ((aPoint.y - (sSize.height / 2)) < kMapGround)
+        {
+            mLanded  = YES;
+            [mSelectedWeapon setFire:NO];
+            aPoint.y = kMapGround + sSize.height / 2;
+        }
+        else if (aPoint.y > 300)
+        {
+            aPoint.y = 300;
+            mLanded = NO;
+        }
+        else
+        {
+            mLanded = NO;
+        }
     }
     else
     {
-        mLanded = NO;
+        aPoint.y -= 1.5;
+        
+        if ((aPoint.y - (sSize.height / 2)) < kMapGround)
+        {
+            [self setState:kTBUnitStateDestroyed];
+            [mDelegate helicopterDidDestroy:self];
+        }
     }
 
     return aPoint;
@@ -386,6 +408,23 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 }
 
 
+- (void)spin
+{
+    mTextureIndex++;
+    
+    if (mTextureIndex >= ([self tileCount] - 2))
+    {
+        mTextureIndex = 2;
+    }
+    else if (mTextureIndex == 23 || mTextureIndex == 24)
+    {
+        mTextureIndex = 25;
+    }
+    
+    [self selectTileAtIndex:mTextureIndex];
+}
+
+
 - (void)updateTailRotor
 {
     mRotorAngle += 34;
@@ -431,7 +470,7 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     {
         NSInteger sDamage = (NSInteger)((1.0 - sDamageRate) * 10.0);
         
-        if (mTick % (NSInteger)(10 - sDamage) == 0)
+        if (mTick % (NSInteger)(11 - sDamage) == 0)
         {
             [[TBSmokeManager sharedManager] addDamageSmokeAtPoint:[self point]];
         }
@@ -439,51 +478,60 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 }
 
 
-- (void)action
+- (void)updateTexture
 {
-    [super action];
-    
-    [self updateTailRotor];
-    [mRepairIndicator action];
-    
-    if (![self isLanded])
+    if (!mLeftAhead)
     {
-        [mSelectedWeapon action];
-    }
-  
-    if (++mTick == 100)
-    {
-        mTick = 0;
-    }
-    
-    [self updateSmoke];
-    
-    if ((mTick % 2) == 0)
-    {
-        if (!mLeftAhead)
+        if (mTextureIndex > 1)
         {
-            if (mTextureIndex > 1)
-            {
-                mTextureIndex--;
-            }
-            else
-            {
-                mTextureIndex = (mTextureIndex == 0) ? 1 : 0;
-            }
+            mTextureIndex--;
         }
         else
         {
-            if (mTextureIndex < 23)
-            {
-                mTextureIndex++;
-            }
-            else
-            {
-                mTextureIndex = (mTextureIndex == 23) ? 24 : 23;
-            }
+            mTextureIndex = (mTextureIndex == 0) ? 1 : 0;
         }
-        
-        [self selectTileAtIndex:mTextureIndex];
+    }
+    else
+    {
+        if (mTextureIndex < 23)
+        {
+            mTextureIndex++;
+        }
+        else
+        {
+            mTextureIndex = (mTextureIndex == 23) ? 24 : 23;
+        }
+    }
+    
+    [self selectTileAtIndex:mTextureIndex];
+}
+
+
+- (void)action
+{
+    [super action];
+
+    mTick = (mTick == 100) ? 0 : (mTick + 1);
+    
+    [self updateTailRotor];
+    [self updateSmoke];
+    [mRepairIndicator action];
+
+    if (mCrashing)
+    {
+        [self spin];
+    }
+    else
+    {
+        if (![self isLanded])
+        {
+            [mSelectedWeapon action];
+        }
+
+        if ((mTick % 2) == 0)
+        {
+            [self updateTexture];
+        }
     }
 }
 

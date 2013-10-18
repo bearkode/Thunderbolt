@@ -87,16 +87,17 @@
             mTextureIndex = (mTextureIndex > 7) ? 0 : mTextureIndex;
         }
         
-        TBUnit *sTarget = ([self team] == kTBTeamAlly) ? [[TBUnitManager sharedManager] enemyHelicopter] : [[TBUnitManager sharedManager] allyHelicopter];
         [mVulcan action];
         [mMissileLauncher action];
-        
+
+        TBUnit *sTarget = [[TBUnitManager sharedManager] opponentHeicopter:[self team]];
 #if (0)
+#warning Base Use AAGun
         if (sTarget)
         {
-            if ([mAAVulcan fireAt:sTarget])
+            if ([mVulcan fireAt:sTarget])
             {
-                [mAAVulcan supplyAmmo:1];
+                [mVulcan supplyAmmo:1];
             }
         }
 #else
@@ -107,8 +108,8 @@
                 [mMissileLauncher supplyAmmo:1];
             }
         }
-    }
 #endif
+    }
 }
 
 

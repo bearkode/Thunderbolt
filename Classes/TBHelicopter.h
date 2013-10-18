@@ -59,6 +59,9 @@ typedef enum
 - (void)setFire:(BOOL)aFire;
 
 
+- (void)spin;
+
+
 @end
 
 

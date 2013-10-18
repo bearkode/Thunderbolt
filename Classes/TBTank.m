@@ -116,7 +116,8 @@ const CGFloat kTankSpeed = 0.5;
     if ([mTankGun isReloaded])
     {
         TBUnit *sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kTankGunMaxRange];
-        if (sUnit)
+
+        if ([sUnit state] == kTBUnitStateNormal)
         {
             CGFloat sAngle = [self angleWith:sUnit];
             if ((sAngle >= -100.0 && sAngle <= -85.0) ||
@@ -141,13 +142,20 @@ const CGFloat kTankSpeed = 0.5;
 }
 
 
-- (void)addDamage:(NSInteger)aDamage
+- (BOOL)addDamage:(NSInteger)aDamage
 {
-    [super addDamage:aDamage];
+    BOOL sDestroyed = [super addDamage:aDamage];
     
     [self setTexture:mTextureHit];
     [self setTileSize:[mTextureHit size]];
     mHitDiscount = 10;
+    
+    if (sDestroyed)
+    {
+        [self setState:kTBUnitStateDestroyed];
+    }
+    
+    return sDestroyed;
 }
 
 

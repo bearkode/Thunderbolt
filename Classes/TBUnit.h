@@ -23,18 +23,29 @@ typedef enum
 } TBUnitType;
 
 
+typedef enum
+{
+    kTBUnitStateUnknown = 0,
+    kTBUnitStateNormal,
+    kTBUnitStateReady,
+    kTBUnitStateCrashing,
+    kTBUnitStateDestroyed
+} TBUnitState;
+
+
 #pragma mark -
 
 
 @interface TBUnit : TBSprite
 
 
-@property (nonatomic, assign)                         TBUnitType type;
-@property (nonatomic, retain)                         NSNumber  *unitID;
-@property (nonatomic, readonly)                       TBTeam     team;
-@property (nonatomic, assign)                         NSInteger  durability;
-@property (nonatomic, assign)                         NSInteger  damage;
-@property (nonatomic, readonly, getter = isAvailable) BOOL available;
+@property (nonatomic, assign)                       TBUnitType  type;
+@property (nonatomic, retain)                       NSNumber   *unitID;
+@property (nonatomic, readonly)                     TBTeam      team;
+@property (nonatomic, assign)                       NSInteger   durability;
+@property (nonatomic, assign)                       NSInteger   damage;
+@property (nonatomic, assign)                       TBUnitState state;
+//@property (nonatomic, assign, getter = isAvailable) BOOL        available;
 
 
 - (id)initWithUnitID:(NSNumber *)aUnitID team:(TBTeam)aTeam;
@@ -43,10 +54,10 @@ typedef enum
 - (BOOL)isAlly;
 - (TBTeam)opponentTeam;
 
-- (void)addDamage:(NSInteger)aDamage;
+- (BOOL)addDamage:(NSInteger)aDamage;
 - (void)repair:(NSInteger)aValue;
 
-- (BOOL)isAvailable;
+//- (BOOL)isAvailable;
 - (CGFloat)damageRate;
 
 

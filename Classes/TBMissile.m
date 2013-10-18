@@ -83,6 +83,7 @@ const CGFloat   kMissileAcceleration = 0.1;
     }
     
     sTarget = [[TBUnitManager sharedManager] unitForUnitID:mTargetID];
+
     if (sTarget)
     {
         CGFloat sAngle = 360 - TBRadiansToDegrees(TBAngleBetweenToPoints([self point], [sTarget point]));
@@ -134,6 +135,19 @@ const CGFloat   kMissileAcceleration = 0.1;
     {
         [[TBSmokeManager sharedManager] addSmokeAtPoint:sPoint];
     }
+}
+
+
+- (BOOL)addDamage:(NSInteger)aDamage
+{
+    BOOL sDestroyed = [super addDamage:aDamage];
+    
+    if (sDestroyed)
+    {
+        [self setState:kTBUnitStateDestroyed];
+    }
+    
+    return sDestroyed;
 }
 
 

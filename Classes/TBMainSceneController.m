@@ -103,33 +103,17 @@
 
 - (void)pbSceneWillUpdate:(PBScene *)aScene
 {
-    static BOOL      sOdd   = YES;
-    static NSInteger sIndex = 2;
+    static BOOL sOdd = YES;
     
     if (sOdd)
     {
         for (TBHelicopter *sHelicopter in mHelicopters)
         {
-            [sHelicopter selectTileAtIndex:sIndex];
+            [sHelicopter spin];
         }
-        
-        sIndex++;
-        
-        if (sIndex >= ([[mHelicopters objectAtIndex:0] tileCount] - 2))
-        {
-            sIndex = 2;
-        }
-        else if (sIndex == 23)
-        {
-            sIndex = 25;
-        }
-        
-        sOdd = NO;
     }
-    else
-    {
-        sOdd = YES;
-    }
+    
+    sOdd = !sOdd;
 }
 
 

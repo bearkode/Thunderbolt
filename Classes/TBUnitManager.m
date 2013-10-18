@@ -110,6 +110,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
             mAllyHelicopter = nil;
         }
         
+        [[TBExplosionManager sharedManager] addExplosionWithUnit:aUnit];
         [mAllyUnits removeObjectForKey:[aUnit unitID]];
     }
     else
@@ -118,7 +119,8 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
         {
             mEnemyHelicopter = nil;
         }
-        
+
+        [[TBExplosionManager sharedManager] addExplosionWithUnit:aUnit];
         [mEnemyUnits removeObjectForKey:[aUnit unitID]];
     }
 }
@@ -130,7 +132,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     
     for (TBUnit *sUnit in [mAllyUnits array])
     {
-        if (![sUnit isAvailable])
+        if ([sUnit state] == kTBUnitStateDestroyed)
         {
             [mDisabledUnits addObject:sUnit];
         }
@@ -138,7 +140,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
     
     for (TBUnit *sUnit in [mEnemyUnits array])
     {
-        if (![sUnit isAvailable])
+        if ([sUnit state] == kTBUnitStateDestroyed)
         {
             [mDisabledUnits addObject:sUnit];
             

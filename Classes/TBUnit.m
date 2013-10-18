@@ -13,12 +13,13 @@
 
 @implementation TBUnit
 {
-    TBUnitType mType;
-    NSNumber  *mUnitID;
-    TBTeam     mTeam;
-    NSInteger  mDurability;
-    NSInteger  mDamage;
-    BOOL       mAvailable;
+    TBUnitType  mType;
+    NSNumber   *mUnitID;
+    TBTeam      mTeam;
+    NSInteger   mDurability;
+    NSInteger   mDamage;
+    TBUnitState mState;
+//    BOOL        mAvailable;
 }
 
 
@@ -30,7 +31,8 @@
 @synthesize team       = mTeam;
 @synthesize durability = mDurability;
 @synthesize damage     = mDamage;
-@synthesize available  = mAvailable;
+@synthesize state      = mState;
+//@synthesize available  = mAvailable;
 
 
 #pragma mark -
@@ -47,7 +49,8 @@
         mTeam       = aTeam;
         mDurability = 100;
         mDamage     = 0;
-        mAvailable  = YES;
+//        mAvailable  = YES;
+        mState      = kTBUnitStateNormal;
     }
     
     return self;
@@ -69,12 +72,13 @@
 {
     [super action];
     
-    if ([self isAvailable])
+    if (mState == kTBUnitStateNormal)
     {
         if (([self point].x > (kMaxMapXPos + 50)) ||
             ([self point].x < (kMinMapXPos -50)))
         {
-            mAvailable = NO;
+//            mAvailable = NO;
+            mState = kTBUnitStateReady;
         }
     }
 }
@@ -101,15 +105,21 @@
 }
 
 
-- (void)addDamage:(NSInteger)aDamage
+- (BOOL)addDamage:(NSInteger)aDamage
 {
     mDamage += aDamage;
-    if (mDamage > mDurability)
+
+    if (mDamage >= mDurability)
     {
-        mDamage    = mDurability;
-        mAvailable = NO;
-        
-        [[TBExplosionManager sharedManager] addExplosionWithUnit:self];
+        mDamage = mDurability;
+
+        return YES;
+//        mAvailable = NO;
+//        [[TBExplosionManager sharedManager] addExplosionWithUnit:self];
+    }
+    else
+    {
+        return NO;
     }
 }
 

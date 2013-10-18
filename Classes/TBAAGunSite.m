@@ -123,7 +123,8 @@
         [mVulcan action];
         
         TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] opponentHeicopter:[self team]];
-        if (sHelicopter)
+
+        if ([sHelicopter state] == kTBUnitStateNormal)
         {
             CGPoint sSitePosition   = [self point];
             CGPoint sTargetPosition = [sHelicopter point];

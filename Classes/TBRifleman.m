@@ -89,7 +89,8 @@ const CGFloat kRiflemanSpeed = 0.5;
     [mRifle action];
     
     TBUnit *sUnit = [[TBUnitManager sharedManager] opponentUnitOf:self inRange:kRifleMaxRange];
-    if (sUnit)
+    
+    if ([sUnit state] == kTBUnitStateNormal)
     {
         CGFloat sAngle = [self angleWith:sUnit];
         
@@ -116,6 +117,19 @@ const CGFloat kRiflemanSpeed = 0.5;
         mTick = 0;
         mIndex = (mIndex > 10) ? 0 : (mIndex + 1);
     }
+}
+
+
+- (BOOL)addDamage:(NSInteger)aDamage
+{
+    BOOL sDestroyed = [super addDamage:aDamage];
+    
+    if (sDestroyed)
+    {
+        [self setState:kTBUnitStateDestroyed];
+    }
+    
+    return sDestroyed;
 }
 
 

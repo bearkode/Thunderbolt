@@ -67,7 +67,7 @@
     [self setAlpha:(1.0 - mIndex / 15.0)];
     [self setPoint:CGPointMake(sPoint.x, sPoint.y + 2)];
     
-    if (mIndex > 60)
+    if (mIndex > 70)
     {
         return NO;
     }

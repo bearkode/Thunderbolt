@@ -84,13 +84,16 @@ const CGFloat kAPCSpeed = 0.5;
     {
         TBUnit *sHelicopter = (TBUnit *)[[TBUnitManager sharedManager] allyHelicopter];
         
-        if ([mMissileLauncher ammoCount] > 0)
+        if ([sHelicopter state] == kTBUnitStateNormal)
         {
-            sFire = [mMissileLauncher fireAt:sHelicopter];
-        }
-        else
-        {
-            sFire = [mVulcan fireAt:sHelicopter];
+            if ([mMissileLauncher ammoCount] > 0)
+            {
+                sFire = [mMissileLauncher fireAt:sHelicopter];
+            }
+            else
+            {
+                sFire = [mVulcan fireAt:sHelicopter];
+            }
         }
     }
     
@@ -107,13 +110,20 @@ const CGFloat kAPCSpeed = 0.5;
 }
 
 
-- (void)addDamage:(NSInteger)aDamage
+- (BOOL)addDamage:(NSInteger)aDamage
 {
-    [super addDamage:aDamage];
+    BOOL sDestroyed = [super addDamage:aDamage];
 
     [self setTexture:mTextureHit];
     [self setTileSize:[mTextureHit size]];
     mHitDiscount = 10;
+    
+    if (sDestroyed)
+    {
+        [self setState:kTBUnitStateDestroyed];
+    }
+    
+    return sDestroyed;
 }
 
 
