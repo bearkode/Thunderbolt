@@ -21,6 +21,7 @@
 
 #import "TBWarheadManager.h"
 #import "TBMoneyManager.h"
+#import "TBSmokeManager.h"
 
 #import "TBHelicopterInfo.h"
 
@@ -148,8 +149,6 @@ const CGFloat    kAltitudeSensitivity = 7.0;
         mRepairIndicator = [[TBRepairIndicator alloc] init];
         [mRepairIndicator setEnabled:NO];
         [self addSubNode:mRepairIndicator];
-        
-        [self addDamage:100];
     }
     
     return self;
@@ -424,6 +423,22 @@ const CGFloat    kAltitudeSensitivity = 7.0;
 }
 
 
+- (void)updateSmoke
+{
+    CGFloat sDamageRate = [self damageRate];
+    
+    if (sDamageRate < 0.5)
+    {
+        NSInteger sDamage = (NSInteger)((1.0 - sDamageRate) * 10.0);
+        
+        if (mTick % (NSInteger)(10 - sDamage) == 0)
+        {
+            [[TBSmokeManager sharedManager] addDamageSmokeAtPoint:[self point]];
+        }
+    }
+}
+
+
 - (void)action
 {
     [super action];
@@ -440,6 +455,8 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     {
         mTick = 0;
     }
+    
+    [self updateSmoke];
     
     if ((mTick % 2) == 0)
     {

@@ -27,7 +27,7 @@ typedef enum
 #define kTankShellPower             50
 
 
-#define kHelicopterDurability       1500//50
+#define kHelicopterDurability       150
 #define kTankDurability             100
 #define kArmoredVehicleDurability   70
 #define kSoldierDurability          10

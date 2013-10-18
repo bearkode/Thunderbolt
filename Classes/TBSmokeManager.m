@@ -11,6 +11,7 @@
 #import <PBObjCUtil.h>
 #import "TBObjectPool.h"
 #import "TBSmoke.h"
+#import "TBDamageSmoke.h"
 
 
 @implementation TBSmokeManager
@@ -18,7 +19,10 @@
     PBNode         *mSmokeLayer;
 
     TBObjectPool   *mObjectPool;
+    TBObjectPool   *mDamageSmokePool;
+    
     NSMutableArray *mSmokes;
+    NSMutableArray *mDamageSmokes;
 }
 
 
@@ -31,8 +35,11 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
     
     if (self)
     {
-        mObjectPool = [[TBObjectPool alloc] initWithCapacity:100 storableClass:[TBSmoke class]];
-        mSmokes     = [[NSMutableArray alloc] init];
+        mObjectPool      = [[TBObjectPool alloc] initWithCapacity:100 storableClass:[TBSmoke class]];
+        mDamageSmokePool = [[TBObjectPool alloc] initWithCapacity:100 storableClass:[TBDamageSmoke class]];
+        
+        mSmokes          = [[NSMutableArray alloc] init];
+        mDamageSmokes    = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -45,10 +52,14 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
     [mSmokeLayer release];
     mSmokeLayer = nil;
     
-    //  TODO : finish using in array?
     for (TBSmoke *sSmoke in mSmokes)
     {
         [mObjectPool finishUsing:sSmoke];
+    }
+    
+    for (TBDamageSmoke *sSmoke in mDamageSmokes)
+    {
+        [mDamageSmokePool finishUsing:sSmoke];
     }
 }
 
@@ -70,6 +81,20 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
     }
     
     [mSmokes removeObjectsInArray:sDisabledSmokes];
+    
+    [sDisabledSmokes removeAllObjects];
+
+    for (TBDamageSmoke *sSmoke in mDamageSmokes)
+    {
+        if (![sSmoke action])
+        {
+            [sSmoke removeFromSuperNode];
+            [sDisabledSmokes addObject:sSmoke];
+            [mDamageSmokePool finishUsing:sSmoke];
+        }
+    }
+    
+    [mDamageSmokes removeObjectsInArray:sDisabledSmokes];
 }
 
 
@@ -84,10 +109,24 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
 - (void)addSmokeAtPoint:(CGPoint)aPoint
 {
     TBSmoke *sSmoke = (TBSmoke *)[mObjectPool object];
+
     [sSmoke reset];
     [sSmoke setPoint:aPoint];
-    [mSmokeLayer addSubNode:sSmoke];
+
     [mSmokes addObject:sSmoke];
+    [mSmokeLayer addSubNode:sSmoke];
+}
+
+
+- (void)addDamageSmokeAtPoint:(CGPoint)aPoint
+{
+    TBDamageSmoke *sSmoke = (TBDamageSmoke *)[mDamageSmokePool object];
+    
+    [sSmoke reset];
+    [sSmoke setPoint:aPoint];
+    
+    [mDamageSmokes addObject:sSmoke];
+    [mSmokeLayer addSubNode:sSmoke];
 }
 
 

@@ -95,7 +95,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBUnitManager, sharedManager);
         }
     }
     
-    NSLog(@"sUnits = %@", [sUnits array]);
+//    NSLog(@"sUnits = %@", [sUnits array]);
 }
 
 

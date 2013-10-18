@@ -13,6 +13,7 @@
 		2E009DB01713069F00A362F2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAE1713069F00A362F2 /* Default@2x.png */; };
 		2E009DB3171306DB00A362F2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E51D111E5E8A00CA7792 /* Default.png */; };
 		2E015AD6180FBBC9001723C6 /* TBRepairIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E015AD5180FBBC9001723C6 /* TBRepairIndicator.m */; };
+		2E015AD9180FD38F001723C6 /* TBDamageSmoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E015AD8180FD38F001723C6 /* TBDamageSmoke.m */; };
 		2E08E82C180E7968005FF876 /* radar_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82A180E7968005FF876 /* radar_move.png */; };
 		2E08E82D180E7968005FF876 /* radar_move@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82B180E7968005FF876 /* radar_move@2x.png */; };
 		2E08E831180F90D1005FF876 /* bullet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82F180F90D1005FF876 /* bullet@2x.png */; };
@@ -186,6 +187,8 @@
 		2E009DAE1713069F00A362F2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2E015AD4180FBBC9001723C6 /* TBRepairIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBRepairIndicator.h; sourceTree = "<group>"; };
 		2E015AD5180FBBC9001723C6 /* TBRepairIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBRepairIndicator.m; sourceTree = "<group>"; };
+		2E015AD7180FD38F001723C6 /* TBDamageSmoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBDamageSmoke.h; sourceTree = "<group>"; };
+		2E015AD8180FD38F001723C6 /* TBDamageSmoke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBDamageSmoke.m; sourceTree = "<group>"; };
 		2E08E82A180E7968005FF876 /* radar_move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar_move.png; sourceTree = "<group>"; };
 		2E08E82B180E7968005FF876 /* radar_move@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radar_move@2x.png"; sourceTree = "<group>"; };
 		2E08E82F180F90D1005FF876 /* bullet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullet@2x.png"; sourceTree = "<group>"; };
@@ -551,6 +554,8 @@
 				2EB4E9811741279F009EDFBB /* TBSmokeManager.m */,
 				2EB4E9791741265A009EDFBB /* TBSmoke.h */,
 				2EB4E97A1741265A009EDFBB /* TBSmoke.m */,
+				2E015AD7180FD38F001723C6 /* TBDamageSmoke.h */,
+				2E015AD8180FD38F001723C6 /* TBDamageSmoke.m */,
 			);
 			name = Smoke;
 			sourceTree = "<group>";
@@ -1008,6 +1013,7 @@
 				A72BD43911A42F920091AEC4 /* TBScoreManager.m in Sources */,
 				A72BD49511A4381F0091AEC4 /* TBRadar.m in Sources */,
 				2E61B84D180CD91B00D20D3E /* TBViewController.m in Sources */,
+				2E015AD9180FD38F001723C6 /* TBDamageSmoke.m in Sources */,
 				A7D9182011A67027006ABF25 /* TBRadarObject.m in Sources */,
 				A7BF9DC411DF8A8D001F8F6B /* TBAAGunSite.m in Sources */,
 				A7A7782811E217D7001CE8D1 /* TBStructureManager.m in Sources */,
@@ -1051,7 +1057,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
 				COPY_PHASE_STRIP = NO;
@@ -1075,7 +1081,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
 				COPY_PHASE_STRIP = YES;
