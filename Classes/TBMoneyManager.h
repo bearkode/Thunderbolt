@@ -17,9 +17,9 @@
 #define kTBPriceBomb                1
 
 
-#define kTBCashPrizeTank            50
-#define kTBCashPrizeArmoredVehicle  30
-#define kTBCashPrizeSoldier         10
+#define kTBCashPrizeTank            70
+#define kTBCashPrizeArmoredVehicle  50
+#define kTBCashPrizeSoldier         30
 
 
 @class TBUnit;

@@ -75,27 +75,35 @@
 {
     CGRect   sBounds    = [[self controlView] bounds];
     UIColor *sBackColor = [UIColor clearColor];
+    UIFont  *sFont      = [UIFont fontWithName:@"LetsgoDigital-Regular" size:20];
+
+//    for(NSString* family in [UIFont familyNames]) {
+//        NSLog(@"%@", family);
+//        for(NSString* name in [UIFont fontNamesForFamilyName: family]) {
+//            NSLog(@"  %@", name);
+//        }
+//    }
     
     mAmmoLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 40, 140, 30)] autorelease];
     [mAmmoLabel setAutoresizingMask:(UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin)];
     [mAmmoLabel setBackgroundColor:sBackColor];
-    [mAmmoLabel setTextColor:[UIColor whiteColor]];
-    [mAmmoLabel setFont:[UIFont systemFontOfSize:14]];
+    [mAmmoLabel setTextColor:[UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.5]];
+    [mAmmoLabel setFont:sFont];
     [[self controlView] addSubview:mAmmoLabel];
     
     mScoreLabel = [[[UILabel alloc] initWithFrame:CGRectMake(sBounds.size.width - 300, 40, 100, 30)] autorelease];
     [mScoreLabel setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin)];
     [mScoreLabel setBackgroundColor:sBackColor];
-    [mScoreLabel setTextColor:[UIColor whiteColor]];
-    [mScoreLabel setFont:[UIFont systemFontOfSize:14]];
+    [mScoreLabel setTextColor:[UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.5]];
+    [mScoreLabel setFont:sFont];
     [mScoreLabel setTextAlignment:NSTextAlignmentCenter];
     [[self controlView] addSubview:mScoreLabel];
     
-    mMoneyLabel = [[[UILabel alloc] initWithFrame:CGRectMake(sBounds.size.width - 120, 40, 120, 30)] autorelease];
+    mMoneyLabel = [[[UILabel alloc] initWithFrame:CGRectMake(sBounds.size.width - 130, 40, 120, 30)] autorelease];
     [mMoneyLabel setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin)];
     [mMoneyLabel setBackgroundColor:sBackColor];
-    [mMoneyLabel setTextColor:[UIColor whiteColor]];
-    [mMoneyLabel setFont:[UIFont systemFontOfSize:14]];
+    [mMoneyLabel setTextColor:[UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.5]];
+    [mMoneyLabel setFont:sFont];
     [mMoneyLabel setTextAlignment:NSTextAlignmentRight];
     [[self controlView] addSubview:mMoneyLabel];
     

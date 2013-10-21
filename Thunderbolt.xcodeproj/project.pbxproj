@@ -24,6 +24,7 @@
 		2E33AB921725397C00DE26D5 /* TBGatlingGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E33AB911725397C00DE26D5 /* TBGatlingGun.m */; };
 		2E46379A17127FEA00EA1888 /* TBEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379917127FEA00EA1888 /* TBEventView.m */; };
 		2E46379D171286E800EA1888 /* TBControlLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E46379C171286E800EA1888 /* TBControlLever.m */; };
+		2E5B91561811216100480045 /* LetsgoDigitalRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E9BC21418111E8000680F01 /* LetsgoDigitalRegular.ttf */; };
 		2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FBD17257E6400140A39 /* rifleman.png */; };
 		2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FBE17257E6400140A39 /* rifleman@2x.png */; };
 		2E5E5FC31727432D00140A39 /* base.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E5FC21727432D00140A39 /* base.png */; };
@@ -62,6 +63,8 @@
 		2E90F9761807EEB900D18A92 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		2E90F9771807EEC300D18A92 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E696A8E1803CB78003A0AA4 /* CoreMotion.framework */; };
 		2E90F97A1807EF0A00D18A92 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AD02A011235FF500359C54 /* AudioToolbox.framework */; };
+		2E9BC21218111A4000680F01 /* digital_counter_7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E9BC21018111A4000680F01 /* digital_counter_7.ttf */; };
+		2E9BC21318111A4000680F01 /* digital_counter_7_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E9BC21118111A4000680F01 /* digital_counter_7_italic.ttf */; };
 		2EA6617D180E3C8D003E368B /* radar_back_l.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA66177180E3C8D003E368B /* radar_back_l.png */; };
 		2EA6617E180E3C8D003E368B /* radar_back_l@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA66178180E3C8D003E368B /* radar_back_l@2x.png */; };
 		2EA6617F180E3C8D003E368B /* radar_back_m.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA66179180E3C8D003E368B /* radar_back_m.png */; };
@@ -245,6 +248,9 @@
 		2E86855E170D7AC300D64EF7 /* PBKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PBKit.xcodeproj; path = PrisonBreak/PBKit/PBKit.xcodeproj; sourceTree = "<group>"; };
 		2E868567170D7E0900D64EF7 /* TBBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBBattleViewController.h; sourceTree = "<group>"; };
 		2E868568170D7E0900D64EF7 /* TBBattleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBBattleViewController.m; sourceTree = "<group>"; };
+		2E9BC21018111A4000680F01 /* digital_counter_7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digital_counter_7.ttf; sourceTree = "<group>"; };
+		2E9BC21118111A4000680F01 /* digital_counter_7_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = digital_counter_7_italic.ttf; sourceTree = "<group>"; };
+		2E9BC21418111E8000680F01 /* LetsgoDigitalRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LetsgoDigitalRegular.ttf; sourceTree = "<group>"; };
 		2EA66177180E3C8D003E368B /* radar_back_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar_back_l.png; sourceTree = "<group>"; };
 		2EA66178180E3C8D003E368B /* radar_back_l@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radar_back_l@2x.png"; sourceTree = "<group>"; };
 		2EA66179180E3C8D003E368B /* radar_back_m.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar_back_m.png; sourceTree = "<group>"; };
@@ -463,6 +469,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2E9BC20F18111A4000680F01 /* Fonts */,
 				A73DE648110DE635008C1A67 /* Images */,
 				A7736AF8111B141200B9174C /* Sound */,
 				8D1107310486CEB800E47090 /* Thunderbolt-Info.plist */,
@@ -545,6 +552,16 @@
 				2E868563170D7AC300D64EF7 /* libPBKit.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2E9BC20F18111A4000680F01 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2E9BC21418111E8000680F01 /* LetsgoDigitalRegular.ttf */,
+				2E9BC21018111A4000680F01 /* digital_counter_7.ttf */,
+				2E9BC21118111A4000680F01 /* digital_counter_7_italic.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		2EB4E97817412640009EDFBB /* Smoke */ = {
@@ -938,6 +955,7 @@
 				A78A1C4411E88C5200DA9574 /* heli_r_exp00.png in Resources */,
 				A78A1C4511E88C5200DA9574 /* heli_r_exp01.png in Resources */,
 				A78A1C4611E88C5200DA9574 /* heli_r_exp02.png in Resources */,
+				2E9BC21218111A4000680F01 /* digital_counter_7.ttf in Resources */,
 				A78A1CD511E9370A00DA9574 /* missile_exp00.png in Resources */,
 				2E08E82D180E7968005FF876 /* radar_move@2x.png in Resources */,
 				A78A1CD611E9370A00DA9574 /* missile_exp01.png in Resources */,
@@ -949,6 +967,7 @@
 				2E009DB3171306DB00A362F2 /* Default.png in Resources */,
 				2EE9C193172189EC00BB3D24 /* TBCheatViewController.xib in Resources */,
 				2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */,
+				2E9BC21318111A4000680F01 /* digital_counter_7_italic.ttf in Resources */,
 				2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */,
 				2E5E5FC31727432D00140A39 /* base.png in Resources */,
 				2E5E6006172AC91000140A39 /* AH1.png in Resources */,
@@ -970,6 +989,7 @@
 				2E5E6024172DDE4200140A39 /* MD500@2x.png in Resources */,
 				2EB4E96E173A9937009EDFBB /* TailRotor.png in Resources */,
 				2EB4E96F173A9937009EDFBB /* TailRotor@2x.png in Resources */,
+				2E5B91561811216100480045 /* LetsgoDigitalRegular.ttf in Resources */,
 				2EB4E97E174126CF009EDFBB /* smoke.png in Resources */,
 				2EA66181180E3C8D003E368B /* radar_back_r.png in Resources */,
 				2EB4E97F174126CF009EDFBB /* smoke@2x.png in Resources */,

@@ -149,6 +149,12 @@
 }
 
 
+- (BOOL)isFillUpRequered
+{
+    return (mMaxAmmoCount > mAmmoCount) ? YES : NO;
+}
+
+
 - (BOOL)fillUp
 {
     return NO;

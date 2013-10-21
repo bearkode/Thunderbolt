@@ -215,8 +215,6 @@
 - (void)viewWillDisappear:(BOOL)aAnimated
 {
     [super viewWillDisappear:aAnimated];
-    
-    [[TBMoneyManager sharedManager] setDelegate:nil];
 }
 
 

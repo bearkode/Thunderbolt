@@ -356,8 +356,13 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     
     for (TBWeapon *sWeapon in mHardPoints)
     {
-        BOOL sFilledUp = [sWeapon fillUp];
+        BOOL sFilledUp = NO;
         
+        if ([sWeapon isFillUpRequered])
+        {
+            sFilledUp = [sWeapon fillUp];
+        }
+
         if (!sReloaded && sFilledUp)
         {
             sReloaded = YES;

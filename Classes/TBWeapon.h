@@ -47,6 +47,7 @@
 - (void)setFire:(BOOL)aFire;
 - (BOOL)fireAt:(TBUnit *)aUnit;
 
+- (BOOL)isFillUpRequered;
 - (BOOL)fillUp;
 - (BOOL)supplyAmmo:(NSUInteger)aCount;
 

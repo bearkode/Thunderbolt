@@ -37,6 +37,7 @@ SYNTHESIZE_SINGLETON_CLASS(TBMoneyManager, sharedManager);
 - (id)init
 {
     self = [super init];
+
     if (self)
     {
 
