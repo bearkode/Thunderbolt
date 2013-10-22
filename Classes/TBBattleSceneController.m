@@ -237,7 +237,7 @@
         mTimeTick  = 0;
         
         mController = [[TBController alloc] init];
-        [mController setControllerMode:kTBControllerModeMotion];
+//        [mController setControllerMode:kTBControllerModeMotion];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(baseDidDestroyNotification:)
@@ -369,6 +369,39 @@
 - (void)pbSceneWillUpdate:(PBScene *)aScene
 {
     [super pbSceneWillUpdate:aScene];
+    
+    if ([mController controllerMode] == kTBControllerModeGamepad)
+    {
+        static BOOL sAButton  = NO;
+        static BOOL sRSButton = NO;
+        
+        if ([mController AButtonValue])
+        {
+            if (!sAButton)
+            {
+                sAButton = YES;
+                [[[TBUnitManager sharedManager] allyHelicopter] setFire:YES];
+            }
+        }
+        else
+        {
+            sAButton = NO;
+            [[[TBUnitManager sharedManager] allyHelicopter] setFire:NO];
+        }
+        
+        if ([mController rightShoulderValue])
+        {
+            if (!sRSButton)
+            {
+                sRSButton = YES;
+                [self ammoButtonTapped:self];
+            }
+        }
+        else
+        {
+            sRSButton = NO;
+        }
+    }
 
     CGPoint sCameraPos = [[[self canvas] camera] position];
     [[[self canvas] camera] setPosition:CGPointMake(mCameraXPos, sCameraPos.y)];

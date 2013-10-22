@@ -104,6 +104,7 @@
 		2EF7C3C0181648F80001009C /* cloud2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3BC181648F80001009C /* cloud2.png */; };
 		2EF7C3C1181648F80001009C /* cloud2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3BD181648F80001009C /* cloud2@2x.png */; };
 		2EF7C3C4181649820001009C /* TBCloudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF7C3C3181649820001009C /* TBCloudLayer.m */; };
+		2EF7C3C5181658CD0001009C /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E696A901803CF15003A0AA4 /* GameController.framework */; };
 		2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */; };
 		2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43CA17167CA000CC376E /* ProfilingOverlayView.m */; };
 		A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFA6D1194D9ED00DA0139 /* TBMissile.m */; };
@@ -444,6 +445,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EF7C3C5181658CD0001009C /* GameController.framework in Frameworks */,
 				2E90F97A1807EF0A00D18A92 /* AudioToolbox.framework in Frameworks */,
 				2E90F9771807EEC300D18A92 /* CoreMotion.framework in Frameworks */,
 				2E90F9761807EEB900D18A92 /* QuartzCore.framework in Frameworks */,

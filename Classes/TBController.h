@@ -28,9 +28,11 @@ typedef enum
 @property (nonatomic, readonly) BOOL    BButtonValue;
 @property (nonatomic, readonly) BOOL    XButtonValue;
 @property (nonatomic, readonly) BOOL    YButtonValue;
+@property (nonatomic, readonly) BOOL    rightShoulderValue;
 
 
 - (void)setControllerMode:(TBControllerMode)aControllerMode;
+- (TBControllerMode)controllerMode;
 
 
 @end

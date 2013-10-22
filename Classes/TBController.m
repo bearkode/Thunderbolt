@@ -9,6 +9,7 @@
 
 #import "TBController.h"
 #import <CoreMotion/CoreMotion.h>
+#import <GameController/GameController.h>
 
 
 @implementation TBController
@@ -21,18 +22,37 @@
     BOOL             mBButtonValue;
     BOOL             mXButtonValue;
     BOOL             mYButtonValue;
+    BOOL             mRightShoulderValue;
 
     /* HW Controller */
     CMMotionManager *mMotionManager;
+    GCGamepad       *mGamepad;
 }
 
 
-@synthesize xAxisValue   = mXAxisValue;
-@synthesize yAxisValue   = mYAxisValue;
-@synthesize AButtonValue = mAButtonValue;
-@synthesize BButtonValue = mBButtonValue;
-@synthesize XButtonValue = mXButtonValue;
-@synthesize YButtonValue = mYButtonValue;
+@synthesize xAxisValue         = mXAxisValue;
+@synthesize yAxisValue         = mYAxisValue;
+@synthesize AButtonValue       = mAButtonValue;
+@synthesize BButtonValue       = mBButtonValue;
+@synthesize XButtonValue       = mXButtonValue;
+@synthesize YButtonValue       = mYButtonValue;
+@synthesize rightShoulderValue = mRightShoulderValue;
+
+
+#pragma mark -
+
+
+- (BOOL)detectGameController
+{
+    if ([[GCController controllers] count] > 0)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
 
 
 #pragma mark -
@@ -44,7 +64,19 @@
     
     if (self)
     {
-    
+        NSNotificationCenter *sNotiCenter = [NSNotificationCenter defaultCenter];
+
+        [sNotiCenter addObserver:self selector:@selector(gameControllerDidConnectNotification:) name:GCControllerDidConnectNotification object:nil];
+        [sNotiCenter addObserver:self selector:@selector(gameControllerDidDisconnectNotification:) name:GCControllerDidDisconnectNotification object:nil];
+
+        if ([self detectGameController])
+        {
+            [self setControllerMode:kTBControllerModeGamepad];
+        }
+        else
+        {
+            [self setControllerMode:kTBControllerModeMotion];
+        }
     }
     
     return self;
@@ -53,6 +85,8 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     [mMotionManager stopAccelerometerUpdates];
     [mMotionManager release];
     
@@ -71,6 +105,13 @@
         [mMotionManager release];
         mMotionManager = nil;
     }
+    else if (mControllerMode == kTBControllerModeGamepad)
+    {
+        [[mGamepad dpad] setValueChangedHandler:NULL];
+        [[mGamepad buttonA] setValueChangedHandler:NULL];
+        [[mGamepad rightShoulder] setValueChangedHandler:NULL];
+        mGamepad = nil;
+    }
 }
 
 
@@ -88,6 +129,23 @@
             mYAxisValue = (mYAxisValue < -1.0) ? -1.0 : mYAxisValue;
         }];
     }
+    else if (mControllerMode == kTBControllerModeGamepad)
+    {
+        mGamepad = [[[GCController controllers] objectAtIndex:0] gamepad];
+        
+        [[mGamepad dpad] setValueChangedHandler:^(GCControllerDirectionPad *aDpad, float aXValue, float aYValue) {
+            mXAxisValue = -aXValue / 1.5;
+            mYAxisValue = aYValue / 1.5;
+        }];
+
+        [[mGamepad buttonA] setValueChangedHandler:^(GCControllerButtonInput *aButton, float aValue, BOOL aPressed) {
+            mAButtonValue = aPressed;
+        }];
+        
+        [[mGamepad rightShoulder] setValueChangedHandler:^(GCControllerButtonInput *aButton, float aValue, BOOL aPressed) {
+            mRightShoulderValue = aPressed;
+        }];
+    }
 }
 
 
@@ -96,6 +154,8 @@
 
 - (void)setControllerMode:(TBControllerMode)aControllerMode
 {
+    NSLog(@"setControllerMode: %d", aControllerMode);
+    
     if (mControllerMode != aControllerMode)
     {
         [self controllerModeWillChange];
@@ -104,6 +164,35 @@
         
         [self controllerModeDidChange];
     }
+}
+
+
+- (TBControllerMode)controllerMode
+{
+    return mControllerMode;
+}
+
+
+#pragma mark -
+
+
+- (void)gameControllerDidConnectNotification:(NSNotification *)aNotification
+{
+//    NSDictionary *sUserInfo = [aNotification userInfo];
+//    
+//    NSLog(@"%@", [NSString stringWithFormat:@"connect = %@", sUserInfo]);
+
+    [self setControllerMode:kTBControllerModeGamepad];
+}
+
+
+- (void)gameControllerDidDisconnectNotification:(NSNotification *)aNotification
+{
+//    NSDictionary *sUserInfo = [aNotification userInfo];
+//    
+//    NSLog(@"%@", [NSString stringWithFormat:@"disconnect = %@", sUserInfo]);
+    
+    [self setControllerMode:kTBControllerModeMotion];
 }
 
 
