@@ -25,9 +25,13 @@
 #import "TBHelicopterInfo.h"
 #import "TBBase.h"
 #import "TBHitPointsBar.h"
+#import "TBAmmoView.h"
+#import "TBBombChamber.h"
+#import "TBGatlingGun.h"
 
 #import "TBEventView.h"
 #import "TBController.h"
+#import "TBButton.h"
 
 
 #if (1)
@@ -46,11 +50,12 @@
     /*  User Interface : not retained  */
     TBEventView          *mEventView;
     
-    UILabel              *mAmmoLabel;
+//    UILabel              *mAmmoLabel;
+    TBAmmoView           *mAmmoView;
     UILabel              *mScoreLabel;
     UILabel              *mMoneyLabel;
-    UIButton             *mTankButton;
-    UIButton             *mAmmoButton;
+    TBButton             *mTankButton;
+    TBButton             *mAmmoButton;
     TBHitPointsBar       *mHitPointBar;
     
     TBRadar              *mRadar;
@@ -91,19 +96,17 @@
     [mHitPointBar setLocation:CGPointMake(10, 44)];
     [[self controlView] addSubview:mHitPointBar];
     
-    mAmmoLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 50, 140, 30)] autorelease];
-    [mAmmoLabel setAutoresizingMask:(UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin)];
-    [mAmmoLabel setBackgroundColor:sBackColor];
-    [mAmmoLabel setTextColor:[UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.5]];
-    [mAmmoLabel setFont:sFont];
-    [[self controlView] addSubview:mAmmoLabel];
+    mAmmoView = [[[TBAmmoView alloc] init] autorelease];
+    [mAmmoView setFrame:CGRectMake(10, 60, 100, 50)];
+    [[self controlView] addSubview:mAmmoView];
     
-    mScoreLabel = [[[UILabel alloc] initWithFrame:CGRectMake(sBounds.size.width - 300, 40, 100, 30)] autorelease];
-    [mScoreLabel setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin)];
+    mScoreLabel = [[[UILabel alloc] initWithFrame:CGRectMake(sBounds.size.width / 2.0 - 50, 40, 100, 30)] autorelease];
+    [mScoreLabel setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin)];
     [mScoreLabel setBackgroundColor:sBackColor];
-    [mScoreLabel setTextColor:[UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.5]];
-    [mScoreLabel setFont:sFont];
+    [mScoreLabel setTextColor:[UIColor colorWithRed:1.0 green:0.58 blue:0.0 alpha:0.5]];
+    [mScoreLabel setFont:[UIFont fontWithName:@"LetsgoDigital-Regular" size:30]];
     [mScoreLabel setTextAlignment:NSTextAlignmentCenter];
+    [mScoreLabel setText:@"0"];
     [[self controlView] addSubview:mScoreLabel];
     
     mMoneyLabel = [[[UILabel alloc] initWithFrame:CGRectMake(sBounds.size.width - 130, 40, 120, 30)] autorelease];
@@ -114,18 +117,24 @@
     [mMoneyLabel setTextAlignment:NSTextAlignmentRight];
     [[self controlView] addSubview:mMoneyLabel];
     
-    mTankButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    mTankButton = [TBButton buttonWithType:UIButtonTypeCustom];
+    [mTankButton setBackgroundImage:[UIImage imageNamed:@"button_small"] forState:UIControlStateNormal];
+    [mTankButton setBackgroundImage:[UIImage imageNamed:@"button_small"] forState:UIControlStateHighlighted];
     [mTankButton setFrame:CGRectMake(10, sBounds.size.height - 35, 60, 30)];
     [mTankButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
     [mTankButton setTitle:@"Tank" forState:UIControlStateNormal];
     [mTankButton addTarget:self action:@selector(tankButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [mTankButton setAnimated:YES];
     [[self controlView] addSubview:mTankButton];
     
-    mAmmoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [mAmmoButton setFrame:CGRectMake(410, sBounds.size.height - 35, 60, 30)];
+    mAmmoButton = [TBButton buttonWithType:UIButtonTypeCustom];
+    [mAmmoButton setBackgroundImage:[UIImage imageNamed:@"button_small"] forState:UIControlStateNormal];
+    [mAmmoButton setBackgroundImage:[UIImage imageNamed:@"button_small"] forState:UIControlStateHighlighted];
+    [mAmmoButton setFrame:CGRectMake(sBounds.size.width - (10 + 60), sBounds.size.height - 35, 60, 30)];
     [mAmmoButton setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin)];
-    [mAmmoButton setTitle:@"Ammo" forState:UIControlStateNormal];
+    [mAmmoButton setImage:[UIImage imageNamed:@"gatling_gun_ico"] forState:UIControlStateNormal];
     [mAmmoButton addTarget:self action:@selector(ammoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [mAmmoButton setAnimated:YES];
     [[self controlView] addSubview:mAmmoButton];
 }
 
@@ -172,12 +181,12 @@
 - (void)updateAmmoLabel
 {
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
-    NSString     *sAmmoText;
     
     if (sHelicopter)
     {
-        sAmmoText = [NSString stringWithFormat:@"V:%d B:%d", [sHelicopter bulletCount], [sHelicopter bombCount]];
-        [mAmmoLabel setText:sAmmoText];
+        [mAmmoView setBulletCount:[sHelicopter bulletCount]];
+        [mAmmoView setBombCount:[sHelicopter bombCount]];
+        
         [mHitPointBar setHitPoint:[sHelicopter damageRate]];
     }
 }
@@ -341,6 +350,15 @@
     TBHelicopter *sHelicopter = [[TBUnitManager sharedManager] allyHelicopter];
     
     [sHelicopter selectNextWeapon];
+    
+    if ([[sHelicopter selectedWeapon] isKindOfClass:[TBBombChamber class]])
+    {
+        [mAmmoButton setImage:[UIImage imageNamed:@"bomb_ico"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [mAmmoButton setImage:[UIImage imageNamed:@"gatling_gun_ico"] forState:UIControlStateNormal];
+    }
 }
 
 

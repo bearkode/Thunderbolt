@@ -23,6 +23,7 @@
 @property (nonatomic, readonly) PBNode *unitLayer;
 @property (nonatomic, readonly) PBNode *structureLayer;
 @property (nonatomic, readonly) PBNode *backgroundLayer;
+@property (nonatomic, readonly) PBNode *cloudLayer;
 
 
 - (NSArray *)layers;

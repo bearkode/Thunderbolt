@@ -23,6 +23,7 @@
     PBNode *mUnitLayer;
     PBNode *mStructureLayer;
     PBNode *mBackgroundLayer;
+    PBNode *mCloudLayer;
 }
 
 
@@ -35,6 +36,7 @@
 @synthesize unitLayer       = mUnitLayer;
 @synthesize structureLayer  = mStructureLayer;
 @synthesize backgroundLayer = mBackgroundLayer;
+@synthesize cloudLayer      = mCloudLayer;
 
 
 #pragma mark -
@@ -77,6 +79,7 @@
         mUnitLayer       = [[PBNode alloc] init];
         mStructureLayer  = [[PBNode alloc] init];
         mBackgroundLayer = [[PBNode alloc] init];
+        mCloudLayer      = [[PBNode alloc] init];
         
         [self setupBackgroundLayer];
     }
@@ -96,6 +99,7 @@
     [mUnitLayer release];
     [mStructureLayer release];
     [mBackgroundLayer release];
+    [mCloudLayer release];
     
     [super dealloc];
 }
@@ -106,7 +110,7 @@
 
 - (NSArray *)layers
 {
-    return @[mBackgroundLayer, mStructureLayer, mUnitLayer, mExplosionLayer, mWarheadLayer, mSmokeLayer, mEffectLayer, mInterfaceLayer, mRadarLayer];
+    return @[mCloudLayer, mBackgroundLayer, mStructureLayer, mUnitLayer, mExplosionLayer, mWarheadLayer, mSmokeLayer, mEffectLayer, mInterfaceLayer, mRadarLayer];
 }
 
 
