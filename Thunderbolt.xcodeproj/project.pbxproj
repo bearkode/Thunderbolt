@@ -91,6 +91,19 @@
 		2EF7C3A51816229A0001009C /* energy_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A11816229A0001009C /* energy_r@2x.png */; };
 		2EF7C3A61816229A0001009C /* energy_y.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A21816229A0001009C /* energy_y.png */; };
 		2EF7C3A71816229A0001009C /* energy_y@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A31816229A0001009C /* energy_y@2x.png */; };
+		2EF7C3AA181628BE0001009C /* gatling_gun_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A8181628BE0001009C /* gatling_gun_ico.png */; };
+		2EF7C3AB181628BE0001009C /* gatling_gun_ico@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A9181628BE0001009C /* gatling_gun_ico@2x.png */; };
+		2EF7C3AE181628C50001009C /* bomb_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3AC181628C50001009C /* bomb_ico.png */; };
+		2EF7C3AF181628C50001009C /* bomb_ico@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3AD181628C50001009C /* bomb_ico@2x.png */; };
+		2EF7C3B2181628FA0001009C /* TBAmmoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF7C3B1181628FA0001009C /* TBAmmoView.m */; };
+		2EF7C3B5181643D80001009C /* button_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3B3181643D80001009C /* button_small.png */; };
+		2EF7C3B6181643D80001009C /* button_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3B4181643D80001009C /* button_small@2x.png */; };
+		2EF7C3B91816461D0001009C /* TBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF7C3B81816461D0001009C /* TBButton.m */; };
+		2EF7C3BE181648F80001009C /* cloud1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3BA181648F80001009C /* cloud1.png */; };
+		2EF7C3BF181648F80001009C /* cloud1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3BB181648F80001009C /* cloud1@2x.png */; };
+		2EF7C3C0181648F80001009C /* cloud2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3BC181648F80001009C /* cloud2.png */; };
+		2EF7C3C1181648F80001009C /* cloud2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3BD181648F80001009C /* cloud2@2x.png */; };
+		2EF7C3C4181649820001009C /* TBCloudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF7C3C3181649820001009C /* TBCloudLayer.m */; };
 		2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */; };
 		2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43CA17167CA000CC376E /* ProfilingOverlayView.m */; };
 		A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFA6D1194D9ED00DA0139 /* TBMissile.m */; };
@@ -292,6 +305,22 @@
 		2EF7C3A11816229A0001009C /* energy_r@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energy_r@2x.png"; sourceTree = "<group>"; };
 		2EF7C3A21816229A0001009C /* energy_y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = energy_y.png; sourceTree = "<group>"; };
 		2EF7C3A31816229A0001009C /* energy_y@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energy_y@2x.png"; sourceTree = "<group>"; };
+		2EF7C3A8181628BE0001009C /* gatling_gun_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gatling_gun_ico.png; sourceTree = "<group>"; };
+		2EF7C3A9181628BE0001009C /* gatling_gun_ico@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gatling_gun_ico@2x.png"; sourceTree = "<group>"; };
+		2EF7C3AC181628C50001009C /* bomb_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb_ico.png; sourceTree = "<group>"; };
+		2EF7C3AD181628C50001009C /* bomb_ico@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb_ico@2x.png"; sourceTree = "<group>"; };
+		2EF7C3B0181628FA0001009C /* TBAmmoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAmmoView.h; sourceTree = "<group>"; };
+		2EF7C3B1181628FA0001009C /* TBAmmoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAmmoView.m; sourceTree = "<group>"; };
+		2EF7C3B3181643D80001009C /* button_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_small.png; sourceTree = "<group>"; };
+		2EF7C3B4181643D80001009C /* button_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_small@2x.png"; sourceTree = "<group>"; };
+		2EF7C3B71816461D0001009C /* TBButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBButton.h; sourceTree = "<group>"; };
+		2EF7C3B81816461D0001009C /* TBButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBButton.m; sourceTree = "<group>"; };
+		2EF7C3BA181648F80001009C /* cloud1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud1.png; sourceTree = "<group>"; };
+		2EF7C3BB181648F80001009C /* cloud1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud1@2x.png"; sourceTree = "<group>"; };
+		2EF7C3BC181648F80001009C /* cloud2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud2.png; sourceTree = "<group>"; };
+		2EF7C3BD181648F80001009C /* cloud2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud2@2x.png"; sourceTree = "<group>"; };
+		2EF7C3C2181649820001009C /* TBCloudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCloudLayer.h; sourceTree = "<group>"; };
+		2EF7C3C3181649820001009C /* TBCloudLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCloudLayer.m; sourceTree = "<group>"; };
 		2EFB43C617167C1B00CC376E /* ProfilingOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilingOverlay.h; sourceTree = "<group>"; };
 		2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilingOverlay.m; sourceTree = "<group>"; };
 		2EFB43C917167CA000CC376E /* ProfilingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilingOverlayView.h; sourceTree = "<group>"; };
@@ -517,6 +546,8 @@
 				2E61B849180CD82200D20D3E /* TBSceneController.m */,
 				2E61B84B180CD91B00D20D3E /* TBViewController.h */,
 				2E61B84C180CD91B00D20D3E /* TBViewController.m */,
+				2EF7C3B71816461D0001009C /* TBButton.h */,
+				2EF7C3B81816461D0001009C /* TBButton.m */,
 			);
 			name = Foundation;
 			sourceTree = "<group>";
@@ -536,6 +567,10 @@
 				2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */,
 				2EF7C39D181611E10001009C /* TBHitPointsBar.h */,
 				2EF7C39E181611E10001009C /* TBHitPointsBar.m */,
+				2EF7C3B0181628FA0001009C /* TBAmmoView.h */,
+				2EF7C3B1181628FA0001009C /* TBAmmoView.m */,
+				2EF7C3C2181649820001009C /* TBCloudLayer.h */,
+				2EF7C3C3181649820001009C /* TBCloudLayer.m */,
 			);
 			name = BattleViewController;
 			sourceTree = "<group>";
@@ -751,6 +786,16 @@
 				2EF7C3A11816229A0001009C /* energy_r@2x.png */,
 				2EF7C3A21816229A0001009C /* energy_y.png */,
 				2EF7C3A31816229A0001009C /* energy_y@2x.png */,
+				2EF7C3A8181628BE0001009C /* gatling_gun_ico.png */,
+				2EF7C3A9181628BE0001009C /* gatling_gun_ico@2x.png */,
+				2EF7C3AC181628C50001009C /* bomb_ico.png */,
+				2EF7C3AD181628C50001009C /* bomb_ico@2x.png */,
+				2EF7C3B3181643D80001009C /* button_small.png */,
+				2EF7C3B4181643D80001009C /* button_small@2x.png */,
+				2EF7C3BA181648F80001009C /* cloud1.png */,
+				2EF7C3BB181648F80001009C /* cloud1@2x.png */,
+				2EF7C3BC181648F80001009C /* cloud2.png */,
+				2EF7C3BD181648F80001009C /* cloud2@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -935,6 +980,8 @@
 				A7303C33111336A10097B02E /* bullet.png in Resources */,
 				A7C62ABF1115CEE800F31E63 /* enemy_tank_shoot.png in Resources */,
 				2EF7C39C181610360001009C /* energy@2x.png in Resources */,
+				2EF7C3AE181628C50001009C /* bomb_ico.png in Resources */,
+				2EF7C3AF181628C50001009C /* bomb_ico@2x.png in Resources */,
 				A7BC32E51119BF6A0052D1BA /* bomb.png in Resources */,
 				A7C78F69111E212C004A2F37 /* heli.caf in Resources */,
 				A720E4F8111E2A6D00CA7792 /* Valkyries.3gp in Resources */,
@@ -950,6 +997,7 @@
 				A720E71F111F725700CA7792 /* bomb_exp01.png in Resources */,
 				2E08E834180FB37A005FF876 /* repair.png in Resources */,
 				A720E720111F725700CA7792 /* bomb_exp02.png in Resources */,
+				2EF7C3C0181648F80001009C /* cloud2.png in Resources */,
 				2E61B85F180D3AF100D20D3E /* button_h.png in Resources */,
 				A7AD01FA1122EE7300359C54 /* vulcan.caf in Resources */,
 				A785DD35112ACD6500487CCB /* bomb_explosion.caf in Resources */,
@@ -964,15 +1012,18 @@
 				A7BF98BC11DE25C5001F8F6B /* ally_tank_exp01.png in Resources */,
 				A7BF98BD11DE25C5001F8F6B /* ally_tank_exp02.png in Resources */,
 				2EF7C3A51816229A0001009C /* energy_r@2x.png in Resources */,
+				2EF7C3B6181643D80001009C /* button_small@2x.png in Resources */,
 				2E61B860180D3AF100D20D3E /* button_h@2x.png in Resources */,
 				A7BF98BE11DE25C5001F8F6B /* ally_tank_shoot.png in Resources */,
 				2E08E835180FB37A005FF876 /* repair@2x.png in Resources */,
 				A7BF98BF11DE25C5001F8F6B /* ally_tank.png in Resources */,
 				2EA6617F180E3C8D003E368B /* radar_back_m.png in Resources */,
+				2EF7C3C1181648F80001009C /* cloud2@2x.png in Resources */,
 				A7BF9D9211DF82F4001F8F6B /* AAGun00.png in Resources */,
 				2EA6617D180E3C8D003E368B /* radar_back_l.png in Resources */,
 				2EF7C3A41816229A0001009C /* energy_r.png in Resources */,
 				A7BF9D9311DF82F4001F8F6B /* AAGun01.png in Resources */,
+				2EF7C3BE181648F80001009C /* cloud1.png in Resources */,
 				A7BF9D9411DF82F4001F8F6B /* AAGun02.png in Resources */,
 				A7BF9D9511DF82F4001F8F6B /* AAGun03.png in Resources */,
 				A7BF9D9611DF82F4001F8F6B /* AAGun04.png in Resources */,
@@ -992,8 +1043,10 @@
 				2E009DAF1713069F00A362F2 /* Default-568h@2x.png in Resources */,
 				2E009DB01713069F00A362F2 /* Default@2x.png in Resources */,
 				2E009DB3171306DB00A362F2 /* Default.png in Resources */,
+				2EF7C3BF181648F80001009C /* cloud1@2x.png in Resources */,
 				2EE9C193172189EC00BB3D24 /* TBCheatViewController.xib in Resources */,
 				2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */,
+				2EF7C3B5181643D80001009C /* button_small.png in Resources */,
 				2E9BC21318111A4000680F01 /* digital_counter_7_italic.ttf in Resources */,
 				2E5E5FC017257E6400140A39 /* rifleman@2x.png in Resources */,
 				2E5E5FC31727432D00140A39 /* base.png in Resources */,
@@ -1005,6 +1058,8 @@
 				2E5E601A172C251B00140A39 /* SuperCobra.png in Resources */,
 				2E5E601B172C251B00140A39 /* SuperCobra@2x.png in Resources */,
 				2EF7C3A71816229A0001009C /* energy_y@2x.png in Resources */,
+				2EF7C3AA181628BE0001009C /* gatling_gun_ico.png in Resources */,
+				2EF7C3AB181628BE0001009C /* gatling_gun_ico@2x.png in Resources */,
 				2E5E601C172C251B00140A39 /* UH1.png in Resources */,
 				2EA6617E180E3C8D003E368B /* radar_back_l@2x.png in Resources */,
 				2E61B861180D3AF100D20D3E /* button_n.png in Resources */,
@@ -1036,10 +1091,12 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				A73DE74B110DF3BF008C1A67 /* TBSprite.m in Sources */,
 				A73DE9FD110E4E96008C1A67 /* TBHelicopter.m in Sources */,
+				2EF7C3B91816461D0001009C /* TBButton.m in Sources */,
 				A733A77B1111E26700FA6062 /* TBTank.m in Sources */,
 				A7303C0E111333A00097B02E /* TBBullet.m in Sources */,
 				A7C62A8B1115766100F31E63 /* TBUnit.m in Sources */,
 				A7BC32B01119B9100052D1BA /* TBBomb.m in Sources */,
+				2EF7C3B2181628FA0001009C /* TBAmmoView.m in Sources */,
 				A7BC332C1119C3E10052D1BA /* TBWarhead.m in Sources */,
 				A720E54A111EA68900CA7792 /* TBExplosion.m in Sources */,
 				A7AF9C85114005DB00726807 /* TBStructure.m in Sources */,
@@ -1085,6 +1142,7 @@
 				2EE9C19617218E0D00BB3D24 /* TBUserStatusManager.m in Sources */,
 				2EE9C1991722C28500BB3D24 /* TBHelicopterInfo.m in Sources */,
 				2E33AB8C172530F900DE26D5 /* TBBombChamber.m in Sources */,
+				2EF7C3C4181649820001009C /* TBCloudLayer.m in Sources */,
 				2E33AB8F1725322D00DE26D5 /* TBRocketLauncher.m in Sources */,
 				2E33AB921725397C00DE26D5 /* TBGatlingGun.m in Sources */,
 				2EB4E97B1741265A009EDFBB /* TBSmoke.m in Sources */,

@@ -10,6 +10,7 @@
 #import "TBBattleLayerManager.h"
 #import <PBKit.h>
 #import "TBGameConst.h"
+#import "TBCloudLayer.h"
 
 
 @implementation TBBattleLayerManager
@@ -79,7 +80,7 @@
         mUnitLayer       = [[PBNode alloc] init];
         mStructureLayer  = [[PBNode alloc] init];
         mBackgroundLayer = [[PBNode alloc] init];
-        mCloudLayer      = [[PBNode alloc] init];
+        mCloudLayer      = [[TBCloudLayer alloc] init];
         
         [self setupBackgroundLayer];
     }

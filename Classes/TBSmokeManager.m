@@ -57,10 +57,14 @@ SYNTHESIZE_SHARED_INSTANCE(TBSmokeManager, sharedManager)
         [mObjectPool finishUsing:sSmoke];
     }
     
+    [mSmokes removeAllObjects];
+    
     for (TBDamageSmoke *sSmoke in mDamageSmokes)
     {
         [mDamageSmokePool finishUsing:sSmoke];
     }
+    
+    [mDamageSmokes removeAllObjects];
 }
 
 
