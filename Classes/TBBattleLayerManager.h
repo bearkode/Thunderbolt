@@ -15,6 +15,7 @@
 
 
 @property (nonatomic, readonly) PBNode *radarLayer;
+@property (nonatomic, readonly) PBNode *interfaceLayer;
 @property (nonatomic, readonly) PBNode *effectLayer;
 @property (nonatomic, readonly) PBNode *smokeLayer;
 @property (nonatomic, readonly) PBNode *warheadLayer;

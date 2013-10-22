@@ -84,6 +84,13 @@
 		2EE9C19617218E0D00BB3D24 /* TBUserStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9C19517218E0D00BB3D24 /* TBUserStatusManager.m */; };
 		2EE9C1991722C28500BB3D24 /* TBHelicopterInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9C1981722C28400BB3D24 /* TBHelicopterInfo.m */; };
 		2EEC0BB5171EE8EA0063798C /* TBAssociativeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEC0BB4171EE8EA0063798C /* TBAssociativeArray.m */; };
+		2EF7C39B181610360001009C /* energy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C399181610360001009C /* energy.png */; };
+		2EF7C39C181610360001009C /* energy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C39A181610360001009C /* energy@2x.png */; };
+		2EF7C39F181611E10001009C /* TBHitPointsBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF7C39E181611E10001009C /* TBHitPointsBar.m */; };
+		2EF7C3A41816229A0001009C /* energy_r.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A01816229A0001009C /* energy_r.png */; };
+		2EF7C3A51816229A0001009C /* energy_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A11816229A0001009C /* energy_r@2x.png */; };
+		2EF7C3A61816229A0001009C /* energy_y.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A21816229A0001009C /* energy_y.png */; };
+		2EF7C3A71816229A0001009C /* energy_y@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF7C3A31816229A0001009C /* energy_y@2x.png */; };
 		2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */; };
 		2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43CA17167CA000CC376E /* ProfilingOverlayView.m */; };
 		A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFA6D1194D9ED00DA0139 /* TBMissile.m */; };
@@ -277,6 +284,14 @@
 		2EE9C1981722C28400BB3D24 /* TBHelicopterInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHelicopterInfo.m; sourceTree = "<group>"; };
 		2EEC0BB3171EE8EA0063798C /* TBAssociativeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAssociativeArray.h; sourceTree = "<group>"; };
 		2EEC0BB4171EE8EA0063798C /* TBAssociativeArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAssociativeArray.m; sourceTree = "<group>"; };
+		2EF7C399181610360001009C /* energy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = energy.png; sourceTree = "<group>"; };
+		2EF7C39A181610360001009C /* energy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energy@2x.png"; sourceTree = "<group>"; };
+		2EF7C39D181611E10001009C /* TBHitPointsBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBHitPointsBar.h; sourceTree = "<group>"; };
+		2EF7C39E181611E10001009C /* TBHitPointsBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHitPointsBar.m; sourceTree = "<group>"; };
+		2EF7C3A01816229A0001009C /* energy_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = energy_r.png; sourceTree = "<group>"; };
+		2EF7C3A11816229A0001009C /* energy_r@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energy_r@2x.png"; sourceTree = "<group>"; };
+		2EF7C3A21816229A0001009C /* energy_y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = energy_y.png; sourceTree = "<group>"; };
+		2EF7C3A31816229A0001009C /* energy_y@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energy_y@2x.png"; sourceTree = "<group>"; };
 		2EFB43C617167C1B00CC376E /* ProfilingOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilingOverlay.h; sourceTree = "<group>"; };
 		2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilingOverlay.m; sourceTree = "<group>"; };
 		2EFB43C917167CA000CC376E /* ProfilingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilingOverlayView.h; sourceTree = "<group>"; };
@@ -519,6 +534,8 @@
 				2E61B852180CE1FB00D20D3E /* TBBattleSceneController.m */,
 				2E61B854180CEDE900D20D3E /* TBBattleLayerManager.h */,
 				2E61B855180CEDE900D20D3E /* TBBattleLayerManager.m */,
+				2EF7C39D181611E10001009C /* TBHitPointsBar.h */,
+				2EF7C39E181611E10001009C /* TBHitPointsBar.m */,
 			);
 			name = BattleViewController;
 			sourceTree = "<group>";
@@ -728,6 +745,12 @@
 				2EB4E97D174126CF009EDFBB /* smoke@2x.png */,
 				2E08E832180FB37A005FF876 /* repair.png */,
 				2E08E833180FB37A005FF876 /* repair@2x.png */,
+				2EF7C399181610360001009C /* energy.png */,
+				2EF7C39A181610360001009C /* energy@2x.png */,
+				2EF7C3A01816229A0001009C /* energy_r.png */,
+				2EF7C3A11816229A0001009C /* energy_r@2x.png */,
+				2EF7C3A21816229A0001009C /* energy_y.png */,
+				2EF7C3A31816229A0001009C /* energy_y@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -911,6 +934,7 @@
 				A733A7581111E0BC00FA6062 /* enemy_tank.png in Resources */,
 				A7303C33111336A10097B02E /* bullet.png in Resources */,
 				A7C62ABF1115CEE800F31E63 /* enemy_tank_shoot.png in Resources */,
+				2EF7C39C181610360001009C /* energy@2x.png in Resources */,
 				A7BC32E51119BF6A0052D1BA /* bomb.png in Resources */,
 				A7C78F69111E212C004A2F37 /* heli.caf in Resources */,
 				A720E4F8111E2A6D00CA7792 /* Valkyries.3gp in Resources */,
@@ -920,6 +944,7 @@
 				A720E545111EA5D700CA7792 /* enemy_tank_exp02.png in Resources */,
 				A720E71E111F725700CA7792 /* bomb_exp00.png in Resources */,
 				2E08E831180F90D1005FF876 /* bullet@2x.png in Resources */,
+				2EF7C39B181610360001009C /* energy.png in Resources */,
 				2EA66180180E3C8D003E368B /* radar_back_m@2x.png in Resources */,
 				2E61B862180D3AF100D20D3E /* button_n@2x.png in Resources */,
 				A720E71F111F725700CA7792 /* bomb_exp01.png in Resources */,
@@ -938,6 +963,7 @@
 				A7BF98BB11DE25C5001F8F6B /* ally_tank_exp00.png in Resources */,
 				A7BF98BC11DE25C5001F8F6B /* ally_tank_exp01.png in Resources */,
 				A7BF98BD11DE25C5001F8F6B /* ally_tank_exp02.png in Resources */,
+				2EF7C3A51816229A0001009C /* energy_r@2x.png in Resources */,
 				2E61B860180D3AF100D20D3E /* button_h@2x.png in Resources */,
 				A7BF98BE11DE25C5001F8F6B /* ally_tank_shoot.png in Resources */,
 				2E08E835180FB37A005FF876 /* repair@2x.png in Resources */,
@@ -945,6 +971,7 @@
 				2EA6617F180E3C8D003E368B /* radar_back_m.png in Resources */,
 				A7BF9D9211DF82F4001F8F6B /* AAGun00.png in Resources */,
 				2EA6617D180E3C8D003E368B /* radar_back_l.png in Resources */,
+				2EF7C3A41816229A0001009C /* energy_r.png in Resources */,
 				A7BF9D9311DF82F4001F8F6B /* AAGun01.png in Resources */,
 				A7BF9D9411DF82F4001F8F6B /* AAGun02.png in Resources */,
 				A7BF9D9511DF82F4001F8F6B /* AAGun03.png in Resources */,
@@ -972,10 +999,12 @@
 				2E5E5FC31727432D00140A39 /* base.png in Resources */,
 				2E5E6006172AC91000140A39 /* AH1.png in Resources */,
 				2E5E6007172AC91000140A39 /* AH1@2x.png in Resources */,
+				2EF7C3A61816229A0001009C /* energy_y.png in Resources */,
 				2E5E600D172AF39C00140A39 /* 500MD.m4a in Resources */,
 				2E5E6013172B508400140A39 /* 500MD4.caf in Resources */,
 				2E5E601A172C251B00140A39 /* SuperCobra.png in Resources */,
 				2E5E601B172C251B00140A39 /* SuperCobra@2x.png in Resources */,
+				2EF7C3A71816229A0001009C /* energy_y@2x.png in Resources */,
 				2E5E601C172C251B00140A39 /* UH1.png in Resources */,
 				2EA6617E180E3C8D003E368B /* radar_back_l@2x.png in Resources */,
 				2E61B861180D3AF100D20D3E /* button_n.png in Resources */,
@@ -1025,6 +1054,7 @@
 				A71FFC5211965E4300DA0139 /* TBExplosionManager.m in Sources */,
 				A725CC2A119D9AF800276F35 /* TBWeapon.m in Sources */,
 				A725CC36119D9BC400276F35 /* TBVulcan.m in Sources */,
+				2EF7C39F181611E10001009C /* TBHitPointsBar.m in Sources */,
 				A79BD780119F66F20021574B /* TBArmoredVehicle.m in Sources */,
 				A7B5AB19119FD00E00FC9F33 /* TBMissileLauncher.m in Sources */,
 				A75A5C09119FF7AE002B9360 /* TBTankGun.m in Sources */,

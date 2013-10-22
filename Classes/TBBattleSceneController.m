@@ -24,6 +24,7 @@
 #import "TBHelicopter.h"
 #import "TBHelicopterInfo.h"
 #import "TBBase.h"
+#import "TBHitPointsBar.h"
 
 #import "TBEventView.h"
 #import "TBController.h"
@@ -50,7 +51,8 @@
     UILabel              *mMoneyLabel;
     UIButton             *mTankButton;
     UIButton             *mAmmoButton;
-
+    TBHitPointsBar       *mHitPointBar;
+    
     TBRadar              *mRadar;
     TBHelicopterInfo     *mHeliInfo;
     
@@ -84,7 +86,12 @@
 //        }
 //    }
     
-    mAmmoLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 40, 140, 30)] autorelease];
+    mHitPointBar = [[[TBHitPointsBar alloc] init] autorelease];
+    [mHitPointBar setAutoresizingMask:(UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin)];
+    [mHitPointBar setLocation:CGPointMake(10, 44)];
+    [[self controlView] addSubview:mHitPointBar];
+    
+    mAmmoLabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 50, 140, 30)] autorelease];
     [mAmmoLabel setAutoresizingMask:(UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin)];
     [mAmmoLabel setBackgroundColor:sBackColor];
     [mAmmoLabel setTextColor:[UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.5]];
@@ -116,7 +123,7 @@
     
     mAmmoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [mAmmoButton setFrame:CGRectMake(410, sBounds.size.height - 35, 60, 30)];
-    [mAmmoButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
+    [mAmmoButton setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin)];
     [mAmmoButton setTitle:@"Ammo" forState:UIControlStateNormal];
     [mAmmoButton addTarget:self action:@selector(ammoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [[self controlView] addSubview:mAmmoButton];
@@ -134,8 +141,6 @@
     [[TBStructureManager sharedManager] addAAGunSiteWithTeam:kTBTeamEnemy position:kMaxMapXPos - 800];
     [[TBStructureManager sharedManager] addAAGunSiteWithTeam:kTBTeamEnemy position:kMaxMapXPos - 1500];
 }
-
-
 
 
 - (void)setupRadarLayer
@@ -171,8 +176,9 @@
     
     if (sHelicopter)
     {
-        sAmmoText = [NSString stringWithFormat:@"V:%d B:%d D:%3.2f", [sHelicopter bulletCount], [sHelicopter bombCount], [sHelicopter damageRate]];
+        sAmmoText = [NSString stringWithFormat:@"V:%d B:%d", [sHelicopter bulletCount], [sHelicopter bombCount]];
         [mAmmoLabel setText:sAmmoText];
+        [mHitPointBar setHitPoint:[sHelicopter damageRate]];
     }
 }
 

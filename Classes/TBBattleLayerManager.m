@@ -15,6 +15,7 @@
 @implementation TBBattleLayerManager
 {
     PBNode *mRadarLayer;
+    PBNode *mInterfaceLayer;
     PBNode *mEffectLayer;
     PBNode *mSmokeLayer;
     PBNode *mWarheadLayer;
@@ -26,6 +27,7 @@
 
 
 @synthesize radarLayer      = mRadarLayer;
+@synthesize interfaceLayer  = mInterfaceLayer;
 @synthesize effectLayer     = mEffectLayer;
 @synthesize smokeLayer      = mSmokeLayer;
 @synthesize warheadLayer    = mWarheadLayer;
@@ -67,6 +69,7 @@
     if (self)
     {
         mRadarLayer      = [[PBNode alloc] init];
+        mInterfaceLayer  = [[PBNode alloc] init];
         mEffectLayer     = [[PBNode alloc] init];
         mSmokeLayer      = [[PBNode alloc] init];
         mWarheadLayer    = [[PBNode alloc] init];
@@ -85,6 +88,7 @@
 - (void)dealloc
 {
     [mRadarLayer release];
+    [mInterfaceLayer release];
     [mEffectLayer release];
     [mSmokeLayer release];
     [mWarheadLayer release];
@@ -102,7 +106,7 @@
 
 - (NSArray *)layers
 {
-    return @[mBackgroundLayer, mStructureLayer, mUnitLayer, mExplosionLayer, mWarheadLayer, mSmokeLayer, mEffectLayer, mRadarLayer];
+    return @[mBackgroundLayer, mStructureLayer, mUnitLayer, mExplosionLayer, mWarheadLayer, mSmokeLayer, mEffectLayer, mInterfaceLayer, mRadarLayer];
 }
 
 
