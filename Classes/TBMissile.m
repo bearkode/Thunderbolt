@@ -118,8 +118,8 @@ const CGFloat   kMissileAcceleration = 0.1;
     else
     {
         sPoint.x += sX;
-        sPoint.y -= 7.0;
-        mSpeed = (mSpeed <= 0) ? 0.0 : mSpeed - 0.1;
+        sPoint.y -= 6.0;
+        mSpeed = (mSpeed <= 0) ? 0.0 : mSpeed - 0.01;
     }
 
     [self setAngle:sAngle3];

@@ -8,9 +8,14 @@
  */
 
 #import "TBCloudLayer.h"
+#import "TBGameConst.h"
 
 
 @implementation TBCloudLayer
+{
+    PBNode *mNearNode;
+    PBNode *mParNode;
+}
 
 
 - (id)init
@@ -19,32 +24,51 @@
     
     if (self)
     {
-        for (NSInteger i = 0; i < 20; i++)
-        {
-            PBSpriteNode *sCloudNode = [PBSpriteNode spriteNodeWithImageNamed:@"cloud1"];
-            CGPoint       sPoint     = CGPointZero;
-            
-            sPoint.x = arc4random() % 4000;
-            sPoint.y = arc4random() % 200;
-            
-            [sCloudNode setPoint:sPoint];
-            [sCloudNode setAlpha:0.8];
-            
-            [self addSubNode:sCloudNode];
-        }
+        mNearNode = [[[PBNode alloc] init] autorelease];
+        mParNode  = [[[PBNode alloc] init] autorelease];
 
-        for (NSInteger i = 0; i < 20; i++)
+        [self addSubNode:mParNode];
+        [self addSubNode:mNearNode];
+        
+        NSArray  *sNodes  = @[mNearNode, mParNode];
+        NSInteger sIndex = 0;
+        
+        for (PBNode *sNode in sNodes)
         {
-            PBSpriteNode *sCloudNode = [PBSpriteNode spriteNodeWithImageNamed:@"cloud2"];
-            CGPoint       sPoint     = CGPointZero;
+            NSInteger sWidth = (sIndex == 0) ? kMaxMapXPos : kMaxMapXPos / 2.0;
+            CGFloat   sScale = (sIndex == 0) ? 1.0 : 0.6;
             
-            sPoint.x = arc4random() % 4000;
-            sPoint.y = arc4random() % 200;
+            sIndex++;
             
-            [sCloudNode setPoint:sPoint];
-            [sCloudNode setAlpha:0.8];
+            for (NSInteger i = 0; i < 10; i++)
+            {
+                PBSpriteNode *sCloudNode = [PBSpriteNode spriteNodeWithImageNamed:@"cloud1"];
+                CGPoint       sPoint     = CGPointZero;
+                
+                sPoint.x = arc4random() % sWidth;
+                sPoint.y = arc4random() % 300;
+                
+                [sCloudNode setPoint:sPoint];
+                [sCloudNode setAlpha:0.8];
+                [sCloudNode setScale:PBVertex3Make(sScale, sScale, 1.0)];
+                
+                [sNode addSubNode:sCloudNode];
+            }
             
-            [self addSubNode:sCloudNode];
+            for (NSInteger i = 0; i < 10; i++)
+            {
+                PBSpriteNode *sCloudNode = [PBSpriteNode spriteNodeWithImageNamed:@"cloud2"];
+                CGPoint       sPoint     = CGPointZero;
+                
+                sPoint.x = arc4random() % sWidth;
+                sPoint.y = arc4random() % 300;
+                
+                [sCloudNode setPoint:sPoint];
+                [sCloudNode setAlpha:0.8];
+                [sCloudNode setScale:PBVertex3Make(sScale, sScale, 1.0)];
+
+                [sNode addSubNode:sCloudNode];
+            }
         }
     }
     
@@ -55,6 +79,14 @@
 - (void)dealloc
 {
     [super dealloc];
+}
+
+
+- (void)updateWithCameraPositioin:(CGPoint)aCameraPosition
+{
+    CGFloat sX = aCameraPosition.x / kMaxMapXPos * 2000;
+    
+    [mParNode setPoint:CGPointMake(sX, 0)];
 }
 
 

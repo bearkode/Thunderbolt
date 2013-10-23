@@ -13,4 +13,7 @@
 @interface TBCloudLayer : PBNode
 
 
+- (void)updateWithCameraPositioin:(CGPoint)aCameraPosition;
+
+
 @end

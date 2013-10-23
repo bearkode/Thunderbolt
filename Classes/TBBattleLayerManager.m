@@ -15,16 +15,16 @@
 
 @implementation TBBattleLayerManager
 {
-    PBNode *mRadarLayer;
-    PBNode *mInterfaceLayer;
-    PBNode *mEffectLayer;
-    PBNode *mSmokeLayer;
-    PBNode *mWarheadLayer;
-    PBNode *mExplosionLayer;
-    PBNode *mUnitLayer;
-    PBNode *mStructureLayer;
-    PBNode *mBackgroundLayer;
-    PBNode *mCloudLayer;
+    PBNode       *mRadarLayer;
+    PBNode       *mInterfaceLayer;
+    PBNode       *mEffectLayer;
+    PBNode       *mSmokeLayer;
+    PBNode       *mWarheadLayer;
+    PBNode       *mExplosionLayer;
+    PBNode       *mUnitLayer;
+    PBNode       *mStructureLayer;
+    PBNode       *mBackgroundLayer;
+    TBCloudLayer *mCloudLayer;
 }
 
 

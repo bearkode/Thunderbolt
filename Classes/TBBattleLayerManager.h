@@ -11,19 +11,22 @@
 #import <PBKit.h>
 
 
+@class TBCloudLayer;
+
+
 @interface TBBattleLayerManager : NSObject
 
 
-@property (nonatomic, readonly) PBNode *radarLayer;
-@property (nonatomic, readonly) PBNode *interfaceLayer;
-@property (nonatomic, readonly) PBNode *effectLayer;
-@property (nonatomic, readonly) PBNode *smokeLayer;
-@property (nonatomic, readonly) PBNode *warheadLayer;
-@property (nonatomic, readonly) PBNode *explosionLayer;
-@property (nonatomic, readonly) PBNode *unitLayer;
-@property (nonatomic, readonly) PBNode *structureLayer;
-@property (nonatomic, readonly) PBNode *backgroundLayer;
-@property (nonatomic, readonly) PBNode *cloudLayer;
+@property (nonatomic, readonly) PBNode       *radarLayer;
+@property (nonatomic, readonly) PBNode       *interfaceLayer;
+@property (nonatomic, readonly) PBNode       *effectLayer;
+@property (nonatomic, readonly) PBNode       *smokeLayer;
+@property (nonatomic, readonly) PBNode       *warheadLayer;
+@property (nonatomic, readonly) PBNode       *explosionLayer;
+@property (nonatomic, readonly) PBNode       *unitLayer;
+@property (nonatomic, readonly) PBNode       *structureLayer;
+@property (nonatomic, readonly) PBNode       *backgroundLayer;
+@property (nonatomic, readonly) TBCloudLayer *cloudLayer;
 
 
 - (NSArray *)layers;

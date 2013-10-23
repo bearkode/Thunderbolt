@@ -265,7 +265,11 @@ const CGFloat    kAltitudeSensitivity = 7.0;
     else
     {
         mSpeed = 0;
-        [self setAngle:PBVertex3Make(0, 0, 0)];
+        
+        if ([self state] == kTBUnitStateNormal)
+        {
+            [self setAngle:PBVertex3Make(0, 0, 0)];
+        }
     }
     
     aPoint.x = (aPoint.x < kMinMapXPos) ? kMinMapXPos : aPoint.x;

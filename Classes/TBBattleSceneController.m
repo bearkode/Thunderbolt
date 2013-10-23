@@ -33,6 +33,8 @@
 #import "TBController.h"
 #import "TBButton.h"
 
+#import "TBCloudLayer.h"
+
 
 #if (1)
 #define kUnitDeployDuration (60 * 5)
@@ -408,6 +410,8 @@
     
     [mRadar setPoint:CGPointMake(mCameraXPos, 300.0)];
     [mRadar update];
+    
+    [[mLayerManager cloudLayer] updateWithCameraPositioin:sCameraPos];
 
     [self deployEnemyUnit];
     
