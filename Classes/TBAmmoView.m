@@ -63,13 +63,13 @@
 
 - (void)setBulletCount:(NSInteger)aBulletCount
 {
-    [mBulletLabel setText:[NSString stringWithFormat:@": %d", aBulletCount]];
+    [mBulletLabel setText:[NSString stringWithFormat:@": %d", (int)aBulletCount]];
 }
 
 
 - (void)setBombCount:(NSInteger)aBombCount
 {
-    [mBombLabel setText:[NSString stringWithFormat:@": %d", aBombCount]];
+    [mBombLabel setText:[NSString stringWithFormat:@": %d", (int)aBombCount]];
 }
 
 

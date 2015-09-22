@@ -33,7 +33,7 @@
 - (void)updateMoneyLabel
 {
     NSUInteger sMoney = [[TBMoneyManager sharedManager] balance];
-    NSString  *sText  = [[[NSString alloc] initWithFormat:@"Money = %d", sMoney] autorelease];
+    NSString  *sText  = [[[NSString alloc] initWithFormat:@"Money = %d", (int)sMoney] autorelease];
     
     [mMoneyLabel setText:sText];
 }

@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		2E009DAF1713069F00A362F2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAD1713069F00A362F2 /* Default-568h@2x.png */; };
-		2E009DB01713069F00A362F2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E009DAE1713069F00A362F2 /* Default@2x.png */; };
-		2E009DB3171306DB00A362F2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A720E51D111E5E8A00CA7792 /* Default.png */; };
 		2E015AD6180FBBC9001723C6 /* TBRepairIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E015AD5180FBBC9001723C6 /* TBRepairIndicator.m */; };
 		2E015AD9180FD38F001723C6 /* TBDamageSmoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E015AD8180FD38F001723C6 /* TBDamageSmoke.m */; };
 		2E08E82C180E7968005FF876 /* radar_move.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E08E82A180E7968005FF876 /* radar_move.png */; };
@@ -107,6 +104,7 @@
 		2EF7C3C5181658CD0001009C /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E696A901803CF15003A0AA4 /* GameController.framework */; };
 		2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */; };
 		2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43CA17167CA000CC376E /* ProfilingOverlayView.m */; };
+		55711F051BB10D040031DF50 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55711F041BB10D040031DF50 /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFA6D1194D9ED00DA0139 /* TBMissile.m */; };
 		A71FFA9D1194E6D800DA0139 /* missile.png in Resources */ = {isa = PBXBuildFile; fileRef = A71FFA9C1194E6D700DA0139 /* missile.png */; };
 		A71FFB7811961DCE00DA0139 /* TBWarheadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFB7711961DCE00DA0139 /* TBWarheadManager.m */; };
@@ -207,8 +205,6 @@
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2E009DAD1713069F00A362F2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		2E009DAE1713069F00A362F2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		2E015AD4180FBBC9001723C6 /* TBRepairIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBRepairIndicator.h; sourceTree = "<group>"; };
 		2E015AD5180FBBC9001723C6 /* TBRepairIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBRepairIndicator.m; sourceTree = "<group>"; };
 		2E015AD7180FD38F001723C6 /* TBDamageSmoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBDamageSmoke.h; sourceTree = "<group>"; };
@@ -327,6 +323,7 @@
 		2EFB43C917167CA000CC376E /* ProfilingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilingOverlayView.h; sourceTree = "<group>"; };
 		2EFB43CA17167CA000CC376E /* ProfilingOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilingOverlayView.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Thunderbolt_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thunderbolt_Prefix.pch; sourceTree = "<group>"; };
+		55711F041BB10D040031DF50 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Thunderbolt-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Thunderbolt-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A71FFA6C1194D9ED00DA0139 /* TBMissile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMissile.h; sourceTree = "<group>"; };
 		A71FFA6D1194D9ED00DA0139 /* TBMissile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMissile.m; sourceTree = "<group>"; };
@@ -336,7 +333,6 @@
 		A71FFC5011965E4300DA0139 /* TBExplosionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBExplosionManager.h; sourceTree = "<group>"; };
 		A71FFC5111965E4300DA0139 /* TBExplosionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBExplosionManager.m; sourceTree = "<group>"; };
 		A720E4F7111E2A6D00CA7792 /* Valkyries.3gp */ = {isa = PBXFileReference; lastKnownFileType = file; path = Valkyries.3gp; sourceTree = "<group>"; };
-		A720E51D111E5E8A00CA7792 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A720E522111E5FDF00CA7792 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A720E540111EA5D700CA7792 /* enemy_tank_exp00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_tank_exp00.png; sourceTree = "<group>"; };
 		A720E541111EA5D700CA7792 /* enemy_tank_exp01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_tank_exp01.png; sourceTree = "<group>"; };
@@ -515,6 +511,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55711F041BB10D040031DF50 /* Launch Screen.storyboard */,
 				2E9BC20F18111A4000680F01 /* Fonts */,
 				A73DE648110DE635008C1A67 /* Images */,
 				A7736AF8111B141200B9174C /* Sound */,
@@ -707,9 +704,6 @@
 		A73DE648110DE635008C1A67 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				A720E51D111E5E8A00CA7792 /* Default.png */,
-				2E009DAD1713069F00A362F2 /* Default-568h@2x.png */,
-				2E009DAE1713069F00A362F2 /* Default@2x.png */,
 				A720E522111E5FDF00CA7792 /* icon.png */,
 				2E61B85B180D3AF100D20D3E /* button_h.png */,
 				2E61B85C180D3AF100D20D3E /* button_h@2x.png */,
@@ -936,6 +930,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Tinybean;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = X24Z88XXU9;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Thunderbolt" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1015,6 +1014,7 @@
 				A7BF98BD11DE25C5001F8F6B /* ally_tank_exp02.png in Resources */,
 				2EF7C3A51816229A0001009C /* energy_r@2x.png in Resources */,
 				2EF7C3B6181643D80001009C /* button_small@2x.png in Resources */,
+				55711F051BB10D040031DF50 /* Launch Screen.storyboard in Resources */,
 				2E61B860180D3AF100D20D3E /* button_h@2x.png in Resources */,
 				A7BF98BE11DE25C5001F8F6B /* ally_tank_shoot.png in Resources */,
 				2E08E835180FB37A005FF876 /* repair@2x.png in Resources */,
@@ -1042,9 +1042,6 @@
 				A78A1CD711E9370A00DA9574 /* missile_exp02.png in Resources */,
 				A78A1D9D11EA150100DA9574 /* AAGunDestroyed.png in Resources */,
 				2E662D4F170E9DD20081DEC9 /* ground.png in Resources */,
-				2E009DAF1713069F00A362F2 /* Default-568h@2x.png in Resources */,
-				2E009DB01713069F00A362F2 /* Default@2x.png in Resources */,
-				2E009DB3171306DB00A362F2 /* Default.png in Resources */,
 				2EF7C3BF181648F80001009C /* cloud1@2x.png in Resources */,
 				2EE9C193172189EC00BB3D24 /* TBCheatViewController.xib in Resources */,
 				2E5E5FBF17257E6400140A39 /* rifleman.png in Resources */,
@@ -1168,8 +1165,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1178,7 +1175,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrisonBreak/PBKit/**";
 				INFOPLIST_FILE = "Thunderbolt-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Thunderbolt;
@@ -1192,15 +1189,15 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Byoung Chan Woo (8XTMY7L9V5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Thunderbolt_Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrisonBreak/PBKit/**";
 				INFOPLIST_FILE = "Thunderbolt-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Thunderbolt;
 				PROVISIONING_PROFILE = "";

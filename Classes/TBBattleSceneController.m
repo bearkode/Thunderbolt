@@ -196,13 +196,13 @@
 
 - (void)updateMoneyLabel:(NSUInteger)aSum
 {
-    [mMoneyLabel setText:[NSString stringWithFormat:@"$ %d", aSum]];
+    [mMoneyLabel setText:[NSString stringWithFormat:@"$ %d", (int)aSum]];
 }
 
 
 - (void)updateScoreLabel:(NSUInteger)aScore
 {
-    [mScoreLabel setText:[NSString stringWithFormat:@"%d", aScore]];
+    [mScoreLabel setText:[NSString stringWithFormat:@"%d", (int)aScore]];
 }
 
 
@@ -309,7 +309,7 @@
     
     [[self canvas] setDisplayFrameRate:kPBDisplayFrameRateHigh];
     [[self canvas] setBackgroundColor:[PBColor colorWithRed:0.2 green:0.3 blue:0.7 alpha:1.0]];
-    [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.height / 2, sBounds.size.width / 2)];
+    [[[self canvas] camera] setPosition:CGPointMake(sBounds.size.width / 2.0, sBounds.size.height / 2.0)];
     [[self scene] setSubNodes:[mLayerManager layers]];
     
     [self setupUIs];
@@ -408,7 +408,7 @@
     CGPoint sCameraPos = [[[self canvas] camera] position];
     [[[self canvas] camera] setPosition:CGPointMake(mCameraXPos, sCameraPos.y)];
     
-    [mRadar setPoint:CGPointMake(mCameraXPos, 300.0)];
+    [mRadar setPoint:CGPointMake(mCameraXPos, [[UIScreen mainScreen] bounds].size.height - 20)];
     [mRadar update];
     
     [[mLayerManager cloudLayer] updateWithCameraPositioin:sCameraPos];

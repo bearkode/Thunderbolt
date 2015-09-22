@@ -46,7 +46,7 @@
                 CGPoint       sPoint     = CGPointZero;
                 
                 sPoint.x = arc4random() % sWidth;
-                sPoint.y = arc4random() % 300;
+                sPoint.y = arc4random() % 300;  //  FIXME
                 
                 [sCloudNode setPoint:sPoint];
                 [sCloudNode setAlpha:0.8];
@@ -61,7 +61,7 @@
                 CGPoint       sPoint     = CGPointZero;
                 
                 sPoint.x = arc4random() % sWidth;
-                sPoint.y = arc4random() % 300;
+                sPoint.y = arc4random() % 300;  //  FIXME
                 
                 [sCloudNode setPoint:sPoint];
                 [sCloudNode setAlpha:0.8];

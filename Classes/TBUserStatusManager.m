@@ -74,7 +74,7 @@ SYNTHESIZE_SHARED_INSTANCE(TBUserStatusManager, sharedManager)
     NSUInteger      sMoney        = [[sUserDefaults objectForKey:kMoneyKey] integerValue];
     
     NSLog(@"sLastPlayDate = %@", sLastPlayDate);
-    NSLog(@"sMoney = %d", sMoney);
+    NSLog(@"sMoney = %d", (int)sMoney);
     
     sMoney = (sMoney < kMinMoney) ? kMinMoney : sMoney;
     
