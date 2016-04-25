@@ -104,7 +104,7 @@
 		2EF7C3C5181658CD0001009C /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E696A901803CF15003A0AA4 /* GameController.framework */; };
 		2EFB43C817167C1B00CC376E /* ProfilingOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43C717167C1B00CC376E /* ProfilingOverlay.m */; };
 		2EFB43CB17167CA000CC376E /* ProfilingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB43CA17167CA000CC376E /* ProfilingOverlayView.m */; };
-		55711F051BB10D040031DF50 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55711F041BB10D040031DF50 /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		55711F051BB10D040031DF50 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55711F041BB10D040031DF50 /* Launch Screen.storyboard */; };
 		A71FFA6E1194D9ED00DA0139 /* TBMissile.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFA6D1194D9ED00DA0139 /* TBMissile.m */; };
 		A71FFA9D1194E6D800DA0139 /* missile.png in Resources */ = {isa = PBXBuildFile; fileRef = A71FFA9C1194E6D700DA0139 /* missile.png */; };
 		A71FFB7811961DCE00DA0139 /* TBWarheadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A71FFB7711961DCE00DA0139 /* TBWarheadManager.m */; };
@@ -932,7 +932,7 @@
 				ORGANIZATIONNAME = Tinybean;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = X24Z88XXU9;
+						DevelopmentTeam = TYXC7GAYHX;
 					};
 				};
 			};
